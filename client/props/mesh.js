@@ -57,34 +57,12 @@ export default class Mesh extends Prop {
   }
 
   /**
-   * Update the position of the mesh acording to time
-   * @param  {Number}  time
-   * @param  {Vector}  pos new position
-   */
-  updatePosition = (time, pos) => {
-    Object
-      .keys(pos)
-      .forEach((c) => {
-        this.object.position[c] = pos[c];
-      });
-  }
-
-  /**
    * Rotate mesh to the given time by its rotational constant
    * @param  {Number} time rotational constant
    */
   rotate = (time) => {
     this.body.rotation.y = Math2.arcSecToRad(time, this.rotation);
   };
-
-  /**
-   * Scales a number by the WEBGL_SCALE constant
-   * @param  {Number} radius
-   * @return {Number}
-   */
-  scale = (radius) => {
-    return Constants.PLANET_SIZE_SCALE * radius / Constants.WEBGL_SCALE;
-  }
   
   /**
    * Scales mesh by a constant

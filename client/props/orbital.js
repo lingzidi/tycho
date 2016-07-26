@@ -46,7 +46,7 @@ export default class {
    */
   getOrbitalPlane = (data) => {
     let orbitalPlane = new THREE.Object3D();
-console.log('object: ', this.ellipse);
+
     orbitalPlane.add(this.ellipse.getObject());
     orbitalPlane.add(this.mesh.getObject());
 
@@ -100,8 +100,10 @@ console.log('object: ', this.ellipse);
    * @param  {Number}  time UNIX time
    */
   updatePosition = (time) => {
-    let v = this.ellipse.getPosition(time, this.nextPeriapsis, this.lastPeriapsis);
-
-    this.mesh.updatePosition(time, v);
+    this.mesh.updatePosition(time,
+      this.ellipse.getPosition(
+        time, this.data.nextPeriapsis, this.data.lastPeriapsis
+      )
+    );
   }
 }

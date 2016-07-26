@@ -12,6 +12,19 @@ export default class {
   }
 
   /**
+   * Update the position of the mesh acording to time
+   * @param  {Number}  time
+   * @param  {Vector}  pos new position
+   */
+  updatePosition = (time, pos) => {
+    Object
+      .keys(pos)
+      .forEach((c) => {
+        this.object.position[c] = pos[c];
+      });
+  }
+
+  /**
    * Returns instance of main Object3D.
    * @return {Object3D}
    */

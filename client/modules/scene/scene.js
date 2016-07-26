@@ -10,6 +10,7 @@ export default class {
     this.renderScene();
     this.renderProps();
     this.animate();
+    this.c = 0;//test
   }
 
   addProps(props) {
@@ -56,8 +57,19 @@ export default class {
     document.body.appendChild(this.renderer.domElement);
   }
 
+  getTime = () => {
+    if(!this.c) {
+      this.c = 1;
+    }
+    this.c++;//test
+    let t = new Date();
+
+    return (t.getTime() / 1000) + (this.c * 20000);
+
+  }
+
   animate = () => {
-    this.testBody.updatePosition();
+    this.testBody.updatePosition(this.getTime());
     // this.camera.updateProjectionMatrix();
     // this.scene.updateMatrixWorld();
 
@@ -97,6 +109,5 @@ export default class {
       longAscNode: 348.73936,
     });
     this.scene.add(this.testBody.getOrbital());
-    console.log('ellipse obj; ', this.testBody.ellipse.getObject());
   }
 }

@@ -59,12 +59,13 @@ export default class Ellipse extends Prop {
    */
   getPosition = (time, last, next) => {
     let E     = OrbitalDynamics.eccentricAnomaly(this.eccentricity, time, last, next);
+
     let theta = OrbitalDynamics.getTheta(this.eccentricity, E);
     let percent = theta / 360;
 
-    if(percent > 1 || isNaN(percent)) {
-      percent = 0;
-    }
+    // if(percent > 1 || isNaN(percent)) {
+    //   percent = 0;
+    // }
     return this.path.getPoint(percent);
   }
 
