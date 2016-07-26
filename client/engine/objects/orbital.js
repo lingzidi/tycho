@@ -1,6 +1,6 @@
-import Constants from '../constants';
-import Mesh from './mesh';
-import Ellipse from './ellipse';
+import Constants from '../global/constants';
+import Mesh from '../props/mesh';
+import Ellipse from '../props/ellipse';
 import THREE from 'three';
 import Math2 from '../physics/math2';
 

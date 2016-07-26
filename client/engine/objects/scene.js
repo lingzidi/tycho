@@ -1,6 +1,6 @@
-import Orbital from '../../props/orbital';
+import Orbital from './orbital';
 import THREE from 'three';
-import Vector from '../../physics/vector';
+import Vector from '../physics/vector';
 import OrbitControls from 'three-orbit-controls';
 
 export default class {

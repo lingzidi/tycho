@@ -1,5 +1,5 @@
 import THREE from 'three';
-import Constants from '../constants';
+import Constants from '../global/constants';
 import Math2 from '../physics/math2';
 import Prop from './prop';
 

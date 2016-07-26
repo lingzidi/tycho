@@ -1,4 +1,4 @@
-import Scene from '../scene/scene';
+import Scene from '../../engine/objects/scene';
 
 export class SignInController {
   constructor(SignInService) {

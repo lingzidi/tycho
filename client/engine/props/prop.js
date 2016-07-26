@@ -1,4 +1,4 @@
-import Constants from '../constants';
+import Constants from '../global/constants';
 
 export default class {
 
