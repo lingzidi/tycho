@@ -1,8 +1,9 @@
 import THREE from 'three';
 import Constants from '../constants';
 import Math2 from '../physics/math2';
+import Prop from './prop';
 
-export default class {
+export default class Mesh extends Prop {
 
   /**
    * @param  {Object}   data
@@ -10,6 +11,7 @@ export default class {
    * @param  {Object3D} plane
    */
   constructor(data, scene, plane) {
+    super();
     this.rotation  = data.rotation;
     this.radius    = data.radius;
     this.axialTilt = data.axialTilt;
@@ -22,10 +24,10 @@ export default class {
    * Render mesh and mesh body
    */
   renderGeometries() {
-    this.body = this.renderBody.call(this, 0x808080);
-    this.mesh = this.renderMesh.call(this);
-    this.mesh.add(this.body);
-    this.mesh.add( new THREE.AxisHelper( 500 ) );
+    this.body = this.renderBody(0x808080);
+    this.object = this.renderMesh();
+    this.object.add(this.body);
+    // this.object.add( new THREE.AxisHelper( 500 ) );
   }
 
   /**
@@ -33,9 +35,8 @@ export default class {
    * @param  {Hex} atmosphere
    * @return {Object3D}
    */
-  renderBody(atmosphere) {
+  renderBody = (atmosphere) => {
     let radius   = this.scale(this.radius);
-    console.log(radius);
     let geometry = new THREE.SphereGeometry(radius, 32, 32);
     let material = new THREE.MeshPhongMaterial({
       specular: atmosphere
@@ -47,7 +48,7 @@ export default class {
    * Render the rotated mesh.
    * @return {Object3D}
    */
-  renderMesh() {
+  renderMesh = () => {
     let mesh = new THREE.Object3D();
     mesh.rotation.x = this.HPI;
     mesh.rotation.z = -Math2.toRadians(this.axialTilt);
@@ -58,15 +59,14 @@ export default class {
   /**
    * Update the position of the mesh acording to time
    * @param  {Number}  time
-   * @param  {Ellipse} ellipse
+   * @param  {Vector}  pos new position
    */
-  updatePosition(time, ellipse) {
-    let v = ellipse.getCurrentPosition(
-      time, this.nextPeriapsis, this.lastPeriapsis
-    );
-    ['x', 'y', 'z'].forEach((c) => {
-      this.mesh.position[c] = v[c];
-    });
+  updatePosition(time, pos) {
+    Object
+      .keys(pos)
+      .forEach((c) => {
+        this.object.position[c] = pos[c];
+      });
   }
 
   /**
@@ -93,24 +93,8 @@ export default class {
   updateScale(scale) {
     if(this.radius) {
       ['x', 'y', 'z'].forEach((c) => {
-        this.mesh[c] = s;
+        this.object[c] = s;
       });
     }
-  }
-  
-  /**
-   * Add object to mesh
-   * @param {Object3D}
-   */
-  add(object) {
-    this.mesh.add(object);
-  }
-
-  /**
-   * Returns instance of main Object3D.
-   * @return {Object3D}
-   */
-  getObject() {
-    return this.mesh;
   }
 }

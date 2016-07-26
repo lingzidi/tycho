@@ -1,7 +1,8 @@
 import Constants from '../constants';
 import Mesh from './mesh';
 import Ellipse from './ellipse';
-import THREE from 'three';  
+import THREE from 'three';
+import Math2 from '../physics/math2';
 
 export default class {
 
@@ -20,27 +21,6 @@ export default class {
     let data = this.data;
     this.mesh    = new Mesh(data);
     this.ellipse = new Ellipse(data.semimajor, data.semiminor, data.eccentricity);
-  }
-
-  /**
-   * Rotates an scene object.
-   * @param  {String}   coordinate x, y, or z
-   * @param  {Objecr3D} object     object to rotate
-   * @param  {Number}   rotation   in degrees
-   */
-  rotateObject(coordinate, object, rotation) {
-    if(isNaN(object[coordinate])) {
-      object[coordinate] = 0;
-    }
-    object[coordinate] += Math2.toRadians(rotation);
-  }
-
-  /**
-   * Multiply object's size by a scalar
-   * @param  {Number} scale
-   */
-  updateScale(scale) {
-    this.mesh.updateScale(scale);
   }
 
   /**
@@ -66,7 +46,7 @@ export default class {
    */
   getOrbitalPlane(data) {
     let orbitalPlane = new THREE.Object3D();
-
+console.log('object: ', this.ellipse);
     orbitalPlane.add(this.ellipse.getObject());
     orbitalPlane.add(this.mesh.getObject());
 
@@ -88,26 +68,40 @@ export default class {
   }
 
   /**
+   * Rotates an scene object.
+   * @param  {String}   coordinate x, y, or z
+   * @param  {Objecr3D} object     object to rotate
+   * @param  {Number}   rotation   in degrees
+   */
+  rotateObject(coordinate, object, rotation) {
+    if(isNaN(object[coordinate])) {
+      object[coordinate] = 0;
+    }
+    object[coordinate] += Math2.toRadians(rotation);
+  }
+
+  /**
    * Returns the mesh reference plane containing relevant props.
    * @param  {Object}   data
    * @return {Object3D}
    */
   getOrbital(data) {
     let referencePlane = new THREE.Object3D();
-    let orbitalPlane   = getOrbitalPlane(data);
+    let orbitalPlane   = this.getOrbitalPlane.call(this, this.data);
 
     referencePlane.add(orbitalPlane);
-    setPlanarRotations(orbitalPlane, referencePlane, data);
+    this.setPlanarRotations(orbitalPlane, referencePlane, this.data);
 
     return referencePlane;
   }
 
   /**
    * Update real-time attributes (velocity and position).
-   * @param  {Number}  time    UNIX time
-   * @param  {Ellipse} ellipse
+   * @param  {Number}  time UNIX time
    */
   updatePosition(time) {
-    this.mesh.updatePosition(time, this.ellipse);
+    let v = this.ellipse.getPosition(time, this.nextPeriapsis, this.lastPeriapsis);
+    
+    this.mesh.updatePosition(time, v);
   }
 }

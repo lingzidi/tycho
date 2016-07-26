@@ -1,8 +1,9 @@
 import THREE from 'three';
 import OrbitalDynamics from '../physics/orbitalDynamics';
 import Vector from '../physics/vector';
+import Prop from './prop';
 
-export default class {
+export default class Ellipse extends Prop {
 
   /**
    * @param  {Number} semimajor
@@ -10,8 +11,9 @@ export default class {
    * @param  {Number} eccentricity
    */
   constructor(semimajor, semiminor, eccentricity) {
-    this.semimajor = semimajor;
-    this.semiminor = semiminor;
+    super();
+    this.semimajor = this.scale(semimajor);
+    this.semiminor = this.scale(semiminor);
     this.eccentricity = eccentricity;
     this.HPI = Math.PI / 2;
 
@@ -29,10 +31,9 @@ export default class {
 
     this.ellipse  = this.getEllipseCurve(focus, this.semiminor, this.semimajor);
     this.path     = new THREE.Path( this.ellipse.getPoints( 500 ) ); // TODO: constant
-    this.path.add(this.ellipse);
     this.geometry = this.path.createPointsGeometry(500); // TODO: constant
-
-    return new THREE.Line(this.geometry, material);
+    this.object   = new THREE.Line(this.geometry, material);
+    this.path.add(this.ellipse);
   }
 
   /**
@@ -54,10 +55,10 @@ export default class {
    * @param  {Number}   time current timestamp 
    * @param  {Number}   last timestamp of last periapsis
    * @param  {Number}   next timestamp of next peripasis
-   * @return {Vector3D} current position
+   * @return {Vector}   current position
    */
-  getCurrentPosition(time, last, next) {
-    let E = OrbitalDynamics.eccentricAnomaly(this.eccentricity, time, last, next);
+  getPosition(time, last, next) {
+    let E     = OrbitalDynamics.eccentricAnomaly(this.eccentricity, time, last, next);
     let theta = OrbitalDynamics.getTheta(this.eccentricity, E);
     let percent = theta / 360;
 
