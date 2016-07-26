@@ -25,7 +25,7 @@ export default class Ellipse extends Prop {
    * TODO: needs cleaning
    * @return {Object3D} ellipse
    */
-  renderGeometries() {
+  renderGeometries = () => {
     let focus     = Vector.getFocus(this.semimajor, this.semiminor);
     let material  = this.getLineMaterial(0x808080);// TODO
 
@@ -41,7 +41,7 @@ export default class Ellipse extends Prop {
    * @param  {Hex} atmosphereColor
    * @return {LineBasicMaterial}
    */
-  getLineMaterial(atmosphereColor) {
+  getLineMaterial = (atmosphereColor) => {
     return new THREE.LineBasicMaterial({
       color: atmosphereColor,
       opacity: 0.4,
@@ -57,7 +57,7 @@ export default class Ellipse extends Prop {
    * @param  {Number}   next timestamp of next peripasis
    * @return {Vector}   current position
    */
-  getPosition(time, last, next) {
+  getPosition = (time, last, next) => {
     let E     = OrbitalDynamics.eccentricAnomaly(this.eccentricity, time, last, next);
     let theta = OrbitalDynamics.getTheta(this.eccentricity, E);
     let percent = theta / 360;
@@ -75,7 +75,7 @@ export default class Ellipse extends Prop {
    * @param  {Number} i angle of inclination
    * @return {EllipseCurve}
    */
-  getEllipseCurve(f, a, i) {
+  getEllipseCurve = (f, a, i) => {
     return new THREE.EllipseCurve(0, f, a, i, -this.HPI, 3 * this.HPI);
   }
 }

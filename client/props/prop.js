@@ -7,7 +7,7 @@ export default class {
    * @param  {Number} radius
    * @return {Number}
    */
-  scale(radius) {
+  scale = (radius) => {
     return Constants.PLANET_SIZE_SCALE * radius / Constants.WEBGL_SCALE;
   }
 
@@ -15,7 +15,7 @@ export default class {
    * Returns instance of main Object3D.
    * @return {Object3D}
    */
-  getObject() {
+  getObject = () => {
     return this.object;
   }
 }

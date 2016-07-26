@@ -17,7 +17,7 @@ export default class {
   /**
    * Renders the stage props that are part of this orbital
    */
-  renderGeometries() {
+  renderGeometries = () => {
     let data = this.data;
     this.mesh    = new Mesh(data);
     this.ellipse = new Ellipse(data.semimajor, data.semiminor, data.eccentricity);
@@ -26,7 +26,7 @@ export default class {
   /**
    * Light up orbital path
    */
-  illuminatePath() {
+  illuminatePath = () => {
     this.label.illuminated = true;
     this.ellipse.setPathBrightness(0.4);
   }
@@ -34,7 +34,7 @@ export default class {
   /**
    * Darken orbital path
    */
-  darkenPath() {
+  darkenPath = () => {
     this.label.illuminated = false;
     this.ellipse.setPathBrightness(1);
   }
@@ -44,7 +44,7 @@ export default class {
    * @param  {Object}   data
    * @return {Object3D}
    */
-  getOrbitalPlane(data) {
+  getOrbitalPlane = (data) => {
     let orbitalPlane = new THREE.Object3D();
 console.log('object: ', this.ellipse);
     orbitalPlane.add(this.ellipse.getObject());
@@ -59,7 +59,7 @@ console.log('object: ', this.ellipse);
    * @param {Object3D}  referencePlane
    * @param {Object}    data
    */
-  setPlanarRotations(orbitalPlane, referencePlane, data) {
+  setPlanarRotations = (orbitalPlane, referencePlane, data) => {
     this.rotateObject('x', referencePlane, data.inclination);
     this.rotateObject('x', orbitalPlane, 180);
 
@@ -73,7 +73,7 @@ console.log('object: ', this.ellipse);
    * @param  {Objecr3D} object     object to rotate
    * @param  {Number}   rotation   in degrees
    */
-  rotateObject(coordinate, object, rotation) {
+  rotateObject = (coordinate, object, rotation) => {
     if(isNaN(object[coordinate])) {
       object[coordinate] = 0;
     }
@@ -85,9 +85,9 @@ console.log('object: ', this.ellipse);
    * @param  {Object}   data
    * @return {Object3D}
    */
-  getOrbital(data) {
+  getOrbital = (data) => {
     let referencePlane = new THREE.Object3D();
-    let orbitalPlane   = this.getOrbitalPlane.call(this, this.data);
+    let orbitalPlane   = this.getOrbitalPlane(this.data);
 
     referencePlane.add(orbitalPlane);
     this.setPlanarRotations(orbitalPlane, referencePlane, this.data);
@@ -99,9 +99,9 @@ console.log('object: ', this.ellipse);
    * Update real-time attributes (velocity and position).
    * @param  {Number}  time UNIX time
    */
-  updatePosition(time) {
+  updatePosition = (time) => {
     let v = this.ellipse.getPosition(time, this.nextPeriapsis, this.lastPeriapsis);
-    
+
     this.mesh.updatePosition(time, v);
   }
 }

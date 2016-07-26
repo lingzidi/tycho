@@ -7,9 +7,9 @@ export default class {
 
   constructor() {
     this.scene = new THREE.Scene();
-    this.renderScene.call(this);
+    this.renderScene();
     this.renderProps();
-    this.animate.call(this);
+    this.animate();
   }
 
   addProps(props) {
@@ -25,12 +25,12 @@ export default class {
     });
   }
 
-  getCamera() {
+  getCamera = () => {
     let ratio = window.innerWidth / window.innerHeight;
     return new THREE.PerspectiveCamera(50, ratio, 1, 10000);
   }
 
-  getControls() {
+  getControls = () => {
     let _orbitControls = OrbitControls(THREE);
 
     return new _orbitControls(this.camera);
@@ -56,7 +56,7 @@ export default class {
     document.body.appendChild(this.renderer.domElement);
   }
 
-  animate() {
+  animate = () => {
     this.testBody.updatePosition();
     // this.camera.updateProjectionMatrix();
     // this.scene.updateMatrixWorld();
@@ -76,18 +76,18 @@ export default class {
     this.controls.update();
     // this.skybox.update();
     
-    requestAnimationFrame(this.animate.bind(this));
+    requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);
   }
 
   // just a test
-  renderProps() {
+  renderProps = () => {
     this.testBody = new Orbital({
       GM: 6836529,
       axialTilt: 23.26,
       semimajor: 149598261,
       semiminor: 149556483,
-      radius: 6378000.0,
+      radius: 637800.0,
       rotation: 15.0411, // in arcseconds
       inclination: 1.57869,
       argPeriapsis: 114.20763,

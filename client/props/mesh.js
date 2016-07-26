@@ -17,13 +17,13 @@ export default class Mesh extends Prop {
     this.axialTilt = data.axialTilt;
     this.HPI = Math.PI / 2;
     
-    this.renderGeometries.call(this);
+    this.renderGeometries();
   }
 
   /**
    * Render mesh and mesh body
    */
-  renderGeometries() {
+  renderGeometries = () => {
     this.body = this.renderBody(0x808080);
     this.object = this.renderMesh();
     this.object.add(this.body);
@@ -61,7 +61,7 @@ export default class Mesh extends Prop {
    * @param  {Number}  time
    * @param  {Vector}  pos new position
    */
-  updatePosition(time, pos) {
+  updatePosition = (time, pos) => {
     Object
       .keys(pos)
       .forEach((c) => {
@@ -73,7 +73,7 @@ export default class Mesh extends Prop {
    * Rotate mesh to the given time by its rotational constant
    * @param  {Number} time rotational constant
    */
-  rotate(time) {
+  rotate = (time) => {
     this.body.rotation.y = Math2.arcSecToRad(time, this.rotation);
   };
 
@@ -82,7 +82,7 @@ export default class Mesh extends Prop {
    * @param  {Number} radius
    * @return {Number}
    */
-  scale(radius) {
+  scale = (radius) => {
     return Constants.PLANET_SIZE_SCALE * radius / Constants.WEBGL_SCALE;
   }
   
@@ -90,7 +90,7 @@ export default class Mesh extends Prop {
    * Scales mesh by a constant
    * @param  {Number} scale
    */
-  updateScale(scale) {
+  updateScale = (scale) => {
     if(this.radius) {
       ['x', 'y', 'z'].forEach((c) => {
         this.object[c] = s;
