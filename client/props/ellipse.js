@@ -20,6 +20,7 @@ export default class {
 
   /**
    * Renders the ellipse prop.
+   * TODO: needs cleaning
    * @return {Object3D} ellipse
    */
   renderGeometries() {
@@ -28,11 +29,8 @@ export default class {
 
     this.ellipse  = this.getEllipseCurve(focus, this.semiminor, this.semimajor);
     this.path     = new THREE.Path( this.ellipse.getPoints( 500 ) ); // TODO: constant
-    console.log('debug1', typeof this.ellipse);
     this.path.add(this.ellipse);
-    console.log('debug2');
     this.geometry = this.path.createPointsGeometry(500); // TODO: constant
-    console.log('debug3');
 
     return new THREE.Line(this.geometry, material);
   }
@@ -64,9 +62,9 @@ export default class {
     let percent = theta / 360;
 
     if(percent > 1 || isNaN(percent)) {
-      return 0;
+      percent = 0;
     }
-    return this.ellipsePath.getPoint(percent);
+    return this.path.getPoint(percent);
   }
 
   /**
@@ -77,6 +75,6 @@ export default class {
    * @return {EllipseCurve}
    */
   getEllipseCurve(f, a, i) {
-    return new THREE.EllipseCurve(0, f, a, i, -this.HPI, 3*this.HPI);
+    return new THREE.EllipseCurve(0, f, a, i, -this.HPI, 3 * this.HPI);
   }
 }

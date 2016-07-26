@@ -1,13 +1,15 @@
 import Orbital from '../../props/orbital';
 import THREE from 'three';
+import Vector from '../../physics/vector';
+import OrbitControls from 'three-orbit-controls';
 
 export default class {
 
   constructor() {
     this.scene = new THREE.Scene();
-    this.renderScene();
-    this.renderProps();
-    this.animate();
+    this.renderScene.call(this);
+    this.renderProps.call(this);
+    this.animate.call(this);
   }
 
   addProps(props) {
@@ -25,58 +27,67 @@ export default class {
 
   getCamera() {
     let ratio = window.innerWidth / window.innerHeight;
-    return new THREE.PerspectiveCamera(100, ratio, 1, 10000);
+    return new THREE.PerspectiveCamera(50, ratio, 1, 10000);
   }
 
   getControls() {
-    return new THREE.OrbitControls(this.camera);
+    let _orbitControls = OrbitControls(THREE);
+
+    return new _orbitControls(this.camera);
   }
 
   renderScene() {
     this.renderer = this.getRenderer();
     this.camera = this.getCamera();
-    this.setRenderer(this.renderer);
-    // this.controls = this.getControls(); // TODO: install node module!
-console.log('dom element: ', this.renderer.domElement);
+    this.controls = this.getControls();
+    this.camera.position.z = 500;
+    this.camera.rotation.order = 'YXZ';
+
+
+    console.log(this.controls);
+
+    // this.controls.zoomSpeed = 0.001;
+    // this.controls.zoom0 = 200;
+    // 
+    this.controls.minDistance = 0;
+    this.controls.maxDistance = 500;
+
+    this.scene.add(this.camera);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+
     document.body.appendChild(this.renderer.domElement);
   }
 
   animate() {
-    this.testBody.updatePosition();
-    this.camera.updateProjectionMatrix();
-    this.scene.updateMatrixWorld();
-    // this.skybox.render(this.renderer);
-    this.renderer.render(this.scene, this.camera);
-    
-    // let distance = this.controls.maxDistance - this.controls.minDistance;
-    // let radius = this.controls.getRadius();
+    // this.testBody.updatePosition();
+    // this.camera.updateProjectionMatrix();
+    // this.scene.updateMatrixWorld();
 
-    if(!this.perspectiveMode) {
-      // this.camera.fov = radius / distance;
-    }
- 
+    // this.skybox.render(this.renderer);
+    
+    let distance = this.controls.maxDistance - this.controls.minDistance;
+    let radius = Vector.magnitude(this.camera.position);
+
+    this.camera.fov = radius / distance;
+
+
     if(this.camera.fov > 100) {
       this.camera.fov = 100;
     }
-    
-    this.camera.updateProjectionMatrix();
-    // this.controls.update();
+    // this.camera.updateProjectionMatrix();
+    this.controls.update();
     // this.skybox.update();
     
     requestAnimationFrame(this.animate.bind(this));
+    this.renderer.render(this.scene, this.camera);
   }
 
   setRenderer(renderer) {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.physicallyBasedShading = true;
-    renderer.autoClear = false; //allow render overlay on top of skybox
-    renderer.shadowMapEnabled = true;
+    // renderer.physicallyBasedShading = true;
+    // renderer.autoClear = false; //allow render overlay on top of skybox
+    // renderer.shadowMapEnabled = true;
 
-    // controls.minDistance = 0;
-    // controls.maxDistance = 500;
-
-    this.camera.position.set(180, 50, 180);
-    this.camera.rotation.order = 'YXZ';
+    // 
   }
 
   // just a test

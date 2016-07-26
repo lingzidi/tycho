@@ -15,17 +15,17 @@ export default class {
     this.axialTilt = data.axialTilt;
     this.HPI = Math.PI / 2;
     
-    this.renderGeometries();
+    this.renderGeometries.call(this);
   }
 
   /**
    * Render mesh and mesh body
    */
   renderGeometries() {
-    this.body = this.renderBody(0x808080);
-    this.mesh = this.renderMesh();
+    this.body = this.renderBody.call(this, 0x808080);
+    this.mesh = this.renderMesh.call(this);
     this.mesh.add(this.body);
-    this.mesh.add( new THREE.AxisHelper( 10000 ) );
+    this.mesh.add( new THREE.AxisHelper( 500 ) );
   }
 
   /**
@@ -35,6 +35,7 @@ export default class {
    */
   renderBody(atmosphere) {
     let radius   = this.scale(this.radius);
+    console.log(radius);
     let geometry = new THREE.SphereGeometry(radius, 32, 32);
     let material = new THREE.MeshPhongMaterial({
       specular: atmosphere
@@ -77,12 +78,12 @@ export default class {
   };
 
   /**
-   * Scales a number by the PLANET_SIZE_SCALE constant
+   * Scales a number by the WEBGL_SCALE constant
    * @param  {Number} radius
    * @return {Number}
    */
   scale(radius) {
-    return radius * Constants.PLANET_SIZE_SCALE;
+    return Constants.PLANET_SIZE_SCALE * radius / Constants.WEBGL_SCALE;
   }
   
   /**
