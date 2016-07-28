@@ -39,10 +39,14 @@ gulp.task('watch', function() {
 });
 
 gulp.task('test-client', function (done) {
-  new Server({
+  var server = new Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
-  }, done).start();
+  }, function(result) {
+    done(result.error ? 'Error' : null);
+  });
+
+  server.start();
 });
 
 gulp.task('test-server', function (done) {

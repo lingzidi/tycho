@@ -1,5 +1,5 @@
 module.exports = {
-  url: '/sign_in',
+  url: '/',
   controller: 'SignInController',
   controllerAs: 'signin',
   service: 'SignInService'
