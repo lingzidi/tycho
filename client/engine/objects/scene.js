@@ -5,8 +5,6 @@ import OrbitControls from 'three-orbit-controls';
 
 export default class {
 
-  thing = 0;
-
   constructor() {
     this.scene = new THREE.Scene();
     this.renderScene();
@@ -74,10 +72,7 @@ export default class {
     this.testBody.updatePosition(this.getTime());
     // this.camera.updateProjectionMatrix();
     // this.scene.updateMatrixWorld();
-    if(!this.thing) {
-      this.thing = 0;
-    }
-    this.thing = this.thing + 1;
+
     // this.skybox.render(this.renderer);
     
     let distance = this.controls.maxDistance - this.controls.minDistance;
