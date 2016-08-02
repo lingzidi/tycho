@@ -7,7 +7,7 @@ export default class {
     this.clock = new THREE.Clock(true);
     this.offset = this.getOffset(time);
     this.elapsedTime = 0;
-    this.scale = 7;
+    this.scale = 1;
     this.events = [];
   }
 

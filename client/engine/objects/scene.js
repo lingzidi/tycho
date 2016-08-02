@@ -4,6 +4,8 @@ import Vector from '../physics/vector';
 import OrbitControls from 'three-orbit-controls';
 import moment from 'moment';
 import Clock from '../global/clock';
+import Constants from '../global/constants';
+import deepAssign from 'deep-assign';
 
 export default class {
 
@@ -13,9 +15,14 @@ export default class {
     
     this.renderScene();
     this.renderProps();
+    this.setSettings();
     this.animate();
   }
 
+  /**
+   * New instance of WebGL renderer
+   * @return {THREE.WebGLRenderer}
+   */
   getRenderer = () => {
     return new THREE.WebGLRenderer({
       antialias: true,
@@ -23,29 +30,32 @@ export default class {
     });
   }
 
+  /**
+   * New camera instance
+   * @return {THREE.Camera}
+   */
   getCamera = () => {
     let ratio = window.innerWidth / window.innerHeight;
     return new THREE.PerspectiveCamera(50, ratio, 1, 10000);
   }
 
+  /**
+   * New instance of OrbitControls
+   * @return {THREE.OrbitControls}
+   */
   getControls = () => {
     let _orbitControls = OrbitControls(THREE);
     return new _orbitControls(this.camera);
   }
 
+  /**
+   * Binds renderer, camera, and controls to current scene
+   * and appends it to the DOM.
+   */
   renderScene = () => {
     this.renderer = this.getRenderer();
     this.camera   = this.getCamera();
     this.controls = this.getControls();
-
-    this.camera.position.z = 500;
-    this.camera.rotation.order = 'YXZ';
-
-    // this.controls.zoomSpeed = 0.001;
-    // this.controls.zoom0 = 200;
-    // 
-    this.controls.minDistance = 0;
-    this.controls.maxDistance = 500;
 
     this.scene.add(this.camera);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -53,6 +63,9 @@ export default class {
     document.body.appendChild(this.renderer.domElement);
   }
 
+  /**
+   * Animation loop.
+   */
   animate = () => {
     this.testBody.updatePosition(this.clock.elapsedTime);
     this.controls.update();
@@ -63,6 +76,10 @@ export default class {
     this.renderer.render(this.scene, this.camera);
   }
 
+  /**
+   * Updates the field of view of the camera so that all objects
+   * on the screen are visible within the current camera frustum.
+   */
   updateCameraFov = () => {
     let distance = this.controls.maxDistance - this.controls.minDistance;
     let radius = Vector.magnitude(this.camera.position);
@@ -74,8 +91,24 @@ export default class {
     }
   }
 
+  /**
+   * Events to execute on each clock second ("tick")
+   * @param  {Function} fn function to execute
+   */
   tick = (fn) => {
     this.clock.tick(fn);
+  }
+
+  /**
+   * Set settings defined in constants for defined scene components.
+   */
+  setSettings = () => {
+    let settings = Constants.SCENE_SETTINGS;
+
+    for(let component in settings) {
+      this[component] = deepAssign(this[component], settings[component]);
+    }
+    this.camera.position.z = 500;//???
   }
 
   // just a test
