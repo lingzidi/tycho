@@ -2,21 +2,18 @@ import Orbital from './orbital';
 import THREE from 'three';
 import Vector from '../physics/vector';
 import OrbitControls from 'three-orbit-controls';
+import moment from 'moment';
+import Clock from '../global/clock';
 
 export default class {
 
   constructor() {
     this.scene = new THREE.Scene();
+    this.clock = new Clock();
+    
     this.renderScene();
     this.renderProps();
     this.animate();
-    this.c = 0;//test
-  }
-
-  addProps(props) {
-    props.forEach((prop) => {
-      // ...
-    });
   }
 
   getRenderer = () => {
@@ -33,7 +30,6 @@ export default class {
 
   getControls = () => {
     let _orbitControls = OrbitControls(THREE);
-
     return new _orbitControls(this.camera);
   }
 
@@ -57,39 +53,29 @@ export default class {
     document.body.appendChild(this.renderer.domElement);
   }
 
-  getTime = () => {
-    if(!this.c) {
-      this.c = 1;
-    }
-    this.c++;//test
-    let t = new Date();
+  animate = () => {
+    this.testBody.updatePosition(this.clock.elapsedTime);
+    this.controls.update();
+    this.updateCameraFov();
+    this.clock.update();
 
-    return (t.getTime() / 1000) + (this.c * 20000);
-
+    requestAnimationFrame(this.animate);
+    this.renderer.render(this.scene, this.camera);
   }
 
-  animate = () => {
-    this.testBody.updatePosition(this.getTime());
-    // this.camera.updateProjectionMatrix();
-    // this.scene.updateMatrixWorld();
-
-    // this.skybox.render(this.renderer);
-    
+  updateCameraFov = () => {
     let distance = this.controls.maxDistance - this.controls.minDistance;
     let radius = Vector.magnitude(this.camera.position);
 
     this.camera.fov = radius / distance;
 
-
     if(this.camera.fov > 100) {
       this.camera.fov = 100;
     }
-    // this.camera.updateProjectionMatrix();
-    this.controls.update();
-    // this.skybox.update();
-    
-    requestAnimationFrame(this.animate);
-    this.renderer.render(this.scene, this.camera);
+  }
+
+  tick = (fn) => {
+    this.clock.tick(fn);
   }
 
   // just a test

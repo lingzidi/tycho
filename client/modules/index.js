@@ -1,12 +1,13 @@
-import ModulesService from './modules.service'; 
+import Modules from './modules'; 
 
-let Module = new ModulesService();
 let modules = [
-  'sign_in'
+  'bodyInfo'
 ];
 
-modules.forEach(Module.registerLess);
+modules.forEach(Modules.registerLess);
 
-modules = modules.map((moduleName) => Module.registerModule(moduleName));
+modules = modules.map((moduleName) => {
+  return Modules.registerModule(moduleName);
+});
 
 module.exports = modules;

@@ -1,4 +1,4 @@
-export class SignInService {
+export class BodyInfoService {
   constructor() {
   }
 

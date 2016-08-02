@@ -1,9 +1,7 @@
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
 
-export default class ModulesService {
-  constructor() {
-  }
+export default class Modules {
 
   /**
    * registers the ui-router $stateProvider for a module
@@ -12,17 +10,21 @@ export default class ModulesService {
    * @param  {String}         modulePath path to the module files
    * @return {$stateProvider}
    */
-  registerRoute(config, moduleName) {
-    config.templateUrl = require(`ngtemplate!html!./${moduleName}/${moduleName}.html`);
+  static registerRoute(config, moduleName) {
+    config.templateUrl = require(
+      `ngtemplate!html!./${moduleName}/${moduleName}.html`
+    );
 
-    return ['$stateProvider', ($stateProvider) => $stateProvider.state(config.url, config)];
+    return ['$stateProvider', ($stateProvider) => {
+      $stateProvider.state(config.url, config)
+    }];
   }
 
   /**
    * for a given module name, requires its corresponding LESS file
    * @param  {String} moduleName
    */
-  registerLess(moduleName) {
+  static registerLess(moduleName) {
     require(`./${moduleName}/${moduleName}.less`);
   }
 
@@ -32,11 +34,11 @@ export default class ModulesService {
    * @param  {String} moduleName
    * @return {String} name of registered module
    */
-  registerModule(moduleName) {
+  static registerModule(moduleName) {
     const modulePath = `./${moduleName}`;
     const controller = require(`${modulePath}/${moduleName}.controller`);
-    const config = require(`${modulePath}/index`);
-    const module = angular.module(`app.${moduleName}`, [uirouter]);
+    const config     = require(`${modulePath}/index`);
+    const module     = angular.module(`app.${moduleName}`, [uirouter]);
 
     if(config.service) {
       // initialize service, if one exists

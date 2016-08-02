@@ -27,7 +27,7 @@ export default class Ellipse extends Prop {
    */
   renderGeometries = () => {
     let focus     = Vector.getFocus(this.semimajor, this.semiminor);
-    let material  = this.getLineMaterial(0x808080);// TODO
+    let material  = this.getLineMaterial(0xFFFFFF);// TODO
 
     this.ellipse  = this.getEllipseCurve(focus, this.semiminor, this.semimajor);
     this.path     = new THREE.Path( this.ellipse.getPoints( 500 ) ); // TODO: constant
