@@ -4,8 +4,6 @@ let directives = [
   'timepicker'
 ];
 
-directives = directives.map((directiveName) => {
+export default directives.map((directiveName) => {
   return Directives.registerDirective(directiveName, 'bodyInfo');
 });
-
-module.exports = directives;

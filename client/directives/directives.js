@@ -4,7 +4,7 @@ import uirouter from 'angular-ui-router';
 export default class Directives {
 
   /**
-   * Returns all files from a given directive
+   * Returns all files from a given directive.
    * @param  {String} directiveName
    * @return {Object} with properties: controller, directive, and template
    */
@@ -25,13 +25,14 @@ export default class Directives {
    */
   static registerDirective(directiveName, moduleName) {
     let module = angular.module(`app.${moduleName}`);
-    let files = this.getFiles(directiveName);
-
     let config = require(`./${directiveName}/index`);
+    let files  = this.getFiles(directiveName);
 
     let directive = new files.directive[config.directive];
-        directive.controller  = files.controller[config.controller];
-        directive.templateUrl = files.template;
+        directive.controller   = files.controller[config.controller];
+        directive.templateUrl  = files.template;
+        directive.controllerAs = config.controllerAs;
+        directive.restrict     = config.restrict;
 
     module.directive(config.controllerAs, () => directive);
   }

@@ -1,6 +1,7 @@
 import Modules from './modules'; 
 
 let modules = [
+  'main',
   'bodyInfo'
 ];
 

@@ -2,5 +2,6 @@ module.exports = {
   controller: 'TimepickerController',
   directive: 'TimepickerDirective',
   controllerAs: 'timepicker',
-  templateUrl: 'timepicker.html'
+  templateUrl: 'timepicker.html',
+  restrict: 'E'
 }

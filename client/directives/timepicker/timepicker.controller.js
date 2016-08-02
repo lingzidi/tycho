@@ -1,13 +1,12 @@
-
-
 export class TimepickerController {
   constructor($rootScope, scope) {
-    this.time = 'testing';
-    this.root = $rootScope;
+    this.scope = scope;
+    $rootScope.scene.tick(this.tick);
   }
 
-  testTime = () => {
-    console.log(this.root.elapsedTime);
+  tick = (time) => {
+    this.time = time;
+    this.scope.$apply();
   }
 }
 

@@ -16,7 +16,7 @@ export default class Modules {
     );
 
     return ['$stateProvider', ($stateProvider) => {
-      $stateProvider.state(config.url, config)
+      $stateProvider.state(config.name, config);
     }];
   }
 
