@@ -1,14 +1,19 @@
 import Modules from './modules'; 
 
-let modules = [
+let bundles = [
   'main',
   'bodyInfo'
 ];
 
-modules.forEach(Modules.registerLess);
+let modules = new Modules;
 
-modules = modules.map((moduleName) => {
-  return Modules.registerModule(moduleName);
+let registerBundle = (bundleName) => {
+  require(`./${bundleName}/${bundleName}.less`);
+  modules.registerModule(bundleName);
+};
+
+bundles.forEach((moduleName) => {
+  registerBundle(moduleName);
 });
 
-module.exports = modules;
+module.exports = bundles;

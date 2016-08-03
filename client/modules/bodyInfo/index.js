@@ -1,7 +1,7 @@
 module.exports = {
   name: 'main.bodyInfo',
-  url: '/body/:body',
+  url: '/body',
   controller: 'BodyInfoController',
-  controllerAs: 'bodyInfo'
-  // service: 'BodyInfoService'
+  controllerAs: 'bodyInfo',
+  templateUrl: 'bodyInfo.html'
 };

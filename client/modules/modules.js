@@ -3,53 +3,50 @@ import uirouter from 'angular-ui-router';
 
 export default class Modules {
 
+  constructor() {
+    this.module = angular.module('app.scene', [uirouter]);
+  }
+
   /**
-   * registers the ui-router $stateProvider for a module
-   * 
-   * @param  {Object}         config     the config object for the module
-   * @param  {String}         modulePath path to the module files
-   * @return {$stateProvider}
+   * Registers a service.
+   * @param  {String} serviceName
+   * @param  {Module} module instance of Angular.module
    */
-  static registerRoute(config, moduleName) {
-    config.templateUrl = require(
+  registerService = (path, serviceName, module) => {
+    const service = require(path);
+    module.factory(config.service, () => new service[config.service]());
+  }
+
+  /**
+   * Returns the webpack-ready template for the module.
+   * @param  {String} moduleName
+   * @return {ngTemplate}
+   */
+  getTemplate = (moduleName) => {
+    return require(
       `ngtemplate!html!./${moduleName}/${moduleName}.html`
     );
-
-    return ['$stateProvider', ($stateProvider) => {
-      $stateProvider.state(config.name, config);
-    }];
   }
 
   /**
-   * for a given module name, requires its corresponding LESS file
-   * @param  {String} moduleName
-   */
-  static registerLess(moduleName) {
-    require(`./${moduleName}/${moduleName}.less`);
-  }
-
-  /**
-   * registers the controller, service (if exists), and config for each module
-   * 
+   * Registers the controller, service (if exists), and config for each module.
    * @param  {String} moduleName
    * @return {String} name of registered module
    */
-  static registerModule(moduleName) {
+  registerModule = (moduleName) => {
     const modulePath = `./${moduleName}`;
     const controller = require(`${modulePath}/${moduleName}.controller`);
     const config     = require(`${modulePath}/index`);
-    const module     = angular.module(`app.${moduleName}`, [uirouter]);
+
+    config.templateUrl = this.getTemplate(moduleName);
 
     if(config.service) {
-      // initialize service, if one exists
-      const service = require(`${modulePath}/${moduleName}.service`);
-
-      module.factory(config.service, () => new service[config.service]());
+      this.registerService(`${modulePath}/${moduleName}.service`);
     }
 
-    return module
+    return this
+      .module
       .controller(config.controller, controller[config.controller])
-      .config(this.registerRoute(config, moduleName))
       .name;
   }
 }

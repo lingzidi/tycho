@@ -3,12 +3,16 @@ import uirouter from 'angular-ui-router';
 
 export default class Directives {
 
+  constructor() {
+    this.module = angular.module('app.scene');
+  }
+
   /**
    * Returns all files from a given directive.
    * @param  {String} directiveName
    * @return {Object} with properties: controller, directive, and template
    */
-  static getFiles(directiveName) {
+  getFiles = (directiveName) => {
     return {
       controller: require(`./${directiveName}/${directiveName}.controller`),
       directive:  require(`./${directiveName}/${directiveName}.directive`),
@@ -23,8 +27,7 @@ export default class Directives {
    * @param  {String} directiveName
    * @param  {String} moduleName
    */
-  static registerDirective(directiveName, moduleName) {
-    let module = angular.module(`app.${moduleName}`);
+  registerDirective = (directiveName, moduleName) => {
     let config = require(`./${directiveName}/index`);
     let files  = this.getFiles(directiveName);
 
@@ -34,6 +37,6 @@ export default class Directives {
         directive.controllerAs = config.controllerAs;
         directive.restrict     = config.restrict;
 
-    module.directive(config.controllerAs, () => directive);
+    this.module.directive(config.controllerAs, () => directive);
   }
 }

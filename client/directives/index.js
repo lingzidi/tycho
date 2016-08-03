@@ -1,9 +1,11 @@
 import Directives from './directives';
 
-let directives = [
+let bundles = [
   'timepicker'
 ];
 
-export default directives.map((directiveName) => {
-  return Directives.registerDirective(directiveName, 'bodyInfo');
+let directives = new Directives;
+
+export default bundles.map((bundleName) => {
+  return directives.registerDirective(bundleName, 'main');
 });

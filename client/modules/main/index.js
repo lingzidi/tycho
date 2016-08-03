@@ -1,6 +1,8 @@
 module.exports = {
   name: 'main',
-  url: '/',
+  abstract: true,
+  url: '/main',
   controller: 'MainController',
-  controllerAs: 'main'
+  controllerAs: 'main',
+  templateUrl: 'main.html'
 };
