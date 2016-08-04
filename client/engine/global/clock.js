@@ -43,7 +43,7 @@ export default class {
 
     if(elapsedTime > this.elapsedTime) {
       this.elapsedTime = elapsedTime;
-      this.nextTick(elapsedTime);
+      this.nextTick();
     }
   }
 
@@ -51,7 +51,7 @@ export default class {
    * Executes set events after each second ("tick")
    * @param  {Number} elapsedTime UNIX time
    */
-  nextTick = (elapsedTime) => {
+  nextTick = () => {
     this.events.forEach((event) => {
       event(this.getTime());
     });

@@ -13,6 +13,8 @@ module.exports = function (config) {
       './node_modules/phantomjs-polyfill/bind-polyfill.js',
       './node_modules/angular/angular.js',
       './node_modules/angular-mocks/angular-mocks.js',
+      './node_modules/three/build/three.min.js',
+      './node_modules/moment/moment.js',
       'test/client/index.js'
     ],
 
@@ -22,7 +24,7 @@ module.exports = function (config) {
 
     browsers: [
       'Chrome',
-      'Firefox'
+      // 'Firefox'
     ],
 
     singleRun: true,
