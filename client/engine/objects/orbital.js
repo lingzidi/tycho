@@ -20,7 +20,7 @@ export default class {
   renderGeometries = () => {
     let data = this.data;
     this.mesh    = new Mesh(data);
-    this.ellipse = new Ellipse(data.semimajor, data.semiminor, data.eccentricity);
+    this.ellipse = new Ellipse(data);
   }
 
   /**
@@ -41,16 +41,30 @@ export default class {
 
   /**
    * Gets the orbital scene containing the props.
-   * @param  {Object}   data
    * @return {Object3D}
    */
-  getOrbitalPlane = (data) => {
+  getOrbitalPlane = () => {
     let orbitalPlane = new THREE.Object3D();
 
     orbitalPlane.add(this.ellipse.getObject());
     orbitalPlane.add(this.mesh.getObject());
 
     return orbitalPlane;
+  }
+
+  /**
+   * Returns the mesh reference plane containing relevant props.
+   * @param  {Object}   data
+   * @return {Object3D}
+   */
+  getOrbital = () => {
+    let referencePlane = new THREE.Object3D();
+    let orbitalPlane   = this.getOrbitalPlane(this.data);
+
+    referencePlane.add(orbitalPlane);
+    this.setPlanarRotations(orbitalPlane, referencePlane, this.data);
+
+    return referencePlane;
   }
 
   /**
@@ -78,21 +92,6 @@ export default class {
       object[coordinate] = 0;
     }
     object[coordinate] += Math2.toRadians(rotation);
-  }
-
-  /**
-   * Returns the mesh reference plane containing relevant props.
-   * @param  {Object}   data
-   * @return {Object3D}
-   */
-  getOrbital = (data) => {
-    let referencePlane = new THREE.Object3D();
-    let orbitalPlane   = this.getOrbitalPlane(this.data);
-
-    referencePlane.add(orbitalPlane);
-    this.setPlanarRotations(orbitalPlane, referencePlane, this.data);
-
-    return referencePlane;
   }
 
   /**

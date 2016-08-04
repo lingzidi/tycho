@@ -7,10 +7,8 @@ export default class Mesh extends Prop {
 
   /**
    * @param  {Object}   data
-   * @param  {Scene}    scene
-   * @param  {Object3D} plane
    */
-  constructor(data, scene, plane) {
+  constructor(data) {
     super();
     this.rotation  = data.rotation;
     this.radius    = data.radius;

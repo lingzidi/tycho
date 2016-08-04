@@ -10,11 +10,12 @@ export default class Ellipse extends Prop {
    * @param  {Number} semiminor
    * @param  {Number} eccentricity
    */
-  constructor(semimajor, semiminor, eccentricity) {
+  constructor(data) {
     super();
-    this.semimajor = this.scale(semimajor);
-    this.semiminor = this.scale(semiminor);
-    this.eccentricity = eccentricity;
+    this.semimajor = this.scale(data.semimajor);
+    this.semiminor = this.scale(data.semiminor);
+    this.eccentricity    = data.eccentricity;
+    this.atmosphereColor = data.atmosphereColor;
     this.HPI = Math.PI / 2;
 
     this.renderGeometries();
@@ -27,7 +28,7 @@ export default class Ellipse extends Prop {
    */
   renderGeometries = () => {
     let focus     = Vector.getFocus(this.semimajor, this.semiminor);
-    let material  = this.getLineMaterial(0xFFFFFF);// TODO
+    let material  = this.getLineMaterial(this.atmosphereColor);// TODO
 
     this.ellipse  = this.getEllipseCurve(focus, this.semiminor, this.semimajor);
     this.path     = new THREE.Path( this.ellipse.getPoints( 500 ) ); // TODO: constant
