@@ -1,4 +1,17 @@
-Main controller.
-<timepicker></timepicker>
+M<timepicker></timepicker>
 
+<div class="sliderExample">
+  <div 
+    ui-slider="{
+      orientation: 'vertical',
+      start: main.controls.disable,
+      stop: main.controls.enable
+    }"
+    min="1" 
+    max="100"
+    step="1"
+    ng-model="main.settings.zoom">
+  </div>
+</div>
+Z: {{main.settings.zoom}}
 <div ui-view></div>

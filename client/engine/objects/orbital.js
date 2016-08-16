@@ -4,14 +4,19 @@ import Ellipse from '../props/ellipse';
 import THREE from 'three';
 import Math2 from '../physics/math2';
 
-export default class {
+export default class Orbital {
 
   /**
    * @param  {Object} data
    */
-  constructor(data) {
+  constructor(data, parent) {
+this.updateQueue = [];
     this.data = data;
     this.renderGeometries();
+    this.renderChildren(parent);
+    if(parent) {
+      parent.add(this.getOrbital());
+    }
   }
 
   /**
@@ -21,6 +26,17 @@ export default class {
     let data = this.data;
     this.mesh    = new Mesh(data);
     this.ellipse = new Ellipse(data);
+  }
+
+  renderChildren = () => {
+    let children = this.data.children;
+
+    if(children) {
+      children.forEach(child => {
+        let orbital = new Orbital(child, this.mesh.body);
+        this.updateQueue.push(orbital.updatePosition);
+      });
+    }
   }
 
   /**
@@ -46,8 +62,8 @@ export default class {
   getOrbitalPlane = () => {
     let orbitalPlane = new THREE.Object3D();
 
-    orbitalPlane.add(this.ellipse.getObject());
-    orbitalPlane.add(this.mesh.getObject());
+    orbitalPlane.add(this.ellipse);
+    orbitalPlane.add(this.mesh);
 
     return orbitalPlane;
   }
@@ -62,7 +78,7 @@ export default class {
     let orbitalPlane   = this.getOrbitalPlane(this.data);
 
     referencePlane.add(orbitalPlane);
-    this.setPlanarRotations(orbitalPlane, referencePlane, this.data);
+    this.setPlanarRotations(orbitalPlane,  referencePlane , this.data);
 
     return referencePlane;
   }
@@ -99,6 +115,10 @@ export default class {
    * @param  {Number}  time UNIX time
    */
   updatePosition = (time) => {
+    this.updateQueue.forEach((update) => {
+      update(time);
+    });
+
     this.mesh.updatePosition(time,
       this.ellipse.getPosition(
         time, this.data.nextPeriapsis, this.data.lastPeriapsis

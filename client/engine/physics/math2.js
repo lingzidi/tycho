@@ -1,4 +1,6 @@
 export default class {
+
+  static HalfPI = Math.PI / 2;
   
   static ramanujan(a, b) {
     return Math.PI*(3*(a+b)-Math.sqrt((3*a+b)*(a+3*b)));

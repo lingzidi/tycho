@@ -1,58 +1,93 @@
 import THREE from 'three';
 import OrbitalDynamics from '../physics/orbitalDynamics';
 import Vector from '../physics/vector';
+import Math2 from '../physics/math2';
 import Prop from './prop';
+import Scale from '../global/scale';
+import Constants from '../global/constants';
 
-export default class Ellipse extends Prop {
+export default class Ellipse extends THREE.Line {
 
   /**
-   * @param  {Number} semimajor
-   * @param  {Number} semiminor
-   * @param  {Number} eccentricity
+   * @param  {Object} data
    */
   constructor(data) {
     super();
-    this.semimajor = this.scale(data.semimajor);
-    this.semiminor = this.scale(data.semiminor);
-    this.eccentricity    = data.eccentricity;
-    this.atmosphereColor = data.atmosphereColor;
-    this.HPI = Math.PI / 2;
-
+    this.setData(data);
     this.renderGeometries();
   }
 
   /**
+   * Set global data, with appropriate scales.
+   * @param  {Object} data
+   */
+  setData = (data) => {
+    this.semimajor = Scale(data.semimajor);
+    this.semiminor = Scale(data.semiminor);
+    this.eccentricity    = data.eccentricity;
+    this.atmosphereColor = data.atmosphereColor;
+  }
+
+  /**
    * Renders the ellipse prop.
-   * TODO: needs cleaning
    * @return {Object3D} ellipse
    */
   renderGeometries = () => {
-    let focus     = Vector.getFocus(this.semimajor, this.semiminor);
-    let material  = this.getLineMaterial(this.atmosphereColor);// TODO
-
-    this.ellipse  = this.getEllipseCurve(focus, this.semiminor, this.semimajor);
-    this.path     = new THREE.Path( this.ellipse.getPoints( 500 ) ); // TODO: constant
-    this.geometry = this.path.createPointsGeometry(500); // TODO: constant
-    this.object   = new THREE.Line(this.geometry, material);
+    this.material = this.getLineMaterial();
+    this.ellipse  = this.getEllipseCurve();
+    this.path     = this.getPath();
+    this.geometry = this.getGeometry();
     this.path.add(this.ellipse);
   }
 
   /**
+   * Returns instance of geometry from instance of ellipse points.
+   * @return {THREE.Geometry} geometry
+   */
+  getGeometry = () => {
+    return this.path.createPointsGeometry(500); // TODO: constant
+  }
+
+  /**
+   * Returns instance of path from instance of ellipse points.
+   * @return {THREE.Path} path
+   */
+  getPath = () => {
+    return new THREE.Path(
+      this.ellipse.getPoints(500)// TODO: constant
+    );
+  }
+
+  /**
    * 3D line material for prop.
-   * @param  {Hex} atmosphereColor
    * @return {LineBasicMaterial}
    */
-  getLineMaterial = (atmosphereColor) => {
+  getLineMaterial = () => {
     return new THREE.LineBasicMaterial({
-      color: atmosphereColor,
+      color: this.atmosphereColor,
       opacity: 0.4,
       transparent: true
     });
   }
 
   /**
+   * Instance of Ellipse curve.
+   * @return {EllipseCurve}
+   */
+  getEllipseCurve = () => {
+    let focus = Vector.getFocus(this.semimajor, this.semiminor);
+
+    return new THREE.EllipseCurve(0,
+      focus, 
+      this.semiminor,
+      this.semimajor,
+    -Math2.HalfPI, 3 * Math2.HalfPI);
+  }
+
+
+  /**
    * Returns the current vector position of the mesh.
-   * All times are in UNIX time.
+   * All parameter times must be in UNIX time.
    * @param  {Number}   time current timestamp 
    * @param  {Number}   last timestamp of last periapsis
    * @param  {Number}   next timestamp of next peripasis
@@ -64,20 +99,9 @@ export default class Ellipse extends Prop {
     let theta = OrbitalDynamics.getTheta(this.eccentricity, E);
     let percent = theta / 360;
 
-    // if(percent > 1 || isNaN(percent)) {
-    //   percent = 0;
-    // }
+    if(percent > 1 || isNaN(percent)) {
+      percent = 0;
+    }
     return this.path.getPoint(percent);
-  }
-
-  /**
-   * Instance of Ellipse curve.
-   * @param  {Number} f focus
-   * @param  {Number} a angle of...uhh....???
-   * @param  {Number} i angle of inclination
-   * @return {EllipseCurve}
-   */
-  getEllipseCurve = (f, a, i) => {
-    return new THREE.EllipseCurve(0, f, a, i, -this.HPI, 3 * this.HPI);
   }
 }

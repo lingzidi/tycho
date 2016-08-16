@@ -3,3 +3,4 @@ public
 build
 server/env
 coverage
+npm-debug.log

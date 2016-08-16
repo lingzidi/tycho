@@ -1,31 +1,38 @@
 import THREE from 'three';
 import Constants from '../global/constants';
+import Scale from '../global/scale';
 import Math2 from '../physics/math2';
 import Prop from './prop';
 
-export default class Mesh extends Prop {
+export default class Mesh extends THREE.Object3D {
 
   /**
-   * @param  {Object}   data
+   * @param  {Object} data
    */
   constructor(data) {
     super();
-    this.rotation  = data.rotation;
+    this.setData(data);
+    this.renderGeometries();
+  }
+
+  /**
+   * Set global data, with appropriate scales.
+   * @param  {Object} data
+   */
+  setData = (data) => {
+    // this.rotation  = data.rotation;
     this.radius    = data.radius;
     this.axialTilt = data.axialTilt;
-    this.HPI = Math.PI / 2;
-    
-    this.renderGeometries();
   }
 
   /**
    * Render mesh and mesh body
    */
   renderGeometries = () => {
-    this.body = this.renderBody(0x808080);
-    this.object = this.renderMesh();
-    this.object.add(this.body);
-    // this.object.add( new THREE.AxisHelper( 500 ) );
+    this.body = this.renderBody(0xFFFFFF);
+    // this.object = this.renderMesh();
+    this.add(this.body);
+    this.add( new THREE.AxisHelper( 200 ) );
   }
 
   /**
@@ -34,7 +41,7 @@ export default class Mesh extends Prop {
    * @return {Object3D}
    */
   renderBody = (atmosphere) => {
-    let radius   = this.scale(this.radius);
+    let radius   = Scale(this.radius);
     let geometry = new THREE.SphereGeometry(radius, 32, 32);
     let material = new THREE.MeshPhongMaterial({
       specular: atmosphere
@@ -48,7 +55,7 @@ export default class Mesh extends Prop {
    */
   renderMesh = () => {
     let mesh = new THREE.Object3D();
-    mesh.rotation.x = this.HPI;
+    mesh.rotation.x = Math2.HalfPI;
     mesh.rotation.z = -Math2.toRadians(this.axialTilt);
 
     return mesh;
@@ -69,8 +76,21 @@ export default class Mesh extends Prop {
   updateScale = (scale) => {
     if(this.radius) {
       ['x', 'y', 'z'].forEach((c) => {
-        this.object[c] = s;
+        this[c] = s;
       });
     }
+  }
+
+  /**
+   * Update the position of the mesh acording to time
+   * @param  {Number}  time
+   * @param  {Vector}  pos new position
+   */
+  updatePosition = (time, pos) => {
+    Object
+      .keys(pos)
+      .forEach((c) => {
+        this.position[c] = pos[c];
+      });
   }
 }

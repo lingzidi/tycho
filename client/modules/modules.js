@@ -1,10 +1,11 @@
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
+import uislider from 'angular-ui-slider';
 
 export default class Modules {
 
   constructor() {
-    this.module = angular.module('app.scene', [uirouter]);
+    this.module = angular.module('app.scene', [uirouter, uislider]);
   }
 
   /**
@@ -44,9 +45,10 @@ export default class Modules {
       this.registerService(`${modulePath}/${moduleName}.service`);
     }
 
-    return this
+    this
       .module
-      .controller(config.controller, controller[config.controller])
-      .name;
+      .controller(config.controller, controller[config.controller]);
+      
+    return moduleName;
   }
 }

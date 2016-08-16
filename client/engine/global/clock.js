@@ -28,7 +28,7 @@ export default class {
    */
   getTime = () => {
     let time = this.clock.getElapsedTime();
-        time *= Math.pow(10, this.scale);
+        time *= this.scale;
         time += this.offset;
 
     return Math.ceil(time);
