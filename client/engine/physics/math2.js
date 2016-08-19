@@ -1,6 +1,8 @@
 export default class {
 
   static HalfPI = Math.PI / 2;
+
+  static TAU = Math.PI * 2;
   
   static ramanujan(a, b) {
     return Math.PI*(3*(a+b)-Math.sqrt((3*a+b)*(a+3*b)));
@@ -11,7 +13,7 @@ export default class {
   }
 
   static arcSecToRad(time, rotation) {
-    return Math.abs(time * (Math.PI / 648000)) % Math2.TAU;
+    return Math.abs(time * (Math.PI / 648000)) % this.TAU;
   }
   
   // render3Dto2D(position, camera) {   

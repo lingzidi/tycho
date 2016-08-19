@@ -2,7 +2,6 @@ import THREE from 'three';
 import OrbitalDynamics from '../physics/orbitalDynamics';
 import Vector from '../physics/vector';
 import Math2 from '../physics/math2';
-import Prop from './prop';
 import Scale from '../global/scale';
 import Constants from '../global/constants';
 

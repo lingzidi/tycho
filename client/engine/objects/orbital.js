@@ -33,7 +33,7 @@ this.updateQueue = [];
 
     if(children) {
       children.forEach(child => {
-        let orbital = new Orbital(child, this.mesh.body);
+        let orbital = new Orbital(child, this.mesh);
         this.updateQueue.push(orbital.updatePosition);
       });
     }

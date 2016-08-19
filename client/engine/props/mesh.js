@@ -2,7 +2,6 @@ import THREE from 'three';
 import Constants from '../global/constants';
 import Scale from '../global/scale';
 import Math2 from '../physics/math2';
-import Prop from './prop';
 
 export default class Mesh extends THREE.Object3D {
 
@@ -13,6 +12,7 @@ export default class Mesh extends THREE.Object3D {
     super();
     this.setData(data);
     this.renderGeometries();
+    // this.setAxilTilt();
   }
 
   /**
@@ -20,7 +20,7 @@ export default class Mesh extends THREE.Object3D {
    * @param  {Object} data
    */
   setData = (data) => {
-    // this.rotation  = data.rotation;
+    this.arcRotate = data.rotation;
     this.radius    = data.radius;
     this.axialTilt = data.axialTilt;
   }
@@ -30,9 +30,8 @@ export default class Mesh extends THREE.Object3D {
    */
   renderGeometries = () => {
     this.body = this.renderBody(0xFFFFFF);
-    // this.object = this.renderMesh();
     this.add(this.body);
-    this.add( new THREE.AxisHelper( 200 ) );
+    this.body.add( new THREE.AxisHelper( 200 ) );
   }
 
   /**
@@ -50,15 +49,12 @@ export default class Mesh extends THREE.Object3D {
   }
 
   /**
-   * Render the rotated mesh.
+   * Set rotations of mesh.
    * @return {Object3D}
    */
-  renderMesh = () => {
-    let mesh = new THREE.Object3D();
-    mesh.rotation.x = Math2.HalfPI;
-    mesh.rotation.z = -Math2.toRadians(this.axialTilt);
-
-    return mesh;
+  setAxilTilt = () => {
+    // this.rotation.x = Math2.HalfPI;
+    this.rotation.z = -Math2.toRadians(this.axialTilt);
   }
 
   /**
@@ -66,7 +62,7 @@ export default class Mesh extends THREE.Object3D {
    * @param  {Number} time rotational constant
    */
   rotate = (time) => {
-    this.body.rotation.y = Math2.arcSecToRad(time, this.rotation);
+    this.body.rotation.y = Math2.arcSecToRad(time, this.arcRotate);
   };
   
   /**
@@ -92,5 +88,6 @@ export default class Mesh extends THREE.Object3D {
       .forEach((c) => {
         this.position[c] = pos[c];
       });
+    this.rotate(time);
   }
 }
