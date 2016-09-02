@@ -1,29 +1,33 @@
-var gulp = require('gulp');
-var express = require('express');
 var modRewrite = require('connect-modrewrite');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpack = require('webpack');
-var app = require('./server');
+var webpackDev = require('webpack-dev-middleware');
 var livereload = require('gulp-livereload');
+var webpack = require('webpack');
+var express = require('express');
 var nodemon = require('nodemon');
-var Server = require('karma').Server;
+var colors = require('colors');
+var karma = require('karma');
 var mocha = require('gulp-mocha');
+var gulp = require('gulp');
+var app = require('./server');
 
 gulp.task('server', function() {
   require('babel-core/register');
   require('babel-polyfill');
   var compiler = webpack(require('./webpack.config'));
 
-  // webpack client-side spa and serve static components
-  app.use(webpackDevMiddleware(compiler, {
+  // webpack client-side SPA and serve static components
+  app.use(webpackDev(compiler, {
+    quiet: true,
     noInfo: true,
+    stats: { colors: true },
     publicPath: '/client'
   }));
 
   app.listen(8080, function() {
-    console.log('Listening on port 8080');
+    console.log('Listening on port 8080  🌎'.green);
   });
 });
+
 
 gulp.task('watch', function() {
   nodemon({
@@ -38,23 +42,25 @@ gulp.task('watch', function() {
   });
 });
 
+
 gulp.task('test-client', function (done) {
-  var server = new Server({
+  var server = new karma.Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
-  }, function(result) {
-    done(result.error ? 'Error' : null);
-  });
+  }, process.exit);
 
   server.start();
 });
 
+
 gulp.task('test-server', function (done) {
   return gulp
     .src('./test/server/index.js', {read: false})
-    .pipe(mocha({reporter: 'nyan'})); // hehe
+    .pipe(mocha({reporter: 'nyan'}));
 });
 
+
 gulp.task('serve', ['server', 'watch']);
+
 
 gulp.task('test', ['test-client', 'test-server']); // TODO: add task for linting

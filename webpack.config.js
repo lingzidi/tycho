@@ -18,6 +18,8 @@ var config = {
   output: {
     filename: 'app.min.js',
     path: path.join(__dirname, 'dist'),
+    noInfo: true,
+    quiet: true,
     publicPath: '/client/'
   },
 
@@ -61,7 +63,5 @@ var config = {
     })
   ]
 };
-
-console.log(' THE CLIENT URL : ', client);
 
 module.exports = config;

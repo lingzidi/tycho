@@ -36,10 +36,18 @@ module.exports = function (config) {
       type: 'html'
     },
 
+    client: {
+      captureConsole: false
+    },
+
     webpack: require('./test/client/webpack.tests'),
 
-    webpackMiddleware: { // hide webpack output
-      noInfo: true
+    webpackMiddleware: {
+      noInfo: true,
+      quiet: true,
+      stats: {
+        colors: true
+      }
     }
   });
 };
