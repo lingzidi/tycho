@@ -44,7 +44,9 @@ export default class Ellipse extends THREE.Line {
    * @return {THREE.Geometry} geometry
    */
   getGeometry = () => {
-    return this.path.createPointsGeometry(500); // TODO: constant
+    return this.path.createPointsGeometry(
+      Constants.ELLIPSE_CURVE_POINTS
+    );
   }
 
   /**
@@ -53,7 +55,7 @@ export default class Ellipse extends THREE.Line {
    */
   getPath = () => {
     return new THREE.Path(
-      this.ellipse.getPoints(500)// TODO: constant
+      this.ellipse.getPoints(Constants.ELLIPSE_CURVE_POINTS)
     );
   }
 
@@ -88,19 +90,14 @@ export default class Ellipse extends THREE.Line {
    * Returns the current vector position of the mesh.
    * All parameter times must be in UNIX time.
    * @param  {Number}   time current timestamp 
-   * @param  {Number}   last timestamp of last periapsis
-   * @param  {Number}   next timestamp of next peripasis
+   * @param  {Object}   periapses
    * @return {Vector}   current position
    */
-  getPosition = (time, last, next) => {
-    let E     = OrbitalDynamics.eccentricAnomaly(this.eccentricity, time, last, next);
-
-    let theta = OrbitalDynamics.getTheta(this.eccentricity, E);
-    let percent = theta / 360;
-
-    if(percent > 1 || isNaN(percent)) {
-      percent = 0;
-    }
-    return this.path.getPoint(percent);
+  getPosition = (time, periapses) => {
+    return this.path.getPoint(
+      OrbitalDynamics.ellipticPercent(
+        this.eccentricity, time, periapses
+      )
+    );
   }
 }

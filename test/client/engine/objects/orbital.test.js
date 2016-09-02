@@ -1,7 +1,9 @@
 import Orbital from '../../../../client/engine/objects/orbital';
 import Mesh from '../../../../client/engine/props/mesh';
 import Ellipse from '../../../../client/engine/props/ellipse';
+import Scale from '../../../../client/engine/global/scale';
 import Fixtures from './__fixtures__';
+import moment from 'moment';
 import THREE from 'three';
 
 describe('Orbital', () => {
@@ -22,25 +24,23 @@ describe('Orbital', () => {
       mesh.should.not.be.null;
       mesh.should.be.instanceOf(Mesh);
       mesh.should.containSubset({
-        radius: fixture.radius,
-        rotation: fixture.rotation,
-        axialTilt: fixture.axialTilt
+        arcRotate: fixture.rotation,
+        axialTilt: fixture.axialTilt,
+        radius: Scale(fixture.radius)
       });
 
     });
 
-    it('should assign a new ellipse with axis and eccenticity', () => {
-
+    it('should assign a new ellipse with scaled axis and eccenticity', () => {
       let ellipse = orbital.ellipse;
 
       ellipse.should.not.be.null;
       ellipse.should.be.instanceOf(Ellipse);
       ellipse.should.containSubset({
         atmosphereColor: fixture.atmosphereColor,
-        semimajor: ellipse.scale(fixture.semimajor),
-        semiminor: ellipse.scale(fixture.semiminor)
+        semimajor: Scale(fixture.semimajor),
+        semiminor: Scale(fixture.semiminor)
       });
-
     });
 
   });
@@ -48,43 +48,41 @@ describe('Orbital', () => {
   describe('getOrbitalPlane', () => {
 
     it('should return a new Object3D with mesh and ellipse children', () => {
-
       let plane = orbital.getOrbitalPlane();
 
       plane.should.be.instanceOf(THREE.Object3D);
       plane.children.length.should.equal(2);
-      plane.children[0].should.equal(orbital.ellipse.getObject());
-      plane.children[1].should.equal(orbital.mesh.getObject());
+      plane.children[0].should.equal(orbital.ellipse);
+      plane.children[1].should.equal(orbital.mesh);
     });
-
   });
 
   describe('setPlanarRotations', () => {
 
     it('should augment x and z coords for pivot planes', () => {
 
-      let getXZ = (plane) => {
+      let getDimensions = (plane) => {
         return {
-          x: plane.x || 0,
-          z: plane.z || 0
+          x: plane.rotation.x || 0,
+          z: plane.rotation.z || 0
         }
       };
 
       let originalRefPlane = orbital.getOrbital(),
           originalOrbPlane = orbital.getOrbitalPlane(),
           originalDimensions = {
-        referencePlane: getXZ(originalRefPlane),
-        originalPlane : getXZ(originalOrbPlane)
-      };
+            referencePlane: getDimensions(originalRefPlane),
+            originalPlane : getDimensions(originalOrbPlane)
+          };
 
       orbital.setPlanarRotations(originalRefPlane, originalOrbPlane, fixture);
 
       let nextDimensions = {
-        referencePlane: getXZ(originalRefPlane),
-        originalPlane : getXZ(originalOrbPlane)
+        referencePlane: getDimensions(originalRefPlane),
+        originalPlane : getDimensions(originalOrbPlane)
       };
 
-      ['x', 'z'].forEach((d) => {
+      ['x', 'z'].forEach(d => {
 
         originalDimensions
           .referencePlane[d]
@@ -96,7 +94,6 @@ describe('Orbital', () => {
 
         nextDimensions.originalPlane[d].should.be.a.number;
         nextDimensions.referencePlane[d].should.be.a.number;
-
       });
 
     });
@@ -106,21 +103,21 @@ describe('Orbital', () => {
 
   describe('rotateObject', () => {
 
-    it('should rotate an Object3D by given dimension', () => {
-
+    it('should rotate an Object3D by the given dimension', () => {
       let testObject = new THREE.Object3D();
-          testObject.x = 0;
 
-      let oldX = testObject.x;
+      ['x', 'y', 'z'].forEach(d => {
+        testObject.rotation[d] = 0;
+        let oldDim = testObject.rotation[d];
 
-      orbital.rotateObject('x', testObject, Math.PI);
+        orbital.rotateObject(d, testObject, Math.PI);
 
-      let newX = testObject.x;
+        let newDim = testObject.rotation[d];
 
-      newX.should.not.be.null;
-      newX.should.be.a.number;
-      newX.should.not.equal(oldX);
-
+        newDim.should.not.be.null;
+        newDim.should.be.a.number;
+        newDim.should.not.equal(oldDim);
+      });
     });
 
   });
@@ -128,12 +125,11 @@ describe('Orbital', () => {
   describe('updatePosition', () => {
 
     it('should set mesh position based on current time in ellipse', () => {
-
-      let time = 1470323035;
-      let mesh = orbital.mesh.getObject();
-      let vect = orbital.ellipse.getPosition(
-        time, fixture.nextPeriapsis, fixture.lastPeriapsis
-      );
+      let time = moment().unix(),
+          mesh = orbital.mesh,
+          vect = orbital.ellipse.getPosition(
+            time, fixture.periapses
+          );
 
       orbital.updatePosition(time);
       
@@ -143,7 +139,6 @@ describe('Orbital', () => {
         mesh.position[d].should.be.a.number;
         mesh.position[d].should.equal(vect[d]);
       });
-
     });
 
   });

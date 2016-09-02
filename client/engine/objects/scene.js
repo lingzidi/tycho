@@ -26,7 +26,8 @@ export default class Scene extends THREE.Scene {
   getRenderer = () => {
     return new THREE.WebGLRenderer({
       antialias: true,
-      alpha: true
+      alpha: true,
+      logging: false
     });
   }
 
@@ -124,9 +125,8 @@ export default class Scene extends THREE.Scene {
    * @param  {Number} speed scalar to multiply time elapsed by,
    *                        as an exponent of 10
    */
-  //TODO: change 'scale' property to 'speed' in Clock class
   speed = (speed) => {
-    this.clock.scale = Math.pow(10, speed);
+    this.clock.speed(speed);
   }
 
 
@@ -145,10 +145,12 @@ export default class Scene extends THREE.Scene {
       semiminor: 149556483,
       radius: 637800.0,
       rotation: 15.0411, // in arcseconds
-      inclination: 1.57869,
+      inclination: 1.57869+90,//TODO: do something about 90-deg rotation
       argPeriapsis: 114.20763,
-      lastPeriapsis: 1136419200+3600*3, // UNIX time
-      nextPeriapsis: 1167976800+3600*3, // UNIX time
+      periapses: {
+        last: 1136419200+3600*3, // UNIX time
+        next: 1167976800+3600*3 // UNIX time
+      },
       eccentricity: 0.01671123,
       longAscNode: 348.73936,
       atmosphereColor: 0x808080,
@@ -161,8 +163,10 @@ export default class Scene extends THREE.Scene {
         rotation: 15.0411, // in arcseconds
         inclination: 1.57869,
         argPeriapsis: 114.20763,
-        lastPeriapsis: 1136419200+3600*3, // UNIX time
-        nextPeriapsis: 1167976800+3600*3, // UNIX time
+        periapses: {
+          last: 1136419200+3600*3, // UNIX time
+          next: 1167976800+3600*3 // UNIX time
+        },
         eccentricity: 0.01671123,
         longAscNode: 348.73936,
         atmosphereColor: 0xFF0000

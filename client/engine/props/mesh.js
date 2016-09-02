@@ -21,15 +21,15 @@ export default class Mesh extends THREE.Object3D {
    */
   setData = (data) => {
     this.arcRotate = data.rotation;
-    this.radius    = data.radius;
     this.axialTilt = data.axialTilt;
+    this.radius = Scale(data.radius);
   }
 
   /**
    * Render mesh and mesh body
    */
   renderGeometries = () => {
-    this.body = this.renderBody(0xFFFFFF);
+    this.body = this.renderBody();
     this.add(this.body);
     this.body.add( new THREE.AxisHelper( 200 ) );
   }
@@ -39,11 +39,10 @@ export default class Mesh extends THREE.Object3D {
    * @param  {Hex} atmosphere
    * @return {Object3D}
    */
-  renderBody = (atmosphere) => {
-    let radius   = Scale(this.radius);
-    let geometry = new THREE.SphereGeometry(radius, 32, 32);
+  renderBody = () => {
+    let geometry = new THREE.SphereGeometry(this.radius, 32, 32);
     let material = new THREE.MeshPhongMaterial({
-      specular: atmosphere
+      specular: this.atmosphere
     });
     return new THREE.Mesh(geometry, material);
   }
@@ -53,7 +52,6 @@ export default class Mesh extends THREE.Object3D {
    * @return {Object3D}
    */
   setAxilTilt = () => {
-    // this.rotation.x = Math2.HalfPI;
     this.rotation.z = -Math2.toRadians(this.axialTilt);
   }
 
@@ -62,7 +60,7 @@ export default class Mesh extends THREE.Object3D {
    * @param  {Number} time rotational constant
    */
   rotate = (time) => {
-    this.body.rotation.y = Math2.arcSecToRad(time, this.arcRotate);
+    this.body.rotation.z = Math2.arcSecToRad(time, this.arcRotate);
   };
   
   /**
@@ -71,7 +69,7 @@ export default class Mesh extends THREE.Object3D {
    */
   updateScale = (scale) => {
     if(this.radius) {
-      ['x', 'y', 'z'].forEach((c) => {
+      ['x', 'y', 'z'].forEach(c => {
         this[c] = s;
       });
     }
@@ -85,7 +83,7 @@ export default class Mesh extends THREE.Object3D {
   updatePosition = (time, pos) => {
     Object
       .keys(pos)
-      .forEach((c) => {
+      .forEach(c => {
         this.position[c] = pos[c];
       });
     this.rotate(time);

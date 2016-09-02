@@ -8,7 +8,7 @@ export class MainController {
     main.settings = {
       zoom: 100,
       size: 0,
-      speed: 5
+      speed: 0
     };
 
     Object

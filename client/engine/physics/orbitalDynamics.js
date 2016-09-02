@@ -7,11 +7,11 @@ export default class {
     return meanAnom;
   }
   
-  static eccentricAnomaly(ecc, time, lastPeriapsis, nextPeriapsis) {
+  static eccentricAnomaly(ecc, time, periapses) {
     // get eccentric anomaly as a function of time since periapsis, current time and eccentricity
     var E, F;
-    var timePassed = (time - lastPeriapsis);
-    var period = (nextPeriapsis - lastPeriapsis);
+    var timePassed = (time - periapses.last);
+    var period = (periapses.next - periapses.last);
     var m = this.meanAnomaly(timePassed, period) / 360; // mean anomaly as a fn of time
     
     m = 2.0 * Math.PI*(m-Math.floor(m));
@@ -33,6 +33,21 @@ export default class {
     var theta = Math.atan2(min*Math.sin(E), Math.cos(E)-ecc)/(Math.PI/180);
     
     return (theta < 0 ? 360+theta : theta);
+  }
+
+  static thetaToPercent(theta) {
+    let percent = theta / 360;
+    if(percent > 1 || isNaN(percent)) {
+      return 0;
+    }
+    return percent;
+  }
+
+  static ellipticPercent(ecc, time, periapses) {
+    let E = this.eccentricAnomaly(ecc, time, periapses);
+    let theta = this.getTheta(ecc, E);
+    
+    return this.thetaToPercent(theta);
   }
   
   static orbitalEnergyConservation(GM, r, semimajor) {

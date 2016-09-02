@@ -1,6 +1,7 @@
 export default {
   PLANET_SIZE_SCALE: 1,
   WEBGL_SCALE: 1000000,
+  ELLIPSE_CURVE_POINTS: 500,
   SCENE_SETTINGS: {
     renderer: {
       // physicallyBasedShading: true,

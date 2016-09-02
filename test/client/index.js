@@ -1,11 +1,9 @@
-var spy = chai.spies;
 
-console.log('is spy defined?? ', spy);
+var chaiSubset = require('chai-subset');
+chai.use(chaiSubset);
 
-require('./engine/objects/scene.test');
+var testsContext = require.context('.', true, /.test$/);
 
-// var testsContext = require.context('.', true, /.test$/);
-
-// testsContext
-//   .keys()
-//   .forEach(testsContext);
+testsContext
+  .keys()
+  .forEach(testsContext);

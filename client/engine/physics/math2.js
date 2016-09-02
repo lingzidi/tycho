@@ -12,6 +12,10 @@ export default class {
     return deg * Math.PI / 180;
   }
 
+  static toDegrees(rad) {
+    return (rad * 180) / Math.PI;
+  }
+
   static arcSecToRad(time, rotation) {
     return Math.abs(time * (Math.PI / 648000)) % this.TAU;
   }

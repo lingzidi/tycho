@@ -32,13 +32,12 @@ describe('Clock', () => {
 
     it('should return inflated time when scale is greater than 1', (done) => {
       let offset = 1470323035,
+          curTime,
           clock = new Clock(offset);
 
-      clock.scale = 2;
+      clock.speed(2);
 
-      let curTime = clock.getTime();
-
-      // after 1 sec, at 10^2 inflation, time passed should be at least 100
+      // after 1 sec, at 10^2 times inflation, time passed should be at least 100
       setTimeout(() => {
         curTime = clock.getTime();
         curTime -= offset;
@@ -69,6 +68,8 @@ describe('Clock', () => {
         timeAfterUpdate.should.be.a.number;
         timeAfterUpdate.should.be.at.least(timeBeforeUpdate);
         timeAfterUpdate.should.be.at.least(0);
+
+        chai.spy.on(clock, 'nextTick');
         clock.nextTick.should.have.been.called;
         done();
       }, 1000);
@@ -102,7 +103,7 @@ describe('Clock', () => {
 
         clock.events.should.be.an.array;
         clock.events.should.have.length(2);
-        clock.events.forEach((event) => {
+        clock.events.forEach(event => {
           event.should.not.be.null;
           event.should.be.a.function;
         });
@@ -115,10 +116,13 @@ describe('Clock', () => {
 
       it('should execute each event on next tick', () => {
 
+        events.forEach(clock.tick);
+
         clock.nextTick();
 
-        events.forEach((event) => {
-          event.should.have.been.called;
+        events.forEach((event, index) => {
+          chai.spy.on(clock.events, index);
+          clock.events[index].should.have.been.called;
         });
       });
       

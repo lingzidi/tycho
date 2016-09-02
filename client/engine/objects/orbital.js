@@ -10,10 +10,11 @@ export default class Orbital {
    * @param  {Object} data
    */
   constructor(data, parent) {
-this.updateQueue = [];
+    this.updateQueue = [];
     this.data = data;
     this.renderGeometries();
     this.renderChildren(parent);
+
     if(parent) {
       parent.add(this.getOrbital());
     }
@@ -28,6 +29,9 @@ this.updateQueue = [];
     this.ellipse = new Ellipse(data);
   }
 
+  /**
+   * Renders all instances of children from within the queue.
+   */
   renderChildren = () => {
     let children = this.data.children;
 
@@ -78,7 +82,7 @@ this.updateQueue = [];
     let orbitalPlane   = this.getOrbitalPlane(this.data);
 
     referencePlane.add(orbitalPlane);
-    this.setPlanarRotations(orbitalPlane,  referencePlane , this.data);
+    this.setPlanarRotations(orbitalPlane, referencePlane, this.data);
 
     return referencePlane;
   }
@@ -105,9 +109,9 @@ this.updateQueue = [];
    */
   rotateObject = (coordinate, object, rotation) => {
     if(isNaN(object[coordinate])) {
-      object[coordinate] = 0;
+      object.rotation[coordinate] = 0;
     }
-    object[coordinate] += Math2.toRadians(rotation);
+    object.rotation[coordinate] += Math2.toRadians(rotation);
   }
 
   /**
@@ -121,7 +125,7 @@ this.updateQueue = [];
 
     this.mesh.updatePosition(time,
       this.ellipse.getPosition(
-        time, this.data.nextPeriapsis, this.data.lastPeriapsis
+        time, this.data.periapses
       )
     );
   }
