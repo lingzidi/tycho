@@ -10,8 +10,4 @@ config.plugins = [
   })
 ];
 
-console.log('config: ', config);
-console.log('quiet? ', config.quiet);
-console.log('noInfo? ', config.noInfo);
-
 module.exports = config;

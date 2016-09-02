@@ -3,4 +3,4 @@
 require('babel-core/register');
 require('babel-polyfill');
 
-module.exports = require('./server');
+module.exports = require('./server.es6');

@@ -17,11 +17,11 @@ module.exports = function (config) {
       './node_modules/angular-mocks/angular-mocks.js',
       './node_modules/three/build/three.min.js',
       './node_modules/moment/moment.js',
-      'test/client/index.js'
+      'tests/client/index.js'
     ],
 
     preprocessors: {
-      'test/client/index.js': ['webpack', 'sourcemap']
+      'tests/client/index.js': ['webpack', 'sourcemap']
     },
 
     browsers: [
@@ -40,7 +40,7 @@ module.exports = function (config) {
       captureConsole: false
     },
 
-    webpack: require('./test/client/webpack.tests'),
+    webpack: require('./tests/client/webpack.tests'),
 
     webpackMiddleware: {
       noInfo: true,

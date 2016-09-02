@@ -9,6 +9,7 @@ var karma = require('karma');
 var mocha = require('gulp-mocha');
 var gulp = require('gulp');
 var app = require('./server');
+var log = require('single-line-log').stdout;
 
 gulp.task('server', function() {
   require('babel-core/register');
@@ -24,7 +25,14 @@ gulp.task('server', function() {
   }));
 
   app.listen(8080, function() {
-    console.log('Listening on port 8080  🌎'.green);
+    var phase = 0;
+    var phases = ['🌏','🌍','🌎'],
+        msg = 'The Solar System is listening on port 8080';
+    setInterval(function() {
+      phase = ++phase % phases.length;
+      log.clear();
+      log((msg + ' \u0020' + phases[phase] + '\n').green);
+    }, 200);
   });
 });
 
@@ -55,7 +63,7 @@ gulp.task('test-client', function (done) {
 
 gulp.task('test-server', function (done) {
   return gulp
-    .src('./test/server/index.js', {read: false})
+    .src('./tests/server/index.es6', {read: false})
     .pipe(mocha({reporter: 'nyan'}));
 });
 

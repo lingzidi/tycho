@@ -9,7 +9,7 @@ var config = {
   devtool: 'eval',
 
   entry: {
-    app: ['./client/index.js'],
+    app: ['./client/index.es6'],
     vendor: [
       'angular'
     ]
@@ -31,6 +31,11 @@ var config = {
         exclude: /node_modules/
       },
       {
+        test: /\.es6$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
         /* TODO: look for real webpack loaders for these things */
         test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
         loader: 'url-loader'
@@ -47,7 +52,8 @@ var config = {
   },
 
   resolve: {
-    root: [client]
+    root: [client],
+    extensions: ['', '.js', '.es6']
   },
 
   plugins: [

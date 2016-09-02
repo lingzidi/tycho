@@ -34,6 +34,7 @@
     "ng-annotate": "^1.2.1",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
+    "require-extension": "0.0.4",
     "three": "^0.79.0",
     "three-orbit-controls": "^72.0.0",
     "webpack-dev-middleware": "^1.5.1"
@@ -91,6 +92,7 @@
     "phantomjs-polyfill": "0.0.1",
     "postcss-loader": "^0.8.0",
     "raw-loader": "^0.5.1",
+    "single-line-log": "^1.1.1",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "watchify": "^3.7.0",
