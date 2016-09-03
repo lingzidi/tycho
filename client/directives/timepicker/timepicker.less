@@ -1,0 +1,120 @@
+.timepicker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  text-align: right;
+
+  > span {
+    font-size: 1.5em;
+    cursor: pointer;
+
+    &:hover {
+      color: #ff0000;
+    }
+  }
+
+  #timepicker {
+    visibility: hidden;
+    position: absolute;
+    right: 2rem;
+    width: 230px;
+    height: 40px;
+  }
+}
+
+/**
+ * All credit for the CSS below (besides theming) to Dale Lotts.
+ * https://github.com/dalelotts/angularjs-datetime-picker
+ */
+.angularjs-datetime-picker {
+  color: #333;
+  font: normal 14px sans-serif;
+  border: 1px solid #ddd;
+  display: inline-block;
+  background: #fff;
+
+  > .adp-month {
+    text-align: center;
+    line-height: 22px;
+    padding: 10px;
+    background: #fcfcfc;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+
+     > button {
+      color: #555;
+      font: normal 14px sans-serif;
+      outline: none;
+      position: absolute;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        color: #333;
+      }
+
+      &.adp-prev {
+        left: 10px;
+      }
+
+      &.adp-next {
+        right: 10px;
+      }
+    }
+  }
+
+   > .adp-days {
+    width: 210px; /* 30 x 7 */
+    margin: 10px;
+    text-align: center;
+
+    > .adp-day-of-week,
+    > .adp-day {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      border: 1px solid transparent;
+      width: 30px;
+      line-height: 28px;
+      float: left;
+    }
+
+    > .adp-day-of-week {
+      font-weight: bold;
+    }
+
+    > .adp-day {
+      &:not(.selectable) {
+        opacity: 0.15;
+        cursor: default;
+      }
+
+      &.selected {
+        background: #e0e0e0;
+      }
+
+      &.selectable  {
+        cursor: pointer;
+
+        &:hover {
+          background: #eee;
+        }
+      }
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      clear: left;
+      height: 0;
+    }
+  }
+
+  input[type=range] {
+    width: 150px;
+  }
+}

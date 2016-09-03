@@ -27,7 +27,7 @@ gulp.task('server', function() {
   app.listen(8080, function() {
     var phase = 0;
     var phases = ['🌏','🌍','🌎'],
-        msg = 'The Solar System is listening on port 8080';
+        msg = 'Listening on port 8080';
     setInterval(function() {
       phase = ++phase % phases.length;
       log.clear();

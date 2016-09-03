@@ -9,6 +9,7 @@ export default class Controls extends OrbitControls(THREE) {
     super(camera);
     this.camera = camera;
     this.level = 0;
+    this.enabled = false;
   }
 
   /**

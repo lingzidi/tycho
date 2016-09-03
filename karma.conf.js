@@ -2,8 +2,9 @@ module.exports = function (config) {
   config.set({
     frameworks: [
       'jasmine',
+      'mocha',
       'chai-spies',
-      'chai'
+      'sinon-chai'
     ],
 
     reporters: [

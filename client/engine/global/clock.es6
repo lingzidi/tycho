@@ -1,10 +1,11 @@
 import THREE from 'three';
+import TWEEN from 'tween.js';
 import moment from 'moment';
 
 export default class {
 
   constructor(time) {
-    this.clock = new THREE.Clock();
+    this.clock = new THREE.Clock(false);
     this.offset = this.getOffset(time);
     this.clock.start();
     this.speed(0);
@@ -42,10 +43,11 @@ export default class {
   update = () => {
     let elapsedTime = Math.ceil(this.getTime());
 
-    if(elapsedTime > this.elapsedTime) {
+    if(elapsedTime !== this.elapsedTime) {
       this.elapsedTime = elapsedTime;
       this.nextTick();
     }
+    TWEEN.update();
   }
 
   /**
@@ -72,5 +74,29 @@ export default class {
    */
   tick = (event) => {
     this.events.push(event);
+  }
+
+  /**
+   * Tweens the offset time to the given time.
+   * @param  {Number} time UNIX timestamp
+   * @return {TWEEN.Tween}
+   */
+  setOffset = (time) => {
+    this.clock.stop();
+    
+    let updateOffset = (t) => {
+      this.offset = t;
+    },
+    t = this.offset;
+
+    return new TWEEN.Tween({ t })
+      .to({ t: time }, 1000)
+      .onUpdate(function(arg) {
+        updateOffset(this.t);
+      })
+      .onComplete(() => {
+        this.clock.start();
+      })
+      .start();
   }
 }

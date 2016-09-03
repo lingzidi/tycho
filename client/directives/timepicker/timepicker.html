@@ -1,3 +1,12 @@
-<!--Time again: {{timepicker.time}}
--->
-<span ng-click="timepicker.testTime()">log current time</span>
+<div class="timepicker">
+  <input 
+    type="text"
+    id="timepicker"
+    datetime-picker
+    date-format="yyyy-MM-dd hh:mm:ss"
+    ng-model="timepicker.editableTime"
+    ng-change="timepicker.onChange()" />
+  <span ng-click="timepicker.openPicker()">
+    {{ timepicker.currentUnixTime | amFromUnix | amDateFormat:'MMM DD, YYYY HH:mm:ss Z' }}
+  </span>
+</div>
