@@ -1,21 +1,21 @@
 {
-  "name": "ricardo",
-  "version": "0.0.0",
-  "description": "A semantic versioning management service.",
+  "name": "tycho",
+  "version": "0.1.0",
+  "description": "A Solar System simulator.",
   "scripts": {
     "start": "node server",
     "build": "webpack --config webpack.build.js --bail"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:jshor/ricardo.git"
+    "url": "git@github.com:jshor/tycho2.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Josh Shor <jpshor@gmail.com>",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jshor/ricardo/issues"
+    "url": "https://github.com/jshor/tycho2/issues"
   },
-  "homepage": "https://github.com/jshor/ricardo",
+  "homepage": "https://github.com/jshor/tycho2",
   "dependencies": {
     "angular": "^1.4.8",
     "angular-moment": "^1.0.0-beta.6",
