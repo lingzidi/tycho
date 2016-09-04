@@ -11,7 +11,7 @@ export default class Mesh extends THREE.Object3D {
   constructor(data) {
     super();
     this.setData(data);
-    this.renderGeometries();
+    this.setUp();
     // this.setAxilTilt();
   }
 
@@ -28,7 +28,7 @@ export default class Mesh extends THREE.Object3D {
   /**
    * Render mesh and mesh body
    */
-  renderGeometries = () => {
+  setUp = () => {
     this.body = this.renderBody();
     this.add(this.body);
     this.body.add( new THREE.AxisHelper( 200 ) );

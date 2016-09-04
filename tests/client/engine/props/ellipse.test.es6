@@ -43,45 +43,36 @@ describe('Ellipse', () => {
 
   });
 
-  describe('renderGeometries', () => {
+  describe('setUp', () => {
 
     it('should assign the rendered line material', () => {
-      chai.spy.on(ellipse, 'getLineMaterial');
-      ellipse.renderGeometries();
+      sinon.spy(ellipse, 'getLineMaterial');
+      ellipse.setUp();
       ellipse.getLineMaterial.should.have.been.called;
       ellipse.material.should.be.an.instanceOf(THREE.LineBasicMaterial);
     });
 
     it('should assign the ellipse curve', () => {
-      chai.spy.on(ellipse, 'getEllipseCurve');
-      ellipse.renderGeometries();
+      sinon.spy(ellipse, 'getEllipseCurve');
+      ellipse.setUp();
       ellipse.getEllipseCurve.should.have.been.called;
       ellipse.ellipse.should.be.an.instanceOf(THREE.EllipseCurve);
     });
 
     it('should assign the geometric path', () => {
-      chai.spy.on(ellipse, 'getPath');
-      ellipse.renderGeometries();
+      sinon.spy(ellipse, 'getPath');
+      ellipse.setUp();
       ellipse.getPath.should.have.been.called;
       ellipse.path.should.be.an.instanceOf(THREE.Path);
     });
 
     it('should assign the path geometry', () => {
-      chai.spy.on(ellipse, 'getGeometry');
-      ellipse.renderGeometries();
+      sinon.spy(ellipse, 'getGeometry');
+      ellipse.setUp();
       ellipse.getGeometry.should.have.been.called;
       ellipse.geometry.should.be.an.instanceOf(THREE.Geometry);
     });
-
-    // damn thing's busted too
-    // it('should add the ellipse curve to the geometric path', () => {
-
-    //   chai.spy.on(ellipse.path, 'add', 'ellipse');
-    //   ellipse.renderGeometries();
-    //   ellipse.path.add.should.have.been.called.with(ellipse.ellipse);
-
-    // });
-
+    
   });
 
 
@@ -91,7 +82,7 @@ describe('Ellipse', () => {
 
     beforeEach(() => {
       ellipse.ellipse = ellipse.getEllipseCurve();
-      chai.spy.on(ellipse.ellipse, 'getPoints');
+      sinon.spy(ellipse.ellipse, 'getPoints');
       path = ellipse.getPath();
     });
 
@@ -101,8 +92,8 @@ describe('Ellipse', () => {
     });
 
     it('should pass in the calculated points from constants', () => {
-      ellipse.ellipse.getPoints.should.have.been.called.once;
-      ellipse.ellipse.getPoints.should.have.been.called.with(
+      ellipse.ellipse.getPoints.should.have.been.calledOnce;
+      ellipse.ellipse.getPoints.should.have.been.calledWith(
         Constants.ELLIPSE_CURVE_POINTS
       );
     });
@@ -115,7 +106,7 @@ describe('Ellipse', () => {
 
     beforeEach(() => {
       ellipse.path = ellipse.getPath();
-      chai.spy.on(ellipse.path, 'createPointsGeometry');
+      sinon.spy(ellipse.path, 'createPointsGeometry');
       geometry = ellipse.getGeometry();
     });
 
@@ -218,7 +209,7 @@ describe('Ellipse', () => {
 
     beforeEach(() => {
       ellipse.path = ellipse.getPath();
-      chai.spy.on(ellipse.path, 'getPoint');
+      sinon.spy(ellipse.path, 'getPoint');
       position = ellipse.getPosition(time, Fixtures.Periapses);
     });
 
@@ -234,7 +225,7 @@ describe('Ellipse', () => {
     });
 
     it('should get the point based on the current path', () => {
-      ellipse.path.getPoint.should.be.called.once;
+      ellipse.path.getPoint.should.be.calledOnce;
     });
 
   });

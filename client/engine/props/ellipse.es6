@@ -13,7 +13,7 @@ export default class Ellipse extends THREE.Line {
   constructor(data) {
     super();
     this.setData(data);
-    this.renderGeometries();
+    this.setUp();
   }
 
   /**
@@ -31,7 +31,7 @@ export default class Ellipse extends THREE.Line {
    * Renders the ellipse prop.
    * @return {Object3D} ellipse
    */
-  renderGeometries = () => {
+  setUp = () => {
     this.material = this.getLineMaterial();
     this.ellipse  = this.getEllipseCurve();
     this.path     = this.getPath();

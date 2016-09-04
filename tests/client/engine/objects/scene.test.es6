@@ -20,27 +20,26 @@ describe('Scene', () => {
       scene.clock.should.be.instanceOf(Clock);
     });
 
+  });
+
+  describe('setUp', () => {
+
     it('should call all available build-up functions', () => {
-      let buildUpFns = [
-        'renderScene',
-        'renderProps',
-        'setSettings'
-      ];
-      buildUpFns.forEach(fn => {
-        chai.spy.on(scene, fn);
-        scene[fn].should.have.been.called;
-        scene[fn].should.not.be.undefined;
-        scene[fn].should.have.been.called;
-      });
-      scene.renderScene.should.have.been.called;
-      scene.renderProps.should.have.been.called;
-      scene.setSettings.should.have.been.called;
+      let renderScene = sinon.spy(scene, 'renderScene'),
+          renderProps = sinon.spy(scene, 'renderProps'),
+          setSettings = sinon.spy(scene, 'setSettings');
+
+      scene.setUp();
+
+      renderScene.should.have.been.calledOnce;
+      renderProps.should.have.been.calledOnce;
+      setSettings.should.have.been.calledOnce;
     });
 
     it('should start the animation loop', () => {
-      chai.spy.on(scene, 'animate');
-      scene.animate.should.not.be.undefined;
-      scene.animate.should.have.been.called;
+      let animate = sinon.spy(scene, 'animate');
+      scene.setUp();
+      animate.should.have.been.called;
     });
   });
 
@@ -105,7 +104,7 @@ describe('Scene', () => {
 
     it('should return a new instance of Controls', () => {
       let controls = scene.getControls();
-
+      scene.camera = scene.getCamera();
       controls.should.be.instanceOf(Controls);
     });
 
@@ -121,35 +120,27 @@ describe('Scene', () => {
         'getControls'
       ];
 
-      scene.renderScene();
-
       userControls.forEach(userControl => {
-        chai.spy.on(scene, userControl);
-        scene[userControl].should.not.be.undefined;
+        sinon.spy(scene, userControl);
+        scene.renderScene();
         scene[userControl].should.have.been.called;
       });
 
     });
 
     it('should add the camera to the THREE scene', () => {
-      chai.spy.on(scene, 'add', 'camera');
+      let add = sinon.spy(scene, 'add');
       scene.renderScene();
-      scene.add.should.have.been.called.with(scene.camera);
+      add.should.have.been.calledWith(scene.camera);
     });
 
-    // damn thing's busted
     // it('should set width and height of window as the renderer dimensions', () => {
     //   let width  = window.innerWidth,
-    //       height = window.innerHeight;
+    //       height = window.innerHeight,
+    //       setSize = sinon.spy(scene.renderer, 'setSize');
 
     //   scene.renderScene();
-
-    //   chai.spy.on(scene.renderer, 'setSize');
-    //   chai.spy(width, height);
-
-    //   console.log('width, height: ', width, height);
-
-    //   scene.renderer.setSize.should.have.been.called.with(width, height);
+    //   setSize.should.have.been.calledWith(width, height);
     // });
 
   });

@@ -12,7 +12,13 @@ export default class Scene extends THREE.Scene {
   constructor() {
     super();
     this.clock = new Clock();
-    
+    this.setUp();
+  }
+
+  /**
+   * Calls all setup functions.
+   */
+  setUp = () => {
     this.renderScene();
     this.renderProps();
     this.setSettings();
