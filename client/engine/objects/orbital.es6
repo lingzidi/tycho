@@ -95,8 +95,6 @@ export default class Orbital {
    */
   setPlanarRotations = (orbitalPlane, referencePlane, data) => {
     this.rotateObject('x', referencePlane, data.inclination);
-    this.rotateObject('x', orbitalPlane, 180);
-
     this.rotateObject('z', referencePlane, data.longAscNode);
     this.rotateObject('z', orbitalPlane, data.argPeriapsis);
   }

@@ -12,7 +12,6 @@ export default class Mesh extends THREE.Object3D {
     super();
     this.setData(data);
     this.setUp();
-    // this.setAxilTilt();
   }
 
   /**
@@ -21,7 +20,6 @@ export default class Mesh extends THREE.Object3D {
    */
   setData = (data) => {
     this.arcRotate = data.rotation;
-    this.axialTilt = data.axialTilt;
     this.radius = Scale(data.radius);
   }
 
@@ -45,14 +43,6 @@ export default class Mesh extends THREE.Object3D {
       specular: this.atmosphere
     });
     return new THREE.Mesh(geometry, material);
-  }
-
-  /**
-   * Set rotations of mesh.
-   * @return {Object3D}
-   */
-  setAxilTilt = () => {
-    this.rotation.z = -Math2.toRadians(this.axialTilt);
   }
 
   /**
