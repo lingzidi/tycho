@@ -12,7 +12,7 @@ export default class Orbital {
   constructor(data, parent) {
     this.updateQueue = [];
     this.data = data;
-    this.renderGeometries();
+    this.setUp();
     this.renderChildren(parent);
 
     if(parent) {
@@ -23,7 +23,7 @@ export default class Orbital {
   /**
    * Renders the stage props that are part of this orbital
    */
-  renderGeometries = () => {
+  setUp = () => {
     let data = this.data;
     this.mesh    = new Mesh(data);
     this.ellipse = new Ellipse(data);

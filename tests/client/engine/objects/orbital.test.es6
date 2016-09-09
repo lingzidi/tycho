@@ -15,7 +15,7 @@ describe('Orbital', () => {
     orbital = new Orbital(fixture);
   });
 
-  describe('renderGeometries', () => {
+  describe('setUp', () => {
 
     it('should assign a new mesh', () => {
 
@@ -25,7 +25,6 @@ describe('Orbital', () => {
       mesh.should.be.instanceOf(Mesh);
       mesh.should.containSubset({
         arcRotate: fixture.rotation,
-        axialTilt: fixture.axialTilt,
         radius: Scale(fixture.radius)
       });
 
@@ -60,42 +59,20 @@ describe('Orbital', () => {
   describe('setPlanarRotations', () => {
 
     it('should augment x and z coords for pivot planes', () => {
+      let refPlane = new THREE.Object3D(),
+          orbPlane = new THREE.Object3D();
 
-      let getDimensions = (plane) => {
-        return {
-          x: plane.rotation.x || 0,
-          z: plane.rotation.z || 0
-        }
-      };
+      sinon.spy(orbital, 'rotateObject');
 
-      let originalRefPlane = orbital.getOrbital(),
-          originalOrbPlane = orbital.getOrbitalPlane(),
-          originalDimensions = {
-            referencePlane: getDimensions(originalRefPlane),
-            originalPlane : getDimensions(originalOrbPlane)
-          };
+      orbital.setPlanarRotations(orbPlane, refPlane, fixture);
 
-      orbital.setPlanarRotations(originalRefPlane, originalOrbPlane, fixture);
-
-      let nextDimensions = {
-        referencePlane: getDimensions(originalRefPlane),
-        originalPlane : getDimensions(originalOrbPlane)
-      };
-
-      ['x', 'z'].forEach(d => {
-
-        originalDimensions
-          .referencePlane[d]
-          .should.not.equal(nextDimensions.referencePlane[d]);
-
-        originalDimensions
-          .originalPlane[d]
-          .should.not.equal(nextDimensions.originalPlane[d]);
-
-        nextDimensions.originalPlane[d].should.be.a.number;
-        nextDimensions.referencePlane[d].should.be.a.number;
-      });
-
+      orbital.rotateObject.should.have.been.called.thrice;
+      orbital.rotateObject.should.have.been
+        .calledWith('x', refPlane, fixture.inclination);
+      orbital.rotateObject.should.have.been
+        .calledWith('z', refPlane, fixture.longAscNode);
+      orbital.rotateObject.should.have.been
+        .calledWith('z', orbPlane, fixture.argPeriapsis);
     });
 
   });

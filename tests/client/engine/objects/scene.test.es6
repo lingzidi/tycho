@@ -11,7 +11,7 @@ describe('Scene', () => {
   let scene;
 
   beforeEach(() => {
-    scene = new Scene();
+    scene = new Scene(new Clock());
   });
 
   describe('constructor', () => {
@@ -24,15 +24,13 @@ describe('Scene', () => {
 
   describe('setUp', () => {
 
-    it('should call all available build-up functions', () => {
+    it('should call all available setup functions', () => {
       let renderScene = sinon.spy(scene, 'renderScene'),
-          renderProps = sinon.spy(scene, 'renderProps'),
           setSettings = sinon.spy(scene, 'setSettings');
 
       scene.setUp();
 
       renderScene.should.have.been.calledOnce;
-      renderProps.should.have.been.calledOnce;
       setSettings.should.have.been.calledOnce;
     });
 
@@ -134,37 +132,16 @@ describe('Scene', () => {
       add.should.have.been.calledWith(scene.camera);
     });
 
-    // it('should set width and height of window as the renderer dimensions', () => {
-    //   let width  = window.innerWidth,
-    //       height = window.innerHeight,
-    //       setSize = sinon.spy(scene.renderer, 'setSize');
+    it('should set width and height of window as the renderer dimensions', () => {
+      let width  = window.innerWidth,
+          height = window.innerHeight,
+      
+      sinon.spy(scene.renderer, 'setSize');
 
-    //   scene.renderScene();
-    //   setSize.should.have.been.calledWith(width, height);
-    // });
+      scene.renderScene();
+      scene.renderer.setSize.should.have.been.calledWith(width, height);
+    });
 
   });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

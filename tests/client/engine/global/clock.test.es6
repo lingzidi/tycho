@@ -70,8 +70,6 @@ describe('Clock', () => {
         timeAfterUpdate.should.be.a.number;
         timeAfterUpdate.should.be.at.least(timeBeforeUpdate);
         timeAfterUpdate.should.be.at.least(0);
-
-        // clock.nextTick.should.have.been.called;
         done();
       }, 1000);
     });
@@ -117,14 +115,19 @@ describe('Clock', () => {
 
       it('should execute each event on next tick', () => {
 
-        events.forEach(clock.tick);
+        clock
+          .events
+          .forEach(event => {
+            sinon.spy(event);
+          });
 
         clock.nextTick();
 
-        events.forEach((event, index) => {
-          // sinon.spy(clock.events, index);
-          // clock.events[index].should.have.been.called;
-        });
+        clock.
+          .events
+          .forEach((event, index) => {
+            clock.events[index].should.have.been.called;
+          });
       });
       
     });

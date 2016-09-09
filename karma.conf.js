@@ -3,7 +3,6 @@ module.exports = function (config) {
     frameworks: [
       'jasmine',
       'mocha',
-      'chai-spies',
       'sinon-chai'
     ],
 
