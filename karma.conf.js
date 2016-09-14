@@ -3,6 +3,7 @@ module.exports = function (config) {
     frameworks: [
       'jasmine',
       'mocha',
+      'chai',
       'sinon-chai'
     ],
 
@@ -25,7 +26,8 @@ module.exports = function (config) {
     },
 
     browsers: [
-      'Chrome',
+      'PhantomJS2'
+      // 'Chrome',
       // 'Firefox'
     ],
 
@@ -37,8 +39,10 @@ module.exports = function (config) {
     },
 
     client: {
-      captureConsole: false
+      // captureConsole: false
     },
+
+    logLevel: config.LOG_DEBUG,
 
     webpack: require('./tests/client/webpack.tests'),
 
@@ -48,6 +52,12 @@ module.exports = function (config) {
       stats: {
         colors: true
       }
+    },
+
+    phantomjsLauncher: {
+      // Have phantomjs exit if a ResourceError is encountered 
+      // (useful if karma exits without killing phantom) 
+      exitOnResourceError: true
     }
   });
 };

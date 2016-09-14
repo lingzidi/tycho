@@ -1,5 +1,3 @@
-import './timepicker.less';
-
 module.exports = {
   controller: 'TimepickerController',
   directive: 'TimepickerDirective',

@@ -1,7 +1,8 @@
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
 import uislider from 'angular-ui-slider';
-import 'angularjs-datetime-picker';
+import 'angular-ui-bootstrap';
+import 'bootstrap-ui-datetime-picker';
 import 'angular-moment' ;//from 'angular-moment';
 
 export default class Modules {
@@ -10,7 +11,8 @@ export default class Modules {
     this.module = angular.module('app.scene', [
       uirouter,
       uislider,
-      'angularjs-datetime-picker',
+      'ui.bootstrap',
+      'ui.bootstrap.datetimepicker',
       'angularMoment'
     ]);
   }

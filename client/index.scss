@@ -5,8 +5,16 @@
 body {
   background-color: #ff0000!important;
 }
+body {
+  background-color: #ff0000;
+}
+
 .sliderExample {
   z-index: 1000;
+}
+
+canvas {
+  display: none;
 }
 /* begin: global bootstrap LESS override */
 /* end: global bootstrap LESS override */

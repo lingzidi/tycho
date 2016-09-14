@@ -14,14 +14,21 @@ var log = require('single-line-log').stdout;
 gulp.task('server', function() {
   require('babel-core/register');
   require('babel-polyfill');
-  var compiler = webpack(require('./webpack.config'));
+
+  var config = require('./webpack.config');
+
+// config.entry.app.unshift("webpack-dev-server/client?http://localhost:8080/",
+//  "webpack/hot/dev-server");
+
+  var compiler = webpack(config);
 
   // webpack client-side SPA and serve static components
   app.use(webpackDev(compiler, {
     quiet: true,
     noInfo: true,
     stats: { colors: true },
-    publicPath: '/client'
+    publicPath: '/client',
+    hot: true// plz work omg
   }));
 
   app.listen(8080, function() {

@@ -4,6 +4,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 var client = path.resolve('./client');
+
+// require("!style!css!sass!./client/.scss");
+
 var config = {
 
   devtool: 'eval',
@@ -45,8 +48,11 @@ var config = {
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       },
       {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract(
+            'style', // backup loader when not building .css file
+            'css!sass' // loaders to preprocess CSS
+        )
       }
     ]
   },
@@ -59,6 +65,7 @@ var config = {
   plugins: [
     new ExtractTextPlugin('styles.css', {allChunks: true}),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.min.js'), // dev only
+    new webpack.HotModuleReplacementPlugin(),//devonly
     new LiveReloadPlugin({
       appendScriptTag: true,
       ignore: /\/node_modules\//i
