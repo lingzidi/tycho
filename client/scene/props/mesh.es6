@@ -1,7 +1,7 @@
 import THREE from 'three';
-import Constants from '../global/constants';
-import Scale from '../global/scale';
-import Math2 from '../physics/math2';
+import Constants from 'constants';
+import Math2 from 'engine/math2';
+import Scale from 'engine/scale';
 
 export default class Mesh extends THREE.Object3D {
 

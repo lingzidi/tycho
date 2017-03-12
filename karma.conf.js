@@ -39,10 +39,10 @@ module.exports = function (config) {
     },
 
     client: {
-      // captureConsole: false
+      captureConsole: false
     },
 
-    logLevel: config.LOG_DEBUG,
+    logLevel: config.LOG_WARN,
 
     webpack: require('./tests/client/webpack.tests'),
 

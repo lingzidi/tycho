@@ -1,7 +1,6 @@
-
 import THREE from 'three';
 import OrbitControls from 'three-orbit-controls';
-import Vector from '../physics/vector';
+import Vector from 'engine/vector';
 
 export default class Controls extends OrbitControls(THREE) {
 

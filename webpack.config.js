@@ -12,7 +12,7 @@ var config = {
   devtool: 'eval',
 
   entry: {
-    app: ['./client/index.es6'],
+    app: ['./client/app/index.es6'],
     vendor: [
       'angular'
     ]

@@ -1,10 +1,10 @@
-import Orbital from './orbital';
 import THREE from 'three';
-import Vector from '../physics/vector';
 import moment from 'moment';
-import Controls from '../stage/controls';
-import Constants from '../global/constants';
 import deepAssign from 'deep-assign';
+import Constants from 'constants';
+import Vector from 'engine/vector';
+import Orbital from 'scene/objects/orbital';
+import Controls from 'scene/stage/controls';
 
 export default class Scene extends THREE.Scene {
 

@@ -1,9 +1,9 @@
 import THREE from 'three';
-import OrbitalDynamics from '../physics/orbitalDynamics';
-import Vector from '../physics/vector';
-import Math2 from '../physics/math2';
-import Scale from '../global/scale';
-import Constants from '../global/constants';
+import Constants from 'constants';
+import OrbitalDynamics from 'engine/orbitalDynamics';
+import Vector from 'engine/vector';
+import Math2 from 'engine/math2';
+import Scale from 'engine/scale';
 
 export default class Ellipse extends THREE.Line {
 

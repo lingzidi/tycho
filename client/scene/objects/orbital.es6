@@ -1,8 +1,9 @@
-import Constants from '../global/constants';
-import Mesh from '../props/mesh';
-import Ellipse from '../props/ellipse';
 import THREE from 'three';
-import Math2 from '../physics/math2';
+import Constants from 'constants';
+import Math2 from 'engine/math2';
+import Mesh from 'scene/props/mesh';
+import Ellipse from 'scene/props/ellipse';
+
 
 export default class Orbital {
 

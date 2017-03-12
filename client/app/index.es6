@@ -1,5 +1,5 @@
 import config from './config';
-import System from './engine/stage/system';
+import System from '../scene/stage/system';
 
 angular
   .module('app', ['app.scene'])

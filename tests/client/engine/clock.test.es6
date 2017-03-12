@@ -1,4 +1,4 @@
-import Clock from '../../../../client/engine/global/clock';
+import Clock from 'engine/clock';
 import moment from 'moment';
 
 describe('Clock', () => {

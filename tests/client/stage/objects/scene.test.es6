@@ -1,10 +1,9 @@
-import Orbital from '../../../../client/engine/objects/orbital';
-import Clock from '../../../../client/engine/global/clock';
-import Fixtures from './__fixtures__';
-import Scene from '../../../../client/engine/objects/scene';
-import Controls from '../../../../client/engine/stage/controls';
 import THREE from 'three';
-var spy = chai.spies;
+import Clock from 'engine/clock';
+import Orbital from 'scene/objects/orbital';
+import Scene from 'scene/objects/scene';
+import Controls from 'scene/stage/controls';
+import Fixtures from './__fixtures__';
 
 describe('Scene', () => {
 

@@ -1,9 +1,12 @@
 
 var chaiSubset = require('chai-subset');
-window.should = chai.should();
+var spy = chai.spies;
+var should = chai.should();
 chai.use(chaiSubset);
 
 var testsContext = require.context('.', true, /.test$/);
+
+console.log(' ****************************************************** Context: ', testsContext.keys());
 
 testsContext
   .keys()

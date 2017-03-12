@@ -31,7 +31,7 @@ app.use('/api', ensureAuthenticated, api);
 
 app.get('/', function(req, res) {
   fs.readFile(
-    path.join(__dirname, '../client/index.html'),
+    path.join(__dirname, '../client/app/index.html'),
     (err, info) => {
       res.type('html');
       res.end(info);

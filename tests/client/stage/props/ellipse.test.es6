@@ -1,7 +1,7 @@
-import Ellipse from '../../../../client/engine/props/ellipse';
-import Scale from '../../../../client/engine/global/scale';
-import Constants from '../../../../client/engine/global/constants';
-import Vector from '../../../../client/engine/physics/vector';
+import Ellipse from 'scene/props/ellipse';
+import Scale from 'engine/scale';
+import Constants from 'constants';
+import Vector from 'engine/vector';
 import Fixtures from './__fixtures__';
 import moment from 'moment';
 import THREE from 'three';
@@ -16,7 +16,7 @@ describe('Ellipse', () => {
 
   describe('setData', () => {
 
-    it('should set the scaled elliptical axes', () => {
+    it('should scale the semimajor and semiminor axes', () => {
       ['semimajor', 'semiminor'].forEach(axis => {
         let scaled = Scale(Fixtures.Ellipse[axis]);
 
