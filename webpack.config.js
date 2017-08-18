@@ -12,7 +12,7 @@ var config = {
   devtool: 'eval',
 
   entry: {
-    app: ['./client/app/index.es6'],
+    app: ['./client/app/index.js'],
     vendor: [
       'angular'
     ]
@@ -30,11 +30,6 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.es6$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       },
@@ -59,13 +54,13 @@ var config = {
 
   resolve: {
     root: [client],
-    extensions: ['', '.js', '.es6']
+    extensions: ['', '.js']
   },
 
   plugins: [
     new ExtractTextPlugin('styles.css', {allChunks: true}),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.min.js'), // dev only
-    new webpack.HotModuleReplacementPlugin(),//devonly
+    //new webpack.HotModuleReplacementPlugin(),//devonly
     new LiveReloadPlugin({
       appendScriptTag: true,
       ignore: /\/node_modules\//i

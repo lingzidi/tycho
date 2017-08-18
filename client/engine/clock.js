@@ -8,7 +8,7 @@ export default class {
     this.clock = new THREE.Clock(false);
     this.offset = this.getOffset(time);
     this.clock.start();
-    this.speed(0);
+    this.speed(5);
     this.elapsedTime = 0;
     this.events = [];
   }

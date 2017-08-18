@@ -4,7 +4,6 @@ import Math2 from 'engine/math2';
 import Mesh from 'scene/props/mesh';
 import Ellipse from 'scene/props/ellipse';
 
-
 export default class Orbital {
 
   /**
@@ -103,7 +102,7 @@ export default class Orbital {
   /**
    * Rotates an scene object.
    * @param  {String}   coordinate x, y, or z
-   * @param  {Objecr3D} object     object to rotate
+   * @param  {Object3D} object     object to rotate
    * @param  {Number}   rotation   in degrees
    */
   rotateObject = (coordinate, object, rotation) => {
@@ -118,14 +117,9 @@ export default class Orbital {
    * @param  {Number}  time UNIX time
    */
   updatePosition = (time) => {
-    this.updateQueue.forEach((update) => {
-      update(time);
-    });
+    const pos = this.ellipse.getPosition(time, this.data.periapses);
 
-    this.mesh.updatePosition(time,
-      this.ellipse.getPosition(
-        time, this.data.periapses
-      )
-    );
+    this.updateQueue.forEach((update) => update(time));
+    this.mesh.updatePosition(time, pos);
   }
 }
