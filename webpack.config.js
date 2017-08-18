@@ -3,7 +3,7 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 
-var client = path.resolve('./client');
+var client = path.resolve('./src/client');
 
 // require("!style!css!sass!./client/.scss");
 
@@ -12,7 +12,7 @@ var config = {
   devtool: 'eval',
 
   entry: {
-    app: ['./client/app/index.js'],
+    app: ['./src/client/app/index.js'],
     vendor: [
       'angular'
     ]

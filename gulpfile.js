@@ -8,7 +8,7 @@ var colors = require('colors');
 var karma = require('karma');
 var mocha = require('gulp-mocha');
 var gulp = require('gulp');
-var app = require('./server');
+var app = require('./src/server');
 var log = require('single-line-log').stdout;
 
 gulp.task('server', function() {
@@ -46,7 +46,7 @@ gulp.task('server', function() {
 
 gulp.task('watch', function() {
   nodemon({
-    script: './server/index.js'
+    script: './src/server/index.js'
   }).on('readable', function() {
     this.stdout.on('data', function(chunk) {
       if (/^listening/.test(chunk)) {
