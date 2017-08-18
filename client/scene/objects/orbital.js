@@ -3,6 +3,7 @@ import Constants from 'constants';
 import Math2 from 'engine/math2';
 import Mesh from 'scene/props/mesh';
 import Ellipse from 'scene/props/ellipse';
+import Rings from 'scene/objects/rings';
 
 export default class Orbital {
 
@@ -24,9 +25,12 @@ export default class Orbital {
    * Renders the stage props that are part of this orbital
    */
   setUp = () => {
-    let data = this.data;
-    this.mesh    = new Mesh(data);
-    this.ellipse = new Ellipse(data);
+    this.ellipse = new Ellipse(this.data);
+    this.mesh = new Mesh(this.data);
+    
+    if (this.data.ring) {
+      this.mesh.body.add(new Rings(this.data.ring));
+    }
   }
 
   /**
@@ -60,7 +64,7 @@ export default class Orbital {
   }
 
   /**
-   * Gets the orbital scene containing the props.
+   * Renders the orbital plane containing props
    * @return {Object3D}
    */
   getOrbitalPlane = () => {
@@ -82,21 +86,31 @@ export default class Orbital {
     let orbitalPlane   = this.getOrbitalPlane(this.data);
 
     referencePlane.add(orbitalPlane);
-    this.setPlanarRotations(orbitalPlane, referencePlane, this.data);
+    this.setPlanarRotations(orbitalPlane, referencePlane);
+    this.setAxialTilt();
 
     return referencePlane;
   }
 
   /**
-   * Set (x,z)-order rotations on subscene planes.
+   * Sets the y-order rotation of the mesh's body instance.
+   * @param {Number} axialTilt
+   */
+  setAxialTilt = () => {
+    this.rotateObject('x', this.mesh.body, this.data.axialTilt);
+  }
+
+  /**
+   * Sets (x,z)-order rotations on subscene planes.
    * @param {[Object3D} orbitalPlane
    * @param {Object3D}  referencePlane
-   * @param {Object}    data
    */
-  setPlanarRotations = (orbitalPlane, referencePlane, data) => {
-    this.rotateObject('x', referencePlane, data.inclination);
-    this.rotateObject('z', referencePlane, data.longAscNode);
-    this.rotateObject('z', orbitalPlane, data.argPeriapsis);
+  setPlanarRotations = (orbitalPlane, referencePlane) => {
+    const {inclination, longAscNode, argPeriapsis} = this.data;
+
+    this.rotateObject('x', referencePlane, inclination);
+    this.rotateObject('z', referencePlane, longAscNode);
+    this.rotateObject('z', orbitalPlane, argPeriapsis);
   }
 
   /**

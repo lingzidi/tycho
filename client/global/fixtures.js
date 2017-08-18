@@ -15,6 +15,10 @@ export default [{
   eccentricity: 0.01671123,
   longAscNode: 348.73936,
   atmosphereColor: 0x808080,
+  ring: {
+    innerRadius: 6630,
+    outerRadius: 950000
+  },
   children: [{
     GM: 6836529,
     axialTilt: 23.26,
