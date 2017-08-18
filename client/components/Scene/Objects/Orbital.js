@@ -1,9 +1,9 @@
 import THREE from 'three';
 import Constants from 'constants';
 import Math2 from 'engine/math2';
-import Mesh from 'scene/props/mesh';
-import Ellipse from 'scene/props/ellipse';
-import Rings from 'scene/objects/rings';
+import Mesh from '../Utils/Mesh';
+import Ellipse from '../Utils/Ellipse';
+import Rings from './Rings';
 
 export default class Orbital {
 

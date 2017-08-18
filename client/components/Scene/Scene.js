@@ -3,8 +3,8 @@ import moment from 'moment';
 import deepAssign from 'deep-assign';
 import Constants from 'constants';
 import Vector from 'engine/vector';
-import Orbital from 'scene/objects/orbital';
-import Controls from 'scene/stage/controls';
+import Orbital from './Objects/Orbital';
+import Controls from './Utils/Controls';
 
 export default class Scene extends THREE.Scene {
 

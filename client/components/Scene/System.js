@@ -1,6 +1,6 @@
-import Scene from 'scene/objects/scene';
+import Scene from './Scene';
 import Fixtures from 'global/fixtures';
-import Orbital from 'scene/objects/orbital';
+import Orbital from './Objects/Orbital';
 import Clock from 'engine/clock';
 
 export default class System {
