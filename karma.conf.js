@@ -18,11 +18,11 @@ module.exports = function (config) {
       './node_modules/angular-mocks/angular-mocks.js',
       './node_modules/three/build/three.min.js',
       './node_modules/moment/moment.js',
-      'tests/client/index.js'
+      'src/client/index.js'
     ],
 
     preprocessors: {
-      'tests/client/index.js': ['webpack', 'sourcemap']
+      'src/client/index.js': ['webpack', 'sourcemap']
     },
 
     browsers: [
@@ -39,12 +39,15 @@ module.exports = function (config) {
     },
 
     client: {
-      captureConsole: false
+      captureConsole: true
     },
 
-    logLevel: config.LOG_WARN,
+    browserConsoleLogOptions: {
+      level: 'log',
+      terminal: true
+    },
 
-    webpack: require('./tests/client/webpack.tests'),
+    webpack: require('./src/client/webpack.tests'),
 
     webpackMiddleware: {
       noInfo: true,

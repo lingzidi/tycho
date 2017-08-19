@@ -40,7 +40,7 @@ export default class Mesh extends THREE.Object3D {
   renderBody = () => {
     let geometry = new THREE.SphereGeometry(this.radius, 32, 32);
     let material = new THREE.MeshPhongMaterial({
-      specular: this.atmosphere
+      // specular: this.atmosphere
     });
     return new THREE.Mesh(geometry, material);
   }

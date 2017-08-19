@@ -6,7 +6,9 @@ chai.use(chaiSubset);
 
 var testsContext = require.context('.', true, /.test$/);
 
-console.log(' ****************************************************** Context: ', testsContext.keys());
+testsContext
+  .keys()
+  .forEach((fileName) => console.log(`Testing: ${fileName}`));
 
 testsContext
   .keys()

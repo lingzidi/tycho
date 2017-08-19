@@ -10,6 +10,7 @@ export default class Scene extends THREE.Scene {
 
   constructor(clock) {
     super();
+
     this.clock = clock;
     this.setUp();
   }
@@ -48,8 +49,8 @@ export default class Scene extends THREE.Scene {
    * New instance of OrbitControls
    * @return {THREE.OrbitControls}
    */
-  getControls = (camera) => {
-    return new Controls(camera);
+  getControls = () => {
+    return new Controls(this.camera);
   }
 
   /**
@@ -59,7 +60,7 @@ export default class Scene extends THREE.Scene {
   renderScene = () => {
     this.renderer = this.getRenderer();
     this.camera   = this.getCamera();
-    this.controls = this.getControls(this.camera);
+    this.controls = this.getControls();
 
     this.add(this.camera);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
