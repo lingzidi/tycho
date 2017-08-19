@@ -8,7 +8,8 @@ var colors = require('colors');
 var karma = require('karma');
 var mocha = require('gulp-mocha');
 var gulp = require('gulp');
-var app = require('./src/server');
+var path = require('path');
+var fs = require('fs');
 var log = require('single-line-log').stdout;
 
 gulp.task('server', function() {
@@ -16,19 +17,24 @@ gulp.task('server', function() {
   require('babel-polyfill');
 
   var config = require('./webpack.config');
-
-//config.entry.app.unshift("webpack-dev-server/client?http://localhost:8080/",
- //"webpack/hot/dev-server");
-
   var compiler = webpack(config);
+  var app = express();
+
+  app.get('/', function(req, res) {
+    fs.readFile(
+      path.join(__dirname, './src/app/index.html'),
+      (err, info) => {
+        res.type('html');
+        res.end(info);
+      });
+  });
 
   // webpack client-side SPA and serve static components
   app.use(webpackDev(compiler, {
     quiet: true,
     noInfo: true,
     stats: { colors: true },
-    publicPath: '/client',
-    hot: true// plz work omg
+    publicPath: '/client'
   }));
 
   app.listen(8080, function() {
@@ -43,22 +49,7 @@ gulp.task('server', function() {
   });
 });
 
-
-gulp.task('watch', function() {
-  nodemon({
-    script: './src/server/index.js'
-  }).on('readable', function() {
-    this.stdout.on('data', function(chunk) {
-      if (/^listening/.test(chunk)) {
-        livereload.reload();
-      }
-      process.stdout.write(chunk);
-    });
-  });
-});
-
-
-gulp.task('test-client', function (done) {
+gulp.task('test', function (done) {
   var server = new karma.Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
@@ -67,15 +58,4 @@ gulp.task('test-client', function (done) {
   server.start();
 });
 
-
-gulp.task('test-server', function (done) {
-  return gulp
-    .src('./tests/server/index.es6', {read: false})
-    .pipe(mocha({reporter: 'nyan'}));
-});
-
-
-gulp.task('serve', ['server', 'watch']);
-
-
-gulp.task('test', ['test-client', 'test-server']); // TODO: add task for linting
+gulp.task('serve', ['server']);
