@@ -19,7 +19,11 @@ export default class {
   static arcSecToRad(time, rotation) {
     return Math.abs(time * (Math.PI / 648000)) % this.TAU;
   }
-  
+ 
+  static arcSecToDeg(time, rotation) {
+    return this.toDegrees(this.arcSecToRad(time, rotation));
+  }
+ 
   // render3Dto2D(position, camera) {   
   //   var div = document.getElementsByTagName('canvas')[0];
   //   var pos = position.clone();
@@ -38,12 +42,12 @@ export default class {
   //     return null;
   // },
   
-  static findOffset(element) { 
-    var pos = new Object();
-    pos.left = pos.top = 0;
+  static findOffset(element) {
+    let pos = {left: 0, top: 0};
     
-    if (element.offsetParent) { 
-      do { 
+    if (element.offsetParent) {
+      // eslint-disable-next-line
+      do {
         pos.left += element.offsetLeft; 
         pos.top += element.offsetTop; 
       } while (element = element.offsetParent); 

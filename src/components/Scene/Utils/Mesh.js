@@ -1,81 +1,28 @@
-import THREE from 'three';
-import Constants from 'constants';
-import Math2 from 'engine/math2';
-import Scale from 'engine/scale';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Scale from '../../../engine/scale';
 
-export default class Mesh extends THREE.Object3D {
+export default class Mesh extends React.Component {
 
-  /**
-   * @param  {Object} data
-   */
-  constructor(data) {
-    super();
-    this.setData(data);
-    this.setUp();
-  }
-
-  /**
-   * Set global data, with appropriate scales.
-   * @param  {Object} data
-   */
-  setData = (data) => {
-    this.arcRotate = data.rotation;
-    this.radius = Scale(data.radius);
-  }
-
-  /**
-   * Render mesh and mesh body
-   */
-  setUp = () => {
-    this.body = this.renderBody();
-    this.add(this.body);
-    this.body.add( new THREE.AxisHelper( 200 ) );
-  }
-
-  /**
-   * Render the decorated body mesh.
-   * @param  {Hex} atmosphere
-   * @return {Object3D}
-   */
-  renderBody = () => {
-    let geometry = new THREE.SphereGeometry(this.radius, 32, 32);
-    let material = new THREE.MeshPhongMaterial({
-      // specular: this.atmosphere
-    });
-    return new THREE.Mesh(geometry, material);
-  }
-
-  /**
-   * Rotate mesh to the given time by its rotational constant
-   * @param  {Number} time rotational constant
-   */
-  rotate = (time) => {
-    this.body.rotation.z = Math2.arcSecToRad(time, this.arcRotate);
+  static propTypes = {
+    radius: PropTypes.number.isRequired,
+    color: PropTypes.number,
+    position: PropTypes.object,
+    rotation: PropTypes.object
   };
   
-  /**
-   * Scales mesh by a constant
-   * @param  {Number} scale
-   */
-  updateScale = (scale) => {
-    if(this.radius) {
-      ['x', 'y', 'z'].forEach(c => {
-        this[c] = s;
-      });
-    }
-  }
-
-  /**
-   * Update the position of the mesh acording to time
-   * @param  {Number}  time
-   * @param  {Vector}  pos new position
-   */
-  updatePosition = (time, pos) => {
-    Object
-      .keys(pos)
-      .forEach(c => {
-        this.position[c] = pos[c];
-      });
-    this.rotate(time);
+  render() {
+    return (
+      <group position={this.props.position}>
+        <mesh rotation={this.props.rotation}>
+          <meshBasicMaterial color={0x000000} />
+          <sphereGeometry
+            widthSegments={32}
+            heightSegments={32}
+            radius={Scale(this.props.radius)}/>
+        </mesh>
+        <axisHelper size={200} rotation={this.props.rotation} />
+      </group>
+    );
   }
 }

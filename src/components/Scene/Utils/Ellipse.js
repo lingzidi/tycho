@@ -1,40 +1,37 @@
-import THREE from 'three';
-import Constants from 'constants';
-import OrbitalDynamics from 'engine/orbitalDynamics';
-import Vector from 'engine/vector';
-import Math2 from 'engine/math2';
-import Scale from 'engine/scale';
+import * as THREE from 'three';
+import Constants from '../../../constants';
+import OrbitalDynamics from '../../../engine/orbitalDynamics';
+import Vector from '../../../engine/vector';
+import Math2 from '../../../engine/math2';
+import Scale from '../../../engine/scale';
 
-export default class Ellipse extends THREE.Line {
+export default class Ellipse {
 
   /**
-   * @param  {Object} data
+   * @param {Object} data
    */
   constructor(data) {
-    super();
     this.setData(data);
-    this.setUp();
+    this.render();
   }
 
   /**
    * Set global data, with appropriate scales.
    * @param  {Object} data
    */
-  setData = (data) => {
-    this.semimajor = Scale(data.semimajor);
-    this.semiminor = Scale(data.semiminor);
-    this.eccentricity    = data.eccentricity;
-    this.atmosphereColor = data.atmosphereColor;
+  setData = ({semimajor, semiminor, eccentricity}) => {
+    this.semimajor = Scale(semimajor);
+    this.semiminor = Scale(semiminor);
+    this.eccentricity = eccentricity;
   }
 
   /**
    * Renders the ellipse prop.
    * @return {Object3D} ellipse
    */
-  setUp = () => {
-    this.material = this.getLineMaterial();
-    this.ellipse  = this.getEllipseCurve();
-    this.path     = this.getPath();
+  render = () => {
+    this.ellipse = this.getEllipseCurve();
+    this.path = this.getPath();
     this.geometry = this.getGeometry();
     this.path.add(this.ellipse);
   }
@@ -60,23 +57,11 @@ export default class Ellipse extends THREE.Line {
   }
 
   /**
-   * 3D line material for prop.
-   * @return {LineBasicMaterial}
-   */
-  getLineMaterial = () => {
-    return new THREE.LineBasicMaterial({
-      color: this.atmosphereColor,
-      opacity: 0.4,
-      transparent: true
-    });
-  }
-
-  /**
    * Instance of Ellipse curve.
    * @return {EllipseCurve}
    */
   getEllipseCurve = () => {
-    let focus = Vector.getFocus(this.semimajor, this.semiminor);
+    const focus = Vector.getFocus(this.semimajor, this.semiminor);
 
     return new THREE.EllipseCurve(0,
       focus, 
@@ -85,19 +70,19 @@ export default class Ellipse extends THREE.Line {
     -Math2.HalfPI, 3 * Math2.HalfPI);
   }
 
-
   /**
    * Returns the current vector position of the mesh.
    * All parameter times must be in UNIX time.
-   * @param  {Number}   time current timestamp 
-   * @param  {Object}   periapses
-   * @return {Vector}   current position
+   * @param  {Number}  time current timestamp 
+   * @param  {Object}  {lastPeriapsis: Number, nextPeriapsis: Number}
+   * @return {Vector3} current position
    */
   getPosition = (time, periapses) => {
-    return this.path.getPoint(
-      OrbitalDynamics.ellipticPercent(
-        this.eccentricity, time, periapses
-      )
+    const percent = OrbitalDynamics.ellipticPercent(
+      this.eccentricity, time, periapses
     );
+    const vector2d = this.path.getPoint(percent);
+    
+    return new THREE.Vector3(vector2d.x, vector2d.y);
   }
 }

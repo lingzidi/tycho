@@ -1,139 +1,99 @@
-import THREE from 'three';
-import Constants from 'constants';
-import Math2 from 'engine/math2';
-import Mesh from '../Utils/Mesh';
+import React from 'react';
+import ReactAnimationFrame from 'react-animation-frame';
+import PropTypes from 'prop-types';
+import * as THREE from 'three';
+
 import Ellipse from '../Utils/Ellipse';
-import Rings from './Rings';
+import Mesh from '../Utils/Mesh';
+import Math2 from '../../../engine/math2';
 
-export default class Orbital {
+class Orbital extends React.Component {
 
-  /**
-   * @param  {Object} data
-   */
-  constructor(data, parent) {
-    this.updateQueue = [];
-    this.data = data;
-    this.setUp();
-    this.renderChildren(parent);
-
-    if(parent) {
-      parent.add(this.getOrbital());
-    }
+  static propTypes = {
+    inclination: PropTypes.number.isRequired,
+    longAscNode: PropTypes.number.isRequired,
+    argPeriapsis: PropTypes.number.isRequired,
+    arcRotate: PropTypes.number.isRequired,
+    radius: PropTypes.number.isRequired,
+    axialTilt: PropTypes.number.isRequired,
+    time: PropTypes.number,
+    odd: PropTypes.bool
   }
 
-  /**
-   * Renders the stage props that are part of this orbital
-   */
-  setUp = () => {
-    this.ellipse = new Ellipse(this.data);
-    this.mesh = new Mesh(this.data);
-    
-    if (this.data.ring) {
-      this.mesh.body.add(new Rings(this.data.ring));
-    }
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {};
+    this.ellipse = new Ellipse(this.props);
   }
 
-  /**
-   * Renders all instances of children from within the queue.
-   */
-  renderChildren = () => {
-    let children = this.data.children;
-
-    if(children) {
-      children.forEach(child => {
-        let orbital = new Orbital(child, this.mesh);
-        this.updateQueue.push(orbital.updatePosition);
-      });
-    }
+  toEuler = ({x, y, z}) => { // TODO: move to math lib
+    const toRad = (val) => val ? Math2.toRadians(val) : 0;
+    return new THREE.Euler(toRad(x), toRad(y), toRad(z));
   }
 
-  /**
-   * Light up orbital path
-   */
-  illuminatePath = () => {
-    this.label.illuminated = true;
-    this.ellipse.setPathBrightness(0.4);
+  getEclipticGroupRotation = ({inclination, longitudeOfAscendingNode}) => {
+    return this.toEuler({
+      x: inclination - (this.props.odd ? 0 : 90),
+      z: longitudeOfAscendingNode
+    });
   }
 
-  /**
-   * Darken orbital path
-   */
-  darkenPath = () => {
-    this.label.illuminated = false;
-    this.ellipse.setPathBrightness(1);
+  getOrbitalGroupRotation = ({argumentOfPeriapsis}) => {
+    return this.toEuler({
+      z: argumentOfPeriapsis
+    });
   }
 
-  /**
-   * Renders the orbital plane containing props
-   * @return {Object3D}
-   */
-  getOrbitalPlane = () => {
-    let orbitalPlane = new THREE.Object3D();
-
-    orbitalPlane.add(this.ellipse);
-    orbitalPlane.add(this.mesh);
-
-    return orbitalPlane;
+  getBodyRotation = () => {
+    return this.toEuler({
+      x: 90,
+      y: Math2.arcSecToDeg(this.props.time, this.props.arcRotate)*2
+    });
   }
 
-  /**
-   * Returns the mesh reference plane containing relevant props.
-   * @param  {Object}   data
-   * @return {Object3D}
-   */
-  getOrbital = () => {
-    let referencePlane = new THREE.Object3D();
-    let orbitalPlane   = this.getOrbitalPlane(this.data);
-
-    referencePlane.add(orbitalPlane);
-    this.setPlanarRotations(orbitalPlane, referencePlane);
-    this.setAxialTilt();
-
-    return referencePlane;
+  getBodyPosition = () => {
+    return this.ellipse.getPosition(this.props.time, this.props.periapses);
   }
 
-  /**
-   * Sets the y-order rotation of the mesh's body instance.
-   * @param {Number} axialTilt
-   */
-  setAxialTilt = () => {
-    this.rotateObject('x', this.mesh.body, this.data.axialTilt);
+  onAnimationFrame = () => {
+    this.setState({
+      rotation: this.getBodyRotation(),
+      position: this.getBodyPosition()
+    });
   }
 
-  /**
-   * Sets (x,z)-order rotations on subscene planes.
-   * @param {[Object3D} orbitalPlane
-   * @param {Object3D}  referencePlane
-   */
-  setPlanarRotations = (orbitalPlane, referencePlane) => {
-    const {inclination, longAscNode, argPeriapsis} = this.data;
-
-    this.rotateObject('x', referencePlane, inclination);
-    this.rotateObject('z', referencePlane, longAscNode);
-    this.rotateObject('z', orbitalPlane, argPeriapsis);
+  renderBody = () => {
+    // TODO: rename Mesh to Body
+    return (
+      <Mesh
+        rotation={this.state.rotation}
+        axialTilt={this.props.axialTilt} 
+        radius={this.props.radius}
+      />
+    );
   }
 
-  /**
-   * Rotates an scene object.
-   * @param  {String}   coordinate x, y, or z
-   * @param  {Object3D} object     object to rotate
-   * @param  {Number}   rotation   in degrees
-   */
-  rotateObject = (coordinate, object, rotation) => {
-    if(isNaN(object[coordinate])) {
-      object.rotation[coordinate] = 0;
-    }
-    object.rotation[coordinate] += Math2.toRadians(rotation);
+  renderLine = () => {
+    return (
+      <line>
+        <lineBasicMaterial color={0x0000ff} />
+        <geometry vertices={this.ellipse.geometry.vertices} />
+      </line>
+    );
   }
 
-  /**
-   * Update real-time attributes (velocity and position).
-   * @param  {Number}  time UNIX time
-   */
-  updatePosition = (time) => {
-    const pos = this.ellipse.getPosition(time, this.data.periapses);
-
-    this.updateQueue.forEach((update) => update(time));
-    this.mesh.updatePosition(time, pos);
+  render() {
+    return (
+      <group rotation={this.getEclipticGroupRotation(this.props)}>
+        <group rotation={this.getOrbitalGroupRotation(this.props)} position={this.state.position}>
+          {this.renderBody()}
+          {this.props.children}
+        </group>
+        {this.renderLine()}
+      </group>
+    );
   }
 }
+
+export default ReactAnimationFrame(Orbital);

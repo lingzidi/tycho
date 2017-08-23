@@ -5,7 +5,7 @@ export default [{
   semimajor: 149598261,
   semiminor: 149556483,
   radius: 637800.0,
-  rotation: 15.0411, // in arcseconds
+  arcRotate: 45.0411, // in arcseconds
   inclination: 1.57869,
   argPeriapsis: 114.20763,
   periapses: {
@@ -25,7 +25,7 @@ export default [{
     semimajor: 149598261,
     semiminor: 149556483,
     radius: 637800.0,
-    rotation: 15.0411, // in arcseconds
+    arcRotate: 15.0411, // in arcseconds
     inclination: 1.57869,
     argPeriapsis: 114.20763,
     periapses: {

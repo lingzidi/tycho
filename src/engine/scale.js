@@ -1,4 +1,4 @@
-import Constants from 'constants';
+import Constants from '../constants';
 
 /**
  * Scales a number by the WEBGL_SCALE constant

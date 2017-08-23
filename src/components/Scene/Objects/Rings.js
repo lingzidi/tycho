@@ -1,5 +1,5 @@
-import THREE from 'three';
-import Scale from 'engine/scale';
+import * as THREE from 'three';
+import Scale from '../../../engine/scale';
 
 export default class Rings extends THREE.Mesh {
   constructor(data) {

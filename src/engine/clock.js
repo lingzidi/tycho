@@ -1,4 +1,4 @@
-import THREE from 'three';
+import * as THREE from 'three';
 import TWEEN from 'tween.js';
 import moment from 'moment';
 

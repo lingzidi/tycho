@@ -1,9 +1,6 @@
-import THREE from 'three';
-import moment from 'moment';
+import * as THREE from 'three';
 import deepAssign from 'deep-assign';
 import Constants from 'constants';
-import Vector from 'engine/vector';
-import Orbital from './Objects/Orbital';
 import Controls from './Utils/Controls';
 
 export default class Scene extends THREE.Scene {
@@ -65,7 +62,11 @@ export default class Scene extends THREE.Scene {
     this.add(this.camera);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-    document.body.appendChild(this.renderer.domElement);
+    //document.body.appendChild(this.renderer.domElement);
+  }
+
+  getDomElement = () => {
+    return this.renderer.domElement;
   }
 
   /**
