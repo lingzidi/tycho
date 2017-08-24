@@ -16,7 +16,7 @@ class App extends React.Component {
     this.cameraPosition = new THREE.Vector3(300, 300, 300);
     this.state = {};
     this.clock = new Clock();
-    this.clock.speed(5);
+    this.clock.speed(4);
   }
 
   componentDidMount = () => {

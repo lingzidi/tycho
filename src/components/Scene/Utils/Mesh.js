@@ -7,13 +7,12 @@ export default class Mesh extends React.Component {
   static propTypes = {
     radius: PropTypes.number.isRequired,
     color: PropTypes.number,
-    position: PropTypes.object,
     rotation: PropTypes.object
   };
   
   render() {
     return (
-      <group position={this.props.position}>
+      <group>
         <mesh rotation={this.props.rotation}>
           <meshBasicMaterial color={0x000000} />
           <sphereGeometry

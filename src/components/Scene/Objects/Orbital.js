@@ -47,8 +47,8 @@ class Orbital extends React.Component {
 
   getBodyRotation = () => {
     return this.toEuler({
-      x: 90,
-      y: Math2.arcSecToDeg(this.props.time, this.props.arcRotate)*2
+      x: Math.abs(90 - this.props.axialTilt),
+      y: Math2.arcSecToDeg(this.props.time, this.props.arcRotate),
     });
   }
 

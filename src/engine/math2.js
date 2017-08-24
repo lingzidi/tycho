@@ -5,7 +5,11 @@ export default class {
   static TAU = Math.PI * 2;
   
   static ramanujan(a, b) {
-    return Math.PI*(3*(a+b)-Math.sqrt((3*a+b)*(a+3*b)));
+    const p = 3 * b + a;
+    const q = 3 * a + b;
+    const r = 3 * (a + b);
+
+    return Math.PI * (Math.sqrt(p * q) - r);
   }
 
   static toRadians(deg) {
@@ -17,41 +21,28 @@ export default class {
   }
 
   static arcSecToRad(time, rotation) {
-    return Math.abs(time * (Math.PI / 648000)) % this.TAU;
+    return this.toRadians(this.arcSecToDeg(time, rotation));
   }
  
   static arcSecToDeg(time, rotation) {
-    return this.toDegrees(this.arcSecToRad(time, rotation));
+    return time * (rotation / 3600) % 360;
   }
  
-  // render3Dto2D(position, camera) {   
-  //   var div = document.getElementsByTagName('canvas')[0];
-  //   var pos = position.clone();
-  //   projScreenMat = new THREE.Matrix4();
+  // render3Dto2D(position, camera) {
+  //   const width = window.actualWidth;
+  //   const height = window.actualHeight;
+  //   const matrix = new THREE.Matrix4();
+  //   const pos = position.clone();
     
-  //   projScreenMat.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-  //   pos.applyProjection(projScreenMat);
+  //   matrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+  //   pos.applyProjection(matrix);
     
-  //   var offset = this.findOffset(div);
-  //   var x = (( pos.x + 1 ) * div.width / 2 + offset.left);
-  //   var y = (( - pos.y + 1) * div.height  / 2 + offset.top);
+  //   var x = (1 + pos.x) * width / 2;
+  //   var y = (1 - pos.y) * height / 2;
     
-  //   if(x < div.width && y < div.height)
-  //     return { x: x, y: y };
-  //   else
-  //     return null;
+  //   if(x < width && y < height) {
+  //     return {x, y};
+  //   }
+  //   return null;
   // },
-  
-  static findOffset(element) {
-    let pos = {left: 0, top: 0};
-    
-    if (element.offsetParent) {
-      // eslint-disable-next-line
-      do {
-        pos.left += element.offsetLeft; 
-        pos.top += element.offsetTop; 
-      } while (element = element.offsetParent); 
-    } 
-    return pos;
-  }
 }
