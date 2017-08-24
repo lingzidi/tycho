@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "deep-assign": "^2.0.0",
+    "jest-cli": "^20.0.4",
     "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-animation-frame": "^0.2.1",

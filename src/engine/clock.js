@@ -8,9 +8,8 @@ export default class {
     this.clock = new THREE.Clock(false);
     this.offset = this.getOffset(time);
     this.clock.start();
-    this.speed(5);
+    this.speed(0);
     this.elapsedTime = 0;
-    this.events = [];
   }
 
   /**
@@ -18,7 +17,7 @@ export default class {
    * @param  {Number} time UNIX timestamp
    */
   getOffset = (time) => {
-    if(time) {
+    if (time) {
       return time;
     }
     return moment().unix();
@@ -45,19 +44,8 @@ export default class {
 
     if(elapsedTime !== this.elapsedTime) {
       this.elapsedTime = elapsedTime;
-      this.nextTick();
     }
     TWEEN.update();
-  }
-
-  /**
-   * Executes set events after each second ("tick")
-   * @param  {Number} elapsedTime UNIX time
-   */
-  nextTick = () => {
-    this.events.forEach((event) => {
-      event(this.getTime());
-    });
   }
 
   /**
@@ -67,13 +55,6 @@ export default class {
    */
   speed = (e) => {
     this.scale = Math.pow(10, e);
-  }
-
-  /**
-   * Set events that will fire after each second ("tick")
-   */
-  tick = (event) => {
-    this.events.push(event);
   }
 
   /**
