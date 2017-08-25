@@ -27,22 +27,4 @@ export default class {
   static arcSecToDeg(time, rotation) {
     return time * (rotation / 3600) % 360;
   }
- 
-  // render3Dto2D(position, camera) {
-  //   const width = window.actualWidth;
-  //   const height = window.actualHeight;
-  //   const matrix = new THREE.Matrix4();
-  //   const pos = position.clone();
-    
-  //   matrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-  //   pos.applyProjection(matrix);
-    
-  //   var x = (1 + pos.x) * width / 2;
-  //   var y = (1 - pos.y) * height / 2;
-    
-  //   if(x < width && y < height) {
-  //     return {x, y};
-  //   }
-  //   return null;
-  // },
 }

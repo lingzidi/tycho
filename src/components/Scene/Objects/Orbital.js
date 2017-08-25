@@ -2,7 +2,6 @@ import React from 'react';
 import ReactAnimationFrame from 'react-animation-frame';
 import PropTypes from 'prop-types';
 import * as THREE from 'three';
-
 import Ellipse from '../Utils/Ellipse';
 import Mesh from '../Utils/Mesh';
 import Math2 from '../../../engine/math2';
@@ -17,7 +16,10 @@ class Orbital extends React.Component {
     radius: PropTypes.number.isRequired,
     axialTilt: PropTypes.number.isRequired,
     time: PropTypes.number,
-    odd: PropTypes.bool
+    odd: PropTypes.bool,
+    camera: PropTypes.object,
+    onUpdate: PropTypes.func,
+    id: PropTypes.string
   }
 
   constructor(props, context) {
@@ -57,10 +59,11 @@ class Orbital extends React.Component {
   }
 
   onAnimationFrame = () => {
-    this.setState({
-      rotation: this.getBodyRotation(),
-      position: this.getBodyPosition()
-    });
+    const rotation = this.getBodyRotation();
+    const position = this.getBodyPosition();
+
+    this.setState({rotation, position});
+    this.updateScreenPosition();
   }
 
   renderBody = () => {
@@ -70,8 +73,46 @@ class Orbital extends React.Component {
         rotation={this.state.rotation}
         axialTilt={this.props.axialTilt} 
         radius={this.props.radius}
+        ref="mesh"
       />
     );
+  }
+
+  translate3DTo2D = (position, camera) => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const matrix = new THREE.Matrix4();
+
+    if (position) {
+      const pos = position.clone();
+      
+      matrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+      pos.applyMatrix4(matrix);
+      
+      const left = (1 + pos.x) * width / 2;
+      const top = (1 - pos.y) * height / 2;
+      
+        return {top, left};
+    }
+    return null;
+  }
+
+
+  updateScreenPosition = () => {
+    if (this.refs.mesh) {
+      const vect = new THREE.Vector3();
+      const matrix = this.refs.mesh
+        ._reactInternalInstance
+        ._threeObject
+        .matrixWorld;
+
+      vect.setFromMatrixPosition(matrix);
+
+      this.props.onUpdate(
+        this.translate3DTo2D(vect, this.props.camera),
+        this.props.id
+      );
+    }
   }
 
   renderLine = () => {

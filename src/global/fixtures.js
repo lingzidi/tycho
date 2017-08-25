@@ -1,5 +1,7 @@
 /** this is only temporary for dev */
 export default [{
+  id: 'dummyParent',
+  name: 'Dummy Planet',
   GM: 6836529,
   axialTilt: 23.26,
   semimajor: 149598261,
@@ -20,6 +22,8 @@ export default [{
     outerRadius: 950000
   },
   children: [{
+    id: 'dummyChild',
+    name: 'Dummy Satellite',
     GM: 6836529,
     axialTilt: 23.26,
     semimajor: 149598261,
