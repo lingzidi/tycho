@@ -8,9 +8,7 @@ class Label extends React.Component {
     orbital: PropTypes.object.isRequired
   }
 
-  getPosition = () => {
-    const pos = this.props.position;
-
+  getPosition = (pos) => {
     if (pos) {
       return {
         position: 'absolute',
@@ -23,7 +21,7 @@ class Label extends React.Component {
   
   render() {
     return (
-      <span style={this.getPosition()}>
+      <span style={this.getPosition(this.props.position)}>
         {this.props.orbital.name}
       </span>
     );

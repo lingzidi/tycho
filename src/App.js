@@ -2,21 +2,21 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import * as THREE from 'three';
 import ReactDOM from 'react-dom';
-import Orbital from './components/Scene/Objects/Orbital';
+import OrbitalContainer from './containers/OrbitalContainer';
 import data from './global/fixtures';
 import Controls from './components/Scene/Utils/Controls';
 import Clock from './engine/clock';
-import Label from './components/Label/Label';
+import LabelGroup from './components/LabelGroup/LabelGroup';
 
 class App extends React.Component {
-  constructor(props, context) {
-    super(props, context);
 
-    // construct the position vector here, because if we use 'new' within render,
-    // React will think that things have changed when they have not.
+  componentWillMount = () => {
     this.cameraPosition = new THREE.Vector3(300, 300, 300);
-    this.state = {positions: {}};
     this.clock = new Clock();
+    this.state = {
+      positions: {},
+      time: this.clock.getTime()
+    };
     this.clock.speed(4);
   }
 
@@ -47,35 +47,16 @@ class App extends React.Component {
 
   getOrbitalElements = (orbitals, odd) => {
     return orbitals.map((orbital) => (
-      <Orbital {...orbital}
+      <OrbitalContainer
+        {...orbital}
         time={this.state.time}
         camera={this.refs.camera}
         onUpdate={this.updateScreenPositions}
         odd={odd}
         key={orbital.id}>
         {orbital.children && this.getOrbitalElements(orbital.children, !odd)}
-      </Orbital>
+      </OrbitalContainer>
     ));
-  }
-
-  getOrbitalLabels = (orbitals) => {
-    let labels = [];
-
-    orbitals.forEach((orbital) => {
-      labels.push(
-        <Label
-          position={this.state.positions[orbital.id]}
-          orbital={orbital}
-          key={orbital.id}>
-          {orbital.children && this.getOrbitalLabels(orbital.children)}
-        </Label>
-      );
-
-      if (orbital.children) {
-        labels = labels.concat(this.getOrbitalLabels(orbital.children));
-      }
-    });
-    return labels;
   }
 
   render() {
@@ -105,7 +86,10 @@ class App extends React.Component {
             <axisHelper size={500} />
           </scene>
         </React3>
-        {this.getOrbitalLabels(data)}
+        <LabelGroup
+          positions={this.state.positions}
+          orbitals={data}
+        />
       </div>
     );
   }

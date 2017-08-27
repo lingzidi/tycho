@@ -86,32 +86,4 @@ export default class Ellipse {
 
     return new THREE.Vector3(vector2d.x, vector2d.y);
   }
-
-  get2DPosition = (time, periapses, camera) => {
-    const position = this.getPosition(time, periapses);
-
-
-    return this.translate3DTo2D(position, camera);
-  }
-
-  translate3DTo2D = (position, camera) => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const matrix = new THREE.Matrix4();
-
-    if (position) {
-      const pos = position.clone();
-      
-      matrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-      pos.applyMatrix4(matrix);
-      
-      const top = (1 + pos.x) * width / 2;
-      const left = (1 - pos.y) * height / 2;
-      
-      if(top < width && left < height) {
-        return {top, left};
-      }
-    }
-    return null;
-  }
 }

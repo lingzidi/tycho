@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Scale from '../../../engine/scale';
 
 export default class Mesh extends React.Component {
 
@@ -18,7 +17,7 @@ export default class Mesh extends React.Component {
           <sphereGeometry
             widthSegments={32}
             heightSegments={32}
-            radius={Scale(this.props.radius)}/>
+            radius={this.props.radius}/>
         </mesh>
         <axisHelper size={200} rotation={this.props.rotation} />
       </group>
