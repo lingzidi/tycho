@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import TWEEN from 'tween.js';
 import moment from 'moment';
 
-export default class {
+export default class Clock {
 
   constructor(time) {
     this.clock = new THREE.Clock(false);

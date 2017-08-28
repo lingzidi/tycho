@@ -2,10 +2,10 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import * as THREE from 'three';
 import ReactDOM from 'react-dom';
-import OrbitalContainer from './containers/OrbitalContainer';
+import OrbitalContainer from './components/Scene/containers/OrbitalContainer';
 import data from './global/fixtures';
-import Controls from './components/Scene/Utils/Controls';
-import Clock from './engine/clock';
+import Controls from './utils/Controls';
+import Clock from './utils/Clock';
 import LabelGroup from './components/LabelGroup/LabelGroup';
 
 class App extends React.Component {

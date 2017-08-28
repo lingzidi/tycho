@@ -1,4 +1,4 @@
-export default class {
+export default class Math2 {
 
   static HalfPI = Math.PI / 2;
 
@@ -10,6 +10,10 @@ export default class {
     const r = 3 * (a + b);
 
     return Math.PI * (Math.sqrt(p * q) - r);
+  }
+
+  static getFocus(x, y) {
+    return Math.sqrt(Math.pow(x, 2) - Math.pow(y, 2));
   }
 
   static toRadians(deg) {

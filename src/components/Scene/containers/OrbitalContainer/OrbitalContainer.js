@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactAnimationFrame from 'react-animation-frame';
 import PropTypes from 'prop-types';
-import Ellipse from '../components/Scene/Utils/Ellipse';
-import Orbital from '../components/Scene/Objects/Orbital';
-import Service from '../services/OrbitalService';
+import Ellipse from '../../../../utils/Ellipse';
+import Service from '../../../../services/OrbitalService';
+import Orbital from '../../components/Orbital';
 
-class OrbitalContainer extends React.Component {
+export default class OrbitalContainer extends React.Component {
 
   static propTypes = {
     inclination: PropTypes.number.isRequired,
@@ -26,10 +25,6 @@ class OrbitalContainer extends React.Component {
     this.ellipse = new Ellipse(this.props);
 
     this.setGroupRotations(this.props);
-    this.setBodyState(this.props, this.ellipse);
-  }
-
-  onAnimationFrame = () => {
     this.setBodyState(this.props, this.ellipse);
   }
 
@@ -55,6 +50,10 @@ class OrbitalContainer extends React.Component {
     this.props.onUpdate(screen, this.props.id);
   }
 
+  onAnimationFrame = () => {
+    this.setBodyState(this.props, this.ellipse);
+  }
+
   render() {
     return (
       <Orbital
@@ -71,5 +70,3 @@ class OrbitalContainer extends React.Component {
     );
   }
 }
-
-export default ReactAnimationFrame(OrbitalContainer);

@@ -1,4 +1,4 @@
-export default class {
+export default class Physics {
 
   static meanAnomaly(t, P) {
     // mean anomaly, in degrees (mod 1 for percentage)

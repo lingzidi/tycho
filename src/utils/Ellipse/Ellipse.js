@@ -1,9 +1,8 @@
 import * as THREE from 'three';
-import Constants from '../../../constants';
-import OrbitalDynamics from '../../../engine/orbitalDynamics';
-import Vector from '../../../engine/vector';
-import Math2 from '../../../engine/math2';
-import Scale from '../../../engine/scale';
+import Constants from '../../constants';
+import Physics from '../../services/Physics';
+import Math2 from '../../services/Math2';
+import Scale from '../../utils/Scale';
 
 export default class Ellipse {
 
@@ -61,7 +60,7 @@ export default class Ellipse {
    * @return {EllipseCurve}
    */
   getEllipseCurve = () => {
-    const focus = Vector.getFocus(this.semimajor, this.semiminor);
+    const focus = Math2.getFocus(this.semimajor, this.semiminor);
 
     return new THREE.EllipseCurve(0,
       focus, 
@@ -79,7 +78,7 @@ export default class Ellipse {
    * @return {Vector3} current position
    */
   getPosition = (time, periapses) => {
-    const percent = OrbitalDynamics.ellipticPercent(
+    const percent = Physics.ellipticPercent(
       this.eccentricity, time, periapses
     );
     const vector2d = this.path.getPoint(percent);

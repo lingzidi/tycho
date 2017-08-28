@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactAnimationFrame from 'react-animation-frame';
 import PropTypes from 'prop-types';
-import Mesh from '../Utils/Mesh';
+import Mesh from '../Mesh';
 
-class Orbital extends React.Component {
+export default class Orbital extends React.Component {
 
   static propTypes = {
     updateScreenPosition: PropTypes.func.isRequired,
@@ -39,5 +38,3 @@ class Orbital extends React.Component {
     );
   }
 }
-
-export default ReactAnimationFrame(Orbital);
