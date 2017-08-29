@@ -1,93 +1,79 @@
 import * as THREE from 'three';
-import deepAssign from 'deep-assign';
-import Constants from 'constants';
-import Controls from './Utils/Controls';
+import React from 'react';
+import PropTypes from 'prop-types';
+import React3 from 'react-three-renderer';
+import Controls from '../../utils/Controls';
+import OrbitalContainer from './containers/OrbitalContainer';
 
-export default class Scene extends THREE.Scene {
+export default class Scene extends React.Component {
 
-  constructor(clock) {
-    super();
-
-    this.clock = clock;
-    this.setUp();
+  static propTypes = {
+    orbitalData: PropTypes.array.isRequired,
+    onAnimate: PropTypes.func.isRequired,
+    updateScreenPositions: PropTypes.func.isRequired,
+    time: PropTypes.number
   }
 
-  /**
-   * Calls all setup functions.
-   */
-  setUp = () => {
-    this.renderScene();
-    this.setSettings();
-    this.animate();
+  componentWillMount = () => {
+    this.cameraPosition = new THREE.Vector3(300, 300, 300);
   }
 
-  /**
-   * New instance of WebGL renderer
-   * @return {THREE.WebGLRenderer}
-   */
-  getRenderer = () => {
-    return new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: true,
-      logging: false
-    });
+  componentDidMount = () => {
+    this.controls = new Controls(this.refs.camera);
   }
 
-  /**
-   * New camera instance
-   * @return {THREE.Camera}
-   */
-  getCamera = () => {
-    let ratio = window.innerWidth / window.innerHeight;
-    return new THREE.PerspectiveCamera(50, ratio, 1, 10000);
+  componentWillUnmount = () => {
+    this.controls.dispose();
+    delete this.controls;
   }
 
-  /**
-   * New instance of OrbitControls
-   * @return {THREE.OrbitControls}
-   */
-  getControls = () => {
-    return new Controls(this.camera);
+  getCamera = (width, height) => {
+    return (
+      <perspectiveCamera
+        name="camera"
+        ref="camera"
+        fov={50}
+        aspect={width / height}
+        near={1}
+        far={10000}
+        position={this.cameraPosition}
+      />
+    );
   }
 
-  /**
-   * Binds renderer, camera, and controls to current scene
-   * and appends it to the DOM.
-   */
-  renderScene = () => {
-    this.renderer = this.getRenderer();
-    this.camera   = this.getCamera();
-    this.controls = this.getControls();
-
-    this.add(this.camera);
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-    //document.body.appendChild(this.renderer.domElement);
+  getOrbitalElements = (orbitals, odd) => {
+    return orbitals.map((orbital) => (
+      <OrbitalContainer
+        {...orbital}
+        time={this.props.time}
+        camera={this.refs.camera}
+        onUpdate={this.props.updateScreenPositions}
+        odd={odd}
+        key={orbital.id}>
+        {orbital.children && this.getOrbitalElements(orbital.children, !odd)}
+      </OrbitalContainer>
+    ));
   }
 
-  getDomElement = () => {
-    return this.renderer.domElement;
-  }
+  render() {
+    const width = window.innerWidth; // canvas width
+    const height = window.innerHeight; // canvas height
+    const camera = this.getCamera(width, height);
 
-  /**
-   * Animation loop.
-   */
-  animate = () => {
-    this.controls.update();
-    this.renderer.render(this, this.camera);
-  }
-
-  /**
-   * Set settings defined in constants for defined scene components.
-   */
-  setSettings = () => {
-    let settings = Constants.SCENE_SETTINGS;
-
-    for(let component in settings) {
-      this[component] = deepAssign(this[component], settings[component]);
-    }
-    this.camera.position.x = 300;
-    this.camera.position.y = 300;
-    this.camera.position.z = 300;//???
+    return (
+      <React3
+        mainCamera="camera" // this points to the perspectiveCamera which has the name set to "camera" below
+        width={width}
+        height={height}
+        antialias={true}
+        onAnimate={this.props.onAnimate}
+        alpha={true}>
+        <scene>
+          {camera}
+          {this.getOrbitalElements(this.props.orbitalData)}
+          <axisHelper size={500} />
+        </scene>
+      </React3>
+    );
   }
 }

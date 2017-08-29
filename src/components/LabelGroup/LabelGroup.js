@@ -6,7 +6,7 @@ class LabelGroup extends React.Component {
 
   static propTypes = {
     positions: PropTypes.object.isRequired,
-    orbitals: PropTypes.array.isRequired
+    orbitalData: PropTypes.array.isRequired
   }
   
   getOrbitalLabels = (orbitals) => {
@@ -16,7 +16,7 @@ class LabelGroup extends React.Component {
       labels.push(
         <Label
           position={this.props.positions[orbital.id]}
-          orbital={orbital}
+          text={orbital.name}
           key={orbital.id}
         />
       );
@@ -30,7 +30,7 @@ class LabelGroup extends React.Component {
   }
 
   render() {
-    return <div>{this.getOrbitalLabels(this.props.orbitals)}</div>;
+    return <div>{this.getOrbitalLabels(this.props.orbitalData)}</div>;
   }
 }
 

@@ -5,7 +5,7 @@ class Label extends React.Component {
 
   static propTypes = {
     position: PropTypes.object,
-    orbital: PropTypes.object.isRequired
+    text: PropTypes.string.isRequired
   }
 
   getPosition = (pos) => {
@@ -22,7 +22,7 @@ class Label extends React.Component {
   render() {
     return (
       <span style={this.getPosition(this.props.position)}>
-        {this.props.orbital.name}
+        {this.props.text}
       </span>
     );
   }
