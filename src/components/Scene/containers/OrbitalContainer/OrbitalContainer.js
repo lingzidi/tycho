@@ -17,15 +17,21 @@ export default class OrbitalContainer extends React.Component {
     onUpdate: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     odd: PropTypes.bool,
+    active: PropTypes.bool,
     camera: PropTypes.object
   }
 
   componentWillMount = () => {
     this.state = {};
     this.ellipse = new Ellipse(this.props);
-
     this.setGroupRotations(this.props);
-    this.setBodyState(this.props, this.ellipse);
+    this.onAnimationFrame();
+  }
+
+  setPathOpacity = (active) => {
+    const pathOpacity = active ? 1 : 0.2;
+
+    this.setState({pathOpacity});
   }
 
   setGroupRotations = (props) => {
@@ -52,6 +58,7 @@ export default class OrbitalContainer extends React.Component {
 
   onAnimationFrame = () => {
     this.setBodyState(this.props, this.ellipse);
+    this.setPathOpacity(this.props.active);
   }
 
   render() {
@@ -64,6 +71,7 @@ export default class OrbitalContainer extends React.Component {
         bodyPosition={this.state.bodyPosition}
         bodyRotation={this.state.bodyRotation}
         bodyRadius={this.state.bodyRadius}
+        pathOpacity={this.state.pathOpacity}
         id={this.props.id}>
         {this.props.children}
       </Orbital>

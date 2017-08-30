@@ -37,6 +37,8 @@ export default class App extends React.Component {
           updateScreenPositions={this.updateScreenPositions}
           time={this.state.time}
           orbitalData={data}
+          width={window.innerWidth}
+          height={window.innerHeight}
         />
         <LabelGroup
           positions={this.state.positions}

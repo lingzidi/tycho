@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Mesh from '../Mesh';
+import Body from '../Body';
 
 export default class Orbital extends React.Component {
 
@@ -12,26 +12,27 @@ export default class Orbital extends React.Component {
     bodyPosition: PropTypes.object.isRequired,
     bodyRotation: PropTypes.object.isRequired,
     bodyRadius: PropTypes.number.isRequired,
+    pathOpacity: PropTypes.number,
     id: PropTypes.string.isRequired
   }
 
   onAnimationFrame = () => {
-    this.props.updateScreenPosition(this.refs.mesh);
+    this.props.updateScreenPosition(this.refs.body);
   }
 
   render() {
     return (
       <group rotation={this.props.eclipticGroupRotation}>
         <group rotation={this.props.orbitalGroupRotation} position={this.props.bodyPosition}>
-          <Mesh
+          <Body
             rotation={this.props.bodyRotation}
             radius={this.props.bodyRadius}
-            ref="mesh"
+            ref="body"
           />
           {this.props.children}
         </group>
         <line>
-          <lineBasicMaterial color={0x0000ff} />
+          <lineBasicMaterial color={0x0000ff} opacity={this.props.pathOpacity} />
           <geometry vertices={this.props.pathVertices} />
         </line>
       </group>

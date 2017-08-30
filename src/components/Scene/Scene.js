@@ -5,17 +5,17 @@ import React3 from 'react-three-renderer';
 import Controls from '../../utils/Controls';
 import OrbitalContainer from './containers/OrbitalContainer';
 
+const cameraPosition = new THREE.Vector3(300, 300, 300);//move to const
+
 export default class Scene extends React.Component {
 
   static propTypes = {
     orbitalData: PropTypes.array.isRequired,
     onAnimate: PropTypes.func.isRequired,
     updateScreenPositions: PropTypes.func.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
     time: PropTypes.number
-  }
-
-  componentWillMount = () => {
-    this.cameraPosition = new THREE.Vector3(300, 300, 300);
   }
 
   componentDidMount = () => {
@@ -28,6 +28,9 @@ export default class Scene extends React.Component {
   }
 
   getCamera = (width, height) => {
+    const {x, y, z} = cameraPosition;//TODO: constant
+    const position = new THREE.Vector3(x, y, z);
+
     return (
       <perspectiveCamera
         name="camera"
@@ -36,9 +39,16 @@ export default class Scene extends React.Component {
         aspect={width / height}
         near={1}
         far={10000}
-        position={this.cameraPosition}
+        position={cameraPosition}
       />
     );
+  }
+
+  getCameraPosition = (camera) => {
+    if(camera) {
+      return camera.position.clone();
+    }
+    return null;
   }
 
   getOrbitalElements = (orbitals, odd) => {
@@ -56,22 +66,25 @@ export default class Scene extends React.Component {
   }
 
   render() {
-    const width = window.innerWidth; // canvas width
-    const height = window.innerHeight; // canvas height
+    const {width, height} = this.props;
     const camera = this.getCamera(width, height);
 
     return (
       <React3
-        mainCamera="camera" // this points to the perspectiveCamera which has the name set to "camera" below
+        onAnimate={this.props.onAnimate}
+        mainCamera="camera"
         width={width}
         height={height}
         antialias={true}
-        onAnimate={this.props.onAnimate}
         alpha={true}>
         <scene>
           {camera}
           {this.getOrbitalElements(this.props.orbitalData)}
           <axisHelper size={500} />
+          <mesh lookAt={this.getCameraPosition(this.refs.camera)}>
+            <planeGeometry width={100} height={100} />
+            <meshBasicMaterial color={0x00ff00} />
+          </mesh>
         </scene>
       </React3>
     );

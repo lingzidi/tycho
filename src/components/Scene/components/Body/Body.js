@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Mesh extends React.Component {
+export default class Body extends React.Component {
 
   static propTypes = {
     radius: PropTypes.number.isRequired,

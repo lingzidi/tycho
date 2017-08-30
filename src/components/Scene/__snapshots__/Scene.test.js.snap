@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scene Component getCamera() should render a camera with fixed constant props 1`] = `
+<perspectiveCamera
+  aspect={0.5}
+  far={10000}
+  fov={50}
+  name="camera"
+  near={1}
+  position={
+    Vector3 {
+      "x": 300,
+      "y": 300,
+      "z": 300,
+    }
+  }
+/>
+`;
+
+exports[`Scene Component getOrbitalElements() should match the snapshot of OrbitalElements 1`] = `
+<group>
+  orbitalContainers
+</group>
+`;
+
+exports[`Scene Component render() should render the scene 1`] = `
+<React3
+  alpha={true}
+  antialias={true}
+  context="3d"
+  height={300}
+  mainCamera="camera"
+  onAnimate={[Function]}
+  width={500}
+>
+  <scene>
+    <perspectiveCamera
+      aspect={1.6666666666666667}
+      far={10000}
+      fov={50}
+      name="camera"
+      near={1}
+      position={
+        Vector3 {
+          "x": 300,
+          "y": 300,
+          "z": 300,
+        }
+      }
+    />
+    <AnimatedComponent
+      GM={6836529}
+      arcRotate={45.0411}
+      argPeriapsis={114.20763}
+      atmosphereColor={8421504}
+      axialTilt={23.26}
+      eccentricity={0.01671123}
+      id="dummyParent"
+      inclination={1.57869}
+      longAscNode={348.73936}
+      name="Dummy Planet"
+      onUpdate={[Function]}
+      periapses={
+        Object {
+          "last": 1136430000,
+          "next": 1167987600,
+        }
+      }
+      radius={637800}
+      ring={
+        Object {
+          "innerRadius": 6630,
+          "outerRadius": 950000,
+        }
+      }
+      semimajor={149598261}
+      semiminor={149556483}
+      time={1}
+    >
+      <AnimatedComponent
+        GM={6836529}
+        arcRotate={15.0411}
+        argPeriapsis={114.20763}
+        atmosphereColor={16711680}
+        axialTilt={23.26}
+        eccentricity={0.01671123}
+        id="dummyChild"
+        inclination={1.57869}
+        longAscNode={348.73936}
+        name="Dummy Satellite"
+        odd={true}
+        onUpdate={[Function]}
+        periapses={
+          Object {
+            "last": 1166430000,
+            "next": 1167987600,
+          }
+        }
+        radius={637800}
+        semimajor={149598261}
+        semiminor={149556483}
+        time={1}
+      />
+    </AnimatedComponent>
+    <axisHelper
+      size={500}
+    />
+    <mesh
+      lookAt={null}
+    >
+      <planeGeometry
+        height={100}
+        width={100}
+      />
+      <meshBasicMaterial
+        color={65280}
+      />
+    </mesh>
+  </scene>
+</React3>
+`;
