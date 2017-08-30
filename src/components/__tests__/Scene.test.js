@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import {Vector3, Camera} from 'three';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
-import Scene from './Scene';
+import Scene from '../Scene';
 import Controls from '../../utils/Controls';
 import data from '../../global/fixtures';
 

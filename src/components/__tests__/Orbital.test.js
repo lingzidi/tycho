@@ -1,6 +1,6 @@
-import Orbital from './Orbital';
 import React from 'react';
 import {shallow} from 'enzyme';
+import {Orbital} from '../Orbital';
 
 describe('Orbital Component', () => {
   describe('updateScreenPositions()', () => {

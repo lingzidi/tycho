@@ -1,10 +1,10 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import OrbitalContainer from './OrbitalContainer';
-import data from '../../../../global/fixtures';
-import Ellipse from '../../../../utils/Ellipse';
-import Service from '../../../../services/OrbitalService';
-import Orbital from '../../components/Orbital';
+import data from '../../global/fixtures';
+import {OrbitalContainer} from '../OrbitalContainer';
+import {Orbital} from '../../components/Orbital';
+import Ellipse from '../../utils/Ellipse';
+import Service from '../../services/OrbitalService';
 
 describe('Orbital Container', () => {
   let component, orbitalContainer;

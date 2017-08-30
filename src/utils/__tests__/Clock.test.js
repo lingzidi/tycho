@@ -1,4 +1,4 @@
-import Clock from './clock';
+import Clock from '../Clock';
 import moment from 'moment';
 import TWEEN from 'tween.js';
 

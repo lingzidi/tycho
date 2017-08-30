@@ -1,8 +1,8 @@
 import * as THREE from 'three';
-import Constants from '../../constants';
-import Physics from '../../services/Physics';
-import Math2 from '../../services/Math2';
-import Scale from '../../utils/Scale';
+import Constants from '../constants';
+import Physics from '../services/Physics';
+import Math2 from '../services/Math2';
+import Scale from '../utils/Scale';
 
 export default class Ellipse {
 

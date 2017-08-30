@@ -1,6 +1,6 @@
 import React from 'react';
-import Label from './Label';
 import renderer from 'react-test-renderer';
+import Label from '../Label';
 
 describe('Label Component', () => {
   it('renders correctly', () => {

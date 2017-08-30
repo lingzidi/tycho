@@ -1,8 +1,8 @@
 import React from 'react';
-import data from '../../global/fixtures';
-import Clock from '../../utils/Clock';
-import Scene from '../Scene';
-import LabelGroup from '../LabelGroup';
+import data from '../global/fixtures';
+import Clock from '../utils/Clock';
+import Scene from './Scene';
+import LabelGroup from './LabelGroup';
 
 export default class App extends React.Component {
 

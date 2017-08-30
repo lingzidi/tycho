@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactAnimationFrame from 'react-animation-frame';
 import PropTypes from 'prop-types';
-import Ellipse from '../../../../utils/Ellipse';
-import Service from '../../../../services/OrbitalService';
-import Orbital from '../../components/Orbital';
+import Ellipse from '../utils/Ellipse';
+import Service from '../services/OrbitalService';
+import Orbital from '../components/Orbital';
 
-export default class OrbitalContainer extends React.Component {
+export class OrbitalContainer extends React.Component {
 
   static propTypes = {
     inclination: PropTypes.number.isRequired,
@@ -78,3 +79,5 @@ export default class OrbitalContainer extends React.Component {
     );
   }
 }
+
+export default ReactAnimationFrame(OrbitalContainer);

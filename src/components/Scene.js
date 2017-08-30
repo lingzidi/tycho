@@ -2,8 +2,8 @@ import * as THREE from 'three';
 import React from 'react';
 import PropTypes from 'prop-types';
 import React3 from 'react-three-renderer';
-import Controls from '../../utils/Controls';
-import OrbitalContainer from './containers/OrbitalContainer';
+import Controls from '../utils/Controls';
+import OrbitalContainer from '../containers/OrbitalContainer';
 
 const cameraPosition = new THREE.Vector3(300, 300, 300);//move to const
 
@@ -28,9 +28,6 @@ export default class Scene extends React.Component {
   }
 
   getCamera = (width, height) => {
-    const {x, y, z} = cameraPosition;//TODO: constant
-    const position = new THREE.Vector3(x, y, z);
-
     return (
       <perspectiveCamera
         name="camera"

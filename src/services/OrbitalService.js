@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import Math2 from '../Math2';
-import Scale from '../../utils/Scale';
+import Math2 from './Math2';
+import Scale from '../utils/Scale';
 
 export default class OrbitalService {
   
