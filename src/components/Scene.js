@@ -57,7 +57,7 @@ export default class Scene extends React.Component {
         onUpdate={this.props.updateScreenPositions}
         odd={odd}
         key={orbital.id}>
-        {orbital.children && this.getOrbitalElements(orbital.children, !odd)}
+        {(orbital.satellites ? this.getOrbitalElements(orbital.satellites, !odd) : null)}
       </OrbitalContainer>
     ));
   }

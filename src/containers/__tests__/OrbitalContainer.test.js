@@ -1,5 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
+import toJson from 'enzyme-to-json';
 import data from '../../global/fixtures';
 import {OrbitalContainer} from '../OrbitalContainer';
 import {Orbital} from '../../components/Orbital';
@@ -95,6 +96,12 @@ describe('Orbital Container', () => {
       
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props, orbitalContainer.ellipse);
+    });
+  });
+
+  describe('render()', () => {
+    it('should render the OrbitalContainer successfully', () => {
+      expect(toJson(component)).toMatchSnapshot();
     });
   });
 });

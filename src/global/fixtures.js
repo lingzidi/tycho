@@ -21,7 +21,7 @@ export default [{
     innerRadius: 6630,
     outerRadius: 950000
   },
-  children: [{
+  satellites: [{
     id: 'dummyChild',
     name: 'Dummy Satellite',
     GM: 6836529,

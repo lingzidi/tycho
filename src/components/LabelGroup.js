@@ -21,8 +21,8 @@ class LabelGroup extends React.Component {
         />
       );
 
-      if (orbital.children) {
-        labels = labels.concat(this.getOrbitalLabels(orbital.children));
+      if (orbital.satellites) {
+        labels = labels.concat(this.getOrbitalLabels(orbital.satellites));
       }
     });
 
