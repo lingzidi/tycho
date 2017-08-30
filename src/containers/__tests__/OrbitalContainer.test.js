@@ -49,6 +49,22 @@ describe('Orbital Container', () => {
     });
   });
 
+  describe('setPathOpacity()', () => {
+    it('should set the pathOpacity to 1 in local state when active = true', () => {
+      orbitalContainer.setPathOpacity(true);
+
+      expect(orbitalContainer.state).toHaveProperty('pathOpacity');
+      expect(orbitalContainer.state.pathOpacity).toEqual(1);
+    });
+
+    it('should set the pathOpacity to 0.2 in local state when active = false', () => {
+      orbitalContainer.setPathOpacity(false);
+
+      expect(orbitalContainer.state).toHaveProperty('pathOpacity');
+      expect(orbitalContainer.state.pathOpacity).toEqual(0.2);
+    });
+  });
+
   describe('setGroupRotations()', () => {
     it('should set the ecliptic and orbital group rotations', () => {
       orbitalContainer.setGroupRotations(orbitalContainer.props);

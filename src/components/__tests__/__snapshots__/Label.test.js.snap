@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Label Component renders correctly 1`] = `
-<span
-  style={null}
->
-  foo
-</span>
+exports[`Label Component render() should render the Label successfully 1`] = `
+<div>
+  <span
+    style={null}
+  >
+    foo
+  </span>
+</div>
 `;

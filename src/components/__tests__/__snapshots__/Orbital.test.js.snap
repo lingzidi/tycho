@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Orbital Component render() should render the orbital successfully 1`] = `
+<group
+  rotation={Object {}}
+>
+  <group
+    position={Object {}}
+    rotation={Object {}}
+  >
+    <Body
+      radius={1}
+      rotation={Object {}}
+    />
+  </group>
+  <line>
+    <lineBasicMaterial
+      color={255}
+    />
+    <geometry
+      vertices={Array []}
+    />
+  </line>
+</group>
+`;

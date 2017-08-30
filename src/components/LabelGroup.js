@@ -10,23 +10,16 @@ class LabelGroup extends React.Component {
   }
   
   getOrbitalLabels = (orbitals) => {
-    let labels = [];
-
-    orbitals.forEach((orbital) => {
-      labels.push(
+    return orbitals.map((orbital) => {
+      return (
         <Label
           position={this.props.positions[orbital.id]}
           text={orbital.name}
-          key={orbital.id}
-        />
+          key={orbital.id}>
+          {orbital.satellites && this.getOrbitalLabels(orbital.satellites)}
+        </Label>
       );
-
-      if (orbital.satellites) {
-        labels = labels.concat(this.getOrbitalLabels(orbital.satellites));
-      }
     });
-
-    return labels;
   }
 
   render() {

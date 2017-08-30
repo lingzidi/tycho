@@ -5,7 +5,6 @@ export default class Body extends React.Component {
 
   static propTypes = {
     radius: PropTypes.number.isRequired,
-    color: PropTypes.number,
     rotation: PropTypes.object
   };
   
