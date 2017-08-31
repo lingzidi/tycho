@@ -12,7 +12,8 @@ export default class Controls extends OrbitControls(THREE) {
 
   /**
    * Change zoom. Overrides the existing zoom tween in progress.
-   * @param {level} zoom level [0,100]
+   *
+   * @param {level} level - destination zoom level [0,100]
    */
   zoom = (level) => {
     level = level / 100;
@@ -25,7 +26,8 @@ export default class Controls extends OrbitControls(THREE) {
 
   /**
    * Sets the current camera position to the scaled zoom vector.
-   * @param  {Number} percent percentage of zoom [0,1]
+   *
+   * @param {Number} percent - percentage of zoom [0,1]
    */
   pan = (percent) => {
     var p = this.camera.position;
@@ -36,8 +38,8 @@ export default class Controls extends OrbitControls(THREE) {
 
   /**
    * Returns the current vector scaled to the desired zoom.
-   * @param  {Vector3} v current position vector
-   * @param  {Number}  p percentage of zoom [0,1]
+   * @param {Vector3} v - current position vector
+   * @param {Number} p - percentage of zoom [0,1]
    * @return {Vector3}
    */
   getZoomVector = (v, p) => {

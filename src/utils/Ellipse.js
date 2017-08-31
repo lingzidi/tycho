@@ -7,6 +7,8 @@ import Scale from '../utils/Scale';
 export default class Ellipse {
 
   /**
+   * Constructor.
+   *
    * @param {Object} data
    */
   constructor(data) {
@@ -16,7 +18,8 @@ export default class Ellipse {
 
   /**
    * Set global data, with appropriate scales.
-   * @param  {Object} data
+   *
+   * @param {Object} data
    */
   setData = ({semimajor, semiminor, eccentricity}) => {
     this.semimajor = Scale(semimajor);
@@ -26,7 +29,8 @@ export default class Ellipse {
 
   /**
    * Renders the ellipse prop.
-   * @return {Object3D} ellipse
+   *
+   * @returns {Object3D} ellipse
    */
   render = () => {
     this.ellipse = this.getEllipseCurve();
@@ -37,7 +41,8 @@ export default class Ellipse {
 
   /**
    * Returns instance of geometry from instance of ellipse points.
-   * @return {THREE.Geometry} geometry
+   *
+   * @returns {THREE.Geometry} geometry
    */
   getGeometry = () => {
     return this.path.createPointsGeometry(
@@ -47,7 +52,8 @@ export default class Ellipse {
 
   /**
    * Returns instance of path from instance of ellipse points.
-   * @return {THREE.Path} path
+   *
+   * @returns {THREE.Path} path
    */
   getPath = () => {
     return new THREE.Path(
@@ -57,7 +63,8 @@ export default class Ellipse {
 
   /**
    * Instance of Ellipse curve.
-   * @return {EllipseCurve}
+   *
+   * @returns {EllipseCurve}
    */
   getEllipseCurve = () => {
     const focus = Math2.getFocus(this.semimajor, this.semiminor);
@@ -72,9 +79,10 @@ export default class Ellipse {
   /**
    * Returns the current vector position of the mesh.
    * All parameter times must be in UNIX time.
-   * @param  {Number}  time current timestamp 
-   * @param  {Object}  {lastPeriapsis: Number, nextPeriapsis: Number}
-   * @return {Vector3} current position
+   *
+   * @param {Number} time - current timestamp 
+   * @param {Object} periapses - {lastPeriapsis: Number, nextPeriapsis: Number}
+   * @returns {Vector3} current position
    */
   getPosition = (time, periapses) => {
     const percent = Physics.ellipticPercent(

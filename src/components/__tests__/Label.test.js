@@ -37,6 +37,20 @@ describe('Label Component', () => {
     });
   });
 
+  describe('getChildren()', () => {
+    const children = [];
+    
+    it('should return `children` when active', () => {
+      const result = label.getChildren(children, true);
+      expect(result).toEqual(children);
+    });
+
+    it('should return null when not active', () => {
+      const result = label.getChildren(children);
+      expect(result).toEqual(null);
+    });
+  });
+
   describe('render()', () => {
     it('should render the Label successfully', () => {
       expect(toJson(component)).toMatchSnapshot();

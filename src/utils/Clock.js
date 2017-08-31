@@ -71,7 +71,6 @@ export default class Clock {
     let updateOffset = (t) => {
       this.offset = t;
     };
-    let _self = this;
     let t = this.offset;
 
     return this.getTween(t)
@@ -79,7 +78,7 @@ export default class Clock {
       .onUpdate(() => updateOffset(t))
       .onComplete(this.clock.start)
       .start();
-  }
+  }//
 
   /**
    * Creates a new instance of Tween with the given time.

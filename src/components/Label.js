@@ -19,6 +19,13 @@ class Label extends React.Component {
     }
     return null;
   }
+
+  getChildren = (children, active) => {
+    if (active) {
+      return children;
+    }
+    return null;
+  }
   
   render() {
     return (
@@ -26,7 +33,7 @@ class Label extends React.Component {
         <span style={this.getPosition(this.props.position)}>
           {this.props.text}
         </span>
-        {this.props.active ? this.props.children : null}
+        {this.getChildren(this.props.children, this.props.active)}
       </div>
     );
   }
