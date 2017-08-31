@@ -143,8 +143,8 @@ export default class OrbitalService {
    * @param {Number} [coords.z = 0] - z coordinate
    * @returns {THREE.Euler} Eulerian vector
    */
-  static toEuler = ({x, y, z}) => { // TODO: move to math lib
-    const toRad = (val) => val ? Math2.toRadians(val) : 0;
+  static toEuler = ({x, y, z}) => {
+    const toRad = val => val ? Math2.toRadians(val) : 0;
     return new THREE.Euler(toRad(x), toRad(y), toRad(z));
   }
 }
