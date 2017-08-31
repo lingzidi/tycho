@@ -1,48 +1,95 @@
 export default class Physics {
 
+  static MAX_ECCENTRICITY = 0.8
+
+  static KM_TO_AU = 6.68459e-9;
+
+  /**
+   * Calclates the mean anomaly in degrees.
+   * Mean anomaly is the angular distance from 
+   * the focus of an orbit to the present position.
+   *
+   * @param {Number} time - time passed, in seconds
+   * @param {Number} period - period of rotation
+   * @returns {Number} calculated mean anomaly
+   */
   static meanAnomaly(t, P) {
-    // mean anomaly, in degrees (mod 1 for percentage)
-    var meanAnom = t/P % 1 * 360;
-    
-    return meanAnom;
+    return t / P % 1 * 360;
   }
-  
+
+  /**
+   * Calculates the eccentric anomaly.
+   * Eccentric anomaly is the angular distance from 
+   * the focus of an orbit to the present position.
+   *
+   * @param {Number} ecc - eccentricity of ellipse
+   * @param {Number} time - present time, in seconds
+   * @param {Number} periapses - periapses of revolution
+   * @returns {Number} calculated eccentric anomaly
+   */
   static eccentricAnomaly(ecc, time, periapses) {
-    // get eccentric anomaly as a function of time since periapsis, current time and eccentricity
-    var E, F;
-    var timePassed = (time - periapses.last);
-    var period = (periapses.next - periapses.last);
-    var m = this.meanAnomaly(timePassed, period) / 360; // mean anomaly as a fn of time
+    const timePassed = (time - periapses.last);
+    const period = (periapses.next - periapses.last);
+
+    let meanAnomaly = this.meanAnomaly(timePassed, period) / 360;
+    let E, F;
     
-    m = 2.0 * Math.PI*(m-Math.floor(m));
-    E = (ecc < 0.8 ? m : Math.PI);
-    F = E - ecc * Math.sin(m) - m;
+    meanAnomaly = 2 * Math.PI * (meanAnomaly - Math.floor(meanAnomaly));
+    E = ecc < this.MAX_ECCENTRICITY ? meanAnomaly : Math.PI;
+    F = E - ecc * Math.sin(meanAnomaly) - meanAnomaly;
     
     // numerical approximation for Kepler's second law
-    for(var i=0; i<10; i++) {
-      E = E - F / (1.0-ecc * Math.cos(E));
-      F = E - ecc * Math.sin(E) - m;
+    for(let i = 0; i < 10; i++) {
+      E = E - F / (1 - ecc * Math.cos(E));
+      F = E - ecc * Math.sin(E) - meanAnomaly;
     }
-    
     return E;
   }
   
+  /**
+   * Returns the projected orbital angle from eccentricity and eccentric anomaly.
+   *
+   * @param {Number} ecc - eccentricity
+   * @param {Number} E - eccentric anomaly, in degrees
+   * @returns {Number} projected orbital angle
+   */
   static getTheta(ecc, E) {
-    // get angle from eccentricity and eccentric anomaly
-    var min = Math.sqrt(1.0-ecc*ecc);
-    var theta = Math.atan2(min*Math.sin(E), Math.cos(E)-ecc)/(Math.PI/180);
+    const halfPi = Math.PI / 180;
+    const min = Math.sqrt(1 - Math.pow(ecc, 2));
+    const theta = Math.atan2(
+      (min * Math.sin(E)),
+      (Math.cos(E) - ecc)
+    ) / halfPi;
     
-    return (theta < 0 ? 360+theta : theta);
+    if (theta < 0) {
+      return 360 + theta;
+    }
+    return theta;
   }
 
+  /**
+   * Converts an angle theta, in degrees, to percentage.
+   *
+   * @param {Number} theta - angle in degrees
+   * @returns {Number} percentage of ellipse completed
+   */
   static thetaToPercent(theta) {
-    let percent = theta / 360;
+    const percent = theta / 360;
+
     if(percent > 1 || isNaN(percent)) {
       return 0;
     }
     return percent;
   }
 
+  /**
+   * Returns present percentage of ellipse travelled.
+   *
+   * @param {Number} ecc - eccentricity of ellipse
+   * @param {Number} time - present time, in seconds
+   * @param {Object} periapses - {next, last} period, in seconds
+   * @returns {Number} percetnage of ellipse travelled
+   */
   static ellipticPercent(ecc, time, periapses) {
     let E = this.eccentricAnomaly(ecc, time, periapses);
     let theta = this.getTheta(ecc, E);
@@ -50,12 +97,31 @@ export default class Physics {
     return this.thetaToPercent(theta);
   }
   
+  /**
+   * Calculates a mass' specific orbital energy constant.
+   * Approximation for Tsiokolsky's rocket equation.
+   *
+   * @param {Number} GM - gravitational constant
+   * @param {Number} r - orbital radius
+   * @param {Number} semimajor - size of semimajor axis
+   * @returns {Number} orbital energy constant
+   */
   static orbitalEnergyConservation(GM, r, semimajor) {
-    // approximation for Tsiolkolsky's rocket equation
-    return Math.sqrt(Math.abs(GM*((2/r)-(1/semimajor))));
+    return Math.sqrt(
+      Math.abs(
+        GM * ((2 /r) - (1 / semimajor))
+      )
+    );
   }
   
+  /**
+   * Converts given kilometers to astronomical units.
+   *
+   * @param {Number} x - kilometers
+   * @param {Number} scale - scaling factor
+   * @returns {Number} result in astronomical units
+   */
   static toAU(x, scale) {
-    return x * scale * 6.68458712e-9;
+    return x * scale * this.KM_TO_AU;
   }
 }

@@ -70,7 +70,6 @@ export default class Ellipse {
   }
 
   /**
-   * TODO: rename to get3DPosition
    * Returns the current vector position of the mesh.
    * All parameter times must be in UNIX time.
    * @param  {Number}  time current timestamp 
