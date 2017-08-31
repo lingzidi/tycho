@@ -14,7 +14,8 @@ export default class Clock {
 
   /**
    * Get time offset.
-   * @param  {Number} time UNIX timestamp
+   *
+   * @param {Number} time - UNIX timestamp
    */
   getOffset = (time) => {
     if (time) {
@@ -25,7 +26,8 @@ export default class Clock {
 
   /**
    * Current scaled timestamp.
-   * @return {Number} UNIX timestamp
+   *
+   * @returns {Number} UNIX timestamp
    */
   getTime = () => {
     let time = this.clock.getElapsedTime();
@@ -51,7 +53,8 @@ export default class Clock {
   /**
    * Sets the scale of the clock, as base 10.
    * Example: a scalar of 0 means 1:1 scale (10^0=1)
-   * @param {Number} e scalar exponent
+   *
+   * @param {Number} e - scalar exponent
    */
   speed = (e) => {
     this.scale = Math.pow(10, e);
@@ -59,25 +62,32 @@ export default class Clock {
 
   /**
    * Tweens the offset time to the given time.
-   * @param  {Number} time UNIX timestamp
-   * @return {TWEEN.Tween}
+   * @param {Number} time - UNIX timestamp
+   * @returns {Tween} - tween instance
    */
   setOffset = (time) => {
     this.clock.stop();
     
     let updateOffset = (t) => {
       this.offset = t;
-    },
-    t = this.offset;
+    };
+    let _self = this;
+    let t = this.offset;
 
-    return new TWEEN.Tween({ t })
+    return this.getTween(t)
       .to({ t: time }, 1000)
-      .onUpdate(function(arg) {
-        updateOffset(this.t);
-      })
-      .onComplete(() => {
-        this.clock.start();
-      })
+      .onUpdate(() => updateOffset(t))
+      .onComplete(this.clock.start)
       .start();
+  }
+
+  /**
+   * Creates a new instance of Tween with the given time.
+   *
+   * @param {Number} time - UNIX timestamp
+   * @returns {Tween} tween instance
+   */
+  getTween = (time) => {
+    return new TWEEN.Tween({t: time});
   }
 }

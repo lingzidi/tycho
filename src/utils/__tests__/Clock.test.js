@@ -3,7 +3,7 @@ import moment from 'moment';
 import TWEEN from 'tween.js';
 
 describe('Clock', () => {
-  describe('getOffset', () => {
+  describe('getOffset()', () => {
     it('should return the offset passed in', () => {
       const time = 1470323035;
       const clock = new Clock(time);
@@ -27,7 +27,7 @@ describe('Clock', () => {
 
   });
   
-  describe('getTime', () => {
+  describe('getTime()', () => {
     it('should return inflated time when scale is greater than 1', () => {
       let curTime;
       jest.useFakeTimers();
@@ -47,7 +47,7 @@ describe('Clock', () => {
     });
   });
 
-  describe('update', () => {
+  describe('update()', () => {
     it('should update the elapsed time when 1 sec has passed', () => {
       jest.useFakeTimers();
       jest.runAllTimers();
@@ -66,9 +66,22 @@ describe('Clock', () => {
       expect(typeof timeAfterUpdate).toBe('number');
       expect(timeAfterUpdate).toBeGreaterThanOrEqual(timeBeforeUpdate);
     });
+
+    it('should not update elapsedTime if no time has passed', () => {
+      const elapsedTime = 1470323035;
+      let clock = new Clock();
+      clock.clock.stop();
+      clock.elapsedTime = elapsedTime;
+      clock.getTime = () => elapsedTime;
+
+      clock.update();
+
+      expect(typeof clock.elapsedTime).toBe('number');
+      expect(clock.elapsedTime).toEqual(elapsedTime);
+    });
   });
   
-  describe('speed', () => {
+  describe('speed()', () => {
     it('should set `scale` to 10^<input>', () => {
       const input = 5;
       const clock = new Clock();
@@ -79,13 +92,33 @@ describe('Clock', () => {
     });
   });
 
-  describe('setOffset', () => {
-    it('should return an instance of Tween', () => {
+  describe('setOffset()', () => {
+    it('should update the offset of Clock', () => {
+      let clock = new Clock();
+      
       const offset = 1470323035;
-      const clock = new Clock();
+      const tweenMock = {
+        to: () => tweenMock,
+        onComplete: () => tweenMock,
+        start: () => tweenMock,
+        onUpdate: (cb) => {
+          cb();
+          return tweenMock
+        }
+      };
+      clock.getTween = () => tweenMock;
+      clock.offset = offset;
+
       const result = clock.setOffset(offset);
 
-      expect(result).toBeInstanceOf(TWEEN.Tween);
+      expect(clock.offset).toEqual(offset);
+    });
+  });
+
+  describe('getTween()', () => {
+    it('should return a new instance of Tween', () => {
+      const clock = new Clock();
+      expect(clock.getTween()).toBeInstanceOf(TWEEN.Tween);
     });
   });
 });
