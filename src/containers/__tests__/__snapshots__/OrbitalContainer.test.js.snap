@@ -389,13 +389,13 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
         "z": 0,
       },
       Vector3 {
-        "x": 115.23525069447219,
+        "x": 115.2352506944722,
         "y": -91.8222570444326,
         "z": 0,
       },
       Vector3 {
         "x": 116.42408397044939,
-        "y": -90.36627275215834,
+        "y": -90.36627275215832,
         "z": 0,
       },
       Vector3 {
@@ -479,7 +479,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
         "z": 0,
       },
       Vector3 {
-        "x": 133.67977975577426,
+        "x": 133.67977975577423,
         "y": -63.54208604700288,
         "z": 0,
       },
@@ -504,7 +504,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
         "z": 0,
       },
       Vector3 {
-        "x": 137.62663863663238,
+        "x": 137.62663863663235,
         "y": -55.01355661838567,
         "z": 0,
       },
@@ -990,7 +990,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": 102.37845761052314,
-        "y": 112.58770232745324,
+        "y": 112.58770232745326,
         "z": 0,
       },
       Vector3 {
@@ -1010,7 +1010,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": 96.77141391650922,
-        "y": 117.59533710143918,
+        "y": 117.59533710143917,
         "z": 0,
       },
       Vector3 {
@@ -1020,12 +1020,12 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": 93.8753124041195,
-        "y": 119.99186991013747,
+        "y": 119.99186991013748,
         "z": 0,
       },
       Vector3 {
         "x": 92.40491072153114,
-        "y": 121.16264543370792,
+        "y": 121.16264543370791,
         "z": 0,
       },
       Vector3 {
@@ -1035,7 +1035,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": 89.42056643425705,
-        "y": 123.44829035334969,
+        "y": 123.44829035334966,
         "z": 0,
       },
       Vector3 {
@@ -1055,7 +1055,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": 83.28435867043017,
-        "y": 127.79096545507811,
+        "y": 127.7909654550781,
         "z": 0,
       },
       Vector3 {
@@ -1150,7 +1150,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": 51.543583480819954,
-        "y": 143.9682159884943,
+        "y": 143.96821598849428,
         "z": 0,
       },
       Vector3 {
@@ -1619,7 +1619,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
         "z": 0,
       },
       Vector3 {
-        "x": -110.2998679984547,
+        "x": -110.29986799845472,
         "y": 104.56387703280515,
         "z": 0,
       },
@@ -1639,7 +1639,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
         "z": 0,
       },
       Vector3 {
-        "x": -115.23525069447221,
+        "x": -115.2352506944722,
         "y": 98.89278372773897,
         "z": 0,
       },
@@ -1649,7 +1649,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
         "z": 0,
       },
       Vector3 {
-        "x": -117.59453253393684,
+        "x": -117.59453253393686,
         "y": 95.96598700210009,
         "z": 0,
       },
@@ -1664,7 +1664,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
         "z": 0,
       },
       Vector3 {
-        "x": -120.99373636594791,
+        "x": -120.9937363659479,
         "y": 91.46691492605346,
         "z": 0,
       },
@@ -1724,7 +1724,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
         "z": 0,
       },
       Vector3 {
-        "x": -132.82656370866323,
+        "x": -132.82656370866326,
         "y": 72.28761128125012,
         "z": 0,
       },
@@ -2230,7 +2230,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": -105.08585826317216,
-        "y": -102.90923660831317,
+        "y": -102.90923660831318,
         "z": 0,
       },
       Vector3 {
@@ -2250,7 +2250,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": -99.60639252972891,
-        "y": -108.05623482215255,
+        "y": -108.05623482215256,
         "z": 0,
       },
       Vector3 {
@@ -2265,7 +2265,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": -95.33089008664204,
-        "y": -111.7321778550757,
+        "y": -111.73217785507572,
         "z": 0,
       },
       Vector3 {
@@ -2320,7 +2320,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": -78.54327061783773,
-        "y": -123.77203125542893,
+        "y": -123.7720312554289,
         "z": 0,
       },
       Vector3 {
@@ -2335,12 +2335,12 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": -73.69056827990227,
-        "y": -126.64271310735849,
+        "y": -126.64271310735846,
         "z": 0,
       },
       Vector3 {
         "x": -72.04938517098071,
-        "y": -127.55869209559224,
+        "y": -127.5586920955922,
         "z": 0,
       },
       Vector3 {
@@ -2360,7 +2360,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": -65.37349672416215,
-        "y": -131.0141982269435,
+        "y": -131.01419822694348,
         "z": 0,
       },
       Vector3 {
@@ -2370,7 +2370,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
       Vector3 {
         "x": -61.97255453443725,
-        "y": -132.61500719853916,
+        "y": -132.61500719853913,
         "z": 0,
       },
       Vector3 {
