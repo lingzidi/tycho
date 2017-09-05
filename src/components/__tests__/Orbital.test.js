@@ -4,16 +4,16 @@ import {shallow} from 'enzyme';
 import {Orbital} from '../Orbital';
 
 describe('Orbital Component', () => {
-  let component, orbital, updateScreenPosition;
+  let component, orbital, updatePosition;
 
   beforeEach(() => {
     const position = {};
     const rotation = {};
 
-    updateScreenPosition = jest.fn();
+    updatePosition = jest.fn();
 
     component = shallow(<Orbital
-      updateScreenPosition={updateScreenPosition}
+      updatePosition={updatePosition}
       eclipticGroupRotation={rotation}
       orbitalGroupRotation={rotation}
       pathVertices={[]}
@@ -26,12 +26,12 @@ describe('Orbital Component', () => {
     orbital = component.instance();
   });
 
-  describe('updateScreenPositions()', () => {
-    it('should call the updateScreenPosition callback prop', () => {
+  describe('onAnimationFrame()', () => {
+    it('should call the updatePosition callback prop', () => {
       orbital.onAnimationFrame();
 
-      expect(updateScreenPosition).toHaveBeenCalled();
-      expect(updateScreenPosition).toHaveBeenCalledTimes(1);
+      expect(updatePosition).toHaveBeenCalled();
+      expect(updatePosition).toHaveBeenCalledTimes(1);
     });
   });
 

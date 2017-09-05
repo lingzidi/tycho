@@ -15,64 +15,11 @@ describe('Scene Component', () => {
   beforeEach(() => {
     component = shallow(<Scene
       orbitalData={data}
-      onAnimate={() => {}}
-      updateScreenPositions={() => {}}
+      updatePosition={() => {}}
       time={1}
-      width={500}
-      height={300}
     />);
 
     scene = component.instance();
-  });
-
-  describe('componentDidMount()', () => {
-    it('should initialize a new instance of controls', () => {
-      scene.refs = {camera: new Camera()};
-      scene.componentDidMount();
-
-      expect(scene).toHaveProperty('controls');
-      expect(scene.controls).toBeInstanceOf(Controls);
-    });
-  });
-
-  describe('componentWillUnmount()', () => {
-    beforeEach(() => {
-      const camera = new Camera();
-      scene.controls = new Controls(camera);
-    });
-
-    it('should dispose of the controls', () => {
-      const spy = jest.spyOn(scene.controls, 'dispose');
-
-      scene.componentWillUnmount();
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-    });
-
-    it('should no longer have controls assigned to the class instance', () => {
-      scene.componentWillUnmount();
-
-      expect(scene).not.toHaveProperty('controls');
-    });
-  });
-
-  describe('getCamera()', () => {
-    let camera;
-
-    beforeEach(() => {
-      camera = scene.getCamera(100, 200);
-    });
-
-    it('should return an instance of camera', () => {
-      expect(camera).toBeDefined();
-      expect(typeof camera).toBe('object');
-    });
-
-    it('should render a camera with fixed constant props', () => {
-      const cameraJson = toJson(shallow(camera));
-      expect(cameraJson).toMatchSnapshot();
-    });
   });
 
   describe('getCameraPosition()', () => {

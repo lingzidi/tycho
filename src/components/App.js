@@ -1,7 +1,7 @@
 import React from 'react';
 import data from '../global/fixtures';
 import Clock from '../utils/Clock';
-import Scene from './Scene';
+import SceneContainer from '../containers/SceneContainer';
 import LabelGroup from './LabelGroup';
 
 export default class App extends React.Component {
@@ -12,7 +12,7 @@ export default class App extends React.Component {
       positions: {},
       time: this.clock.getTime()
     };
-    this.clock.speed(4); // temporary
+    this.clock.speed(5); // temporary
   }
 
   onAnimate = () => {
@@ -21,7 +21,7 @@ export default class App extends React.Component {
     });
   }
 
-  updateScreenPositions = (position, id) => {
+  updateScreenPosition = (position, id) => {
     this.setState({
       positions: Object.assign(this.state.positions, {
         [id]: position
@@ -32,13 +32,16 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Scene
+        <SceneContainer
           onAnimate={this.onAnimate}
-          updateScreenPositions={this.updateScreenPositions}
+          updateScreenPosition={this.updateScreenPosition}
           time={this.state.time}
           orbitalData={data}
           width={window.innerWidth}
           height={window.innerHeight}
+          perspective={false}
+          targetName="dummyOuter"
+          lookAtName="dummyParent"
         />
         <LabelGroup
           positions={this.state.positions}

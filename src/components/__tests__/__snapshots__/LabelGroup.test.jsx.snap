@@ -3,6 +3,9 @@
 exports[`Label Component should render the LabelGroup successfully 1`] = `
 <div>
   <Label
+    text="Dummy Outer"
+  />
+  <Label
     text="Dummy Planet"
   >
     <Label

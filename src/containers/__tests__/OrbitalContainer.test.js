@@ -14,7 +14,7 @@ describe('Orbital Container', () => {
     component = shallow(
       <OrbitalContainer {...data[0]}
         time={1}
-        onUpdate={() => {}}
+        updatePosition={() => {}}
       />);
 
     orbitalContainer = component.instance();
@@ -84,23 +84,26 @@ describe('Orbital Container', () => {
     });
   });
 
-  describe('updateScreenPositions()', () => {
+  describe('updatePosition()', () => {
     it('should call the onUpdate callback prop', () => {
-      const onUpdate = jest.fn();
+      const updatePosition = jest.fn();
 
       component = shallow(
         <OrbitalContainer {...data[0]}
           time={1}
-          onUpdate={onUpdate}
+          updatePosition={updatePosition}
         />);
 
       orbitalContainer = component.instance();
       const props = component.props();
 
-      orbitalContainer.updateScreenPosition();
+      orbitalContainer.updatePosition();
 
-      expect(onUpdate).toHaveBeenCalled();
-      expect(onUpdate).toHaveBeenCalledWith(null, props.id);
+      expect(updatePosition).toHaveBeenCalled();
+      expect(updatePosition).toHaveBeenCalledWith({
+        position2d: null,
+        position3d: null
+      }, props.id);
     });
   });
 

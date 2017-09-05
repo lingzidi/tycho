@@ -15,11 +15,11 @@ export class OrbitalContainer extends React.Component {
     radius: PropTypes.number.isRequired,
     axialTilt: PropTypes.number.isRequired,
     time: PropTypes.number.isRequired,
-    onUpdate: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,
     odd: PropTypes.bool,
     active: PropTypes.bool,
-    camera: PropTypes.object
+    camera: PropTypes.object,
+    updatePosition: PropTypes.func.isRequired
   }
 
   componentWillMount = () => {
@@ -50,11 +50,11 @@ export class OrbitalContainer extends React.Component {
     });
   }
 
-  updateScreenPosition = (mesh) => {
-    const coords = Service.getWorldPosition(mesh);
-    const screen = Service.translateWorldToScreen(coords, this.props.camera);
+  updatePosition = (mesh) => {
+    const position3d = Service.getWorldPosition(mesh);
+    const position2d = Service.translateWorldToScreen(position3d, this.props.camera);
 
-    this.props.onUpdate(screen, this.props.id);
+    this.props.updatePosition({position2d, position3d}, this.props.id);
   }
 
   onAnimationFrame = () => {
@@ -65,7 +65,6 @@ export class OrbitalContainer extends React.Component {
   render() {
     return (
       <Orbital
-        updateScreenPosition={this.updateScreenPosition}
         eclipticGroupRotation={this.state.eclipticGroupRotation}
         orbitalGroupRotation={this.state.orbitalGroupRotation}
         pathVertices={this.ellipse.geometry.vertices}
@@ -73,6 +72,7 @@ export class OrbitalContainer extends React.Component {
         bodyRotation={this.state.bodyRotation}
         bodyRadius={this.state.bodyRadius}
         pathOpacity={this.state.pathOpacity}
+        updatePosition={this.updatePosition}
         id={this.props.id}>
         {this.props.children}
       </Orbital>

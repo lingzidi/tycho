@@ -6,7 +6,7 @@ import ReactAnimationFrame from 'react-animation-frame';
 export class Orbital extends React.Component {
 
   static propTypes = {
-    updateScreenPosition: PropTypes.func.isRequired,
+    updatePosition: PropTypes.func.isRequired,
     eclipticGroupRotation: PropTypes.object.isRequired,
     orbitalGroupRotation: PropTypes.object.isRequired,
     pathVertices: PropTypes.array.isRequired,
@@ -18,7 +18,7 @@ export class Orbital extends React.Component {
   }
 
   onAnimationFrame = () => {
-    this.props.updateScreenPosition(this.refs.body);
+    this.props.updatePosition(this.refs.body);
   }
 
   render() {
