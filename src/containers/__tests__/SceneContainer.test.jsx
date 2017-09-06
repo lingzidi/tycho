@@ -240,6 +240,16 @@ describe('Scene Container', () => {
     });
   });
 
+  describe('setDomElement()', () => {
+    it('should set `domElement` to the value of the param passed', () => {
+      const elem = <canvas />;
+      sceneContainer.setDomElement(elem);
+
+      expect(sceneContainer).toHaveProperty('domElement');
+      expect(sceneContainer.domElement).toEqual(elem);
+    });
+  });
+
   describe('render()', () => {
     it('should render the scene container successfully', () => {
       expect(toJson(component)).toMatchSnapshot();

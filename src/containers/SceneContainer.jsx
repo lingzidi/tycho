@@ -19,7 +19,7 @@ export default class SceneContainer extends React.Component {
   }
 
   componentDidMount = () => {
-    this.controls = new Controls(this.refs.camera);
+    this.controls = new Controls(this.refs.camera, this.domElement);
     this.state = {positions: {}};
   }
 
@@ -69,6 +69,10 @@ export default class SceneContainer extends React.Component {
     }
   }
 
+  setDomElement = (domElement) => {
+    this.domElement = domElement;
+  }
+
   render() {
     const {width, height} = this.props;
 
@@ -79,7 +83,8 @@ export default class SceneContainer extends React.Component {
         width={width}
         height={height}
         antialias={true}
-        alpha={true}>
+        alpha={true}
+        canvasRef={this.setDomElement}>
         <scene>
           <group position={this.getTargetPosition()}>
             <perspectiveCamera

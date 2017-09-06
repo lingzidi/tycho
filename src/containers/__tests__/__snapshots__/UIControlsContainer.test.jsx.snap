@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UIControls Container render() should successfully render the ui controls container 1`] = `
+<div>
+  <div
+    className="uicontrol uicontrol--scales"
+  >
+    <ScaleSlider
+      label="Time speed:"
+    />
+    <ScaleSlider
+      label="Planet scale:"
+    />
+  </div>
+  <div
+    className="uicontrol uicontrol--datetime"
+  />
+  <div
+    className="uicontrol uicontrol--left-bar"
+  >
+    <div
+      className="uicontrol__button"
+    />
+    <ZoomSlider />
+    <div
+      className="uicontrol__button"
+    />
+  </div>
+</div>
+`;

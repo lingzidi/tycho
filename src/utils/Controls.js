@@ -3,8 +3,8 @@ import OrbitControls from 'three-orbit-controls';
 
 export default class Controls extends OrbitControls(THREE) {
 
-  constructor(camera) {
-    super(camera);
+  constructor(camera, domElement) {
+    super(camera, domElement);
     this.camera = camera;
     this.level = 0;
     this.enabled = true;

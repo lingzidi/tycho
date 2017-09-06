@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Zoom Slider Component render() should successfully render the slider 1`] = `
+<div
+  className="slider slider--vertical"
+>
+  <Slider
+    onChange={[Function]}
+    orientation="vertical"
+    step={10}
+    value={40}
+  />
+</div>
+`;

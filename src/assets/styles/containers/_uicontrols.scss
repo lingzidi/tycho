@@ -1,0 +1,34 @@
+.uicontrol {
+  position: absolute;
+  opacity: 0.5;
+  transition: opacity 0.5s;
+  
+  &:hover {
+    opacity: 1;
+  }
+  
+  &__button {
+    background-color: #000;
+    width: 32px;
+    height: 32px;
+    display: block;
+    margin: 1em;
+  }
+  
+  &--scales {
+    min-width: 200px;
+    padding: 0 1.25em 1.5em;
+    bottom: 0;
+    right: 0;
+    color: #fff;
+  }
+  
+  &--left-bar {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

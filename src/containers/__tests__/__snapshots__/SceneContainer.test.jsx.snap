@@ -4,6 +4,7 @@ exports[`Scene Container render() should render the scene container successfully
 <React3
   alpha={true}
   antialias={true}
+  canvasRef={[Function]}
   context="3d"
   height={300}
   mainCamera="camera"

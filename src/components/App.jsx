@@ -3,6 +3,7 @@ import data from '../global/fixtures';
 import Clock from '../utils/Clock';
 import SceneContainer from '../containers/SceneContainer';
 import LabelGroup from './LabelGroup';
+import UIControlsContainer from '../containers/UIControlsContainer';
 
 export default class App extends React.Component {
 
@@ -47,6 +48,7 @@ export default class App extends React.Component {
           positions={this.state.positions}
           orbitalData={data}
         />
+        <UIControlsContainer />
       </div>
     );
   }
