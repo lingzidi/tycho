@@ -13,7 +13,7 @@ export default class App extends React.Component {
       positions: {},
       time: this.clock.getTime()
     };
-    this.clock.speed(5); // temporary
+    this.clock.speed(1); // temporary
   }
 
   onAnimate = () => {
