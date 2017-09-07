@@ -98,9 +98,9 @@ exports[`Scene Component render() should render the scene 1`] = `
       eccentricity={0.01671123}
       id="dummyChild"
       inclination={1.57869}
+      isSatellite={true}
       longAscNode={348.73936}
       name="Dummy Satellite"
-      odd={true}
       periapses={
         Object {
           "last": 1166430000,

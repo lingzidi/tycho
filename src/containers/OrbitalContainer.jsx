@@ -16,7 +16,7 @@ export class OrbitalContainer extends React.Component {
     axialTilt: PropTypes.number.isRequired,
     time: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
-    odd: PropTypes.bool,
+    isSatellite: PropTypes.bool,
     active: PropTypes.bool,
     camera: PropTypes.object,
     updatePosition: PropTypes.func.isRequired
@@ -30,14 +30,16 @@ export class OrbitalContainer extends React.Component {
     this.onAnimationFrame();
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    if (this.props.scale !== nextProps.scale) {
-      this.setEllipseScale(nextProps.scale);
+  componentDidUpdate = () => {
+    const {scale} = this.props;
+
+    if (scale) {
+      this.setEllipseScale(scale);
     }
   }
 
   setEllipseScale = (scale) => {
-    if (this.props.odd) {
+    if (this.props.isSatellite) {
       this.ellipse.scale({...this.props, scale});
     }
     this.ellipse.scale(this.props);

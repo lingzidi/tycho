@@ -8,11 +8,11 @@ export default class OrbitalService {
    * Calculates inclination at a right angle if parity matches.
    *
    * @param {Number} inclination - angle of inclination, in degrees
-   * @param {Boolean} [odd = false] - parity
+   * @param {Boolean} [isSatellite = false] - parity
    * @returns {Number} calculated inclination
    */
-  static getInclination = (inclination, odd = false) => {
-    if (odd) {
+  static getInclination = (inclination, isSatellite = false) => {
+    if (isSatellite) {
       return inclination;
     }
     return inclination - 90;
@@ -24,12 +24,12 @@ export default class OrbitalService {
    * @param {Object} props - OrbitalContainer props
    * @param {Number} props.inclination - angle of inclination, in degrees
    * @param {Number} props.longitudeOfAscendingNode - longitude of ascending node, in degrees
-   * @param {Boolean} props.odd - orbital parity
+   * @param {Boolean} props.isSatellite - orbital parity
    * @returns {THREE.Euler} Eulerian vector
    */
-  static getEclipticGroupRotation = ({inclination, longitudeOfAscendingNode, odd}) => {
+  static getEclipticGroupRotation = ({inclination, longitudeOfAscendingNode, isSatellite}) => {
     return OrbitalService.toEuler({
-      x: OrbitalService.getInclination(inclination, odd),
+      x: OrbitalService.getInclination(inclination, isSatellite),
       z: longitudeOfAscendingNode
     });
   }

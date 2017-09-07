@@ -38,7 +38,7 @@ describe('Orbital Service', () => {
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(param.inclination, param.odd);
+      expect(spy).toHaveBeenCalledWith(param.inclination, param.isSatellite);
     });
 
     it('should not set a y-dimensional Eulerian rotation', () => {

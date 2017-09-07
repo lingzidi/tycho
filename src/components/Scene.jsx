@@ -12,7 +12,7 @@ export default class Scene extends React.Component {
     scale: PropTypes.number
   }
 
-  getOrbitalElements = (orbitals, odd) => {
+  getOrbitalElements = (orbitals, isSatellite) => {
     return orbitals.map((orbital) => (
       <OrbitalContainer
         {...orbital}
@@ -20,9 +20,9 @@ export default class Scene extends React.Component {
         time={this.props.time}
         camera={this.props.camera}
         updatePosition={this.props.updatePosition}
-        odd={odd}
+        isSatellite={isSatellite}
         key={orbital.id}>
-        {(orbital.satellites ? this.getOrbitalElements(orbital.satellites, !odd) : null)}
+        {(orbital.satellites ? this.getOrbitalElements(orbital.satellites, !isSatellite) : null)}
       </OrbitalContainer>
     ));
   }

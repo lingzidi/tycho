@@ -49,26 +49,23 @@ describe('Orbital Container', () => {
     });
   });
 
-  describe('componentWillReceiveProps()', () => {
-    it('should call setEllipseScale if the `scale` prop has changed', () => {
+  describe('componentDidUpdate()', () => {
+    it('should call setEllipseScale if the `scale` prop is defined', () => {
       const scale = 5;
-      const nextProps = {scale};
       const spy = jest.spyOn(orbitalContainer, 'setEllipseScale');
 
-      orbitalContainer.props = {scale: 4};
-      orbitalContainer.componentWillReceiveProps(nextProps);
+      orbitalContainer.props = {scale};
+      orbitalContainer.componentDidUpdate();
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(scale);
     });
 
-    it('should not call setEllipseScale if the `scale` prop remains the same', () => {
-      const scale = 5;
-      const nextProps = {scale};
+    it('should not call setEllipseScale if the `scale` prop is undefined', () => {
       const spy = jest.spyOn(orbitalContainer, 'setEllipseScale');
 
-      orbitalContainer.props = {scale};
-      orbitalContainer.componentWillReceiveProps(nextProps);
+      orbitalContainer.props = {};
+      orbitalContainer.componentDidUpdate();
 
       expect(spy).not.toHaveBeenCalled();
     });
@@ -77,7 +74,7 @@ describe('Orbital Container', () => {
   describe('setEllipseScale()', () => {
     it('should set the ellipse scale with the given scaling factor if the orbital is a satellite', () => {
       const scale = 5;
-      const props = {odd: true};
+      const props = {isSatellite: true};
       const spy = jest.spyOn(orbitalContainer.ellipse, 'scale');
 
       orbitalContainer.props = props;
