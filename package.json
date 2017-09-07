@@ -23,9 +23,8 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "coverage": "rm -rf coverage && react-scripts test --env=jsdom --coverage"
+    "test": "npm run build-css && react-scripts test --env=jsdom",
+    "coverage": "rimraf coverage && npm run build-css && react-scripts test --env=jsdom --coverage"
   },
   "devDependencies": {
     "codecov": "^2.3.0",
@@ -34,6 +33,7 @@
     "node-sass-chokidar": "^0.0.3",
     "react-redux": "^5.0.6",
     "react-test-renderer": "^15.6.1",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "rimraf": "^2.6.1"
   }
 }
