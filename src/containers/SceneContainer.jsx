@@ -119,7 +119,8 @@ export class SceneContainer extends React.Component {
               time={this.props.time}
               camera={this.refs.camera}
               updatePosition={this.updatePosition}
-              orbitalData={this.props.orbitalData}>
+              orbitalData={this.props.orbitalData}
+              scale={this.props.scale}>
               {this.props.children}
             </Scene>
           </scene>
@@ -130,6 +131,6 @@ export class SceneContainer extends React.Component {
 }
 
 export default connect(
-  ReduxService.mapStateToProps('uiControls', 'zoom'),
+  ReduxService.mapStateToProps('uiControls', 'zoom', 'scale'),
   ReduxService.mapDispatchToProps(Actions)
 )(SceneContainer);

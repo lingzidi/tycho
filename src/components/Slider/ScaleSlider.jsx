@@ -7,15 +7,16 @@ export default class ScaleSlider extends React.Component {
       <div>
         <div className="slider slider--horizontal">
           <span className="slider__label">
-            <span>{this.props.label}: &times; 10</span>
-            <sup>{this.props.value}</sup>
+            {this.props.label}
+            {this.props.value || this.props.min}
           </span>
           <Slider
             orientation="horizontal"
             value={this.props.value}
             onChange={this.props.onChange}
-            min={0}
-            max={10}
+            defaultValue={this.props.min}
+            min={this.props.min}
+            max={this.props.max}
           />
         </div>
       </div>

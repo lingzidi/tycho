@@ -25,4 +25,15 @@ describe('UIControls Actions', () => {
     });
   });
 
+  describe('changeScale()', () => {
+    it('should be of type SCALE_CHANGE with the speed payload', () => {
+      const scale = 5;
+      const result = Actions.changeScale(scale);
+      
+      expect(result).toHaveProperty('type');
+      expect(result).toHaveProperty('scale');
+      expect(result.type).toEqual('SCALE_CHANGE');
+      expect(result.scale).toEqual(scale);
+    });
+  });
 });

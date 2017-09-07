@@ -8,13 +8,15 @@ export default class Scene extends React.Component {
     orbitalData: PropTypes.array.isRequired,
     updatePosition: PropTypes.func.isRequired,
     time: PropTypes.number,
-    camera: PropTypes.object
+    camera: PropTypes.object,
+    scale: PropTypes.number
   }
 
   getOrbitalElements = (orbitals, odd) => {
     return orbitals.map((orbital) => (
       <OrbitalContainer
         {...orbital}
+        scale={this.props.scale}
         time={this.props.time}
         camera={this.props.camera}
         updatePosition={this.props.updatePosition}

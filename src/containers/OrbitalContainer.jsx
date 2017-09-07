@@ -24,9 +24,23 @@ export class OrbitalContainer extends React.Component {
 
   componentWillMount = () => {
     this.state = {};
-    this.ellipse = new Ellipse(this.props);
+    this.ellipse = new Ellipse();
+    this.setEllipseScale();
     this.setGroupRotations(this.props);
     this.onAnimationFrame();
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.scale !== nextProps.scale) {
+      this.setEllipseScale(nextProps.scale);
+    }
+  }
+
+  setEllipseScale = (scale) => {
+    if (this.props.odd) {
+      this.ellipse.scale({...this.props, scale});
+    }
+    this.ellipse.scale(this.props);
   }
 
   setPathOpacity = (active) => {

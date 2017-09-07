@@ -8,8 +8,9 @@ export default function(state = {}, payload) {
       return assign('zoom');
     case 'SPEED_CHANGE':
       return assign('speed');
+    case 'SCALE_CHANGE':
+      return assign('scale');
     default:
       return state;
   }
 }
-

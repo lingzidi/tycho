@@ -11,3 +11,10 @@ export const changeSpeed = (speed) => {
     speed
   };
 }
+
+export const changeScale = (scale) => {
+  return {
+    type: 'SCALE_CHANGE',
+    scale
+  };
+}

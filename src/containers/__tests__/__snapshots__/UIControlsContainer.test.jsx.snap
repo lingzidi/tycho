@@ -6,11 +6,15 @@ exports[`UIControls Container render() should successfully render the ui control
     className="uicontrol uicontrol--scales"
   >
     <ScaleSlider
-      label="Time speed:"
+      label="Time speed: × 10^"
+      max={10}
+      min={0}
       onChange={[Function]}
     />
     <ScaleSlider
-      label="Planet scale:"
+      label="Planet scale: × "
+      max={10}
+      min={1}
     />
   </div>
   <div

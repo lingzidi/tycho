@@ -9,29 +9,11 @@ describe('Ellipse', () => {
   beforeEach(() => {
     mockData = data[0];
     ellipse = new Ellipse(mockData);
-  });
-
-  describe('setData()', () => {
-    
-    beforeEach(() => ellipse.setData(mockData));
-
-    it('should set the semimajor and semiminor axes', () => {
-      expect(ellipse).toHaveProperty('semimajor');
-      expect(ellipse).toHaveProperty('semimajor');
-      expect(typeof ellipse.semimajor).toBe('number');
-      expect(typeof ellipse.semiminor).toBe('number');
-    });
-
-    it('should set the eccentricity', () => {
-      expect(ellipse).toHaveProperty('eccentricity');
-      expect(typeof ellipse.eccentricity).toBe('number');
-    });
+    ellipse.scale(mockData);
+    ellipse.render();
   });
 
   describe('render()', () => {
-    
-    beforeEach(() => ellipse.render());
-
     it('should set the ellipse property to a new instance of EllipseCurve', () => {
       expect(ellipse).toHaveProperty('ellipse');
       expect(ellipse.ellipse).toBeInstanceOf(EllipseCurve);
@@ -90,6 +72,20 @@ describe('Ellipse', () => {
     it('should return an instance of Vector3', () => {
       const result = ellipse.getPosition(0, {});
       expect(result).toBeInstanceOf(Vector3);
+    });
+  });
+
+  describe('scale()', () => {
+    it('should set the semimajor and semiminor axes', () => {
+      expect(ellipse).toHaveProperty('semimajor');
+      expect(ellipse).toHaveProperty('semimajor');
+      expect(typeof ellipse.semimajor).toBe('number');
+      expect(typeof ellipse.semiminor).toBe('number');
+    });
+
+    it('should set the eccentricity', () => {
+      expect(ellipse).toHaveProperty('eccentricity');
+      expect(typeof ellipse.eccentricity).toBe('number');
     });
   });
 });

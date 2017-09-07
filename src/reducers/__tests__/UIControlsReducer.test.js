@@ -28,4 +28,14 @@ describe('UIControls Reducer', () => {
 
     expect(result).toEqual({speed});
   });
+
+  it('should handle SCALE_CHANGE', () => {
+    const scale = 5;
+    const result = reducer(undefined, {
+      type: 'SCALE_CHANGE',
+      scale
+    });
+
+    expect(result).toEqual({scale});
+  });
 });

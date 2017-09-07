@@ -81,10 +81,11 @@ export default class OrbitalService {
    *
    * @param {Object} props - OrbitalContainer props
    * @param {Number} props.radius - body radius, in kilometers
+   * @param {Number} props.scale=1 - scalar multiple
    * @returns {Number} scaled body radius
    */
-  static getBodyRadius = ({radius}) => {
-    return Scale(radius);
+  static getBodyRadius = ({radius, scale}) => {
+    return Scale(radius, scale);
   }
 
   /**

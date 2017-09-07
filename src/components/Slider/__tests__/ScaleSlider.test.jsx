@@ -6,17 +6,30 @@ import ScaleSlider from '../ScaleSlider';
 describe('Scale Slider Component', () => {
   let component;
 
-  beforeEach(() => {
-    component = shallow(<ScaleSlider
-      value={40}
-      label="Test Slider"
-      onChange={jest.fn()}
-    />);
-  });
+  beforeEach(() => {  });
 
   describe('render()', () => {
-    it('should successfully render the slider', () => {
-      expect(toJson(component)).toMatchSnapshot();
+    describe('when the value is set', () => {
+      it('should successfully render the slider', () => {
+        const component = shallow(<ScaleSlider
+          value={40}
+          label="Test Slider"
+          onChange={jest.fn()}
+        />);
+
+        expect(toJson(component)).toMatchSnapshot();
+      });
+    });
+      
+    describe('when the value is undefined', () => {
+      it('should successfully render the slider', () => {
+        const component = shallow(<ScaleSlider
+          label="Test Slider"
+          onChange={jest.fn()}
+        />);
+
+        expect(toJson(component)).toMatchSnapshot();
+      });
     });
   });
 });

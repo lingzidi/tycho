@@ -32,7 +32,7 @@ export class Orbital extends React.Component {
           />
           {this.props.children}
         </group>
-        <line>
+        <line key={'rnd' + Math.random()}>
           <lineBasicMaterial color={0x0000ff} opacity={this.props.pathOpacity} />
           <geometry vertices={this.props.pathVertices} />
         </line>

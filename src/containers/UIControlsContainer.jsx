@@ -12,12 +12,17 @@ export class UIControlsContainer extends React.Component {
         <div className="uicontrol uicontrol--scales">
           <ScaleSlider
             value={this.props.speed}
-            label="Time speed:"
+            label="Time speed: &times; 10^"
             onChange={this.props.action.changeSpeed}
+            min={0}
+            max={10}
           />
           <ScaleSlider
             value={this.props.scale}
-            label="Planet scale:"
+            label="Planet scale: &times; "
+            onChange={this.props.action.changeScale}
+            min={1}
+            max={10}
           />
         </div>
 
@@ -38,6 +43,6 @@ export class UIControlsContainer extends React.Component {
 }
 
 export default connect(
-  ReduxService.mapStateToProps('uiControls', 'speed', 'zoom'),
+  ReduxService.mapStateToProps('uiControls', 'speed', 'zoom', 'scale'),
   ReduxService.mapDispatchToProps(Actions)
 )(UIControlsContainer);

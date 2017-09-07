@@ -7,27 +7,6 @@ import Scale from '../utils/Scale';
 export default class Ellipse {
 
   /**
-   * Constructor.
-   *
-   * @param {Object} data
-   */
-  constructor(data) {
-    this.setData(data);
-    this.render();
-  }
-
-  /**
-   * Set global data, with appropriate scales.
-   *
-   * @param {Object} data
-   */
-  setData = ({semimajor, semiminor, eccentricity}) => {
-    this.semimajor = Scale(semimajor);
-    this.semiminor = Scale(semiminor);
-    this.eccentricity = eccentricity;
-  }
-
-  /**
    * Renders the ellipse prop.
    *
    * @returns {Object3D} ellipse
@@ -91,5 +70,22 @@ export default class Ellipse {
     const vector2d = this.path.getPoint(percent);
 
     return new THREE.Vector3(vector2d.x, vector2d.y);
+  }
+
+  /**
+   * Updates the ellipse path semimajor and semiminor scales.
+   *
+   * @note Triggers render.
+   * @param {Object} props - orbital data
+   * @param {Number} props.semimajor - semimajor axis, in km
+   * @param {Number} props.semiminor - semiminor axis, in km
+   * @param {Number} props.eccentricity - orbital path eccentricity
+   * @param {Number} props.scale - scaling factor
+   */
+  scale = ({semimajor, semiminor, eccentricity, scale}) => {
+    this.semimajor = Scale(semimajor, scale);
+    this.semiminor = Scale(semiminor, scale);
+    this.eccentricity = eccentricity;
+    this.render();
   }
 }
