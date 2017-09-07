@@ -7,7 +7,9 @@ export default class ZoomSlider extends React.Component {
       <div className="slider slider--vertical">
         <Slider
           orientation="vertical"
-          step={10}
+          step={1}
+          min={1}
+          max={300}
           value={this.props.value}
           onChange={this.props.onChange}
         />

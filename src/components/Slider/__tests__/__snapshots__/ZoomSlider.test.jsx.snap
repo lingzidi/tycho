@@ -5,9 +5,11 @@ exports[`Zoom Slider Component render() should successfully render the slider 1`
   className="slider slider--vertical"
 >
   <Slider
+    max={300}
+    min={1}
     onChange={[Function]}
     orientation="vertical"
-    step={10}
+    step={1}
     value={40}
   />
 </div>

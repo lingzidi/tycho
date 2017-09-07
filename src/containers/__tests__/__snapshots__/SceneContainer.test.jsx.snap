@@ -1,116 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Scene Container render() should render the scene container successfully 1`] = `
-<React3
-  alpha={true}
-  antialias={true}
-  canvasRef={[Function]}
-  context="3d"
-  height={300}
-  mainCamera="camera"
-  onAnimate={[Function]}
-  width={500}
+<div
+  onWheel={[Function]}
 >
-  <scene>
-    <group
-      position={
-        Vector3 {
-          "x": 0,
-          "y": 0,
-          "z": 0,
-        }
-      }
-    >
-      <perspectiveCamera
-        aspect={1.6666666666666667}
-        far={10000}
-        fov={50}
-        name="camera"
-        near={1}
+  <React3
+    alpha={true}
+    antialias={true}
+    canvasRef={[Function]}
+    context="3d"
+    height={300}
+    mainCamera="camera"
+    onAnimate={[Function]}
+    width={500}
+  >
+    <scene>
+      <group
         position={
           Vector3 {
-            "x": 300,
-            "y": 300,
-            "z": 300,
+            "x": 0,
+            "y": 0,
+            "z": 0,
           }
         }
-      />
-    </group>
-    <Scene
-      orbitalData={
-        Array [
-          Object {
-            "GM": 6836529,
-            "arcRotate": 45.0411,
-            "argPeriapsis": 114.20763,
-            "atmosphereColor": 8421504,
-            "axialTilt": 23.26,
-            "eccentricity": 0.01671123,
-            "id": "dummyOuter",
-            "inclination": 1.57869,
-            "longAscNode": 348.73936,
-            "name": "Dummy Outer",
-            "periapses": Object {
-              "last": 1136430000,
-              "next": 1167987600,
-            },
-            "radius": 637800,
-            "ring": Object {
-              "innerRadius": 6630,
-              "outerRadius": 950000,
-            },
-            "semimajor": 249598261,
-            "semiminor": 249556483,
-          },
-          Object {
-            "GM": 6836529,
-            "arcRotate": 45.0411,
-            "argPeriapsis": 114.20763,
-            "atmosphereColor": 8421504,
-            "axialTilt": 23.26,
-            "eccentricity": 0.01671123,
-            "id": "dummyParent",
-            "inclination": 15.57869,
-            "longAscNode": 348.73936,
-            "name": "Dummy Planet",
-            "periapses": Object {
-              "last": 1156430000,
-              "next": 1167987600,
-            },
-            "radius": 637800,
-            "ring": Object {
-              "innerRadius": 6630,
-              "outerRadius": 950000,
-            },
-            "satellites": Array [
-              Object {
-                "GM": 6836529,
-                "arcRotate": 15.0411,
-                "argPeriapsis": 114.20763,
-                "atmosphereColor": 16711680,
-                "axialTilt": 23.26,
-                "eccentricity": 0.01671123,
-                "id": "dummyChild",
-                "inclination": 1.57869,
-                "longAscNode": 348.73936,
-                "name": "Dummy Satellite",
-                "periapses": Object {
-                  "last": 1166430000,
-                  "next": 1167987600,
-                },
-                "radius": 637800,
-                "semimajor": 149598261,
-                "semiminor": 149556483,
+      >
+        <perspectiveCamera
+          aspect={1.6666666666666667}
+          far={10000}
+          fov={50}
+          name="camera"
+          near={1}
+          position={
+            Vector3 {
+              "x": 300,
+              "y": 300,
+              "z": 300,
+            }
+          }
+        />
+      </group>
+      <Scene
+        orbitalData={
+          Array [
+            Object {
+              "GM": 6836529,
+              "arcRotate": 45.0411,
+              "argPeriapsis": 114.20763,
+              "atmosphereColor": 8421504,
+              "axialTilt": 23.26,
+              "eccentricity": 0.01671123,
+              "id": "dummyOuter",
+              "inclination": 1.57869,
+              "longAscNode": 348.73936,
+              "name": "Dummy Outer",
+              "periapses": Object {
+                "last": 1136430000,
+                "next": 1167987600,
               },
-            ],
-            "semimajor": 149598261,
-            "semiminor": 149556483,
-          },
-        ]
-      }
-      time={1}
-      updatePosition={[Function]}
-    />
-  </scene>
-</React3>
+              "radius": 637800,
+              "ring": Object {
+                "innerRadius": 6630,
+                "outerRadius": 950000,
+              },
+              "semimajor": 249598261,
+              "semiminor": 249556483,
+            },
+            Object {
+              "GM": 6836529,
+              "arcRotate": 45.0411,
+              "argPeriapsis": 114.20763,
+              "atmosphereColor": 8421504,
+              "axialTilt": 23.26,
+              "eccentricity": 0.01671123,
+              "id": "dummyParent",
+              "inclination": 15.57869,
+              "longAscNode": 348.73936,
+              "name": "Dummy Planet",
+              "periapses": Object {
+                "last": 1156430000,
+                "next": 1167987600,
+              },
+              "radius": 637800,
+              "ring": Object {
+                "innerRadius": 6630,
+                "outerRadius": 950000,
+              },
+              "satellites": Array [
+                Object {
+                  "GM": 6836529,
+                  "arcRotate": 15.0411,
+                  "argPeriapsis": 114.20763,
+                  "atmosphereColor": 16711680,
+                  "axialTilt": 23.26,
+                  "eccentricity": 0.01671123,
+                  "id": "dummyChild",
+                  "inclination": 1.57869,
+                  "longAscNode": 348.73936,
+                  "name": "Dummy Satellite",
+                  "periapses": Object {
+                    "last": 1166430000,
+                    "next": 1167987600,
+                  },
+                  "radius": 637800,
+                  "semimajor": 149598261,
+                  "semiminor": 149556483,
+                },
+              ],
+              "semimajor": 149598261,
+              "semiminor": 149556483,
+            },
+          ]
+        }
+        time={1}
+        updatePosition={[Function]}
+      />
+    </scene>
+  </React3>
+</div>
 `;

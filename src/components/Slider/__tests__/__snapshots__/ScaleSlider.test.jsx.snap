@@ -11,8 +11,10 @@ exports[`Scale Slider Component render() should successfully render the slider 1
       Test Slider
     </span>
     <Slider
+      max={10}
+      min={0}
+      onChange={[Function]}
       orientation="horizontal"
-      step={10}
       value={40}
     />
   </div>

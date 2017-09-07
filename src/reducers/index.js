@@ -1,9 +1,8 @@
 import {combineReducers} from 'redux';
-
-const testReducer = (state = []) => state;
+import uiControls from './UIControlsReducer';
 
 const rootReducer = combineReducers({
-  testReducer
+  uiControls
 });
 
 export default rootReducer;

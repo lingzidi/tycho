@@ -5,9 +5,13 @@ export default class Controls extends OrbitControls(THREE) {
 
   constructor(camera, domElement) {
     super(camera, domElement);
+
     this.camera = camera;
     this.level = 0;
     this.enabled = true;
+    this.enableZoom = false;
+    this.maxDistance = 300;
+    this.minDistance = 1;
   }
 
   /**
@@ -25,14 +29,30 @@ export default class Controls extends OrbitControls(THREE) {
   }
 
   /**
+   * Calculates the zoom from the given mousewheel delta.
+   *
+   * @param {Number} delta - mousewheel delta
+   * @return {Number} new zoom level
+   */
+  getZoomDelta = (delta) => {
+    let zoom = this.level * 100;
+    
+    zoom += (delta / 50); // TODO: constant
+    zoom = Math.max(zoom, this.minDistance);
+    zoom = Math.min(zoom, this.maxDistance);
+   
+    return zoom;
+  }
+
+  /**
    * Sets the current camera position to the scaled zoom vector.
    *
    * @param {Number} percent - percentage of zoom [0,1]
    */
   pan = (percent) => {
-    var p = this.camera.position;
-    var v = this.getZoomVector(p, percent);
-
+    let p = this.camera.position;
+    let v = this.getZoomVector(p, percent);
+    
     p.set(v.x, v.y, v.z);
   }
 
@@ -44,6 +64,7 @@ export default class Controls extends OrbitControls(THREE) {
    */
   getZoomVector = (v, p) => {
     return v
+      .clone()
       .normalize()
       .multiplyScalar(
         this.maxDistance * p

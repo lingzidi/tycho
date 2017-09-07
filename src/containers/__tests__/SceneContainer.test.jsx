@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import {Vector3, Camera} from 'three';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
-import SceneContainer from '../SceneContainer';
+import {SceneContainer} from '../SceneContainer';
 import Controls from '../../utils/Controls';
 import data from '../../global/fixtures';
 
@@ -54,6 +54,35 @@ describe('Scene Container', () => {
       sceneContainer.componentWillUnmount();
 
       expect(sceneContainer).not.toHaveProperty('controls');
+    });
+  });
+
+  describe('componentWillReceiveProps()', () => {
+    beforeEach(() => {
+      sceneContainer.controls = new Controls(new Camera());
+    });
+
+    it('should call controls.zoom() if the `zoom` prop has changed', () => {
+      const zoom = 10;
+      const nextProps = {zoom: 20};
+      const spy = jest.spyOn(sceneContainer.controls, 'zoom');
+
+      sceneContainer.props = {zoom};
+      sceneContainer.componentWillReceiveProps(nextProps);
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(nextProps.zoom);
+    });
+
+    it('should not call controls.zoom() if the `zoom` prop remains the same', () => {
+      const zoom = 10;
+      const nextProps = {zoom};
+      const spy = jest.spyOn(sceneContainer.controls, 'zoom');
+
+      sceneContainer.props = {zoom};
+      sceneContainer.componentWillReceiveProps(nextProps);
+
+      expect(spy).not.toHaveBeenCalled();
     });
   });
 
@@ -247,6 +276,30 @@ describe('Scene Container', () => {
 
       expect(sceneContainer).toHaveProperty('domElement');
       expect(sceneContainer.domElement).toEqual(elem);
+    });
+  });
+
+  describe('changeZoom()', () => {
+    it('should call the redux changeZoom action with the calculated zoom', () => {
+      const deltaY = -40;
+      const ev = {deltaY};
+      const newZoom = 20;
+      
+      sceneContainer.controls = {
+        getZoomDelta: () => newZoom
+      };
+      sceneContainer.props = {
+        action: {
+          changeZoom: jest.fn()
+        }
+      };
+
+      const spy = jest.spyOn(sceneContainer.props.action, 'changeZoom');
+
+      sceneContainer.changeZoom(ev);
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(newZoom);
     });
   });
 

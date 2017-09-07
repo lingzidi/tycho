@@ -12,10 +12,11 @@ exports[`Slider Component render() should successfully render the slider 1`] = `
   max={100}
   min={0}
   minDistance={0}
+  onChange={[Function]}
   orientation="horizontal"
   pearling={true}
   snapDragDisabled={false}
-  step={10}
+  step={1}
   value={40}
   withBars={false}
 />

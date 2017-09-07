@@ -45,6 +45,16 @@ describe('Controls', () => {
     });
   });
 
+  describe('getZoomDelta()', () => {
+    it('should calculate the proper zoom delta', () => {
+      controls.level = 50;
+      const result = controls.getZoomDelta(-40);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(300);
+    });
+  });
+
   describe('pan()', () => {
     it('should set the camera position vector to the new zoom vector', () => {
       const zoomVector = new Vector3(1, 2, 3);

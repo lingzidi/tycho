@@ -58,6 +58,7 @@ export default class Clock {
    */
   speed = (e) => {
     this.scale = Math.pow(10, e);
+    this.offset = this.getTime();
   }
 
   /**

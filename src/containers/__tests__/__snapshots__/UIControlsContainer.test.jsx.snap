@@ -7,6 +7,7 @@ exports[`UIControls Container render() should successfully render the ui control
   >
     <ScaleSlider
       label="Time speed:"
+      onChange={[Function]}
     />
     <ScaleSlider
       label="Planet scale:"

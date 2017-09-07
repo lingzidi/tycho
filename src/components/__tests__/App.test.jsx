@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
-import App from '../App';
+import {App} from '../App';
 import Clock from '../../utils/Clock';
 
 describe('App Component', () => {
@@ -27,6 +27,29 @@ describe('App Component', () => {
       expect(typeof app.state.positions).toBe('object');
       expect(typeof app.state.time).toBe('number');
     });
+  });
+
+  describe('componentDidUpdate()', () => {
+    it('should update the clock speed if the speed prop is defined', () => {
+      const speed = 2;
+      const spy = jest.spyOn(app.clock, 'speed');
+
+      app.props = {speed};
+      app.componentDidUpdate();
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(speed);
+    });
+
+    it('should not update the clock speed if the speed prop is undefined', () => {
+      const spy = jest.spyOn(app.clock, 'speed');
+
+      app.props = {speed: undefined};
+      app.componentDidUpdate();
+
+      expect(spy).not.toHaveBeenCalled();
+    });
+
   });
 
   describe('onAnimate()', () => {

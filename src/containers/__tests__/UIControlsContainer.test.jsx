@@ -1,13 +1,17 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
-import UIControlsContainer from '../UIControlsContainer';
+import {UIControlsContainer} from '../UIControlsContainer';
 
 describe('UIControls Container', () => {
   let component;
 
   beforeEach(() => {
-    component = shallow(<UIControlsContainer />);
+    component = shallow(<UIControlsContainer
+      action={{
+        changeSpeed: jest.fn()
+      }}
+    />);
   });
 
   describe('render()', () => {

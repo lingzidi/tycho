@@ -1,11 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import data from '../global/fixtures';
 import Clock from '../utils/Clock';
-import SceneContainer from '../containers/SceneContainer';
 import LabelGroup from './LabelGroup';
+import SceneContainer from '../containers/SceneContainer';
 import UIControlsContainer from '../containers/UIControlsContainer';
+import ReduxService from '../services/ReduxService';
 
-export default class App extends React.Component {
+export class App extends React.Component {
 
   componentWillMount = () => {
     this.clock = new Clock();
@@ -13,9 +15,16 @@ export default class App extends React.Component {
       positions: {},
       time: this.clock.getTime()
     };
-    this.clock.speed(1); // temporary
   }
 
+  componentDidUpdate = () => {
+    const {speed} = this.props;
+
+    if (speed) {
+      this.clock.speed(speed);
+    }
+  }
+  
   onAnimate = () => {
     this.setState({
       time: this.clock.getTime()
@@ -53,3 +62,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default connect(ReduxService.mapStateToProps('uiControls', 'speed'), null)(App);

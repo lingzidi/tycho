@@ -11,8 +11,10 @@ export default class ScaleSlider extends React.Component {
           </span>
           <Slider
             orientation="horizontal"
-            step={10}
             value={this.props.value}
+            onChange={this.props.onChange}
+            min={0}
+            max={10}
           />
         </div>
       </div>

@@ -32,9 +32,11 @@ export default class Slider extends React.Component {
         handleClassName={this.getClassName('handle')}
         barClassName={this.getClassName('bar')}
         pearling={true}
-        step={10}
+        step={this.props.step}
+        min={this.props.min}
+        max={this.props.max}
         value={this.props.value}
-        onChange={this.onChange}
+        onChange={this.props.onChange}
       />
     );
   }

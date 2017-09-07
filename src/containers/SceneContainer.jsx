@@ -1,13 +1,16 @@
 import * as THREE from 'three';
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import React3 from 'react-three-renderer';
 import Controls from '../utils/Controls';
 import Scene from '../components/Scene';
+import * as Actions from '../actions/UIControlsActions';
+import ReduxService from '../services/ReduxService';
 
 const cameraPosition = new THREE.Vector3(300, 300, 300);//move to const
 
-export default class SceneContainer extends React.Component {
+export class SceneContainer extends React.Component {
 
   static propTypes = {
     orbitalData: PropTypes.array.isRequired,
@@ -26,6 +29,14 @@ export default class SceneContainer extends React.Component {
   componentWillUnmount = () => {
     this.controls.dispose();
     delete this.controls;
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    const {zoom} = this.props;
+
+    if (zoom !== nextProps.zoom) {
+      this.controls.zoom(nextProps.zoom);
+    }
   }
 
   onAnimate = () => {
@@ -73,39 +84,52 @@ export default class SceneContainer extends React.Component {
     this.domElement = domElement;
   }
 
+  changeZoom = (event) => {
+    const zoom = this.controls.getZoomDelta(event.deltaY);
+
+    this.props.action.changeZoom(zoom);
+  }
+
   render() {
     const {width, height} = this.props;
 
     return (
-      <React3
-        onAnimate={this.onAnimate}
-        mainCamera="camera"
-        width={width}
-        height={height}
-        antialias={true}
-        alpha={true}
-        canvasRef={this.setDomElement}>
-        <scene>
-          <group position={this.getTargetPosition()}>
-            <perspectiveCamera
-              name="camera"
-              ref="camera"
-              fov={50}
-              aspect={width / height}
-              near={1}
-              far={10000}
-              position={cameraPosition}
-            />
-          </group>
-          <Scene
-            time={this.props.time}
-            camera={this.refs.camera}
-            updatePosition={this.updatePosition}
-            orbitalData={this.props.orbitalData}>
-            {this.props.children}
-          </Scene>
-        </scene>
-      </React3>
+      <div onWheel={this.changeZoom}>
+        <React3
+          onAnimate={this.onAnimate}
+          mainCamera="camera"
+          width={width}
+          height={height}
+          antialias={true}
+          alpha={true}
+          canvasRef={this.setDomElement}>
+          <scene>
+            <group position={this.getTargetPosition()}>
+              <perspectiveCamera
+                name="camera"
+                ref="camera"
+                fov={50}
+                aspect={width / height}
+                near={1}
+                far={10000}
+                position={cameraPosition}
+              />
+            </group>
+            <Scene
+              time={this.props.time}
+              camera={this.refs.camera}
+              updatePosition={this.updatePosition}
+              orbitalData={this.props.orbitalData}>
+              {this.props.children}
+            </Scene>
+          </scene>
+        </React3>
+      </div>
     );
   }
 }
+
+export default connect(
+  ReduxService.mapStateToProps('uiControls', 'zoom'),
+  ReduxService.mapDispatchToProps(Actions)
+)(SceneContainer);
