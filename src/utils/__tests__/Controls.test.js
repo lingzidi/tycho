@@ -51,7 +51,7 @@ describe('Controls', () => {
       const result = controls.getZoomDelta(-40);
 
       expect(typeof result).toBe('number');
-      expect(result).toEqual(300);
+      expect(result).toEqual(100);
     });
   });
 

@@ -8,7 +8,13 @@ exports[`Scale Slider Component render() should successfully render the slider 1
     <span
       className="slider__label"
     >
-      Test Slider
+      <span>
+        Test Slider
+        : × 10
+      </span>
+      <sup>
+        40
+      </sup>
     </span>
     <Slider
       max={10}

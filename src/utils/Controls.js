@@ -10,7 +10,7 @@ export default class Controls extends OrbitControls(THREE) {
     this.level = 0;
     this.enabled = true;
     this.enableZoom = false;
-    this.maxDistance = 300;
+    this.maxDistance = 500;
     this.minDistance = 1;
   }
 
@@ -29,7 +29,7 @@ export default class Controls extends OrbitControls(THREE) {
   }
 
   /**
-   * Calculates the zoom from the given mousewheel delta.
+   * Calculates the zoom percentage from the given mousewheel delta.
    *
    * @param {Number} delta - mousewheel delta
    * @return {Number} new zoom level
@@ -38,8 +38,8 @@ export default class Controls extends OrbitControls(THREE) {
     let zoom = this.level * 100;
     
     zoom += (delta / 50); // TODO: constant
-    zoom = Math.max(zoom, this.minDistance);
-    zoom = Math.min(zoom, this.maxDistance);
+    zoom = Math.max(zoom, 1);
+    zoom = Math.min(zoom, 100);
    
     return zoom;
   }

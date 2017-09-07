@@ -11,11 +11,14 @@ export class UIControlsContainer extends React.Component {
       <div>
         <div className="uicontrol uicontrol--scales">
           <ScaleSlider
-            value={this.props.time}
+            value={this.props.speed}
             label="Time speed:"
             onChange={this.props.action.changeSpeed}
           />
-          <ScaleSlider value={this.props.speed} label="Planet scale:" />
+          <ScaleSlider
+            value={this.props.scale}
+            label="Planet scale:"
+          />
         </div>
 
         <div className="uicontrol uicontrol--datetime">

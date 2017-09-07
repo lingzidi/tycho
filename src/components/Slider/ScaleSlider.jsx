@@ -7,7 +7,8 @@ export default class ScaleSlider extends React.Component {
       <div>
         <div className="slider slider--horizontal">
           <span className="slider__label">
-            {this.props.label}
+            <span>{this.props.label}: &times; 10</span>
+            <sup>{this.props.value}</sup>
           </span>
           <Slider
             orientation="horizontal"
