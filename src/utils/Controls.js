@@ -7,7 +7,7 @@ export default class Controls extends OrbitControls(THREE) {
     super(camera, domElement);
 
     this.camera = camera;
-    this.level = 0;
+    this.level = 100;
     this.enabled = true;
     this.enableZoom = false;
     this.maxDistance = 500;

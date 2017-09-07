@@ -6,16 +6,24 @@ import ZoomSlider from '../ZoomSlider';
 describe('Zoom Slider Component', () => {
   let component;
 
-  beforeEach(() => {
-    component = shallow(<ZoomSlider
-      value={40}
-      onChange={jest.fn()}
-    />);
-  });
-
   describe('render()', () => {
-    it('should successfully render the slider', () => {
-      expect(toJson(component)).toMatchSnapshot();
+    describe('when the slider value is defined', () => {
+      it('should successfully render the slider', () => {
+        component = shallow(<ZoomSlider
+          onChange={jest.fn()}
+        />);
+        expect(toJson(component)).toMatchSnapshot();
+      });
+    });
+
+    describe('when the slider value is undefined', () => {
+      it('should successfully render the slider', () => {
+        component = shallow(<ZoomSlider
+          value={40}
+          onChange={jest.fn()}
+        />);
+        expect(toJson(component)).toMatchSnapshot();
+      });
     });
   });
 });

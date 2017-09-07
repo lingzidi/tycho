@@ -1,6 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Zoom Slider Component render() should successfully render the slider 1`] = `
+exports[`Zoom Slider Component render() when the slider value is defined should successfully render the slider 1`] = `
+<div
+  className="slider slider--vertical"
+>
+  <Slider
+    invert={true}
+    max={100}
+    min={1}
+    onChange={[Function]}
+    orientation="vertical"
+    step={1}
+    value={100}
+  />
+</div>
+`;
+
+exports[`Zoom Slider Component render() when the slider value is undefined should successfully render the slider 1`] = `
 <div
   className="slider slider--vertical"
 >

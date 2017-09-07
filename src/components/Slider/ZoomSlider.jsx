@@ -11,7 +11,7 @@ export default class ZoomSlider extends React.Component {
           step={1}
           min={1}
           max={100}
-          value={this.props.value}
+          value={this.props.value || 100}
           onChange={this.props.onChange}
         />
       </div>
