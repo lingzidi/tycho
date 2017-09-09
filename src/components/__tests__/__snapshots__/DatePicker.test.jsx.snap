@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePicker Component render() should render the DatePicker component successfully 1`] = `
+<div
+  className="clock"
+>
+  <span
+    className="clock__display"
+    onClick={[Function]}
+  />
+  <Component
+    className="clock__picker"
+    closeOnSelect={true}
+    closeOnTab={true}
+    dateFormat={true}
+    defaultValue=""
+    input={true}
+    inputProps={
+      Object {
+        "className": "clock__input",
+      }
+    }
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onViewModeChange={[Function]}
+    strictParsing={true}
+    timeConstraints={Object {}}
+    timeFormat={true}
+    utc={false}
+    value={123456}
+  />
+</div>
+`;

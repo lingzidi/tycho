@@ -19,7 +19,9 @@ exports[`UIControls Container render() should successfully render the ui control
   </div>
   <div
     className="uicontrol uicontrol--datetime"
-  />
+  >
+    <DatePicker />
+  </div>
   <div
     className="uicontrol uicontrol--left-bar"
   >

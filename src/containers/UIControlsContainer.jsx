@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ScaleSlider from '../components/Slider/ScaleSlider';
 import ZoomSlider from '../components/Slider/ZoomSlider';
+import DatePicker from '../components/DatePicker';
 import * as Actions from '../actions/UIControlsActions';
 import ReduxService from '../services/ReduxService';
 
@@ -27,6 +28,10 @@ export class UIControlsContainer extends React.Component {
         </div>
 
         <div className="uicontrol uicontrol--datetime">
+          <DatePicker 
+            time={this.props.time} 
+            onUpdate={this.props.action.changeTimeOffset}
+          />
         </div>
 
         <div className="uicontrol uicontrol--left-bar"> 

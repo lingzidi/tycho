@@ -1,0 +1,55 @@
+
+$datepicker-fg-color: #000;
+$datepicker-bg-color: #fff;
+
+.clock {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 250px;
+  padding: 1em;
+  text-align: right;
+  
+  &__display {
+    font-family: Georgia, serif;
+    font-size: 2em;
+    color: $datepicker-fg-color;
+    transition: text-shadow 0.5s;
+    cursor: pointer;
+    
+    &:hover {
+      text-shadow: 1px 1px 10px $datepicker-fg-color;
+    }
+  }
+  
+  &__picker {
+    display: flex;
+    justify-content: flex-end;
+    color: $datepicker-fg-color;
+    font-family: Georgia, serif;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+    
+    .rdtPicker {
+      background: $datepicker-bg-color;
+      
+      th, td {
+        &:hover {
+          background: #1e1e1e !important;
+        }
+      }
+      
+      .rdtPrev, .rdtNext {
+        border-color: $datepicker-bg-color;
+      }
+      
+      .rdtCounter .rdtBtn:hover {
+        background: $datepicker-bg-color;
+      }
+    }
+  }
+  
+  &__input {
+    display: none;
+  }
+}

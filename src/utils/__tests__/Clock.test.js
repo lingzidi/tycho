@@ -1,6 +1,6 @@
 import Clock from '../Clock';
 import moment from 'moment';
-import TWEEN from 'tween.js';
+
 
 describe('Clock', () => {
   describe('getOffset()', () => {
@@ -28,55 +28,44 @@ describe('Clock', () => {
   });
   
   describe('getTime()', () => {
-    it('should return inflated time when scale is greater than 1', () => {
-      let curTime;
+    it('should be a number', () => {
+      const clock = new Clock();
+
       jest.useFakeTimers();
       jest.runAllTimers();
 
-      const offset = 1470323035;
-      const clock = new Clock(offset);
-
-      clock.speed(2);
-
-      curTime = clock.getTime();
-      curTime -= offset;
-
-      expect(typeof curTime).toBe('number');
-      expect(curTime).toBeGreaterThanOrEqual(0);
-      expect(curTime).toBeLessThan(1000);
+      expect(typeof clock.getTime()).toBe('number');
     });
   });
 
   describe('update()', () => {
-    it('should update the elapsed time when 1 sec has passed', () => {
+    beforeEach(() => {
       jest.useFakeTimers();
       jest.runAllTimers();
+    });
 
-      const clock = new Clock();
-      const timeBeforeUpdate = clock.elapsedTime;
+    it('should update the elapsed time when 1 sec has passed', () => {
+      let clock = new Clock();
 
-      expect(typeof timeBeforeUpdate).toBe('number');
-      expect(timeBeforeUpdate).not.toBe(null);
-      expect(timeBeforeUpdate).toBe(0);
+      clock.elapsedTime = 0;
+      clock.clock.getElapsedTime = () => 1;
 
       clock.update();
       
-      const timeAfterUpdate = clock.elapsedTime;
-
-      expect(typeof timeAfterUpdate).toBe('number');
-      expect(timeAfterUpdate).toBeGreaterThanOrEqual(timeBeforeUpdate);
+      expect(clock).toHaveProperty('elapsedTime');
+      expect(clock.elapsedTime).toEqual(1);
     });
 
     it('should not update elapsedTime if no time has passed', () => {
       const elapsedTime = 1470323035;
       let clock = new Clock();
-      clock.clock.stop();
+      
       clock.elapsedTime = elapsedTime;
-      clock.getTime = () => elapsedTime;
+      clock.clock.getElapsedTime = () => elapsedTime;
 
       clock.update();
 
-      expect(typeof clock.elapsedTime).toBe('number');
+      expect(clock).toHaveProperty('elapsedTime');
       expect(clock.elapsedTime).toEqual(elapsedTime);
     });
   });
@@ -92,33 +81,124 @@ describe('Clock', () => {
     });
   });
 
+  describe('start()', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = new Clock();
+    });
+
+    it('should call clock.start()', () => {
+      const spy = jest.spyOn(clock.clock, 'start');
+
+      clock.start();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should set paused = false', () => {
+      clock.start();
+
+      expect(clock).toHaveProperty('paused');
+      expect(clock.paused).toEqual(false);
+    });
+  });
+
+  describe('stop()', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = new Clock();
+    });
+
+    it('should call clock.stop()', () => {
+      const spy = jest.spyOn(clock.clock, 'stop');
+
+      clock.stop();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should set paused = true', () => {
+      clock.stop();
+
+      expect(clock).toHaveProperty('paused');
+      expect(clock.paused).toEqual(true);
+    });
+  });
+
+  describe('stopTween()', () => {
+    describe('when an instance of Tween is defined', () => {
+      let clock;
+
+      beforeEach(() => {
+        clock = new Clock();
+        clock.tween = {
+          stop: jest.fn()
+        };
+      });
+
+      it('should stop the Tween in progress', () => {
+        const spy = jest.spyOn(clock.tween, 'stop');
+
+        clock.stopTween();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should set the offset to the destination offset', () => {
+        clock.destinationOffset = 1000;
+        clock.stopTween();
+
+        expect(clock.offset).toEqual(1000);
+      });
+
+      it('should start the clock', () => {
+        const spy = jest.spyOn(clock.clock, 'start');
+
+        clock.stopTween();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should dispose of the Tween instance', () => {
+        clock.stopTween();
+        
+        expect(clock.tween).not.toBeDefined();
+        expect(clock).not.toHaveProperty('tween');
+      });
+    });
+  });
+
+  describe('updateTweenOffset()', () => {
+    it('should update the current offset time with current tween offset', () => {
+      let clock = new Clock();
+
+      clock.offset = 100;
+      clock.tweenData = {offset: 200};
+      clock.updateTweenOffset();
+
+      expect(clock.offset).toEqual(clock.tweenData.offset);
+    });
+  });
+
   describe('setOffset()', () => {
     it('should update the offset of Clock', () => {
       let clock = new Clock();
       
       const offset = 1470323035;
-      const tweenMock = {
-        to: () => tweenMock,
-        onComplete: () => tweenMock,
-        start: () => tweenMock,
-        onUpdate: (cb) => {
-          cb();
-          return tweenMock
-        }
-      };
-      clock.getTween = () => tweenMock;
       clock.offset = offset;
+
+      jest.useFakeTimers();
+      jest.runAllTimers();
 
       const result = clock.setOffset(offset);
 
       expect(clock.offset).toEqual(offset);
-    });
-  });
-
-  describe('getTween()', () => {
-    it('should return a new instance of Tween', () => {
-      const clock = new Clock();
-      expect(clock.getTween()).toBeInstanceOf(TWEEN.Tween);
     });
   });
 });

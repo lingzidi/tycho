@@ -10,6 +10,8 @@ export default function(state = {}, payload) {
       return assign('speed');
     case 'SCALE_CHANGE':
       return assign('scale');
+    case 'TIME_OFFSET_CHANGE':
+      return assign('timeOffset');
     default:
       return state;
   }

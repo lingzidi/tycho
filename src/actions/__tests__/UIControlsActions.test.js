@@ -36,4 +36,16 @@ describe('UIControls Actions', () => {
       expect(result.scale).toEqual(scale);
     });
   });
+
+  describe('changeTimeOffset()', () => {
+    it('should be of type TIME_OFFSET_CHANGE with the speed payload', () => {
+      const timeOffset = 12345;
+      const result = Actions.changeTimeOffset(timeOffset);
+      
+      expect(result).toHaveProperty('type');
+      expect(result).toHaveProperty('timeOffset');
+      expect(result.type).toEqual('TIME_OFFSET_CHANGE');
+      expect(result.timeOffset).toEqual(timeOffset);
+    });
+  });
 });

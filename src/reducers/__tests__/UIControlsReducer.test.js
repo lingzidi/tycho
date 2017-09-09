@@ -38,4 +38,14 @@ describe('UIControls Reducer', () => {
 
     expect(result).toEqual({scale});
   });
+
+  it('should handle TIME_OFFSET_CHANGE', () => {
+    const timeOffset = 12345;
+    const result = reducer(undefined, {
+      type: 'TIME_OFFSET_CHANGE',
+      timeOffset
+    });
+
+    expect(result).toEqual({timeOffset});
+  });
 });

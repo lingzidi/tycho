@@ -17,18 +17,18 @@ export class App extends React.Component {
     };
   }
 
-  componentDidUpdate = () => {
-    const {speed} = this.props;
-
-    if (speed) {
-      this.clock.speed(speed);
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.timeOffset && !this.clock.paused) {
+      this.clock.setOffset(nextProps.timeOffset);
     }
   }
-  
+
   onAnimate = () => {
     this.setState({
       time: this.clock.getTime()
     });
+    this.clock.speed(this.props.speed);
+    this.clock.update();
   }
 
   updateScreenPosition = (position, id) => {
@@ -57,10 +57,15 @@ export class App extends React.Component {
           positions={this.state.positions}
           orbitalData={data}
         />
-        <UIControlsContainer />
+        <UIControlsContainer
+          time={this.state.time}
+        />
       </div>
     );
   }
 }
 
-export default connect(ReduxService.mapStateToProps('uiControls', 'speed'), null)(App);
+export default connect(
+  ReduxService.mapStateToProps('uiControls', 'speed', 'timeOffset'),
+  null
+)(App);

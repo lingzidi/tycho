@@ -29,27 +29,28 @@ describe('App Component', () => {
     });
   });
 
-  describe('componentDidUpdate()', () => {
-    it('should update the clock speed if the speed prop is defined', () => {
-      const speed = 2;
-      const spy = jest.spyOn(app.clock, 'speed');
+  describe('componentWillReceiveProps()', () => {
+    it('should update the clock offset with the next timeOffset prop value', () => {
+      const spy = jest.spyOn(app.clock, 'setOffset');
+      const timeOffset = 123;
+      const nextProps = {timeOffset};
 
-      app.props = {speed};
-      app.componentDidUpdate();
+      app.componentWillReceiveProps(nextProps);
 
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(speed);
+      expect(spy).toHaveBeenCalledWith(timeOffset);
     });
 
-    it('should not update the clock speed if the speed prop is undefined', () => {
-      const spy = jest.spyOn(app.clock, 'speed');
+    it('should not update the clock offset if the clock is paused', () => {
+      const spy = jest.spyOn(app.clock, 'setOffset');
+      const timeOffset = 123;
+      const nextProps = {timeOffset};
 
-      app.props = {speed: undefined};
-      app.componentDidUpdate();
+      app.clock.paused = true;
+      app.componentWillReceiveProps(nextProps);
 
       expect(spy).not.toHaveBeenCalled();
     });
-
   });
 
   describe('onAnimate()', () => {
@@ -61,6 +62,17 @@ describe('App Component', () => {
       expect(typeof app.state.time).toBe('number');
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    xit('should update the clock speed', () => {
+      const speed = 2;
+      const spy = jest.spyOn(app.clock, 'speed');
+
+      app.props = {speed};
+      app.onAnimate();
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(speed);
     });
   });
 

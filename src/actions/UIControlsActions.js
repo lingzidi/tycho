@@ -18,3 +18,10 @@ export const changeScale = (scale) => {
     scale
   };
 }
+
+export const changeTimeOffset = (timeOffset) => {
+  return {
+    type: 'TIME_OFFSET_CHANGE',
+    timeOffset
+  };
+}

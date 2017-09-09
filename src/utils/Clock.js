@@ -4,18 +4,18 @@ import moment from 'moment';
 
 export default class Clock {
 
-  constructor(time) {
-    this.clock = new THREE.Clock(false);
-    this.offset = this.getOffset(time);
-    this.clock.start();
-    this.speed(0);
-    this.elapsedTime = 0;
+  constructor() {
+    this.clock = new THREE.Clock();
+    this.offset = this.getOffset();
+    this.start();
+    this.scale = 1;
   }
 
   /**
    * Get time offset.
    *
    * @param {Number} time - UNIX timestamp
+   * @returns {Number} unix timestamp
    */
   getOffset = (time) => {
     if (time) {
@@ -38,11 +38,11 @@ export default class Clock {
   }
 
   /**
-   * Updates clock time. Intended to be called from within
+   * Clock update method. Intended to be called from within
    * an animation loop to prepare the next frame time.
    */
   update = () => {
-    let elapsedTime = Math.ceil(this.getTime());
+    let elapsedTime = this.clock.getElapsedTime();
 
     if(elapsedTime !== this.elapsedTime) {
       this.elapsedTime = elapsedTime;
@@ -52,42 +52,74 @@ export default class Clock {
 
   /**
    * Sets the scale of the clock, as base 10.
-   * Example: a scalar of 0 means 1:1 scale (10^0=1)
+   * Example: a scalar of 0 means real time (10^0=1)
    *
    * @param {Number} e - scalar exponent
    */
   speed = (e) => {
-    this.scale = Math.pow(10, e);
-    this.offset = this.getTime();
+    const scale = Math.pow(10, e || 0);
+
+    if (scale !== this.scale) {
+      this.stopTween();
+      this.offset = this.getTime();
+      this.scale = scale;
+    }
+  }
+
+  /**
+   * Starts the clock.
+   */
+  start = () => {
+    this.paused = false;
+    this.clock.start();
+  }
+
+  /**
+   * Stops the clock.
+   */
+  stop = () => {
+    this.paused = true;
+    this.clock.stop();
+  }
+
+  /**
+   * Forces the active Tween to stop and updates the current offset to the destination one.
+   */
+  stopTween = () => {
+    if (this.tween) {
+      this.tween.stop();
+      this.offset = this.destinationOffset;
+      this.clock.start();
+      delete this.tween;
+    }
+  }
+
+  /**
+   * Updates the clock offset with current tween offset time.
+   */
+  updateTweenOffset = () => {
+    this.offset = this.tweenData.offset;
   }
 
   /**
    * Tweens the offset time to the given time.
+   *
    * @param {Number} time - UNIX timestamp
    * @returns {Tween} - tween instance
    */
   setOffset = (time) => {
-    this.clock.stop();
-    
-    let updateOffset = (t) => {
-      this.offset = t;
+    this.stop();
+    this.stopTween();
+    this.tweenData = {
+      offset: this.offset
     };
-    let t = this.offset;
+    this.destinationOffset = time;
 
-    return this.getTween(t)
-      .to({ t: time }, 1000)
-      .onUpdate(() => updateOffset(t))
-      .onComplete(this.clock.start)
+    this.tween = new TWEEN.Tween(this.tweenData)
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .to({offset: time}, 2000)
+      .onUpdate(this.updateTweenOffset)
+      .onComplete(this.start)
       .start();
-  }//
-
-  /**
-   * Creates a new instance of Tween with the given time.
-   *
-   * @param {Number} time - UNIX timestamp
-   * @returns {Tween} tween instance
-   */
-  getTween = (time) => {
-    return new TWEEN.Tween({t: time});
   }
 }
