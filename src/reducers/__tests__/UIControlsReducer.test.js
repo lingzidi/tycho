@@ -1,5 +1,6 @@
 import reducer from '../UIControlsReducer';
 import ReduxService from '../../services/ReduxService';
+import Actions from '../../constants/Actions';
 
 describe('UIControls Reducer', () => {
   it('should return the state', () => {
@@ -12,7 +13,7 @@ describe('UIControls Reducer', () => {
   it('should handle ZOOM_CHANGE', () => {
     const zoom = 10;
     const result = reducer(undefined, {
-      type: 'ZOOM_CHANGE',
+      type: Actions.ZOOM_CHANGE,
       zoom
     });
 
@@ -22,7 +23,7 @@ describe('UIControls Reducer', () => {
   it('should handle SPEED_CHANGE', () => {
     const speed = 10;
     const result = reducer(undefined, {
-      type: 'SPEED_CHANGE',
+      type: Actions.SPEED_CHANGE,
       speed
     });
 
@@ -32,7 +33,7 @@ describe('UIControls Reducer', () => {
   it('should handle SCALE_CHANGE', () => {
     const scale = 5;
     const result = reducer(undefined, {
-      type: 'SCALE_CHANGE',
+      type: Actions.SCALE_CHANGE,
       scale
     });
 
@@ -42,7 +43,7 @@ describe('UIControls Reducer', () => {
   it('should handle TIME_OFFSET_CHANGE', () => {
     const timeOffset = 12345;
     const result = reducer(undefined, {
-      type: 'TIME_OFFSET_CHANGE',
+      type: Actions.TIME_OFFSET_CHANGE,
       timeOffset
     });
 

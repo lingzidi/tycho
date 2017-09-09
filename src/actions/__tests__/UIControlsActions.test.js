@@ -1,4 +1,5 @@
 import * as Actions from '../UIControlsActions';
+import ActionType from '../../constants/Actions';
 
 describe('UIControls Actions', () => {
   describe('changeZoom()', () => {
@@ -8,7 +9,7 @@ describe('UIControls Actions', () => {
       
       expect(result).toHaveProperty('type');
       expect(result).toHaveProperty('zoom');
-      expect(result.type).toEqual('ZOOM_CHANGE');
+      expect(result.type).toEqual(ActionType.ZOOM_CHANGE);
       expect(result.zoom).toEqual(zoom);
     });
   });
@@ -20,7 +21,7 @@ describe('UIControls Actions', () => {
       
       expect(result).toHaveProperty('type');
       expect(result).toHaveProperty('speed');
-      expect(result.type).toEqual('SPEED_CHANGE');
+      expect(result.type).toEqual(ActionType.SPEED_CHANGE);
       expect(result.speed).toEqual(speed);
     });
   });
@@ -32,7 +33,7 @@ describe('UIControls Actions', () => {
       
       expect(result).toHaveProperty('type');
       expect(result).toHaveProperty('scale');
-      expect(result.type).toEqual('SCALE_CHANGE');
+      expect(result.type).toEqual(ActionType.SCALE_CHANGE);
       expect(result.scale).toEqual(scale);
     });
   });
@@ -44,7 +45,7 @@ describe('UIControls Actions', () => {
       
       expect(result).toHaveProperty('type');
       expect(result).toHaveProperty('timeOffset');
-      expect(result.type).toEqual('TIME_OFFSET_CHANGE');
+      expect(result.type).toEqual(ActionType.TIME_OFFSET_CHANGE);
       expect(result.timeOffset).toEqual(timeOffset);
     });
   });

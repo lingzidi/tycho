@@ -1,16 +1,17 @@
 import ReduxService from '../services/ReduxService';
+import Actions from '../constants/Actions';
 
 export default function(state = {}, payload) {
   const assign = (...props) => ReduxService.assign(state, payload, ...props);
 
   switch(payload.type) {
-    case 'ZOOM_CHANGE':
+    case Actions.ZOOM_CHANGE:
       return assign('zoom');
-    case 'SPEED_CHANGE':
+    case Actions.SPEED_CHANGE:
       return assign('speed');
-    case 'SCALE_CHANGE':
+    case Actions.SCALE_CHANGE:
       return assign('scale');
-    case 'TIME_OFFSET_CHANGE':
+    case Actions.TIME_OFFSET_CHANGE:
       return assign('timeOffset');
     default:
       return state;
