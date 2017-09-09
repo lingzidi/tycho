@@ -9,7 +9,7 @@ cache:
 
 script:
   - npm install
-  - npm test
+  - npm run coverage
 
 after_success:
 - cat ./coverage/lcov.info | ./node_modules/codecov/bin/codecov
