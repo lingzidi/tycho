@@ -2,15 +2,18 @@
 
 exports[`Label Component should render the LabelGroup successfully 1`] = `
 <div>
-  <Label
+  <Connect(LabelContainer)
+    id="dummyOuter"
     text="Dummy Outer"
   />
-  <Label
+  <Connect(LabelContainer)
+    id="dummyParent"
     text="Dummy Planet"
   >
-    <Label
+    <Connect(LabelContainer)
+      id="dummyChild"
       text="Dummy Satellite"
     />
-  </Label>
+  </Connect(LabelContainer)>
 </div>
 `;

@@ -9,46 +9,12 @@ describe('Label Component', () => {
   beforeEach(() => {
     component = shallow(<Label 
       text="foo"
-      positions={{}}
+      style={{}}
+      onClick={jest.fn()}
+      active={false}
     />);
 
     label = component.instance();
-  });
-
-  describe('getPosition()', () => {
-    it('should return a style object with top, left, and position definitions', () => {
-      const pos = {top: 4, left: 10};
-      const style = label.getPosition(pos);
-
-      expect(typeof style).toBe('object');
-      expect(style).toHaveProperty('position');
-      expect(style).toHaveProperty('top');
-      expect(style).toHaveProperty('left');
-      expect(style.position).toEqual('absolute');
-      expect(style.top).toEqual(`${pos.top}px`);
-      expect(style.left).toEqual(`${pos.left}px`);
-    });
-
-    it('should return null if the position parameter is not defined', () => {
-      const style = label.getPosition();
-
-      expect(style).toBeDefined();
-      expect(style).toBeNull();
-    });
-  });
-
-  describe('getChildren()', () => {
-    const children = [];
-    
-    it('should return `children` when active', () => {
-      const result = label.getChildren(children, true);
-      expect(result).toEqual(children);
-    });
-
-    it('should return null when not active', () => {
-      const result = label.getChildren(children);
-      expect(result).toEqual(null);
-    });
   });
 
   describe('render()', () => {

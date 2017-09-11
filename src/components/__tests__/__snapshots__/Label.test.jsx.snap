@@ -3,7 +3,8 @@
 exports[`Label Component render() should render the Label successfully 1`] = `
 <div>
   <span
-    style={null}
+    onClick={[Function]}
+    style={Object {}}
   >
     foo
   </span>

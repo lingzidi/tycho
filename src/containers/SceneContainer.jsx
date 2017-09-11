@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import TWEEN from 'tween.js';
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,6 +8,7 @@ import Controls from '../utils/Controls';
 import Scene from '../components/Scene';
 import * as Actions from '../actions/UIControlsActions';
 import ReduxService from '../services/ReduxService';
+import SceneService from '../services/SceneService';
 
 const cameraPosition = new THREE.Vector3(300, 300, 300);//move to const
 
@@ -32,16 +34,21 @@ export class SceneContainer extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    const {zoom} = this.props;
+    const {zoom, targetName} = this.props;
 
     if (zoom !== nextProps.zoom) {
       this.controls.zoom(nextProps.zoom);
+    }
+
+    if (targetName !== nextProps.targetName) {
+      this.startTween(nextProps.targetName);
     }
   }
 
   onAnimate = () => {
     this.updateCameraVectors();
     this.props.onAnimate();
+    TWEEN.update();
   }
 
   updatePosition = (positions, id, log) => {
@@ -53,31 +60,48 @@ export class SceneContainer extends React.Component {
     });
   }
 
-  getTargetPosition = () => {
-    if (this.state) {
-      const {positions} = this.state;
-      const {perspective, targetName} = this.props;
+  endTween = () => {
+    delete this.tweenData;
+    delete this.tweenBase;
 
-      if (positions[targetName] && !perspective) {
-        return positions[targetName].position3d;
-      }
+    this.setState({
+      targetName: this.props.targetName
+    });
+  }
+
+  cancelTween = () => {
+    if (this.tweenBase) {
+      this.tweenBase.stop();
+      this.endTween();
     }
-    return new THREE.Vector3(0, 0, 0);
+  }
+
+  startTween = (targetName) => {
+    const target = this.state.positions[targetName];
+
+    if (target) {
+      this.cancelTween();
+      this.controls.tweenZoom(1, this.props.action.changeZoom);
+      this.tweenData = SceneService.vectorToObject(this.refs.cameraBase.position);
+      this.tweenBase = new TWEEN.Tween(this.tweenData);
+
+      SceneService.startTween(this.tweenBase, target.position3d, this.endTween);
+    }
+  }
+
+  getTargetPosition = () => {
+    if (this.tweenData) {
+      return SceneService.objectToVector(this.tweenData);
+    }
+    return SceneService.getTargetPosition(this.state, this.props);
   }
 
   updateCameraVectors = () => {
-    const {positions} = this.state;
-    const {camera} = this.refs;
-    const {
-      perspective,
-      targetName,
-      lookAtName
-    } = this.props;
-
-    if(positions[targetName] && positions[lookAtName] && perspective) {
-      camera.position.copy(positions[targetName].position3d);
-      camera.lookAt(positions[lookAtName].position3d);
-    }
+    SceneService.updateCameraVectors(
+      this.state,
+      this.props,
+      this.refs.camera
+    );
   }
 
   setDomElement = (domElement) => {
@@ -85,9 +109,9 @@ export class SceneContainer extends React.Component {
   }
 
   changeZoom = (event) => {
-    const zoom = this.controls.getZoomDelta(event.deltaY);
-
-    this.props.action.changeZoom(zoom);
+    this.props.action.changeZoom(
+      this.controls.getZoomDelta(event.deltaY)
+    );
   }
 
   render() {
@@ -104,7 +128,7 @@ export class SceneContainer extends React.Component {
           alpha={true}
           canvasRef={this.setDomElement}>
           <scene>
-            <group position={this.getTargetPosition()}>
+            <group position={this.getTargetPosition()} ref="cameraBase">
               <perspectiveCamera
                 name="camera"
                 ref="camera"
@@ -131,6 +155,10 @@ export class SceneContainer extends React.Component {
 }
 
 export default connect(
-  ReduxService.mapStateToProps('uiControls', 'zoom', 'scale'),
+  ReduxService.mapStateToProps(
+    'uiControls.zoom',
+    'uiControls.scale',
+    'label.targetName'
+  ),
   ReduxService.mapDispatchToProps(Actions)
 )(SceneContainer);

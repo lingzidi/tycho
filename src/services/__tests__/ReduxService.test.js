@@ -8,7 +8,11 @@ describe('Redux Service', () => {
 
     it('should assign all properties from the given reducer to the returned prop object', () => {
       const reducer = 'foo';
-      const props = ['bar', 'baz'];
+      const props = [
+        'foo.bar',
+        'foo.baz',
+        'bar.foo'
+      ];
       const bar = 'test1';
       const baz = 'test2';
       const state = {

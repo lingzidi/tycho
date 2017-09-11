@@ -64,7 +64,7 @@ describe('App Component', () => {
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    xit('should update the clock speed', () => {
+    it('should update the clock speed', () => {
       const speed = 2;
       const spy = jest.spyOn(app.clock, 'speed');
 
@@ -72,7 +72,6 @@ describe('App Component', () => {
       app.onAnimate();
 
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(speed);
     });
   });
 

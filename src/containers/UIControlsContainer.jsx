@@ -48,6 +48,10 @@ export class UIControlsContainer extends React.Component {
 }
 
 export default connect(
-  ReduxService.mapStateToProps('uiControls', 'speed', 'zoom', 'scale'),
+  ReduxService.mapStateToProps(
+    'uiControls.speed',
+    'uiControls.zoom',
+    'uiControls.scale'
+  ),
   ReduxService.mapDispatchToProps(Actions)
 )(UIControlsContainer);

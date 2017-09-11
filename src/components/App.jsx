@@ -66,6 +66,9 @@ export class App extends React.Component {
 }
 
 export default connect(
-  ReduxService.mapStateToProps('uiControls', 'speed', 'timeOffset'),
+  ReduxService.mapStateToProps(
+    'uiControls.speed',
+    'uiControls.timeOffset'
+  ),
   null
 )(App);

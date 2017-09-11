@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Label Container render() should render the Label successfully 1`] = `
+<Label
+  onClick={[Function]}
+  onHover={[Function]}
+  style={null}
+  text="Test Thing"
+/>
+`;

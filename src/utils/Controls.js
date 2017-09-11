@@ -1,11 +1,13 @@
 import * as THREE from 'three';
 import OrbitControls from 'three-orbit-controls';
+import TWEEN from 'tween.js';
 
 export default class Controls extends OrbitControls(THREE) {
 
   constructor(camera, domElement) {
     super(camera, domElement);
 
+    // TODO: clean this up
     this.camera = camera;
     this.level = 100;
     this.enabled = true;
@@ -32,7 +34,7 @@ export default class Controls extends OrbitControls(THREE) {
    * Calculates the zoom percentage from the given mousewheel delta.
    *
    * @param {Number} delta - mousewheel delta
-   * @return {Number} new zoom level
+   * @returns {Number} new zoom level
    */
   getZoomDelta = (delta) => {
     let zoom = this.level * 100;
@@ -58,9 +60,10 @@ export default class Controls extends OrbitControls(THREE) {
 
   /**
    * Returns the current vector scaled to the desired zoom.
+   *
    * @param {Vector3} v - current position vector
    * @param {Number} p - percentage of zoom [0,1]
-   * @return {Vector3}
+   * @returns {Vector3}
    */
   getZoomVector = (v, p) => {
     return v
@@ -91,5 +94,63 @@ export default class Controls extends OrbitControls(THREE) {
    */
   disable = () => {
     this.enabled = false;
+  }
+
+  /**
+   * Deletes Tween instance and data.
+   */
+  endTween = () => {
+    delete this.tweenData;
+    delete this.tweenBase;
+  }
+
+  /**
+   * Cancels Tween, if one is in progress.
+   */
+  cancelTween = () => {
+    if (this.tweenBase) {
+      this.tweenBase.stop();
+      this.endTween();
+    }
+  }
+
+  /**
+   * Zooms to the level of the current Tween data.
+   */
+  updateTween = () => {
+    this.zoom(this.tweenData.level);
+  }
+
+  /**
+   * Invokes teardown methods for active tween.
+   */
+  completeTween = () => {
+    this.level = this.tweenData.level;
+
+    if (this.tweenDone) {
+      this.tweenDone(this.level);
+    }
+    this.endTween();
+  }
+
+  /**
+   * Creates an animation to zoom to the specified level.
+   *
+   * @param {Number} level - percentage of zoom
+   * @param {Function} onDone - animation completion callback
+   */
+  tweenZoom = (level, onDone) => {
+    this.cancelTween();
+
+    this.tweenDone = onDone;
+    this.tweenData = {level: this.level};
+
+    this.tweenBase = new TWEEN
+      .Tween(this.tweenData)
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .to({level}, 5000)
+      .onUpdate(this.updateTween)
+      .onComplete(this.completeTween)
+      .start();
   }
 }

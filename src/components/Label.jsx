@@ -1,42 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Label extends React.Component {
+export default class Label extends React.Component {
 
   static propTypes = {
-    position: PropTypes.object,
+    style: PropTypes.object,
     text: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
     active: PropTypes.bool
-  }
-
-  getPosition = (pos) => {
-    if (pos) {
-      return {
-        position: 'absolute',
-        top: `${pos.top}px`,
-        left: `${pos.left}px`
-      };
-    }
-    return null;
-  }
-
-  getChildren = (children, active) => {
-    if (active) {
-      return children;
-    }
-    return null;
   }
   
   render() {
     return (
       <div>
-        <span style={this.getPosition(this.props.position)}>
+        <span
+          style={this.props.style}
+          onClick={this.props.onClick}>
           {this.props.text}
         </span>
-        {this.getChildren(this.props.children, this.props.active)}
+        {this.props.children}
       </div>
     );
   }
 }
-
-export default Label;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Label from './Label';
+import LabelContainer from '../containers/LabelContainer';
 
 class LabelGroup extends React.Component {
 
@@ -10,16 +10,15 @@ class LabelGroup extends React.Component {
   }
   
   getOrbitalLabels = (orbitals) => {
-    return orbitals.map((orbital) => {
-      return (
-        <Label
-          position={this.props.positions[orbital.id]}
-          text={orbital.name}
-          key={orbital.id}>
-          {orbital.satellites && this.getOrbitalLabels(orbital.satellites)}
-        </Label>
-      );
-    });
+    return orbitals.map((orbital) => (
+      <LabelContainer
+        position={this.props.positions[orbital.id]}
+        text={orbital.name}
+        id={orbital.id}
+        key={orbital.id}>
+        {orbital.satellites && this.getOrbitalLabels(orbital.satellites)}
+      </LabelContainer>
+    ));
   }
 
   render() {

@@ -10,11 +10,21 @@ export default class ReduxService {
    * @param {...String} props - list of prop names to copy from the reducer
    * @returns {Function<Object>} new props to be assigned
    */
-  static mapStateToProps = (reducer, ...props) => {
+  static mapStateToProps = (...props) => {
     return function(state) {
       let data = {};
+
       props.forEach((prop) => {
-        data[prop] = state[reducer][prop];
+        const path = prop.split('.');
+        const reducer = path[0];
+        const key = path[1];
+
+        if (!data[reducer]) {
+          data[reducer] = {};
+        }
+        if (state[reducer]) {
+          data[key] = state[reducer][key];
+        }
       });
       return data;
     }

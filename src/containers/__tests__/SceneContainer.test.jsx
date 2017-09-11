@@ -2,12 +2,16 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import renderer from 'react-test-renderer';
 import ReactDOM from 'react-dom';
+import TWEEN from 'tween.js';
 import {Vector3, Camera} from 'three';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import {SceneContainer} from '../SceneContainer';
 import Controls from '../../utils/Controls';
 import data from '../../global/fixtures';
+import SceneService from '../../services/SceneService';
+
+jest.mock('../../services/SceneService');
 
 describe('Scene Container', () => {
   let component, sceneContainer;
@@ -74,15 +78,17 @@ describe('Scene Container', () => {
       expect(spy).toHaveBeenCalledWith(nextProps.zoom);
     });
 
-    it('should not call controls.zoom() if the `zoom` prop remains the same', () => {
-      const zoom = 10;
-      const nextProps = {zoom};
-      const spy = jest.spyOn(sceneContainer.controls, 'zoom');
+    it('should start tweening to `targetName` if the prop has changed', () => {
+      const targetName = 'Mars';
+      const nextProps = {targetName: 'Earth'};
+      const spy = jest.spyOn(sceneContainer, 'startTween');
 
-      sceneContainer.props = {zoom};
+      sceneContainer.state = {positions: {}};
+      sceneContainer.props = {targetName};
       sceneContainer.componentWillReceiveProps(nextProps);
 
-      expect(spy).not.toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(nextProps.targetName);
     });
   });
 
@@ -121,151 +127,86 @@ describe('Scene Container', () => {
     });
   });
 
-  describe('getTargetPosition()', () => {
-    describe('when not in perspective mode', () => {
-      it('should return the `position3d` if the target is defined', () => {
-        const position3d = {x: 1, y: 1, z: 1};
-        const targetName = 'MARS';
+  describe('endTween()', () => {
+    it('should dispose of the tweenData and tweenBase', () => {
+      sceneContainer.tweenData = {};
+      sceneContainer.tweenBase = {};
+      sceneContainer.endTween();
 
-        sceneContainer.props = {targetName};
-        sceneContainer.state = {
-          positions: {
-            [targetName]: {position3d}
-          }
-        };
+      expect(sceneContainer).not.toHaveProperty('tweenData');
+      expect(sceneContainer).not.toHaveProperty('tweenBase');
+    });
+  });
 
-        const result = sceneContainer.getTargetPosition();
+  describe('cancelTween()', () => {
+    it('should call endTween, if the tweenBase is defined', () => {
+      const stop = jest.fn();
+      const spy = jest.spyOn(sceneContainer, 'endTween');
 
-        expect(result).toBeDefined();
-        expect(result).toEqual(position3d);
-      });
+      sceneContainer.tweenBase = {stop};
+      sceneContainer.cancelTween();
 
-      it('should return <0> when the target is not defined', () => {
-        sceneContainer.state = {positions: {}};
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
 
-        const result = sceneContainer.getTargetPosition();
+  describe('startTween()', () => {
+    const targetName = 'Earth';
+    const action = {};
+    const cameraBase = {};
+    const tweenZoom = jest.fn();
+    const positions = {[targetName]: {}};
 
-        expect(result).toBeDefined();
-        expect(result).toBeInstanceOf(Vector3);
-        expect(result).toEqual(new Vector3(0, 0, 0));
-      });
-
-      it('should return <0> when state is null', () => {
-        sceneContainer.state = null;
-
-        const result = sceneContainer.getTargetPosition();
-
-        expect(result).toBeDefined();
-        expect(result).toBeInstanceOf(Vector3);
-        expect(result).toEqual(new Vector3(0, 0, 0));
-      });
+    beforeEach(() => {
+      sceneContainer.controls = {tweenZoom};
+      sceneContainer.refs = {cameraBase};
+      sceneContainer.props = {action};
+      sceneContainer.state = {positions};
     });
 
-    describe('when in perspective mode', () => {
-      it('should return <0>', () => {
-        sceneContainer.state = {
-          perpsective: true,
-          positions: {}
-        };
+    it('should call cancelTween()', () => {
+      const spy = jest.spyOn(sceneContainer, 'cancelTween');
 
-        const result = sceneContainer.getTargetPosition();
+      sceneContainer.startTween(targetName);
+      
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
 
-        expect(result).toBeDefined();
-        expect(result).toBeInstanceOf(Vector3);
-        expect(result).toEqual(new Vector3(0, 0, 0));
-      });
+    it('should initialize a new tween', () => {
+      sceneContainer.startTween(targetName);
+      expect(typeof sceneContainer.tweenBase).toEqual('object');
+    });
+  });
+
+  describe('getTargetPosition()', () => {
+    it('should return the vector version of current tweenData, if any', () => {
+      const tweenData = {x: 1, y: 1, z: 1};
+
+      SceneService.objectToVector = (v) => v;
+      sceneContainer.tweenData = tweenData;
+
+      const result = sceneContainer.getTargetPosition();
+
+      expect(result).toEqual(tweenData);
+    });
+
+    it('should return the target position if scene container is not actively tweening', () => {
+      const targetPosition = {x: 1, y: 1, z: 1};
+      SceneService.getTargetPosition = () => targetPosition;
+      const result = sceneContainer.getTargetPosition();
+
+      expect(result).toEqual(targetPosition);
     });
   });
 
   describe('updateCameraVectors()', () => {
-    let copySpy, lookAtSpy;
+    it('should call the service method', () => {
+      const spy = jest.spyOn(SceneService, 'updateCameraVectors');
+      sceneContainer.updateCameraVectors();
 
-    beforeEach(() => {
-      const copy = jest.fn();
-      const lookAt = jest.fn();
-
-      sceneContainer.refs = {
-        camera: {position: {copy}, lookAt}
-      };
-      lookAtSpy = jest.spyOn(sceneContainer.refs.camera, 'lookAt');
-      copySpy = jest.spyOn(sceneContainer.refs.camera.position, 'copy');
-    });
-
-    describe('when not in perspective mode', () => {
-      it('should not change the lookAt or target of the camera', () => {
-        sceneContainer.state = {
-          positions: {
-            Earth: 1,
-            Mars: 2
-          }
-        };
-        sceneContainer.props = {
-          lookAtName: 'Mars',
-          targetName: 'Earth'
-        };
-        sceneContainer.updateCameraVectors();
-
-        expect(copySpy).not.toHaveBeenCalled();
-        expect(lookAtSpy).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('when in perspective mode', () => {
-      it('should look at the lookAtName from the targetName if both are defined', () => {
-        const position3d = new Vector3(1, 2, 3);
-
-        sceneContainer.state = {
-          positions: {
-            Earth: {position3d},
-            Mars: {position3d}
-          }
-        };
-        sceneContainer.props = {
-          lookAtName: 'Mars',
-          targetName: 'Earth',
-          perspective: true
-        };
-        sceneContainer.updateCameraVectors(true);
-
-        expect(copySpy).toHaveBeenCalled();
-        expect(copySpy).toHaveBeenCalledWith(position3d);
-        expect(lookAtSpy).toHaveBeenCalled();
-        expect(lookAtSpy).toHaveBeenCalledWith(position3d);
-      });
-
-      it('should not change the lookAt or target positions of the camera if the lookAtName is undefined', () => {
-        sceneContainer.state = {
-          positions: {
-            Earth: 1
-          }
-        };
-        sceneContainer.props = {
-          lookAtName: 'Mars',
-          targetName: 'Earth',
-          perspective: true
-        };
-        sceneContainer.updateCameraVectors();
-
-        expect(copySpy).not.toHaveBeenCalled();
-        expect(lookAtSpy).not.toHaveBeenCalled();
-      });
-
-      it('should not change the lookAt or target of the camera if the targetName is undefined', () => {
-        sceneContainer.state = {
-          positions: {
-            Mars: 2
-          }
-        };
-        sceneContainer.props = {
-          lookAtName: 'Mars',
-          targetName: 'Earth',
-          perspective: true
-        };
-        sceneContainer.updateCameraVectors();
-
-        expect(copySpy).not.toHaveBeenCalled();
-        expect(lookAtSpy).not.toHaveBeenCalled();
-      });
+      expect(spy).toHaveBeenCalled();
     });
   });
 

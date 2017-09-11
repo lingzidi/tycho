@@ -1,3 +1,4 @@
+import TWEEN from 'tween.js';
 import {Camera, Vector3} from 'three';
 import Controls from '../Controls';
 
@@ -110,6 +111,120 @@ describe('Controls', () => {
 
       expect(typeof controls.enabled).toBe('boolean');
       expect(controls.enabled).toEqual(false);
+    });
+  });
+
+  describe('updateTween()', () => {
+    it('should statically zoom to the current tween level', () => {
+      const spy = jest.spyOn(controls, 'zoom');
+      const level = 40;
+
+      controls.tweenData = {level};
+      controls.updateTween();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(level);
+    });
+  });
+
+  describe('endTween()', () => {
+    it('should dispose of the tweenBase and tweenData objects', () => {
+      const spy = jest.spyOn(controls, 'endTween');
+
+      controls.tweenBase = {};
+      controls.tweenData = {};
+      controls.completeTween();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('cancelTween()', () => {
+    it('should stop the active tween', () => {
+      const stop = jest.fn();
+      controls.tweenBase = {stop};
+      const spy = jest.spyOn(controls.tweenBase, 'stop');
+
+      controls.cancelTween();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call endTween', () => {
+      const stop = jest.fn();
+      const spy = jest.spyOn(controls, 'endTween');
+
+      controls.tweenBase = {stop};
+      controls.cancelTween();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('completeTween()', () => {
+    it('should assign the current level to the destination level', () => {
+      const level = 40;
+
+      controls.tweenData = {level};
+      controls.level = 100;
+      controls.completeTween();
+
+      expect(controls.level).toEqual(level);
+    });
+
+    it('should invoke the tweenDone callback assignment, if exists', () => {
+      controls.tweenDone = jest.fn();
+      controls.tweenData = {};
+
+      const spy = jest.spyOn(controls, 'tweenDone');
+
+      controls.completeTween();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call endTween()', () => {
+      const spy = jest.spyOn(controls, 'endTween');
+
+      controls.tweenData = {};
+      controls.completeTween();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('tweenZoom()', () => {
+    it('should cancel any tween in progress', () => {
+      const spy = jest.spyOn(controls, 'cancelTween');
+
+      controls.tweenZoom(50);
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should assign the tween data to be the current zoom level', () => {
+      controls.level = 100;
+      controls.tweenZoom(50);
+
+      expect(controls).toHaveProperty('tweenData');
+      expect(controls.tweenData).toHaveProperty('level');
+      expect(controls.tweenData.level).toEqual(controls.level);
+    });
+
+    it('should assign a new tween to tweenBase', () => {
+      const tween = new TWEEN.Tween();
+
+      controls.tweenBase = tween;
+      controls.tweenZoom(50);
+
+      expect(controls).toHaveProperty('tweenBase');
+      expect(controls.tweenBase).toBeInstanceOf(TWEEN.Tween);
     });
   });
 });
