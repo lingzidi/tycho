@@ -49,6 +49,7 @@ export class SceneContainer extends React.Component {
     this.updateCameraVectors();
     this.updateCameraPosition();
     this.props.onAnimate();
+    this.controls.update();
     TWEEN.update();
   }
 

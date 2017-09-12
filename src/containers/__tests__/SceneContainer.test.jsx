@@ -95,6 +95,7 @@ describe('Scene Container', () => {
   describe('onAnimate()', () => {
     it('should call updateCameraVectors() and onAnimate()', () => {
       sceneContainer.props = {onAnimate: jest.fn()};
+      sceneContainer.controls = {update: jest.fn()};
       sceneContainer.updateCameraVectors = jest.fn();
 
       const updateCamVectSpy = jest.spyOn(sceneContainer, 'updateCameraVectors');

@@ -95,6 +95,23 @@ export default class Controls extends OrbitControls(THREE) {
   }
 
   /**
+   * Starts autorotating the scene clockwise.
+   *
+   * @param {Number} speed - speed to rotate at
+   */
+  startAutoRotate = (speed) => {
+    this.autoRotate = true;
+    this.autoRotateSpeed = speed;
+  }
+
+  /**
+   * Stop autorotating the scene.
+   */
+  stopAutoRotate = () => {
+    this.autoRotate = false;
+  }
+
+  /**
    * Deletes Tween instance and data.
    */
   endTween = () => {

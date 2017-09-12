@@ -114,6 +114,25 @@ describe('Controls', () => {
     });
   });
 
+  describe('startAutoRotate()', () => {
+    it('should start autorotating the scene at the given speed', () => {
+      const speed = 2;
+
+      controls.startAutoRotate(speed);
+
+      expect(controls.autoRotate).toBe(true);
+      expect(controls.autoRotateSpeed).toEqual(speed);
+    });
+  });
+
+  describe('stopAutoRotate()', () => {
+    it('should stop autorotating the scene', () => {
+      controls.stopAutoRotate();
+
+      expect(controls.autoRotate).toBe(false);
+    });
+  });
+
   describe('updateTween()', () => {
     it('should statically zoom to the current tween level', () => {
       const spy = jest.spyOn(controls, 'zoom');
