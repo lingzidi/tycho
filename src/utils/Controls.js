@@ -19,13 +19,11 @@ export default class Controls extends OrbitControls(THREE) {
   /**
    * Change zoom. Overrides the existing zoom tween in progress.
    *
-   * @param {level} level - destination zoom level [0,100]
+   * @param {level} level - percentage of desired zoom level [0,100]
    */
   zoom = (level) => {
-    level = level / 100;
-
     if(this.level !== level) {
-      this.pan(level);
+      this.pan(level / 100);
       this.level = level;
     }
   }
@@ -37,7 +35,7 @@ export default class Controls extends OrbitControls(THREE) {
    * @returns {Number} new zoom level
    */
   getZoomDelta = (delta) => {
-    let zoom = this.level * 100;
+    let zoom = this.level;
     
     zoom += (delta / 50); // TODO: constant
     zoom = Math.max(zoom, 1);
@@ -125,8 +123,6 @@ export default class Controls extends OrbitControls(THREE) {
    * Invokes teardown methods for active tween.
    */
   completeTween = () => {
-    this.level = this.tweenData.level;
-
     if (this.tweenDone) {
       this.tweenDone(this.level);
     }

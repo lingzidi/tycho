@@ -83,6 +83,7 @@ export class SceneContainer extends React.Component {
     if (target) {
       this.cancelTween();
       this.controls.tweenZoom(1, this.props.action.changeZoom);
+
       this.tweenData = SceneService.vectorToObject(this.refs.cameraBase.position);
       this.tweenBase = new TWEEN.Tween(this.tweenData);
 

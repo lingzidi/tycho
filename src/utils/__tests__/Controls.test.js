@@ -12,14 +12,14 @@ describe('Controls', () => {
   
   describe('zoom()', () => {
     describe('when the zoom level has changed', () => {
-      const newLevel = 0.5;
+      const newLevel = 50;
       let spy;
 
       beforeEach(() => {
         spy = jest.spyOn(controls, 'pan');
-        controls.level = 0.6;
+        controls.level = 60;
         
-        controls.zoom(50);
+        controls.zoom(newLevel);
       });
 
       it('should update the `level` property to the new zoom and pan', () => {
@@ -27,18 +27,18 @@ describe('Controls', () => {
         expect(controls.level).toEqual(newLevel);
       });
 
-      it('should pan to the new level', () => {
+      it('should call pan with `newLevel` converted to a decimal percentage', () => {
         expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(newLevel);
+        expect(spy).toHaveBeenCalledWith(newLevel / 100);
       });
     });
 
     describe('when the zoom level has not changed', () => {
       it('should not change the `level` property', () => {
-        const oldLevel = 0.5;
+        const oldLevel = 50;
         controls.level = oldLevel;
 
-        controls.zoom(50);
+        controls.zoom(oldLevel);
 
         expect(typeof controls.level).toBe('number');
         expect(controls.level).toEqual(oldLevel);
@@ -52,7 +52,7 @@ describe('Controls', () => {
       const result = controls.getZoomDelta(-40);
 
       expect(typeof result).toBe('number');
-      expect(result).toEqual(100);
+      expect(result).toEqual(49.2);
     });
   });
 
@@ -61,7 +61,7 @@ describe('Controls', () => {
       const zoomVector = new Vector3(1, 2, 3);
 
       controls.getZoomVector = () => zoomVector;
-      controls.pan(0.5);
+      controls.pan(50);
 
       expect(controls.camera.position).toBeInstanceOf(Vector3);
       expect(controls.camera.position).toEqual(zoomVector);
@@ -165,16 +165,6 @@ describe('Controls', () => {
   });
 
   describe('completeTween()', () => {
-    it('should assign the current level to the destination level', () => {
-      const level = 40;
-
-      controls.tweenData = {level};
-      controls.level = 100;
-      controls.completeTween();
-
-      expect(controls.level).toEqual(level);
-    });
-
     it('should invoke the tweenDone callback assignment, if exists', () => {
       controls.tweenDone = jest.fn();
       controls.tweenData = {};
