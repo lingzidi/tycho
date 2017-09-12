@@ -47,6 +47,7 @@ export class SceneContainer extends React.Component {
 
   onAnimate = () => {
     this.updateCameraVectors();
+    this.updateCameraPosition();
     this.props.onAnimate();
     TWEEN.update();
   }
@@ -104,6 +105,16 @@ export class SceneContainer extends React.Component {
     );
   }
 
+  updateCameraPosition = () => {
+    const {camera} = this.refs;
+
+    if (camera) {
+      this.setState({
+        cameraMatrix: camera.position.clone()
+      });
+    }
+  }
+
   setDomElement = (domElement) => {
     this.domElement = domElement;
   }
@@ -144,7 +155,8 @@ export class SceneContainer extends React.Component {
               camera={this.refs.camera}
               updatePosition={this.updatePosition}
               orbitalData={this.props.orbitalData}
-              scale={this.props.scale}>
+              scale={this.props.scale}
+              cameraMatrix={this.state && this.state.cameraMatrix}>
               {this.props.children}
             </Scene>
           </scene>

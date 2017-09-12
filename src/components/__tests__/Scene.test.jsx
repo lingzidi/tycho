@@ -22,24 +22,6 @@ describe('Scene Component', () => {
     scene = component.instance();
   });
 
-  describe('getCameraPosition()', () => {
-    it('should returned the cloned position vector', () => {
-      const position = new Vector3(1, 2, 3);
-      const camera = {position};
-      const cloned = scene.getCameraPosition(camera);
-
-      expect(cloned !== position).toBe(true);
-      expect(cloned).toEqual(position);
-    });
-
-    it('should return null if the camera is undefined', () => {
-      const cloned = scene.getCameraPosition();
-
-      expect(cloned).toBeDefined();
-      expect(cloned).toBeNull();
-    });
-  });
-
   describe('getOrbitalElements()', () => {
     let orbitalContainers;
 

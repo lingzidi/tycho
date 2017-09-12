@@ -117,9 +117,7 @@ exports[`Scene Component render() should render the scene 1`] = `
   <axisHelper
     size={500}
   />
-  <mesh
-    lookAt={null}
-  >
+  <mesh>
     <planeGeometry
       height={100}
       width={100}

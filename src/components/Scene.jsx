@@ -22,16 +22,9 @@ export default class Scene extends React.Component {
         updatePosition={this.props.updatePosition}
         isSatellite={isSatellite}
         key={orbital.id}>
-        {(orbital.satellites ? this.getOrbitalElements(orbital.satellites, !isSatellite) : null)}
+        {orbital.satellites && this.getOrbitalElements(orbital.satellites, !isSatellite)}
       </OrbitalContainer>
     ));
-  }
-
-  getCameraPosition = (camera) => {
-    if (camera) {
-      return camera.position.clone();
-    }
-    return null;
   }
 
   render() {
@@ -39,7 +32,7 @@ export default class Scene extends React.Component {
       <group>
         {this.getOrbitalElements(this.props.orbitalData)}
         <axisHelper size={500} />
-        <mesh lookAt={this.getCameraPosition(this.props.camera)}>
+        <mesh lookAt={this.props.cameraMatrix}>
           <planeGeometry width={100} height={100} />
           <meshBasicMaterial color={0x00ff00} />
         </mesh>

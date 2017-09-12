@@ -210,6 +210,18 @@ describe('Scene Container', () => {
     });
   });
 
+  describe('updateCameraPosition()', () => {
+    it('should returned the cloned position vector', () => {
+      const position = new Vector3(1, 2, 3);
+      const camera = {position};
+      
+      sceneContainer.refs = {camera};  
+      sceneContainer.updateCameraPosition();
+
+      expect(component.state('cameraMatrix')).toEqual(position);
+    });
+  });
+
   describe('setDomElement()', () => {
     it('should set `domElement` to the value of the param passed', () => {
       const elem = <canvas />;

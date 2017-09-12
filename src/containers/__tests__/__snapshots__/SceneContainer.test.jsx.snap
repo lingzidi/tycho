@@ -40,6 +40,7 @@ exports[`Scene Container render() should render the scene container successfully
         />
       </group>
       <Scene
+        cameraMatrix={null}
         orbitalData={
           Array [
             Object {
