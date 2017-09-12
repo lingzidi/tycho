@@ -75,4 +75,20 @@ export default class SceneService {
       camera.lookAt(positions[lookAtName].position3d);
     }
   }
+
+  /**
+   * Gets the zoom delta from controls and invokes the given action if zoom has changed.
+   *
+   * @param {Event} event - DOM mousewheel event
+   * @param {Controls} controls - instance of controls
+   * @param {Function} action - callback action
+   */
+  static mapZoom = (event, controls, action) => {
+    const zoom = controls.getZoomDelta(event.deltaY);
+    const current = Math.round(controls.level * 100);
+
+    if (current !== zoom) {
+      action(zoom);
+    }
+  }
 }

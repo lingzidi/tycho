@@ -188,4 +188,36 @@ describe('Scene Service', () => {
       });
     });
   });
+
+  describe('mapZoom()', () => {
+    let action, spy; 
+
+    beforeEach(() => {
+      action = {changeZoom: jest.fn()};
+      spy = jest.spyOn(action, 'changeZoom');
+    });
+
+    it('should call the given action callback with the calculated zoom, if changed', () => {
+      const newZoom = 20;
+      const controls = {
+        getZoomDelta: () => newZoom
+      };
+      SceneService.mapZoom({}, controls, action.changeZoom);
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(newZoom);
+    });
+
+    it('should not call the given callback if the zoom stays the same', () => {
+      const newZoom = 20;
+      const controls = {
+        getZoomDelta: () => newZoom,
+        level: newZoom / 100
+      };
+      SceneService.mapZoom({}, controls, action.changeZoom);
+
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
+
 });

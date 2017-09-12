@@ -120,8 +120,10 @@ export class SceneContainer extends React.Component {
   }
 
   changeZoom = (event) => {
-    this.props.action.changeZoom(
-      this.controls.getZoomDelta(event.deltaY)
+    SceneService.mapZoom(
+      event,
+      this.controls,
+      this.props.action.changeZoom
     );
   }
 

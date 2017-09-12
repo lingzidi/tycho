@@ -233,26 +233,17 @@ describe('Scene Container', () => {
   });
 
   describe('changeZoom()', () => {
-    it('should call the redux changeZoom action with the calculated zoom', () => {
-      const deltaY = -40;
-      const ev = {deltaY};
-      const newZoom = 20;
-      
-      sceneContainer.controls = {
-        getZoomDelta: () => newZoom
-      };
+    it('should call mapZoom()', () => {
+      SceneService.mapZoom = jest.fn();
+      const changeZoom = jest.fn();
+      const spy = jest.spyOn(SceneService, 'mapZoom');
+
       sceneContainer.props = {
-        action: {
-          changeZoom: jest.fn()
-        }
+        action: {changeZoom}
       };
+      sceneContainer.changeZoom();
 
-      const spy = jest.spyOn(sceneContainer.props.action, 'changeZoom');
-
-      sceneContainer.changeZoom(ev);
-
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(newZoom);
+      expect(spy).toHaveBeenCalled();
     });
   });
 
