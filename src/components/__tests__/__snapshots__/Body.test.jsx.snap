@@ -12,8 +12,8 @@ exports[`Body Component should render the body successfully 1`] = `
       }
     }
   >
-    <meshBasicMaterial
-      color={0}
+    <meshPhongMaterial
+      specular={0}
     />
     <sphereGeometry
       heightSegments={32}

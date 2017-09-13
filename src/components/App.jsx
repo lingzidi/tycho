@@ -2,6 +2,7 @@ import React from 'react';
 import LabelGroup from './LabelGroup';
 import SceneContainer from '../containers/SceneContainer';
 import UIControlsContainer from '../containers/UIControlsContainer';
+import LoaderContainer from '../containers/LoaderContainer';
 
 export default class App extends React.Component {
   render() {
@@ -23,6 +24,7 @@ export default class App extends React.Component {
         <UIControlsContainer
           time={this.props.time}
         />
+        <LoaderContainer />
       </div>
     );
   }

@@ -18,5 +18,6 @@ exports[`App Component render() should render the app successfully 1`] = `
   <Connect(UIControlsContainer)
     time={1}
   />
+  <Connect(LoaderContainer) />
 </div>
 `;

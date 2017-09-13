@@ -117,6 +117,12 @@ exports[`Scene Component render() should render the scene 1`] = `
   <axisHelper
     size={500}
   />
+  <pointLight
+    color={16777215}
+    distance={500}
+    intensity={0.95}
+  />
+  <Skybox />
   <mesh>
     <planeGeometry
       height={100}

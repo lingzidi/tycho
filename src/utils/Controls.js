@@ -12,6 +12,7 @@ export default class Controls extends OrbitControls(THREE) {
     this.level = 100;
     this.enabled = true;
     this.enableZoom = false;
+    this.enablePan = false;
     this.maxDistance = 500;
     this.minDistance = 1;
   }

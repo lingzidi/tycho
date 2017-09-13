@@ -12,7 +12,7 @@ export default class Body extends React.Component {
     return (
       <group>
         <mesh rotation={this.props.rotation}>
-          <meshBasicMaterial color={0x000000} />
+          <meshPhongMaterial specular={0x000000} />
           <sphereGeometry
             widthSegments={32}
             heightSegments={32}

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OrbitalContainer from '../containers/OrbitalContainer';
+import Skybox from './Skybox';
 
 export default class Scene extends React.Component {
 
@@ -32,6 +33,12 @@ export default class Scene extends React.Component {
       <group>
         {this.getOrbitalElements(this.props.orbitalData)}
         <axisHelper size={500} />
+        <pointLight
+          color={0xffffff}
+          intensity={0.95}
+          distance={500}
+        />
+        <Skybox />
         <mesh lookAt={this.props.cameraMatrix}>
           <planeGeometry width={100} height={100} />
           <meshBasicMaterial color={0x00ff00} />

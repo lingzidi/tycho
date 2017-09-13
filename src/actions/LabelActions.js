@@ -6,5 +6,3 @@ export const setActiveOrbital = (targetName) => {
     targetName
   };
 }
-
-
