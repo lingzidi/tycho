@@ -46,146 +46,34 @@ describe('Scene Service', () => {
   });
 
   describe('getTargetPosition()', () => {
-    describe('when not in perspective mode', () => {
-      it('should return the `position3d` if the target is defined', () => {
-        const position3d = {x: 1, y: 1, z: 1};
-        const targetName = 'Mars';
+    it('should return the `position3d` if the target is defined', () => {
+      const position3d = {x: 1, y: 1, z: 1};
+      const targetName = 'Mars';
+      const positions = {
+        [targetName]: {position3d}
+      };
 
-        const props = {targetName};
-        const state = {
-          positions: {
-            [targetName]: {position3d}
-          }
-        };
+      const result = SceneService.getTargetPosition(positions, targetName);
 
-        const result = SceneService.getTargetPosition(state, props);
-
-        expect(result).toBeDefined();
-        expect(result).toEqual(position3d);
-      });
-
-      it('should return <0> when the target is not defined', () => {
-        const state = {positions: {}};
-        const result = SceneService.getTargetPosition(state, {});
-
-        expect(result).toBeDefined();
-        expect(result).toBeInstanceOf(Vector3);
-        expect(result).toEqual(new Vector3(0, 0, 0));
-      });
-
-      it('should return <0> when state is null', () => {
-        const result = SceneService.getTargetPosition(null, {});
-
-        expect(result).toBeDefined();
-        expect(result).toBeInstanceOf(Vector3);
-        expect(result).toEqual(new Vector3(0, 0, 0));
-      });
+      expect(result).toBeDefined();
+      expect(result).toEqual(position3d);
     });
 
-    describe('when in perspective mode', () => {
-      it('should return <0>', () => {
-        const state = {
-          perpsective: true,
-          positions: {}
-        };
-        const result = SceneService.getTargetPosition(state, {});
+    it('should return <0> when the targetName is not defined', () => {
+      const state = {positions: {}};
+      const result = SceneService.getTargetPosition(state, {});
 
-        expect(result).toBeDefined();
-        expect(result).toBeInstanceOf(Vector3);
-        expect(result).toEqual(new Vector3(0, 0, 0));
-      });
+      expect(result).toBeDefined();
+      expect(result).toBeInstanceOf(Vector3);
+      expect(result).toEqual(new Vector3(0, 0, 0));
     });
 
-  });
+    it('should return <0> when positions is not defined', () => {
+      const result = SceneService.getTargetPosition(undefined, {});
 
-  describe('updateCameraVectors()', () => {
-    let camera, copySpy, lookAtSpy;
-
-    beforeEach(() => {
-      camera = new Camera();
-      
-      lookAtSpy = jest.spyOn(camera, 'lookAt');
-      copySpy = jest.spyOn(camera.position, 'copy');
-    });
-    
-    describe('when not in perspective mode', () => {
-      it('should not change the lookAt or target of the camera', () => {
-        const state = {
-          positions: {
-            Earth: 1,
-            Mars: 2
-          },
-          targetName: 'Earth'
-        };
-        const props = {
-          lookAtName: 'Mars'
-        };
-
-        SceneService.updateCameraVectors(state, props, camera);
-
-        expect(copySpy).not.toHaveBeenCalled();
-        expect(lookAtSpy).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('when in perspective mode', () => {
-      it('should look at the lookAtName from the targetName if both are defined', () => {
-        const position3d = new Vector3(1, 2, 3);
-        const state = {
-          positions: {
-            Earth: {position3d},
-            Mars: {position3d}
-          },
-          targetName: 'Earth'
-        };
-        const props = {
-          lookAtName: 'Mars',
-          perspective: true
-        };
-        
-        SceneService.updateCameraVectors(state, props, camera);
-
-        expect(copySpy).toHaveBeenCalled();
-        expect(copySpy).toHaveBeenCalledWith(position3d);
-        expect(lookAtSpy).toHaveBeenCalled();
-        expect(lookAtSpy).toHaveBeenCalledWith(position3d);
-      });
-
-      it('should not change the lookAt or target positions of the camera if the lookAtName is undefined', () => {
-        const state = {
-          positions: {
-            Earth: 1
-          },
-          targetName: 'Earth'
-        };
-        const props = {
-          lookAtName: 'Mars',
-          perspective: true
-        };
-
-        SceneService.updateCameraVectors(state, props, camera);
-
-        expect(copySpy).not.toHaveBeenCalled();
-        expect(lookAtSpy).not.toHaveBeenCalled();
-      });
-
-      it('should not change the lookAt or target of the camera if the targetName is undefined', () => {
-        const state = {
-          positions: {
-            Mars: 2
-          },
-          targetName: 'Earth'
-        };
-        const props = {
-          lookAtName: 'Mars',
-          perspective: true
-        };
-
-        SceneService.updateCameraVectors(state, props, camera);
-
-        expect(copySpy).not.toHaveBeenCalled();
-        expect(lookAtSpy).not.toHaveBeenCalled();
-      });
+      expect(result).toBeDefined();
+      expect(result).toBeInstanceOf(Vector3);
+      expect(result).toEqual(new Vector3(0, 0, 0));
     });
   });
 

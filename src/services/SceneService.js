@@ -47,33 +47,11 @@ export default class SceneService {
    * @param {Object} props - scene props
    * @returns {Vector3} - active target vector
    */
-  static getTargetPosition = (state, props) => {
-    if (state) {
-      const {positions} = state;
-      const {perspective, targetName} = props;
-
-      if (positions[targetName] && !perspective) {
-        return positions[targetName].position3d;
-      }
+  static getTargetPosition = (positions, targetName) => {
+    if (positions && positions[targetName]) {
+      return positions[targetName].position3d;
     }
     return new Vector3(0, 0, 0);
-  }
-
-  /**
-   * Updates the camera position and lookAt vectors for the given target positions.
-   *
-   * @param {Object} state - scene state
-   * @param {Object} props - scene props
-   * @param {Camera} camera - scene camera
-   */
-  static updateCameraVectors = (state, props, camera) => {
-    const {positions, targetName} = state;
-    const {perspective, lookAtName} = props;
-
-    if(positions[targetName] && positions[lookAtName] && perspective) {
-      camera.position.copy(positions[targetName].position3d);
-      camera.lookAt(positions[lookAtName].position3d);
-    }
   }
 
   /**
