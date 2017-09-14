@@ -19,5 +19,23 @@ exports[`App Component render() should render the app successfully 1`] = `
     time={1}
   />
   <Connect(LoaderContainer) />
+  <Connect(TourContainer)
+    labels={
+      Array [
+        Object {
+          "duration": 1000,
+          "text": "Welcome to the Solar System",
+        },
+        Object {
+          "duration": 1000,
+          "text": "This is a real-time interactive simulation of major planetary bodies",
+        },
+        Object {
+          "duration": 1000,
+          "text": "Let's start exploring",
+        },
+      ]
+    }
+  />
 </div>
 `;

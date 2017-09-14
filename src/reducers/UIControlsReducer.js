@@ -7,12 +7,16 @@ export default function(state = {}, payload) {
   switch(payload.type) {
     case Actions.ZOOM_CHANGE:
       return assign('zoom');
+    case Actions.CAMERA_PANNED:
+      return assign('newVector');
     case Actions.SPEED_CHANGE:
       return assign('speed');
     case Actions.SCALE_CHANGE:
       return assign('scale');
     case Actions.TIME_OFFSET_CHANGE:
       return assign('timeOffset');
+    case Actions.SET_UI_CONTROLS:
+      return assign('controlsEnabled');
     default:
       return state;
   }

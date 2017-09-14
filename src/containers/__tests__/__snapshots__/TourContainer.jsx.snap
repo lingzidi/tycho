@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tour Container getLabels() should return an array of TourLabels 1`] = `
+<TourLabelContainer
+  end={6000}
+  start={1000}
+  text="Welcome to the Solar System"
+/>
+`;
+
+exports[`Tour Container getLabels() should return an array of TourLabels 2`] = `
+<TourLabelContainer
+  end={12000}
+  start={7000}
+  text="This is a real-time interactive simulation of major planetary bodies"
+/>
+`;
+
+exports[`Tour Container getLabels() should return an array of TourLabels 3`] = `
+<TourLabelContainer
+  end={16000}
+  start={13000}
+  text="Let's start exploring"
+/>
+`;
+
+exports[`Tour Container render() should render the tour container with the hide modifier if isComplete = true 1`] = `
+<div>
+  <div
+    className="tour tour--hide"
+  >
+    <div
+      className="tour__theater-bar tour__theater-bar--hide"
+      style={
+        Object {
+          "top": 0,
+        }
+      }
+    />
+    <div
+      className="tour__labels"
+    >
+      <TourLabelContainer
+        end={6000}
+        start={1000}
+        text="Welcome to the Solar System"
+      />
+      <TourLabelContainer
+        end={12000}
+        start={7000}
+        text="This is a real-time interactive simulation of major planetary bodies"
+      />
+      <TourLabelContainer
+        end={16000}
+        start={13000}
+        text="Let's start exploring"
+      />
+    </div>
+    <div
+      className="tour__theater-bar tour__theater-bar--hide"
+      style={
+        Object {
+          "bottom": 0,
+        }
+      }
+    >
+      <span
+        className="tour__skip-link"
+        onClick={[Function]}
+      >
+        Skip Tour
+      </span>
+    </div>
+  </div>
+  <Connect(SpinLabelContainer) />
+</div>
+`;
+
+exports[`Tour Container render() should render the tour container with the show modifier if isComplete = false 1`] = `
+<div>
+  <div
+    className="tour tour--show"
+  >
+    <div
+      className="tour__theater-bar tour__theater-bar--show"
+      style={
+        Object {
+          "top": 0,
+        }
+      }
+    />
+    <div
+      className="tour__labels"
+    >
+      <TourLabelContainer
+        end={6000}
+        start={1000}
+        text="Welcome to the Solar System"
+      />
+      <TourLabelContainer
+        end={12000}
+        start={7000}
+        text="This is a real-time interactive simulation of major planetary bodies"
+      />
+      <TourLabelContainer
+        end={16000}
+        start={13000}
+        text="Let's start exploring"
+      />
+    </div>
+    <div
+      className="tour__theater-bar tour__theater-bar--show"
+      style={
+        Object {
+          "bottom": 0,
+        }
+      }
+    >
+      <span
+        className="tour__skip-link"
+        onClick={[Function]}
+      >
+        Skip Tour
+      </span>
+    </div>
+  </div>
+  <Connect(SpinLabelContainer) />
+</div>
+`;

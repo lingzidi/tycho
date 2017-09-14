@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import React3 from 'react-three-renderer';
 import Controls from '../utils/Controls';
 import Scene from '../components/Scene';
-import * as Actions from '../actions/UIControlsActions';
+import * as UIControlsActions from '../actions/UIControlsActions';
+import * as TourActions from '../actions/TourActions';
 import ReduxService from '../services/ReduxService';
 import SceneService from '../services/SceneService';
 import CameraContainer from './CameraContainer';
@@ -36,8 +37,29 @@ export class SceneContainer extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if (this.props.zoom !== nextProps.zoom) {
-      this.controls.zoom(nextProps.zoom);
+    this.maybeUpdateControlsZoom(nextProps.zoom);
+    this.maybeUpdateAutoOrbit(nextProps.isAutoOrbitEnabled);
+  }
+
+  /**
+   * Updates zoom level if the zoom prop has changed.
+   *
+   * @param {Number} zoom - new zoom prop value
+   */
+  maybeUpdateControlsZoom = (zoom) => {
+    if (this.props.zoom !== zoom) {
+      this.controls.zoom(zoom);
+    }
+  }
+
+  /**
+   * Updates the auto orbit state if the isAutoOrbitEnabled has changed.
+   *
+   * @param {Boolean} isAutoOrbitEnabled - new isAutoOrbitEnabled prop value
+   */
+  maybeUpdateAutoOrbit = (isAutoOrbitEnabled) => {
+    if (this.props.isAutoOrbitEnabled !== isAutoOrbitEnabled) {
+      this.controls.autoRotate = isAutoOrbitEnabled;
     }
   }
 
@@ -96,6 +118,22 @@ export class SceneContainer extends React.Component {
   }
 
   /**
+   * Starts auto-rotation of the camera.
+   */
+  startAutoRotate = () => {
+    this.props.action.setCameraOrbit(true);
+    this.props.action.setUIControls(false);
+  }
+
+  /**
+   * Stops auto-rotation of the camera.
+   */
+  stopAutoRotate = () => {
+    this.props.action.setCameraOrbit(false);
+    this.props.action.setUIControls(true);
+  }
+
+  /**
    * Sets the camera.
    */
   setCamera = (camera) => {
@@ -113,7 +151,10 @@ export class SceneContainer extends React.Component {
     const {width, height} = this.props;
 
     return (
-      <div onWheel={this.changeZoom}>
+      <div
+        onWheel={this.changeZoom}
+        onTouchStart={this.stopAutoRotate}
+        onMouseDown={this.stopAutoRotate}>
         <React3
           onAnimate={this.onAnimate}
           mainCamera="camera"
@@ -152,7 +193,11 @@ export default connect(
   ReduxService.mapStateToProps(
     'uiControls.zoom',
     'uiControls.scale',
-    'label.targetName'
+    'label.targetName',
+    'tour.isAutoOrbitEnabled'
   ),
-  ReduxService.mapDispatchToProps(Actions)
+  ReduxService.mapDispatchToProps(
+    UIControlsActions,
+    TourActions
+  )
 )(SceneContainer);

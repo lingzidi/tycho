@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`UIControls Container render() should successfully render the ui controls container 1`] = `
-<div>
+<div
+  className="uicontrols--disabled"
+>
   <div
-    className="uicontrol uicontrol--scales"
+    className="uicontrols__control uicontrols__control--scales"
   >
     <ScaleSlider
       label="Time speed: × 10^"
@@ -18,19 +20,19 @@ exports[`UIControls Container render() should successfully render the ui control
     />
   </div>
   <div
-    className="uicontrol uicontrol--datetime"
+    className="uicontrols__control uicontrols__control--datetime"
   >
     <DatePicker />
   </div>
   <div
-    className="uicontrol uicontrol--left-bar"
+    className="uicontrols__control uicontrols__control--left-bar"
   >
     <div
-      className="uicontrol__button"
+      className="uicontrols__button"
     />
     <ZoomSlider />
     <div
-      className="uicontrol__button"
+      className="uicontrols__button"
     />
   </div>
 </div>

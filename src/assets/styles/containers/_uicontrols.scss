@@ -1,12 +1,15 @@
-.uicontrol {
-  position: absolute;
-  opacity: 0.5;
-  transition: opacity 0.5s;
-  
-  &:hover {
+.uicontrols {
+  opacity: 0;
+  transition: opacity 1s;
+
+  &--enabled {
     opacity: 1;
   }
-  
+
+  &--disabled {
+    opacity: 0;
+  }
+
   &__button {
     background-color: #000;
     width: 32px;
@@ -15,25 +18,35 @@
     margin: 1em;
   }
 
-  &--datetime {
-    top: 0;
-    right: 0;
-  }
-  
-  &--scales {
-    min-width: 200px;
-    padding: 0 1.25em 1.5em;
-    bottom: 0;
-    right: 0;
-    color: #fff;
-  }
-  
-  &--left-bar {
-    left: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  &__control {
+    position: absolute;
+    opacity: 0.5;
+    transition: opacity 0.5s;
+    
+    &:hover {
+      opacity: 1;
+    }
+
+    &--datetime {
+      top: 0;
+      right: 0;
+    }
+    
+    &--scales {
+      min-width: 200px;
+      padding: 0 1.25em 1.5em;
+      bottom: 0;
+      right: 0;
+      color: #fff;
+    }
+    
+    &--left-bar {
+      left: 0;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

@@ -57,37 +57,60 @@ describe('Scene Container', () => {
 
     it('should no longer have controls assigned to the class instance', () => {
       sceneContainer.componentWillUnmount();
-
       expect(sceneContainer).not.toHaveProperty('controls');
     });
   });
 
-  describe('componentWillReceiveProps()', () => {
+  describe('prop update methods', () => {
     beforeEach(() => {
       sceneContainer.controls = new Controls(new Camera());
     });
 
-    it('should call controls.zoom() if the `zoom` prop has changed', () => {
-      const zoom = 10;
-      const nextProps = {zoom: 20};
-      const spy = jest.spyOn(sceneContainer.controls, 'zoom');
+    describe('maybeUpdateAutoOrbit()', () => {
+      it('should set controls.autoRotate to the value of `isAutoOrbitEnabled` if it has changed', () => {
+        const isAutoOrbitEnabled = false;
+        const nextProps = {isAutoOrbitEnabled};
+        
+        sceneContainer.props = {isAutoOrbitEnabled: !isAutoOrbitEnabled};
+        sceneContainer.componentWillReceiveProps(nextProps);
 
-      sceneContainer.props = {zoom};
-      sceneContainer.componentWillReceiveProps(nextProps);
+        expect(sceneContainer.controls.autoRotate).toEqual(isAutoOrbitEnabled);
+      });
 
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(nextProps.zoom);
+      it('should change the value of controls.autoRotate if `isAutoOrbitEnabled` has not changed', () => {
+        const isAutoOrbitEnabled = false;
+        const nextProps = {isAutoOrbitEnabled};
+
+        sceneContainer.props = {isAutoOrbitEnabled};
+        sceneContainer.componentWillReceiveProps(nextProps);
+
+        expect(sceneContainer.controls.autoRotate).toEqual(isAutoOrbitEnabled);
+      });
     });
 
-    it('should not call controls.zoom() if the `zoom` prop has not changed', () => {
-      const zoom = 10;
-      const nextProps = {zoom};
-      const spy = jest.spyOn(sceneContainer.controls, 'zoom');
+    describe('maybeUpdateControlsZoom()', () => {
+      it('should call controls.zoom() if the `zoom` prop has changed', () => {
+        const zoom = 10;
+        const nextProps = {zoom: 20};
+        const spy = jest.spyOn(sceneContainer.controls, 'zoom');
 
-      sceneContainer.props = {zoom};
-      sceneContainer.componentWillReceiveProps(nextProps);
+        sceneContainer.props = {zoom};
+        sceneContainer.componentWillReceiveProps(nextProps);
 
-      expect(spy).not.toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(nextProps.zoom);
+      });
+
+      it('should not call controls.zoom() if the `zoom` prop has not changed', () => {
+        const zoom = 10;
+        const nextProps = {zoom};
+        const spy = jest.spyOn(sceneContainer.controls, 'zoom');
+
+        sceneContainer.props = {zoom};
+        sceneContainer.componentWillReceiveProps(nextProps);
+
+        expect(spy).not.toHaveBeenCalled();
+      });
     });
   });
 
@@ -164,6 +187,61 @@ describe('Scene Container', () => {
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(1, changeZoom);
+    });
+  });
+
+  describe('auto rotate methods', () => {
+    beforeEach(() => {
+      sceneContainer.props = {
+        action: {
+          setCameraOrbit: jest.fn(),
+          setUIControls: jest.fn()
+        }
+      };
+    });
+
+    describe('startAutoRotate()', () => {
+      it('should call the setCameraOrbit() action with `true`', () => {
+        const spy = jest.spyOn(sceneContainer.props.action, 'setCameraOrbit');
+
+        sceneContainer.startAutoRotate();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(true);
+      });
+
+      it('should call the setUIControls() action with `false`', () => {
+        const spy = jest.spyOn(sceneContainer.props.action, 'setUIControls');
+
+        sceneContainer.startAutoRotate();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(false);
+      });
+    });
+
+    describe('stopAutoRotate()', () => {
+      it('should call the setCameraOrbit() action with `false`', () => {
+        const spy = jest.spyOn(sceneContainer.props.action, 'setCameraOrbit');
+
+        sceneContainer.stopAutoRotate();
+        
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(false);
+      });
+
+      it('should call the setUIControls() action with `true`', () => {
+        const spy = jest.spyOn(sceneContainer.props.action, 'setUIControls');
+
+        sceneContainer.stopAutoRotate();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(true);
+      });
     });
   });
 

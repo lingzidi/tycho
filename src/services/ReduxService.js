@@ -32,15 +32,20 @@ export default class ReduxService {
 
   /**
    * Returns a `mapDispatchToProps` function for Redux.
-   * This will convert the given actions to action creators.
+   * This will combine and convert the given actions to action creators.
    *
    * @param {Object} actions - key-value pair for action methods
    * @returns {Function<Object>}
    */
-  static mapDispatchToProps = (actions) => {
+  static mapDispatchToProps = (...actions) => {
+    // consolidate sets of actions into one object
+    const allActions = actions.reduce((cur, next) => {
+      return Object.assign(cur, next);
+    }, {});
+
     return function(dispatch) {
       return {
-        action: bindActionCreators(actions, dispatch)
+        action: bindActionCreators(allActions, dispatch)
       };
     }
   }

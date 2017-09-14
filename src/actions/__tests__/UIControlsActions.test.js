@@ -49,4 +49,16 @@ describe('UIControls Actions', () => {
       expect(result.timeOffset).toEqual(timeOffset);
     });
   });
+
+  describe('setUIControls()', () => {
+    it('should be of type SET_UI_CONTROLS with the controlsEnabled payload', () => {
+      const controlsEnabled = true;
+      const result = Actions.setUIControls(controlsEnabled);
+      
+      expect(result).toHaveProperty('type');
+      expect(result).toHaveProperty('controlsEnabled');
+      expect(result.type).toEqual(ActionType.SET_UI_CONTROLS);
+      expect(result.controlsEnabled).toEqual(controlsEnabled);
+    });
+  });
 });

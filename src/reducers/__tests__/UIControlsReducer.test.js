@@ -20,6 +20,16 @@ describe('UIControls Reducer', () => {
     expect(result).toEqual({zoom});
   });
 
+  it('should handle CAMERA_PANNED', () => {
+    const newVector = {x: 1, y: 2, z: 3};
+    const result = reducer(undefined, {
+      type: Actions.CAMERA_PANNED,
+      newVector
+    });
+
+    expect(result).toEqual({newVector});
+  });
+
   it('should handle SPEED_CHANGE', () => {
     const speed = 10;
     const result = reducer(undefined, {
@@ -48,5 +58,15 @@ describe('UIControls Reducer', () => {
     });
 
     expect(result).toEqual({timeOffset});
+  });
+
+  it('should handle SET_UI_CONTROLS', () => {
+    const controlsEnabled = true;
+    const result = reducer(undefined, {
+      type: Actions.SET_UI_CONTROLS,
+      controlsEnabled
+    });
+
+    expect(result).toEqual({controlsEnabled});
   });
 });

@@ -27,3 +27,10 @@ export const changeTimeOffset = (timeOffset) => {
     timeOffset
   };
 }
+
+export const setUIControls = (controlsEnabled) => {
+  return {
+    type: Actions.SET_UI_CONTROLS,
+    controlsEnabled
+  };
+}

@@ -3,6 +3,7 @@ import LabelGroup from './LabelGroup';
 import SceneContainer from '../containers/SceneContainer';
 import UIControlsContainer from '../containers/UIControlsContainer';
 import LoaderContainer from '../containers/LoaderContainer';
+import TourContainer from '../containers/TourContainer';
 
 export default class App extends React.Component {
   render() {
@@ -25,6 +26,22 @@ export default class App extends React.Component {
           time={this.props.time}
         />
         <LoaderContainer />
+        <TourContainer
+          labels={[
+            {
+              duration: 1000,
+              text: 'Welcome to the Solar System'
+            },
+            {
+              duration: 1000,
+              text: 'This is a real-time interactive simulation of major planetary bodies'
+            },
+            {
+              duration: 1000,
+              text: 'Let\'s start exploring'
+            }
+          ]}
+        />
       </div>
     );
   }

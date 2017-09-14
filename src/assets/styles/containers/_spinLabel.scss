@@ -1,0 +1,19 @@
+.spin-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+
+  &--hide {
+    opacity: 0;
+  }
+
+  &--show {
+    opacity: 1;
+  }
+}
