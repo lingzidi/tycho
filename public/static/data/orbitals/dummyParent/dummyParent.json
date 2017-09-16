@@ -1,0 +1,25 @@
+{
+  "name": "Dummy Planet",
+  "GM": 6836529,
+  "axialTilt": 23.26,
+  "semimajor": 149598261,
+  "semiminor": 149556483,
+  "radius": 637800,
+  "arcRotate": 45.0411,
+  "inclination": 15.57869,
+  "argPeriapsis": 114.20763,
+  "periapses": {
+    "last": 1156430000,
+    "next": 1167987600
+  },
+  "eccentricity": 0.01671123,
+  "longAscNode": 348.73936,
+  "atmosphereColor": 8421504,
+  "ring": {
+    "innerRadius": 6630,
+    "outerRadius": 950000
+  },
+  "satellites": [
+    "dummyChild"
+  ]
+}
