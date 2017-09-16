@@ -1,6 +1,8 @@
-# Tycho.io
+<p align="center">
+  <img src="https://raw.githubusercontent.com/jshor/tycho2/develop/public/static/img/logo-gradient-dark.png" width="450" height="75" />
+</p>
 
-A Solar System Simulator.
+<br>
 
 [![codecov](https://codecov.io/gh/jshor/tycho2/branch/develop/graph/badge.svg)](https://codecov.io/gh/jshor/tycho2)
 [![Build Status](https://travis-ci.org/jshor/tycho2.svg?branch=master)](https://travis-ci.org/jshor/tycho2)
