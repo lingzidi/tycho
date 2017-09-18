@@ -13,7 +13,9 @@ exports[`Orbital Component render() should render the orbital successfully 1`] =
       rotation={Object {}}
     />
   </group>
-  <line>
+  <line
+    key="rnd123"
+  >
     <lineBasicMaterial
       color={255}
     />

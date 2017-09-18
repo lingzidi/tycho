@@ -12,15 +12,19 @@ exports[`SpinLabel Component render() should render the spin label with the \`hi
     >
       <span
         className="spin__arrow spin__arrow--left"
+        key="0"
       />
       <span
         className="spin__arrow spin__arrow--left"
+        key="1"
       />
       <span
         className="spin__arrow spin__arrow--left"
+        key="2"
       />
       <span
         className="spin__arrow spin__arrow--left"
+        key="3"
       />
     </div>
     <div
@@ -33,15 +37,19 @@ exports[`SpinLabel Component render() should render the spin label with the \`hi
     >
       <span
         className="spin__arrow spin__arrow--right"
+        key="0"
       />
       <span
         className="spin__arrow spin__arrow--right"
+        key="1"
       />
       <span
         className="spin__arrow spin__arrow--right"
+        key="2"
       />
       <span
         className="spin__arrow spin__arrow--right"
+        key="3"
       />
     </div>
   </div>
@@ -60,15 +68,19 @@ exports[`SpinLabel Component render() should render the spin label with the \`sh
     >
       <span
         className="spin__arrow spin__arrow--left"
+        key="0"
       />
       <span
         className="spin__arrow spin__arrow--left"
+        key="1"
       />
       <span
         className="spin__arrow spin__arrow--left"
+        key="2"
       />
       <span
         className="spin__arrow spin__arrow--left"
+        key="3"
       />
     </div>
     <div
@@ -81,15 +93,19 @@ exports[`SpinLabel Component render() should render the spin label with the \`sh
     >
       <span
         className="spin__arrow spin__arrow--right"
+        key="0"
       />
       <span
         className="spin__arrow spin__arrow--right"
+        key="1"
       />
       <span
         className="spin__arrow spin__arrow--right"
+        key="2"
       />
       <span
         className="spin__arrow spin__arrow--right"
+        key="3"
       />
     </div>
   </div>

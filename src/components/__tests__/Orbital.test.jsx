@@ -3,6 +3,8 @@ import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {Orbital} from '../Orbital';
 
+jest.mock('../../utils/Random', () => () => 123);
+
 describe('Orbital Component', () => {
   let component, orbital, updatePosition;
 

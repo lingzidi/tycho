@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Body from './Body';
 import ReactAnimationFrame from 'react-animation-frame';
+import Random from '../utils/Random';
 
 export class Orbital extends React.Component {
 
@@ -32,7 +33,7 @@ export class Orbital extends React.Component {
           />
           {this.props.children}
         </group>
-        <line key={'rnd' + Math.random()}>
+        <line key={'rnd' + Random()}>
           <lineBasicMaterial color={0x0000ff} opacity={this.props.pathOpacity} />
           <geometry vertices={this.props.pathVertices} />
         </line>

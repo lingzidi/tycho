@@ -42,16 +42,19 @@ exports[`Tour Container render() should render the tour container with the hide 
     >
       <TourLabelContainer
         end={6000}
+        key="0"
         start={1000}
         text="Welcome to the Solar System"
       />
       <TourLabelContainer
         end={12000}
+        key="1"
         start={7000}
         text="This is a real-time interactive simulation of major planetary bodies"
       />
       <TourLabelContainer
         end={16000}
+        key="2"
         start={13000}
         text="Let's start exploring"
       />
@@ -94,16 +97,19 @@ exports[`Tour Container render() should render the tour container with the show 
     >
       <TourLabelContainer
         end={6000}
+        key="0"
         start={1000}
         text="Welcome to the Solar System"
       />
       <TourLabelContainer
         end={12000}
+        key="1"
         start={7000}
         text="This is a real-time interactive simulation of major planetary bodies"
       />
       <TourLabelContainer
         end={16000}
+        key="2"
         start={13000}
         text="Let's start exploring"
       />

@@ -4,14 +4,17 @@ exports[`Label Component should render the LabelGroup successfully 1`] = `
 <div>
   <Connect(LabelContainer)
     id="dummyOuter"
+    key="dummyOuter"
     text="Dummy Outer"
   />
   <Connect(LabelContainer)
     id="dummyParent"
+    key="dummyParent"
     text="Dummy Planet"
   >
     <Connect(LabelContainer)
       id="dummyChild"
+      key="dummyChild"
       text="Dummy Satellite"
     />
   </Connect(LabelContainer)>
