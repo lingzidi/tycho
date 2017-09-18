@@ -2,7 +2,7 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {Euler} from 'three';
-import Body from './Body';
+import Body from './';
 
 describe('Body Component', () => {
   let component;

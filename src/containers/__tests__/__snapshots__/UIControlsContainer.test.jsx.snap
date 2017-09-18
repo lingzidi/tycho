@@ -1,39 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`UIControls Container render() should successfully render the ui controls container 1`] = `
-<div
-  className="uicontrols--disabled"
->
-  <div
-    className="uicontrols__control uicontrols__control--scales"
-  >
-    <ScaleSlider
-      label="Time speed: × 10^"
-      max={10}
-      min={0}
-      onChange={[Function]}
-    />
-    <ScaleSlider
-      label="Planet scale: × "
-      max={10}
-      min={1}
-    />
-  </div>
-  <div
-    className="uicontrols__control uicontrols__control--datetime"
-  >
-    <DatePicker />
-  </div>
-  <div
-    className="uicontrols__control uicontrols__control--left-bar"
-  >
-    <div
-      className="uicontrols__button"
-    />
-    <ZoomSlider />
-    <div
-      className="uicontrols__button"
-    />
-  </div>
-</div>
+<UIControls
+  action={
+    Object {
+      "changeSpeed": [Function],
+    }
+  }
+  changeSpeed={[Function]}
+  modifier="disabled"
+/>
 `;
