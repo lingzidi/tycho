@@ -1,10 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Label Component render() should render the Label successfully 1`] = `
+exports[`Label Component render() when active should render the Label without text and with children if active 1`] = `
 <div>
   <span
+    className="label"
     onClick={[Function]}
-    style={Object {}}
+  />
+</div>
+`;
+
+exports[`Label Component render() when not active should render the Label with text and without children if not active 1`] = `
+<div>
+  <span
+    className="label"
+    onClick={[Function]}
   >
     foo
   </span>

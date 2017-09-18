@@ -1,0 +1,11 @@
+.label {
+  position: absolute;
+  text-shadow: 1px 1px 1px #c0c0c0;
+  opacity: 0.75;
+  font-family: Georgia, serif;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+}

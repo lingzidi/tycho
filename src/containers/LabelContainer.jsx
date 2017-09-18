@@ -10,45 +10,48 @@ export class LabelContainer extends React.Component {
   static propTypes = {
     position: PropTypes.object,
     text: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    active: PropTypes.bool
+    id: PropTypes.string.isRequired
   }
 
-  getPosition = (pos) => {
-    if (pos) {
-      return {
-        position: 'absolute',
-        top: `${pos.top}px`,
-        left: `${pos.left}px`
-      };
-    }
-    return null;
-  }
-
-  getChildren = (children, active) => {
-    if (active) {
-      return children;
-    }
-    return null;
-  }
-
+  /**
+   * Sets the targetName global state.
+   */
   setActiveOrbital = () => {
     this.props.action.setActiveOrbital(this.props.id);
   }
 
+  /**
+   * Sets the currently-highlighted orbital path.
+   */
   setHighlightedOrbital = () => {
     this.props.action.setHighlightedOrbital(this.props.id);
+  }
+
+  /**
+   * Determine if the current label is active or not.
+   *
+   * @returns {Boolean} state of label
+   */
+  isActive = () => {
+    const {
+      targetName,
+      id,
+      zoom,
+      controlsEnabled
+    } = this.props;
+
+    return controlsEnabled && targetName === id && zoom <= 25; // TODO: 25 = const
   }
   
   render() {
     return (
       <Label
-        style={this.getPosition(this.props.position)}
+        position={this.props.position}
         onClick={this.setActiveOrbital}
         onHover={this.setHighlightedOrbital}
-        active={this.props.active}
-        text="Test Thing">
-        {this.getChildren(this.props.children, this.props.active)}
+        active={this.isActive()}
+        text={this.props.text}>
+        {this.props.children}
       </Label>
     );
   }
@@ -56,7 +59,9 @@ export class LabelContainer extends React.Component {
 
 export default connect(
   ReduxService.mapStateToProps(
-    'viewer.activePlanet'
+    'label.targetName',
+    'uiControls.zoom',
+    'uiControls.controlsEnabled'
   ),
   ReduxService.mapDispatchToProps(Actions)
 )(LabelContainer);

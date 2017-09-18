@@ -6,7 +6,7 @@ import * as LabelActions from '../actions/LabelActions';
 import ReduxService from '../services/ReduxService';
 import TourService from '../services/TourService';
 import TourLabelContainer from './TourLabelContainer';
-import SpinLabelContainer from '../containers/SpinLabelContainer';
+import Tour from '../components/Tour';
 
 export class TourContainer extends React.Component {
 
@@ -108,29 +108,12 @@ export class TourContainer extends React.Component {
   }
 
   render() {
-    const modifier = this.getModifier(this.props);
     return (
-      <div>
-        <div className={`tour tour--${modifier}`}>
-          <div
-            className={`tour__theater-bar tour__theater-bar--${modifier}`}
-            style={{top: 0}}>
-          </div>
-          <div className="tour__labels">
-						{this.getLabels(this.props.labels)}
-					</div>
-          <div
-            className={`tour__theater-bar tour__theater-bar--${modifier}`}
-            style={{bottom: 0}}>
-            <span
-              className="tour__skip-link"
-              onClick={this.skipTour}>
-              Skip Tour
-            </span>
-          </div>
-				</div>
-        <SpinLabelContainer />
-      </div>
+      <Tour
+        skipTour={this.skipTour}
+        modifier={this.getModifier(this.props)}
+        labels={this.getLabels(this.props.labels)}
+      />
     );
   }
 }

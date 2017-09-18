@@ -116,6 +116,18 @@ describe('Orbital Service', () => {
     });
   });
 
+  describe('isInCameraView()', () => {
+    it('should return a boolean', () => {
+      const position = new Vector3();
+      const camera = new Camera();
+      const matrix = new Matrix4();
+
+      const result = OrbitalService.isInCameraView(camera, matrix, position);
+
+      expect(typeof result).toBe('boolean');
+    });
+  });
+
   describe('translateWorldToScreen()', () => {
     let result;
     const position = new Vector3();
@@ -129,6 +141,12 @@ describe('Orbital Service', () => {
       expect(result).toHaveProperty('left');
       expect(typeof result.top).toBe('number');
       expect(typeof result.left).toBe('number');
+    });
+
+    it('should return null if the position vector is not in the camera frustum', () => {
+      OrbitalService.isInCameraView = () => false;
+      const result = OrbitalService.translateWorldToScreen(position, camera);
+      expect(result).toBeNull();
     });
 
     it('should return null if position is undefined', () => {

@@ -89,6 +89,21 @@ export default class OrbitalService {
   }
 
   /**
+   * Checks if the given vector is within the given camera frustum.
+   *
+   * @param {THREE.Camera} camera - active renderer camera
+   * @param {THREE.Matrix4} matrix - projection matrix
+   * @param {THREE.Vector3} vector - vector to check if in frustum
+   * @return {Boolean} whether or not vector is in frustum
+   */
+  static isInCameraView = (camera, matrix, vector) => {
+    const frustum = new THREE.Frustum();
+    frustum.setFromMatrix(matrix);
+    
+    return frustum.containsPoint(vector);
+  }
+
+  /**
    * Translate 3D space coordinates to 2D screen ones.
    *
    * @param {THREE.Vector3} position - current position in ellipse
@@ -104,12 +119,15 @@ export default class OrbitalService {
       const pos = position.clone();
       
       matrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-      pos.applyMatrix4(matrix);
-      
-      const left = (1 + pos.x) * width / 2;
-      const top = (1 - pos.y) * height / 2;
-      
-      return {top, left};
+
+      if (OrbitalService.isInCameraView(camera, matrix, pos)) {
+        pos.applyMatrix4(matrix);
+
+        const left = (1 + pos.x) * width / 2;
+        const top = (1 - pos.y) * height / 2;
+        
+        return {top, left};
+      }
     }
     return null;
   }

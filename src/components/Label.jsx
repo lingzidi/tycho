@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Label extends React.Component {
 
   static propTypes = {
-    style: PropTypes.object,
+    position: PropTypes.object,
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
     active: PropTypes.bool
@@ -14,11 +14,12 @@ export default class Label extends React.Component {
     return (
       <div>
         <span
-          style={this.props.style}
+          className="label"
+          style={this.props.position}
           onClick={this.props.onClick}>
-          {this.props.text}
+          {!this.props.active && this.props.text}
         </span>
-        {this.props.children}
+        {this.props.active && this.props.children}
       </div>
     );
   }

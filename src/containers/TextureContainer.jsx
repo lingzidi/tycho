@@ -38,10 +38,12 @@ export default class TextureContainer extends React.Component {
   }
 
   render() {
-    return <meshBasicMaterial
-      color={0x808080}
-      side={this.props.side}
-      ref="material" />
+    return (
+      <meshBasicMaterial
+        color={0x808080}
+        side={this.props.side}
+        ref="material"
+      />
+    );
   }
 }
-
