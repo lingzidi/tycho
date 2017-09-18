@@ -1,4 +1,22 @@
+import Cookies from 'js-cookie';
+
 export default class TourService {
+
+  /**
+   * Determines if the user has opted, via cookie, to skip the tour.
+   *
+   * @returns {Boolean} ability to skip tour
+   */
+  static canSkip = () => {
+    return Cookies.get('tourViewed') === 'true';
+  }
+
+  /**
+   * Sets a cookie to indicate that the tour was either viewed or skipped.
+   */
+  static setSkip = () => {
+    Cookies.set('tourViewed', 'true', {expires: 365});
+  }
 
   /**
    * Calculates the total time that showing labels will take,

@@ -11,6 +11,23 @@ import SpinLabelContainer from '../containers/SpinLabelContainer';
 export class TourContainer extends React.Component {
 
   componentDidMount = () => {
+    if (TourService.canSkip()) {
+      this.props.action.tourSkipped(true);
+    } else {
+      this.initializeTour();
+    }
+  }
+
+  componentWillReceiveProps = ({isSkipped}) => {
+    if (this.props.isSkipped !== isSkipped && isSkipped) {
+      this.skipTour();
+    }
+  }
+
+  /**
+   * Initlaizes the tour.
+   */
+  initializeTour = () => {
     const {action, labels} = this.props;
     const tourDuration = TourService.getTourDuration(labels);
 
@@ -18,12 +35,6 @@ export class TourContainer extends React.Component {
     action.setCameraOrbit(true);
 
     setTimeout(this.onOrbitComplete, tourDuration);
-  }
-
-  componentWillReceiveProps = ({isSkipped}) => {
-    if (this.props.isSkipped !== isSkipped && isSkipped) {
-      this.skipTour();
-    }
   }
 
   /**
@@ -48,16 +59,12 @@ export class TourContainer extends React.Component {
   skipTour = () => {
     const {action} = this.props;
 
+    TourService.setSkip();
+
     action.tourCompleted(true);
     action.setCameraOrbit(false);
+    action.setUIControls(true);
     action.setActiveOrbital('dummyParent'); // TODO
-  }
-
-  /**
-   * Update the state to skip the tour.
-   */
-  triggerSkipTour = () => {
-    this.props.action.tourSkipped(true);
   }
   
   /**
@@ -67,8 +74,8 @@ export class TourContainer extends React.Component {
    * @returns {TourLabelContainer[]}
    */
   getLabels = (labels) => {
-    let totalTime = 0;
     const SEPARATION_INTERVAL = 1000;
+    let totalTime = SEPARATION_INTERVAL;
     
     return labels.map(({text, duration}, key) => {
       totalTime += SEPARATION_INTERVAL;
@@ -87,8 +94,21 @@ export class TourContainer extends React.Component {
     });
   }
 
+  /**
+   * Returns class modifier based on prop state.
+   *
+   * @param {Object} props - component props
+   * @returns {String} modifier
+   */
+  getModifier = ({isComplete, isSkipped}) => {
+    if (isSkipped) {
+      return 'skip';
+    }
+    return isComplete ? 'hide' : 'show';
+  }
+
   render() {
-    const modifier = this.props.isComplete ? 'hide' : 'show';
+    const modifier = this.getModifier(this.props);
     return (
       <div>
         <div className={`tour tour--${modifier}`}>

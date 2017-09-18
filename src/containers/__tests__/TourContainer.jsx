@@ -2,6 +2,7 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {TourContainer} from '../TourContainer';
+import TourService from '../../services/TourService';
 
 const labels = [
   {
@@ -41,7 +42,30 @@ describe('Tour Container', () => {
   });
 
   describe('componentDidMount()', () => {
+    it('should call the tour skip action if the tour can be skipped', () => {
+      TourService.canSkip = () => true;
+      const spy = jest.spyOn(tourContainer.props.action, 'tourSkipped');
 
+      tourContainer.componentDidMount();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(true);;
+    });
+
+    it('should initialize the tour if the tour cannot be skipped', () => {
+      TourService.canSkip = () => false;
+      const spy = jest.spyOn(tourContainer, 'initializeTour');
+
+      tourContainer.componentDidMount();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+  });
+
+  describe('initializeTour()', () => {
     beforeEach(() => {
       tourContainer.getTourDuration = jest.fn();
     });
@@ -49,7 +73,7 @@ describe('Tour Container', () => {
     it('should call setUIControls with false', () => {
       const spy = jest.spyOn(tourContainer.props.action, 'setUIControls');
 
-      tourContainer.componentDidMount();
+      tourContainer.initializeTour();
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
@@ -59,7 +83,7 @@ describe('Tour Container', () => {
     it('should call setCameraOrbit with true', () => {
       const spy = jest.spyOn(tourContainer.props.action, 'setCameraOrbit');
 
-      tourContainer.componentDidMount();
+      tourContainer.initializeTour();
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
@@ -71,7 +95,7 @@ describe('Tour Container', () => {
       const spy = jest.spyOn(tourContainer, 'onOrbitComplete');
       const duration = 5000;
 
-      tourContainer.componentDidMount();
+      tourContainer.initializeTour();
 
       expect(spy).not.toHaveBeenCalled();
 
@@ -163,18 +187,6 @@ describe('Tour Container', () => {
     });
   });
 
-  describe('triggerSkipTour()', () => {
-    it('should call tourSkipped with true', () => {
-      const spy = jest.spyOn(tourContainer.props.action, 'tourSkipped');
-
-      tourContainer.triggerSkipTour();
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(true);
-    });
-  });
-
   describe('getLabels()', () => {
     it('should return an array of TourLabels', () => {
       const result = tourContainer.getLabels(labels);
@@ -187,26 +199,29 @@ describe('Tour Container', () => {
     });
   });
 
-  describe('render()', () => {
-    it('should render the tour container with the show modifier if isComplete = false', () => {
-      component = shallow(<TourContainer
-        labels={labels}
-        action={action}
-        isComplete={false}
-      />);
-      component.setState({time: 1});
-
-      expect(toJson(component)).toMatchSnapshot();
+  describe('getModifier()', () => {
+    it('should return `skip` if isSkipped = true', () => {
+      expect(tourContainer.getModifier({
+        isSkipped: true
+      })).toEqual('skip');
     });
 
-    it('should render the tour container with the hide modifier if isComplete = true', () => {
-      component = shallow(<TourContainer
-        labels={labels}
-        action={action}
-        isComplete={true}
-      />);
-      component.setState({time: 1});
+    it('should return `show` if isComplete = false', () => {
+      expect(tourContainer.getModifier({
+        isComplete: false
+      })).toEqual('show');
+    });
 
+    it('should return `hide` if isComplete = true', () => {
+      expect(tourContainer.getModifier({
+        isComplete: true
+      })).toEqual('hide');
+    });
+  });
+
+  describe('render()', () => {
+    it('should render the tour container successfully', () => {
+      component.setState({time: 1});
       expect(toJson(component)).toMatchSnapshot();
     });
   });
