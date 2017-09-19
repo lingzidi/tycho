@@ -4,7 +4,6 @@ import data from '../global/fixtures';
 import Clock from '../utils/Clock';
 import ReduxService from '../services/ReduxService';
 import App from '../components/App';
-import LoaderContainer from './LoaderContainer';
 
 export class AppContainer extends React.Component {
 

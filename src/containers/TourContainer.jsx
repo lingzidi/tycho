@@ -11,7 +11,7 @@ import Tour from '../components/Tour';
 export class TourContainer extends React.Component {
 
   componentDidMount = () => {
-    if (false && TourService.canSkip()) {
+    if (TourService.canSkip()) {
       this.props.action.tourSkipped(true);
     } else {
       this.initializeTour();
@@ -59,12 +59,18 @@ export class TourContainer extends React.Component {
   skipTour = () => {
     const {action} = this.props;
 
-    TourService.setSkip();
-
     action.tourCompleted(true);
     action.setCameraOrbit(false);
     action.setUIControls(true);
     action.setActiveOrbital('dummyParent'); // TODO
+  }
+
+  /**
+   * Sets the skip tour cookie and skips tour.
+   */
+  skipTourTrigger = () => {
+    TourService.setSkip();
+    this.skipTour();
   }
   
   /**
@@ -110,7 +116,7 @@ export class TourContainer extends React.Component {
   render() {
     return (
       <Tour
-        skipTour={this.skipTour}
+        skipTour={this.skipTourTrigger}
         modifier={this.getModifier(this.props)}
         labels={this.getLabels(this.props.labels)}
       />

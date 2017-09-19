@@ -187,6 +187,17 @@ describe('Tour Container', () => {
     });
   });
 
+  describe('skipTourTrigger()', () => {
+    it('should call skipTour()', () => {
+      const spy = jest.spyOn(tourContainer, 'skipTour');
+
+      tourContainer.skipTourTrigger();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('getLabels()', () => {
     it('should return an array of TourLabels', () => {
       const result = tourContainer.getLabels(labels);

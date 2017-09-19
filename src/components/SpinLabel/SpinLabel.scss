@@ -21,11 +21,10 @@
 $n: 4; // # of arrows on either side
 
 .spin {
-  background-color: rgba(0, 0, 0, 0.75);
+  font-family: Georgia, serif;
   color: #fff;
   padding: 1em;
   display: flex;
-  font-family: Georgia, serif;
   width: 300px;
   margin: auto;
   align-items: center;
@@ -37,6 +36,7 @@ $n: 4; // # of arrows on either side
     box-sizing: border-box;
     border-radius: 50%;
     color: #000;
+    text-shadow: 1px 1px #e8e8e8;
     background-color: #fff;
     text-align: center;
     vertical-align: center;
