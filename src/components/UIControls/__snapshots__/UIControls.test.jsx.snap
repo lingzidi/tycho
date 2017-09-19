@@ -21,7 +21,7 @@ exports[`UIControls Component render() should render the UIControls successfully
   <div
     className="uicontrols__control uicontrols__control--datetime"
   >
-    <DatePicker />
+    <DatePickerContainer />
   </div>
   <div
     className="uicontrols__control uicontrols__control--left-bar"

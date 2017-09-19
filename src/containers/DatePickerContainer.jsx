@@ -1,11 +1,11 @@
 import React from 'react';
 import Datetime from 'react-datetime';
 import moment from 'moment';
+import DatePicker from '../components/DatePicker';
 
-export default class DatePicker extends React.Component {
-  constructor(props) {
-    super(props);
-    
+export default class DatePickerContainer extends React.Component {
+
+  componentWillMount = () => {
     this.state = {};
   }
   
@@ -20,20 +20,30 @@ export default class DatePicker extends React.Component {
     }
   }
 
+  shouldComponentUpdate = () => !this.isOpen
+
+  /**
+   * Formats given moment date to user-friendly time.
+   *
+   * @param {Moment} timeInstance - moment instance
+   * @returns {String} user-friendly time
+   */
   getUXTime = (timeInstance) => {
     return timeInstance
       .format('MMM DD, YYYY h:mm a') // TODO: move to const
       .replace(/ /g, '\u00A0');
   }
-  
-  shouldComponentUpdate = () => {
-    return !this.isOpen;
-  }
-  
+
+  /**
+   * Closes the date picker.
+   */
   hidePicker = () => {
     this.isOpen = false;
   }
-  
+
+  /**
+   * Opens the date picker.
+   */
   showPicker = () => {
     const {picker} = this.refs;
     
@@ -42,7 +52,12 @@ export default class DatePicker extends React.Component {
       picker.openCalendar();
     }
   }
-  
+
+  /**
+   * Calls the callback prop with the current UNIX timestamp.
+   *
+   * @param {Moment} timeInstance - moment instance
+   */
   changeTime = (timeInstance) => {
     const time = timeInstance.unix();
     this.props.onUpdate(time);
@@ -50,12 +65,9 @@ export default class DatePicker extends React.Component {
   
   render() {
     return (
-      <div className="clock">
-        <span
-          className="clock__display"
-          onClick={this.showPicker}>
-          {this.state.uxTime}
-        </span>
+      <DatePicker
+        onClick={this.showPicker}
+        uxTime={this.state.uxTime}>
         <Datetime
           value={this.state.realTime}
           ref="picker"
@@ -67,7 +79,7 @@ export default class DatePicker extends React.Component {
             className: 'clock__input'
           }}
         />
-      </div>
+      </DatePicker>
     );
   }
 }

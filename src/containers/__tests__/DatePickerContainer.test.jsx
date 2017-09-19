@@ -2,16 +2,18 @@ import React from 'react';
 import moment from 'moment';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
-import DatePicker from '../DatePicker';
+import DatePickerContainer from '../DatePickerContainer';
 
-describe('DatePicker Component', () => {
+describe('DatePicker Container', () => {
   let component, datePicker;
 
   beforeEach(() => {
-    component = shallow(<DatePicker 
-      time={1}
-      onUpdate={jest.fn()}
-    />);
+    component = shallow(
+      <DatePickerContainer
+        time={1}
+        onUpdate={jest.fn()}
+      />
+    );
 
     datePicker = component.instance();
   });

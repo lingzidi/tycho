@@ -1,7 +1,7 @@
 import React from 'react';
 import ScaleSlider from '../Slider/ScaleSlider';
 import ZoomSlider from '../Slider/ZoomSlider';
-import DatePicker from '../DatePicker';
+import DatePickerContainer from '../../containers/DatePickerContainer';
 
 export default class UIControls extends React.Component {
   render() {
@@ -25,7 +25,7 @@ export default class UIControls extends React.Component {
         </div>
 
         <div className="uicontrols__control uicontrols__control--datetime">
-          <DatePicker 
+          <DatePickerContainer 
             time={this.props.time} 
             onUpdate={this.props.changeTimeOffset}
           />

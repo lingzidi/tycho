@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DatePicker Component render() should render the DatePicker component successfully 1`] = `
-<div
-  className="clock"
+exports[`DatePicker Container render() should render the DatePicker component successfully 1`] = `
+<DatePicker
+  onClick={[Function]}
 >
-  <span
-    className="clock__display"
-    onClick={[Function]}
-  />
   <Component
     className="clock__picker"
     closeOnSelect={true}
@@ -30,5 +26,5 @@ exports[`DatePicker Component render() should render the DatePicker component su
     utc={false}
     value={123456}
   />
-</div>
+</DatePicker>
 `;
