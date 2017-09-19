@@ -1,7 +1,15 @@
 import React from 'react';
 import SpinLabelContainer from '../../containers/SpinLabelContainer';
+import PropTypes from 'prop-types';
 
 export default class Tour extends React.Component {
+
+  static propTypes = {
+    modifier: PropTypes.string,
+    labels: PropTypes.array,
+    skipTour: PropTypes.func
+  }
+
   render() {
     const {modifier, labels} = this.props;
     return (

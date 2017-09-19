@@ -1,11 +1,20 @@
 import React from 'react';
 import TWEEN from 'tween.js';
+import PropTypes from 'prop-types';
 import SceneService from '../services/SceneService';
 import {Vector3} from 'three';
 
 const cameraPosition = new Vector3(300, 300, 300);//move to const
 
 export default class CameraContainer extends React.Component {
+
+  static propTypes= {
+    cameraRef: PropTypes.func,
+    positions: PropTypes.object,
+    targetName: PropTypes.string,
+    zoomIn: PropTypes.func,
+    controls: PropTypes.object
+  }
 
   componentDidMount = () => {
     if (this.props.cameraRef) {

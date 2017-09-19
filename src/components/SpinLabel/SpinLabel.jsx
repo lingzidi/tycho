@@ -1,6 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class SpinLabel extends React.Component {
+
+  static propTypes = {
+    show: PropTypes.bool,
+    count: PropTypes.number
+  }
 
   /**
    * Generates an array of n divs with the provided modifier.

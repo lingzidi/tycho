@@ -1,7 +1,17 @@
 import React from 'react';
 import Slider from '../Slider';
+import PropTypes from 'prop-types';
 
 export default class ScaleSlider extends React.Component {
+
+  static propTypes = {
+    label: PropTypes.string,
+    value: PropTypes.number,
+    onChange: PropTypes.func,
+    min: PropTypes.number,
+    max: PropTypes.number
+  }
+
   render() {
     return (
       <div>

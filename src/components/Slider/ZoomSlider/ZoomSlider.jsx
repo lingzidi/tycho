@@ -1,7 +1,14 @@
 import React from 'react';
 import Slider from '../Slider';
+import PropTypes from 'prop-types';
 
 export default class ZoomSlider extends React.Component {
+
+  static propTypes = {
+    value: PropTypes.number,
+    onChange: PropTypes.func
+  }
+
   render() {
     return (
       <div className="slider slider--vertical">

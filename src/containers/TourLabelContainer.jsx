@@ -1,7 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TourLabel from '../components/TourLabel';
 
 export default class TourLabelContainer extends React.Component {
+
+  static propTypes = {
+    text: PropTypes.string,
+    start: PropTypes.number,
+    end: PropTypes.number
+  }
 
   componentWillMount = () => {
     const {start, end} = this.props;

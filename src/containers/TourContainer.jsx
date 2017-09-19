@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import * as UIControlsActions from '../actions/UIControlsActions';
 import * as TourActions from '../actions/TourActions';
 import * as LabelActions from '../actions/LabelActions';
@@ -9,6 +10,10 @@ import TourLabelContainer from './TourLabelContainer';
 import Tour from '../components/Tour';
 
 export class TourContainer extends React.Component {
+
+  static propTypes = {
+    labels: PropTypes.array
+  }
 
   componentDidMount = () => {
     if (TourService.canSkip()) {

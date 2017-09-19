@@ -1,7 +1,13 @@
 import React from 'react';
 import {TextureLoader} from 'three';
+import PropTypes from 'prop-types';
 
 export default class TextureContainer extends React.Component {
+
+  static propTypes = {
+    side: PropTypes.object,
+    textures: PropTypes.array
+  }
 
   componentDidMount = () => {
     this.enqueueTextures(this.props.textures);

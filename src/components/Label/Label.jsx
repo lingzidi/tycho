@@ -7,7 +7,8 @@ export default class Label extends React.Component {
     position: PropTypes.object,
     text: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
-    active: PropTypes.bool
+    active: PropTypes.bool,
+    enabled: PropTypes.bool
   }
   
   render() {

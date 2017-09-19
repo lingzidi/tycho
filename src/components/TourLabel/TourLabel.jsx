@@ -1,6 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class TourLabel extends React.Component {
+
+  static propTypes = {
+    modifier: PropTypes.string,
+    text: PropTypes.string
+  }
+
   render() {
     return (
       <div className="tour-label">

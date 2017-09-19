@@ -1,7 +1,17 @@
 import React from 'react';
 import ReactSlider from 'react-slider';
+import PropTypes from 'prop-types';
 
 export default class Slider extends React.Component {
+
+  static propTypes = {
+    orientation: PropTypes.string.isRequired,
+    step: PropTypes.number,
+    min: PropTypes.number,
+    max: PropTypes.number,
+    value: PropTypes.number,
+    onChange: PropTypes.func
+  }
 
   componentDidMount = () => {
     this.state = {

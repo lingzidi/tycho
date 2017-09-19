@@ -1,9 +1,15 @@
 import React from 'react';
 import Datetime from 'react-datetime';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import DatePicker from '../components/DatePicker';
 
 export default class DatePickerContainer extends React.Component {
+
+  static propTypes = {
+    time: PropTypes.number,
+    onUpdate: PropTypes.func
+  }
 
   componentWillMount = () => {
     this.state = {};
