@@ -9,6 +9,8 @@ cache:
 
 script:
   - npm install
+  - npm run build
+  - npm test
   - npm run coverage
 
 after_success:
