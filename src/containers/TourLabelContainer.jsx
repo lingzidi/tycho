@@ -1,12 +1,12 @@
 import React from 'react';
+import TourLabel from '../components/TourLabel';
 
 export default class TourLabelContainer extends React.Component {
 
   componentWillMount = () => {
     const {start, end} = this.props;
-    const className = 'tour-label__text';
 
-    this.setState({className});
+    this.setState({modifier: 'hide'});
     this.setClassAsync('show', start);
     this.setClassAsync('hide', end);
   }
@@ -18,21 +18,17 @@ export default class TourLabelContainer extends React.Component {
    * @param {Number} timeout - delay, in milliseconds
    */
   setClassAsync = (modifier, timeout) => {
-    const base = 'tour-label__text';
-    const className = `${base} ${base}--${modifier}`;
-    
     setTimeout(() => {
-      this.setState({className});
+      this.setState({modifier});
     }, timeout);
   }
   
   render() {
     return (
-      <div className="tour-label">
-        <span className={this.state.className}>
-          {this.props.text}
-        </span>
-      </div>
+      <TourLabel
+        modifier={this.state.modifier}
+        text={this.props.text}
+      />
     );
   }
 }

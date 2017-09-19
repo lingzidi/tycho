@@ -18,12 +18,12 @@ describe('App Container', () => {
   });
 
   describe('componentWillMount()', () => {
-    it('should initialize the className in state', () => {
-      expect(component.state()).toHaveProperty('className');
-      expect(typeof component.state('className')).toBe('string');
+    it('should initialize the modifier in state', () => {
+      expect(component.state()).toHaveProperty('modifier');
+      expect(typeof component.state('modifier')).toBe('string');
     });
 
-    it('should set the start and stop className change classes', () => {
+    it('should set the start and stop modifier change classes', () => {
       const spy = jest.spyOn(tourLabelContainer, 'setClassAsync');
       const start = 1000;
       const end = 3000;
@@ -39,18 +39,15 @@ describe('App Container', () => {
   });
 
   describe('setClassAsync()', () => {
-    it('should add the given BEM modifier to the className after the given duration', () => {
-      const className = 'tour-label__text';
+    it('should add the given BEM modifier to the modifier after the given duration', () => {
       const modifier = 'hide';
 
-      component.setState({className});
+      component.setState({modifier});
       tourLabelContainer.setClassAsync(modifier, 1000);
-
-      expect(component.state('className')).toEqual(className);
 
       jest.runAllTimers();
 
-      expect(component.state('className')).toEqual(`${className} ${className}--${modifier}`);
+      expect(component.state('modifier')).toEqual(modifier);
     });
   });
 

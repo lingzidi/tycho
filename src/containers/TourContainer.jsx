@@ -11,7 +11,7 @@ import Tour from '../components/Tour';
 export class TourContainer extends React.Component {
 
   componentDidMount = () => {
-    if (TourService.canSkip()) {
+    if (false && TourService.canSkip()) {
       this.props.action.tourSkipped(true);
     } else {
       this.initializeTour();
