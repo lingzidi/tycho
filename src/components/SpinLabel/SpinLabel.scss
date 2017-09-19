@@ -17,3 +17,84 @@
     opacity: 1;
   }
 }
+
+$n: 4; // # of arrows on either side
+
+.spin {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 1em;
+  display: flex;
+  font-family: Georgia, serif;
+  width: 300px;
+  margin: auto;
+  align-items: center;
+  
+  &__label {
+    width: 5em;
+    height: 5em;
+    margin: 1em;
+    box-sizing: border-box;
+    border-radius: 50%;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+    vertical-align: center;
+    padding: 0 0.25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &__arrow-container {
+    flex: 1;
+    
+    &--left {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+  
+  &__arrow {
+    animation: blink-animation 2s ease-in-out infinite;
+    padding: 0 0.25em;
+    font-weight: bold;
+    
+    @for $i from $n through 1 {
+      &:nth-of-type(#{$i}) {
+        animation-delay: #{($i / $n) - 1}s;
+      }
+    }
+    
+    @for $i from ($n + 1) through ($n * 2) {
+      &:nth-of-type(#{$i}) {
+        animation-delay: #{($i / $n)  - 1}s;
+      }
+    }
+    
+    &--left {
+      &:before {
+        content: '\2329';
+      }
+    }
+    
+    &--right {
+      &:before {
+        content: '\232A';
+      }
+    }
+  }
+}
+
+
+@keyframes blink-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
