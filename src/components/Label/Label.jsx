@@ -12,9 +12,11 @@ export default class Label extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className="label" style={{
+        display: this.props.enabled ? 'block' : 'none'
+      }}>
         <span
-          className="label"
+          className="label__text"
           style={this.props.position}
           onClick={this.props.onClick}>
           {!this.props.active && this.props.text}

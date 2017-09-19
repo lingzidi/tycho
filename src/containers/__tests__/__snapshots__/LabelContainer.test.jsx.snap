@@ -2,6 +2,7 @@
 
 exports[`Label Container render() should render the Label successfully 1`] = `
 <Label
+  active={false}
   onClick={[Function]}
   onHover={[Function]}
   text="foo"

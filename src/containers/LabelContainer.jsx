@@ -33,14 +33,8 @@ export class LabelContainer extends React.Component {
    * @returns {Boolean} state of label
    */
   isActive = () => {
-    const {
-      targetName,
-      id,
-      zoom,
-      controlsEnabled
-    } = this.props;
-
-    return controlsEnabled && targetName === id && zoom <= 25; // TODO: 25 = const
+    const {targetName, id, zoom} = this.props;
+    return targetName === id && zoom <= 25; // TODO: 25 = const
   }
   
   render() {
@@ -50,6 +44,7 @@ export class LabelContainer extends React.Component {
         onClick={this.setActiveOrbital}
         onHover={this.setHighlightedOrbital}
         active={this.isActive()}
+        enabled={this.props.controlsEnabled}
         text={this.props.text}>
         {this.props.children}
       </Label>
