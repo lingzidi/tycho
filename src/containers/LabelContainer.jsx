@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as Actions from '../actions/LabelActions';
 import ReduxService from '../services/ReduxService';
 import Label from '../components/Label';
+import Constants from '../constants';
 
 export class LabelContainer extends React.Component {
 
@@ -34,7 +35,7 @@ export class LabelContainer extends React.Component {
    */
   isActive = () => {
     const {targetName, id, zoom} = this.props;
-    return targetName === id && zoom <= 25; // TODO: 25 = const
+    return targetName === id && zoom <= Constants.UI.ZOOM_LABEL_TRIGGER;
   }
   
   render() {

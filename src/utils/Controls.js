@@ -1,20 +1,20 @@
 import * as THREE from 'three';
 import OrbitControls from 'three-orbit-controls';
 import TWEEN from 'tween.js';
+import Constants from '../constants';
 
 export default class Controls extends OrbitControls(THREE) {
 
   constructor(camera, domElement) {
     super(camera, domElement);
 
-    // TODO: clean this up
     this.camera = camera;
     this.level = 100;
     this.enabled = true;
     this.enableZoom = false;
     this.enablePan = false;
-    this.maxDistance = 500;
-    this.minDistance = 1;
+    this.minDistance = Constants.WebGL.Camera.MIN_DISTANCE;
+    this.maxDistance = Constants.WebGL.Camera.MAX_DISTANCE;
   }
 
   /**
@@ -38,7 +38,7 @@ export default class Controls extends OrbitControls(THREE) {
   getZoomDelta = (delta) => {
     let zoom = this.level;
     
-    zoom += (delta / 50); // TODO: constant
+    zoom += (delta / Constants.UI.WHEEL_DELTA_DIVISOR);
     zoom = Math.max(zoom, 1);
     zoom = Math.min(zoom, 100);
    
@@ -162,7 +162,7 @@ export default class Controls extends OrbitControls(THREE) {
     this.tweenBase = new TWEEN
       .Tween(this.tweenData)
       .easing(TWEEN.Easing.Quadratic.Out)
-      .to({level}, 5000)
+      .to({level}, Constants.WebGL.Tween.SLOW)
       .onUpdate(this.updateTween)
       .onComplete(this.completeTween)
       .start();

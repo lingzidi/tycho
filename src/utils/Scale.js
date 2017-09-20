@@ -8,5 +8,5 @@ import Constants from '../constants';
  * @returns {Number} 
  */
 export default (radius, scale = 1) => {
-  return (scale * radius) / Constants.WEBGL_SCALE;
+  return (scale * radius) / Constants.WebGL.UNIT_SCALE;
 }

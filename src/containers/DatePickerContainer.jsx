@@ -3,6 +3,7 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import DatePicker from '../components/DatePicker';
+import Constants from '../constants';
 
 export default class DatePickerContainer extends React.Component {
 
@@ -36,8 +37,8 @@ export default class DatePickerContainer extends React.Component {
    */
   getUXTime = (timeInstance) => {
     return timeInstance
-      .format('MMM DD, YYYY h:mm a') // TODO: move to const
-      .replace(/ /g, '\u00A0');
+      .format(Constants.UI.UX_DATE_FORMAT)
+      .replace(/ /g, '\u00A0'); // replace spaces with HTML entity
   }
 
   /**

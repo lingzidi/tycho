@@ -2,7 +2,6 @@
 
 exports[`App Container render() should render the app successfully 1`] = `
 <App
-  lookAtName="dummyParent"
   onAnimate={[Function]}
   orbitalData={
     Array [

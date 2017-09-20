@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import SpinLabel from '../components/SpinLabel';
 import ReduxService from '../services/ReduxService';
+import Constants from '../constants';
 
 export class SpinLabelContainer extends React.Component {
 
@@ -25,7 +26,7 @@ export class SpinLabelContainer extends React.Component {
     return (
       <SpinLabel
         show={this.isVisible()}
-        count={4}
+        count={Constants.UI.SPIN_LABEL_ARROW_COUNT}
       />
     );
   }

@@ -25,7 +25,7 @@ export default class Ellipse {
    */
   getGeometry = () => {
     return this.path.createPointsGeometry(
-      Constants.ELLIPSE_CURVE_POINTS
+      Constants.WebGL.ELLIPSE_CURVE_POINTS
     );
   }
 
@@ -36,7 +36,7 @@ export default class Ellipse {
    */
   getPath = () => {
     return new THREE.Path(
-      this.ellipse.getPoints(Constants.ELLIPSE_CURVE_POINTS)
+      this.ellipse.getPoints(Constants.WebGL.ELLIPSE_CURVE_POINTS)
     );
   }
 

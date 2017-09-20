@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Constants from '../../constants';
 
 export default class Body extends React.Component {
 
@@ -13,11 +14,14 @@ export default class Body extends React.Component {
     return (
       <group>
         <mesh rotation={this.props.rotation}>
-          <meshPhongMaterial specular={0x000000} />
+          <meshPhongMaterial
+            specular={Constants.WebGL.SPECULAR_COLOR}
+          />
           <sphereGeometry
-            widthSegments={32}
-            heightSegments={32}
-            radius={this.props.radius}/>
+            widthSegments={Constants.WebGL.SPHERE_SEGMENTS}
+            heightSegments={Constants.WebGL.SPHERE_SEGMENTS}
+            radius={this.props.radius}
+          />
         </mesh>
         <axisHelper size={200} rotation={this.props.rotation} />
       </group>

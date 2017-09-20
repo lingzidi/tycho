@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import TWEEN from 'tween.js';
 import moment from 'moment';
+import Constants from '../constants';
 
 export default class Clock {
 
@@ -117,7 +118,7 @@ export default class Clock {
 
     this.tween = new TWEEN.Tween(this.tweenData)
       .easing(TWEEN.Easing.Quadratic.Out)
-      .to({offset: time}, 2000)
+      .to({offset: time}, Constants.WebGL.Tween.NORMAL)
       .onUpdate(this.updateTweenOffset)
       .onComplete(this.start)
       .start();

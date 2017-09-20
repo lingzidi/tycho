@@ -2,9 +2,7 @@ import React from 'react';
 import TWEEN from 'tween.js';
 import PropTypes from 'prop-types';
 import SceneService from '../services/SceneService';
-import {Vector3} from 'three';
-
-const cameraPosition = new Vector3(300, 300, 300);//move to const
+import Constants from '../constants';
 
 export default class CameraContainer extends React.Component {
 
@@ -88,11 +86,11 @@ export default class CameraContainer extends React.Component {
         <perspectiveCamera
           name="camera"
           ref="camera"
-          fov={50}
+          fov={Constants.WebGL.Camera.FOV}
           aspect={window.innerWidth / window.innerHeight}
-          near={1}
-          far={10000}
-          position={cameraPosition}
+          near={Constants.WebGL.Camera.NEAR}
+          far={Constants.WebGL.Camera.FAR}
+          position={SceneService.CAMERA_INITIAL_POSITION}
         />
       </group>
     );

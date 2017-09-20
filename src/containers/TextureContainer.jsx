@@ -1,6 +1,7 @@
 import React from 'react';
 import {TextureLoader} from 'three';
 import PropTypes from 'prop-types';
+import Constants from '../constants';
 
 export default class TextureContainer extends React.Component {
 
@@ -46,7 +47,7 @@ export default class TextureContainer extends React.Component {
   render() {
     return (
       <meshBasicMaterial
-        color={0x808080}
+        color={Constants.WebGL.MESH_DEFAULT_COLOR}
         side={this.props.side}
         ref="material"
       />

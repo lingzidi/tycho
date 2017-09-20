@@ -2,6 +2,7 @@ import React from 'react';
 import ScaleSlider from '../Slider/ScaleSlider';
 import ZoomSlider from '../Slider/ZoomSlider';
 import DatePickerContainer from '../../containers/DatePickerContainer';
+import Constants from '../../constants';
 
 export default class UIControls extends React.Component {
   render() {
@@ -12,15 +13,15 @@ export default class UIControls extends React.Component {
             value={this.props.speed}
             label="Time speed: &times; 10^"
             onChange={this.props.changeSpeed}
-            min={0}
-            max={10}
+            min={Constants.UI.Sliders.Speed.MIN}
+            max={Constants.UI.Sliders.Speed.MAX}
           />
           <ScaleSlider
             value={this.props.scale}
             label="Planet scale: &times; "
             onChange={this.props.changeScale}
-            min={1}
-            max={10}
+            min={Constants.UI.Sliders.Scale.MIN}
+            max={Constants.UI.Sliders.Scale.MAX}
           />
         </div>
 

@@ -1,7 +1,10 @@
 import TWEEN from 'tween.js';
 import {Vector3} from 'three';
+import Constants from '../constants';
 
 export default class SceneService {
+
+  static CAMERA_INITIAL_POSITION = new Vector3(300, 300, 300)
 
   /**
    * Converts an instance of Vector3 to a plain object with x, y, z properties.
@@ -34,7 +37,7 @@ export default class SceneService {
   static startTween = (tween, dest, onComplete) => {
     return tween
       .easing(TWEEN.Easing.Quadratic.Out)
-      .to(SceneService.vectorToObject(dest), 2000)
+      .to(SceneService.vectorToObject(dest), Constants.WebGL.Tween.NORMAL)
       .onComplete(onComplete)
       .start();
   }

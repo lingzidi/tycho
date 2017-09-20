@@ -67,7 +67,7 @@ export default class OrbitalService {
    * Returns the present position vector w.r.t. the elliptical plane.
    *
    * @param {Object} props - OrbitalContainer props
-   * @param {Object} props.periapses - Orbital periapses (TODO: change to number, as orbitalPeriod)
+   * @param {Object} props.periapses - Orbital periapses
    * @param {Number} props.time - current time, in seconds
    * @param {Ellipse} ellipse - instance of ellipse
    * @returns {THREE.Vector3} projected body position

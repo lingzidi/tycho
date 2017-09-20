@@ -8,6 +8,7 @@ import ReduxService from '../services/ReduxService';
 import TourService from '../services/TourService';
 import TourLabelContainer from './TourLabelContainer';
 import Tour from '../components/Tour';
+import Constants from '../constants';
 
 export class TourContainer extends React.Component {
 
@@ -46,7 +47,7 @@ export class TourContainer extends React.Component {
    * Callback to invoke once the tour orbit has completed.
    */
   onOrbitComplete = () => {
-    this.props.action.setActiveOrbital('dummyParent');
+    this.props.action.setActiveOrbital(Constants.UI.DEFAULT_TARGET_NAME);
 
     setTimeout(this.onTourComplete, 5000);
   }
@@ -67,7 +68,7 @@ export class TourContainer extends React.Component {
     action.tourCompleted(true);
     action.setCameraOrbit(false);
     action.setUIControls(true);
-    action.setActiveOrbital('dummyParent'); // TODO
+    action.setActiveOrbital(Constants.UI.DEFAULT_TARGET_NAME);
   }
 
   /**
@@ -85,11 +86,11 @@ export class TourContainer extends React.Component {
    * @returns {TourLabelContainer[]}
    */
   getLabels = (labels) => {
-    const SEPARATION_INTERVAL = 1000;
-    let totalTime = SEPARATION_INTERVAL;
+    const separation = Constants.Tour.SEPARATION_INTERVAL;
+    let totalTime = separation;
     
     return labels.map(({text, duration}, key) => {
-      totalTime += SEPARATION_INTERVAL;
+      totalTime += separation;
       const start = totalTime;
       totalTime += duration;
       const end = totalTime;

@@ -3,6 +3,7 @@ import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {TourContainer} from '../TourContainer';
 import TourService from '../../services/TourService';
+import Constants from '../../constants';
 
 const labels = [
   {
@@ -139,7 +140,7 @@ describe('Tour Container', () => {
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith('dummyParent'); // TODO: const
+      expect(spy).toHaveBeenCalledWith(Constants.UI.DEFAULT_TARGET_NAME);
     });
   });
 
@@ -183,7 +184,7 @@ describe('Tour Container', () => {
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith('dummyParent'); // TODO
+      expect(spy).toHaveBeenCalledWith(Constants.UI.DEFAULT_TARGET_NAME);
     });
   });
 

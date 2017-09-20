@@ -4,6 +4,7 @@ import data from '../global/fixtures';
 import Clock from '../utils/Clock';
 import ReduxService from '../services/ReduxService';
 import App from '../components/App';
+import Constants from '../constants';
 
 export class AppContainer extends React.Component {
 
@@ -45,8 +46,7 @@ export class AppContainer extends React.Component {
         orbitalData={data}
         updateScreenPosition={this.updateScreenPosition}
         onAnimate={this.onAnimate}
-        targetName="dummyOuter"
-        lookAtName="dummyParent"
+        targetName={Constants.UI.DEFAULT_TARGET_NAME}
       />
     );
   }
