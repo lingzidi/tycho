@@ -1,7 +1,7 @@
 import React from 'react';
 import TWEEN from 'tween.js';
 import PropTypes from 'prop-types';
-import SceneService from '../services/SceneService';
+import CameraService from '../services/CameraService';
 import Constants from '../constants';
 
 export default class CameraContainer extends React.Component {
@@ -55,7 +55,7 @@ export default class CameraContainer extends React.Component {
       this.assignTween();
       this.props.zoomIn();
 
-      SceneService.startTween(this.tweenBase, target.position3d, this.endTween);
+      CameraService.startTween(this.tweenBase, target.position3d, this.endTween);
     }
   }
 
@@ -63,7 +63,7 @@ export default class CameraContainer extends React.Component {
    * Assigns a new Tween to the active target position.
    */
   assignTween = () => {
-    this.tweenData = SceneService.vectorToObject(this.getTargetPosition());
+    this.tweenData = CameraService.vectorToObject(this.getTargetPosition());
     this.tweenBase = new TWEEN.Tween(this.tweenData);
   }
   
@@ -75,9 +75,9 @@ export default class CameraContainer extends React.Component {
     const {positions, targetName} = this.props;
 
     if (this.tweenData) {
-      return SceneService.objectToVector(this.tweenData);
+      return CameraService.objectToVector(this.tweenData);
     }
-    return SceneService.getTargetPosition(positions, targetName);
+    return CameraService.getTargetPosition(positions, targetName);
   }
 
   render() {
@@ -90,7 +90,7 @@ export default class CameraContainer extends React.Component {
           aspect={window.innerWidth / window.innerHeight}
           near={Constants.WebGL.Camera.NEAR}
           far={Constants.WebGL.Camera.FAR}
-          position={SceneService.CAMERA_INITIAL_POSITION}
+          position={CameraService.CAMERA_INITIAL_POSITION}
         />
       </group>
     );

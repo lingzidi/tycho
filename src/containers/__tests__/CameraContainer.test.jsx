@@ -9,9 +9,9 @@ import toJson from 'enzyme-to-json';
 import CameraContainer from '../CameraContainer';
 import Controls from '../../utils/Controls';
 import data from '../../global/fixtures';
-import SceneService from '../../services/SceneService';
+import CameraService from '../../services/CameraService';
 
-jest.mock('../../services/SceneService');
+jest.mock('../../services/CameraService');
 
 describe('Camera Container', () => {
   let component, cameraContainer;
@@ -136,7 +136,7 @@ describe('Camera Container', () => {
     it('should return the vector version of current tweenData, if any', () => {
       const tweenData = {x: 1, y: 1, z: 1};
 
-      SceneService.objectToVector = (v) => v;
+      CameraService.objectToVector = (v) => v;
       cameraContainer.tweenData = tweenData;
 
       const result = cameraContainer.getTargetPosition();
@@ -146,7 +146,7 @@ describe('Camera Container', () => {
 
     it('should return the target position if scene container is not actively tweening', () => {
       const targetPosition = {x: 1, y: 1, z: 1};
-      SceneService.getTargetPosition = () => targetPosition;
+      CameraService.getTargetPosition = () => targetPosition;
       const result = cameraContainer.getTargetPosition();
 
       expect(result).toEqual(targetPosition);

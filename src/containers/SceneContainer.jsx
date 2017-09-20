@@ -8,7 +8,6 @@ import Scene from '../components/Scene';
 import * as UIControlsActions from '../actions/UIControlsActions';
 import * as TourActions from '../actions/TourActions';
 import ReduxService from '../services/ReduxService';
-import SceneService from '../services/SceneService';
 import CameraContainer from './CameraContainer';
 
 export class SceneContainer extends React.Component {
@@ -101,12 +100,8 @@ export class SceneContainer extends React.Component {
   /**
    * Maps the mousewheel event to the controls zoom function.
    */
-  changeZoom = (event) => {
-    SceneService.mapZoom(
-      event,
-      this.controls,
-      this.props.action.changeZoom
-    );
+  changeZoom = (ev) => {
+    this.controls.wheelZoom(ev, this.props.action.changeZoom);
   }
 
   /**

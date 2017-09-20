@@ -236,4 +236,33 @@ describe('Controls', () => {
       expect(controls.tweenBase).toBeInstanceOf(TWEEN.Tween);
     });
   });
+
+  describe('wheelZoom()', () => {
+    let action, spy; 
+
+    beforeEach(() => {
+      action = {changeZoom: jest.fn()};
+      spy = jest.spyOn(action, 'changeZoom');
+    });
+
+    it('should call the given action callback with the calculated zoom, if changed', () => {
+      const newZoom = 20;
+      
+      controls.getZoomDelta = () => newZoom;
+      controls.wheelZoom({}, action.changeZoom);
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(newZoom);
+    });
+
+    it('should not call the given callback if the zoom stays the same', () => {
+      const newZoom = 20;
+      
+      controls.getZoomDelta = () => newZoom;
+      controls.level = newZoom / 100;
+      controls.wheelZoom({}, action.changeZoom);
+
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
 });

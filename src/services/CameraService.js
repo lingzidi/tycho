@@ -2,7 +2,7 @@ import TWEEN from 'tween.js';
 import {Vector3} from 'three';
 import Constants from '../constants';
 
-export default class SceneService {
+export default class CameraService {
 
   static CAMERA_INITIAL_POSITION = new Vector3(300, 300, 300)
 
@@ -37,7 +37,7 @@ export default class SceneService {
   static startTween = (tween, dest, onComplete) => {
     return tween
       .easing(TWEEN.Easing.Quadratic.Out)
-      .to(SceneService.vectorToObject(dest), Constants.WebGL.Tween.NORMAL)
+      .to(CameraService.vectorToObject(dest), Constants.WebGL.Tween.NORMAL)
       .onComplete(onComplete)
       .start();
   }
@@ -55,21 +55,5 @@ export default class SceneService {
       return positions[targetName].position3d;
     }
     return new Vector3(0, 0, 0);
-  }
-
-  /**
-   * Gets the zoom delta from controls and invokes the given action if zoom has changed.
-   *
-   * @param {Event} event - DOM mousewheel event
-   * @param {Controls} controls - instance of controls
-   * @param {Function} action - callback action
-   */
-  static mapZoom = (event, controls, action) => {
-    const zoom = controls.getZoomDelta(event.deltaY);
-    const current = Math.round(controls.level * 100);
-
-    if (current !== zoom) {
-      action(zoom);
-    }
   }
 }

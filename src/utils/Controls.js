@@ -30,6 +30,21 @@ export default class Controls extends OrbitControls(THREE) {
   }
 
   /**
+   * Gets the zoom delta from controls and invokes the given action if zoom has changed.
+   *
+   * @param {Event} ev - DOM wheel event
+   * @param {Function} action - callback action
+   */
+  wheelZoom = (ev, action) => {
+    const zoom = this.getZoomDelta(ev.deltaY);
+    const current = Math.round(this.level * 100);
+
+    if (current !== zoom) {
+      action(zoom);
+    }
+  }
+
+  /**
    * Calculates the zoom percentage from the given mousewheel delta.
    *
    * @param {Number} delta - mousewheel delta

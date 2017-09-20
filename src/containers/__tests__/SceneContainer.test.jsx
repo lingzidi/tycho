@@ -8,9 +8,6 @@ import toJson from 'enzyme-to-json';
 import {SceneContainer} from '../SceneContainer';
 import Controls from '../../utils/Controls';
 import data from '../../global/fixtures';
-import SceneService from '../../services/SceneService';
-
-jest.mock('../../services/SceneService');
 
 describe('Scene Container', () => {
   let component, sceneContainer;
@@ -158,14 +155,12 @@ describe('Scene Container', () => {
   });
 
   describe('changeZoom()', () => {
-    it('should call mapZoom()', () => {
-      SceneService.mapZoom = jest.fn();
-      const changeZoom = jest.fn();
-      const spy = jest.spyOn(SceneService, 'mapZoom');
-
-      sceneContainer.props = {
-        action: {changeZoom}
-      };
+    it('should call controls.wheelZoom()', () => {
+      const wheelZoom = jest.fn();
+      sceneContainer.controls = {wheelZoom};
+      sceneContainer.props = {action: {}};
+      const spy = jest.spyOn(sceneContainer.controls, 'wheelZoom');
+      
       sceneContainer.changeZoom();
 
       expect(spy).toHaveBeenCalled();
