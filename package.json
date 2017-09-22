@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.5",
     "deep-assign": "^2.0.0",
     "jest-cli": "^21.0.2",
     "js-cookie": "^2.1.4",

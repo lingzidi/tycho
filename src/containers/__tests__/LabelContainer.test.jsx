@@ -93,6 +93,33 @@ describe('Label Container', () => {
     });
   });
 
+  describe('getPosition()', () => {
+    it('should return the value of `position2d` if the id is defined in positions', () => {
+      const position2d = {};
+
+      labelContainer.props = {
+        id: 'Earth',
+        positions: {
+          Earth: {position2d}
+        }
+      };
+
+      expect(labelContainer.getPosition()).toEqual(position2d);
+    });
+
+    it('should return undefined if id is not defined', () => {
+      labelContainer.props = {
+        positions: {}
+      };
+      expect(labelContainer.getPosition()).not.toBeDefined();
+    });
+
+    it('should return undefined if position is not defined', () => {
+      labelContainer.props = {};
+      expect(labelContainer.getPosition()).not.toBeDefined();
+    });
+  });
+
   describe('render()', () => {
     it('should render the Label successfully', () => {
       expect(toJson(component)).toMatchSnapshot();

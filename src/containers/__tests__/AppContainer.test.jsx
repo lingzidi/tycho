@@ -12,23 +12,6 @@ describe('App Container', () => {
     appContainer = component.instance();
   });
 
-  describe('componentWillMount()', () => {
-
-    beforeEach(() => appContainer.componentWillMount());
-
-    it('should set clock to a new instance of Clock', () => {
-      expect(appContainer).toHaveProperty('clock');
-      expect(appContainer.clock).toBeInstanceOf(Clock);
-    });
-
-    it('should initialize state to have positions and time properties', () => {
-      expect(appContainer).toHaveProperty('state');
-      expect(typeof appContainer.state).toBe('object');
-      expect(typeof appContainer.state.positions).toBe('object');
-      expect(typeof appContainer.state.time).toBe('number');
-    });
-  });
-
   describe('componentWillReceiveProps()', () => {
     it('should update the clock offset with the next timeOffset prop value', () => {
       const spy = jest.spyOn(appContainer.clock, 'setOffset');
@@ -72,18 +55,6 @@ describe('App Container', () => {
       appContainer.onAnimate();
 
       expect(spy).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('updateScreenPosition()', () => {
-    it('should assign the given object position to the state positions property', () => {
-      const position = {x: 1, y: 1};
-      const id = 'sampleId';
-
-      appContainer.updateScreenPosition(position, id);
-
-      expect(appContainer.state.positions).toHaveProperty(id);
-      expect(appContainer.state.positions[id]).toEqual(position);
     });
   });
 

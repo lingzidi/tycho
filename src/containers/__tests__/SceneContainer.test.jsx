@@ -18,6 +18,7 @@ describe('Scene Container', () => {
         orbitalData={data}
         updateScreenPosition={() => {}}
         onAnimate={() => {}}
+        action={{}}
         width={500}
         height={300}
         time={1}
@@ -125,24 +126,6 @@ describe('Scene Container', () => {
     });
   });
   
-  describe('updatePosition()', () => {
-    it('should call props.updateScreenPosition with given position2d and id params', () => {
-      const updateScreenPosition = jest.fn();
-      const position2d = {x: 1, y: 1};
-      const id = 'Mars';
-
-      sceneContainer.state = {positions: {}};
-      sceneContainer.props = {updateScreenPosition};
-
-      const spy = jest.spyOn(sceneContainer.props, 'updateScreenPosition');
-
-      sceneContainer.updatePosition({position2d}, id, true);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(position2d, id);
-    });
-  });
-
   describe('updateCameraPosition()', () => {
     it('should returned the cloned position vector', () => {
       const position = new Vector3(1, 2, 3);

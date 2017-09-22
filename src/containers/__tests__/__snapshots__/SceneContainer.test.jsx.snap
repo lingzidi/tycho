@@ -19,7 +19,6 @@ exports[`Scene Container render() should render the scene container successfully
     <scene>
       <CameraContainer
         cameraRef={[Function]}
-        positions={Object {}}
         zoomIn={[Function]}
       />
     </scene>

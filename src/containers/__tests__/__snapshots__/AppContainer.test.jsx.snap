@@ -74,9 +74,7 @@ exports[`App Container render() should render the app successfully 1`] = `
       },
     ]
   }
-  positions={Object {}}
   targetName="dummyOuter"
   time={1}
-  updateScreenPosition={[Function]}
 />
 `;

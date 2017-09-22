@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 export default class Label extends React.Component {
 
@@ -13,17 +14,18 @@ export default class Label extends React.Component {
   
   render() {
     return (
-      <div className="label" style={{
-        display: this.props.enabled ? 'block' : 'none'
-      }}>
-        <span
-          className="label__text"
-          style={this.props.position}
-          onClick={this.props.onClick}>
-          {!this.props.active && this.props.text}
-        </span>
-        {this.props.active && this.props.children}
-      </div>
+      <div className={classNames({
+        'label--show': this.props.enabled,
+        'label--hide': !this.props.enabled,
+      })}>
+      <span
+        className="label__text"
+        style={this.props.position}
+        onClick={this.props.onClick}>
+        {!this.props.active && this.props.text}
+      </span>
+      {this.props.active && this.props.children}
+    </div>
     );
   }
 }

@@ -21,8 +21,10 @@ export default class CameraContainer extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if (this.props.targetName !== nextProps.targetName) {
-      this.startTween(nextProps.targetName);
+    const {positions, targetName} = this.props;
+
+    if (positions && targetName !== nextProps.targetName) {
+       this.startTween(nextProps.targetName);
     }
   }
 

@@ -37,11 +37,24 @@ export class LabelContainer extends React.Component {
     const {targetName, id, zoom} = this.props;
     return targetName === id && zoom <= Constants.UI.ZOOM_LABEL_TRIGGER;
   }
+
+  /**
+   * Returns the position of the id, if any defined.
+   *
+   * @returns {Object} 2d position of object
+   */
+  getPosition = () => {
+    const {positions, id} = this.props;
+
+    if (positions && positions[id]) {
+      return positions[id].position2d;
+    }
+  }
   
   render() {
     return (
       <Label
-        position={this.props.position}
+        position={this.getPosition()}
         onClick={this.setActiveOrbital}
         onHover={this.setHighlightedOrbital}
         active={this.isActive()}
@@ -57,7 +70,8 @@ export default connect(
   ReduxService.mapStateToProps(
     'label.targetName',
     'uiControls.zoom',
-    'uiControls.controlsEnabled'
+    'uiControls.controlsEnabled',
+    'animation.positions'
   ),
   ReduxService.mapDispatchToProps(Actions)
 )(LabelContainer);

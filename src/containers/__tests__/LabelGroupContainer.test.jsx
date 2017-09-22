@@ -1,15 +1,15 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
-import LabelGroup from './LabelGroup';
+import {LabelGroupContainer} from '../LabelGroupContainer';
 import data from '../../global/fixtures';
 
-describe('Label Component', () => {
+describe('Label Group Container', () => {
   let component;
 
   beforeEach(() => {
     component = shallow(
-      <LabelGroup
+      <LabelGroupContainer
         orbitalData={data}
         positions={{}}
       />);

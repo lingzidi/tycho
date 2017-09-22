@@ -1,4 +1,12 @@
 .label {
+  &--show {
+    display: block;
+  }
+
+  &--hide {
+    display: none;
+  }
+
   &__text {
     position: absolute;
     text-shadow: 1px 1px 1px #c0c0c0;

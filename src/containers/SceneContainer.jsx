@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React3 from 'react-three-renderer';
 import Controls from '../utils/Controls';
 import Scene from '../components/Scene';
+import * as AnimationActions from '../actions/AnimationActions';
 import * as UIControlsActions from '../actions/UIControlsActions';
 import * as TourActions from '../actions/TourActions';
 import ReduxService from '../services/ReduxService';
@@ -15,14 +16,9 @@ export class SceneContainer extends React.Component {
   static propTypes = {
     orbitalData: PropTypes.array.isRequired,
     onAnimate: PropTypes.func.isRequired,
-    updateScreenPosition: PropTypes.func.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     time: PropTypes.number
-  }
-
-  componentWillMount = () => {
-    this.state = {positions: {}};
   }
 
   componentDidMount = () => {
@@ -69,21 +65,6 @@ export class SceneContainer extends React.Component {
     this.props.onAnimate();
     this.controls.update();
     TWEEN.update();
-  }
-
-  /**
-   * Updates the local state of all positions.
-   * Each Scene-bound object position changes on each animation frame.
-   * The SceneContainer holds the object positions in its local state and not the Redux store,
-   * since updating the Redux store with new info on each animation frame would be impractical.
-   */
-  updatePosition = (positions, id, log) => {
-    this.props.updateScreenPosition(positions.position2d, id);
-    this.setState({
-      positions: Object.assign({}, this.state.positions, {
-        [id]: positions
-      })
-    });
   }
 
   /**
@@ -143,7 +124,6 @@ export class SceneContainer extends React.Component {
 
   render() {
     const {width, height} = this.props;
-
     return (
       <div
         onWheel={this.changeZoom}
@@ -160,7 +140,7 @@ export class SceneContainer extends React.Component {
           <scene>
             <CameraContainer 
               cameraRef={this.setCamera}
-              positions={this.state.positions}
+              positions={this.props.positions}
               targetName={this.props.targetName}
               zoomIn={this.zoomIn}
               controls={this.controls}
@@ -169,10 +149,10 @@ export class SceneContainer extends React.Component {
               <Scene
                 time={this.props.time}
                 camera={this.camera}
-                updatePosition={this.updatePosition}
+                updatePosition={this.props.action.setPosition}
                 orbitalData={this.props.orbitalData}
                 scale={this.props.scale}
-                cameraMatrix={this.state.cameraMatrix}>
+                cameraMatrix={this.camera.position.clone()}>
                 {this.props.children}
               </Scene>
             : null}
@@ -188,10 +168,12 @@ export default connect(
     'uiControls.zoom',
     'uiControls.scale',
     'label.targetName',
-    'tour.isAutoOrbitEnabled'
+    'tour.isAutoOrbitEnabled',
+    'animation.positions'
   ),
   ReduxService.mapDispatchToProps(
     UIControlsActions,
-    TourActions
+    TourActions,
+    AnimationActions
   )
 )(SceneContainer);

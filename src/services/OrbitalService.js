@@ -116,7 +116,8 @@ export default class OrbitalService {
     const matrix = new THREE.Matrix4();
 
     if (position && camera) {
-      const pos = position.clone();
+      const {x, y, z} = position;
+      const pos = new THREE.Vector3(x, y, z);
       
       matrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
 
@@ -148,7 +149,8 @@ export default class OrbitalService {
 
       vect.setFromMatrixPosition(matrix);
 
-      return vect;
+      const {x, y, z} = vect;
+      return {x, y, z};
     }
     return null;
   }

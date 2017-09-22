@@ -11,7 +11,6 @@ export class AppContainer extends React.Component {
   componentWillMount = () => {
     this.clock = new Clock();
     this.state = {
-      positions: {},
       time: this.clock.getTime()
     };
   }
@@ -30,21 +29,11 @@ export class AppContainer extends React.Component {
     this.clock.update();
   }
 
-  updateScreenPosition = (position, id) => {
-    this.setState({
-      positions: Object.assign(this.state.positions, {
-        [id]: position
-      })
-    });
-  }
-
   render() {
     return (
       <App
-        positions={this.state.positions}
         time={this.state.time}
         orbitalData={data}
-        updateScreenPosition={this.updateScreenPosition}
         onAnimate={this.onAnimate}
         targetName={Constants.UI.DEFAULT_TARGET_NAME}
       />

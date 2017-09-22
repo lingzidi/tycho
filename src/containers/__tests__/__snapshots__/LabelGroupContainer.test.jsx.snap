@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Label Component should render the LabelGroup successfully 1`] = `
+exports[`Label Group Container should render the LabelGroup successfully 1`] = `
 <div>
   <Connect(LabelContainer)
     id="dummyOuter"

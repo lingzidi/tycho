@@ -8,12 +8,10 @@ exports[`App Component render() should render the app successfully 1`] = `
     orbitalData={Array []}
     perspective={false}
     time={1}
-    updateScreenPosition={[Function]}
     width={1024}
   />
-  <LabelGroup
+  <Connect(LabelGroupContainer)
     orbitalData={Array []}
-    positions={Object {}}
   />
   <Connect(UIControlsContainer)
     time={1}

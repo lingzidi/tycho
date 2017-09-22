@@ -2,12 +2,7 @@
 
 exports[`Label Component render() when active should render the Label without text and with children if active 1`] = `
 <div
-  className="label"
-  style={
-    Object {
-      "display": "none",
-    }
-  }
+  className="label--hide"
 >
   <span
     className="label__text"
@@ -18,12 +13,7 @@ exports[`Label Component render() when active should render the Label without te
 
 exports[`Label Component render() when not active should render the Label with text and without children if not active 1`] = `
 <div
-  className="label"
-  style={
-    Object {
-      "display": "none",
-    }
-  }
+  className="label--hide"
 >
   <span
     className="label__text"

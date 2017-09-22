@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LabelContainer from '../../containers/LabelContainer';
+import LabelContainer from './LabelContainer';
+import {connect} from 'react-redux';
+import ReduxService from '../services/ReduxService';
 
-class LabelGroup extends React.Component {
+export class LabelGroupContainer extends React.Component {
 
   static propTypes = {
-    positions: PropTypes.object.isRequired,
     orbitalData: PropTypes.array.isRequired
   }
   
   getOrbitalLabels = (orbitals) => {
     return orbitals.map((orbital) => (
       <LabelContainer
-        position={this.props.positions[orbital.id]}
+        position={this.props.positions && this.props.positions[orbital.id]}
         text={orbital.name}
         id={orbital.id}
         key={orbital.id}>
@@ -26,4 +27,9 @@ class LabelGroup extends React.Component {
   }
 }
 
-export default LabelGroup;
+export default connect(
+  ReduxService.mapStateToProps(
+    'uiControls.positions'
+  ),
+  null
+)(LabelGroupContainer);

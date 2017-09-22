@@ -9,6 +9,7 @@ export default keyMirror({
   SET_PERCENT_LOADED: null,
   SET_CAMERA_ORBIT: null,
   SET_TEXTURE_LOADED: null,
+  SET_POSITION: null,
   SHOW_LABEL: null,
   SET_UI_CONTROLS: null,
   TOUR_COMPLETED: null,
