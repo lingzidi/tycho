@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Body from '../Body/Body';
+import Body from '../Body';
 import Random from '../../utils/Random';
 
 export default class Orbital extends React.Component {
@@ -21,6 +21,7 @@ export default class Orbital extends React.Component {
     this.props.updatePosition(this.refs.body);
   }
 
+  // TODO: the orbital line rendering is a bottleneck - do something about it
   render() {
     return (
       <group rotation={this.props.eclipticGroupRotation}>

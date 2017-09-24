@@ -9,7 +9,7 @@ export default class Body extends React.Component {
     atmosphereColor: PropTypes.number.isRequired,
     rotation: PropTypes.object
   };
-  
+
   render() {
     return (
       <group>
