@@ -64,6 +64,7 @@ export default class Clock {
       this.stopTween();
       this.offset = this.getTime();
       this.scale = scale;
+      this.clock.start();
     }
   }
 

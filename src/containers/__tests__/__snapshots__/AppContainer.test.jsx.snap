@@ -20,7 +20,7 @@ exports[`App Container render() should render the app successfully 1`] = `
           "last": 1136430000,
           "next": 1167987600,
         },
-        "radius": 637800,
+        "radius": 1267800,
         "ring": Object {
           "innerRadius": 6630,
           "outerRadius": 950000,

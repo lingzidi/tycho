@@ -1,6 +1,7 @@
 import TWEEN from 'tween.js';
 import {Vector3} from 'three';
 import Constants from '../constants';
+import Scale from '../utils/Scale';
 
 export default class CameraService {
 
@@ -55,5 +56,43 @@ export default class CameraService {
       return positions[targetName].position3d;
     }
     return new Vector3(0, 0, 0);
+  }
+
+  /**
+   * Calculates the min distance from target to camera to avoid collision.
+   *
+   * @param {Object[]} orbitals - list of orbitals
+   * @param {String} targetName - id of active orbital target
+   * @param {Number} scale - user-defined planet scale
+   * @returns {Number} min distance
+   */
+  static getMinDistance = (orbitals, targetName, scale) => {
+    const targetRadius = CameraService.getTargetRadius(orbitals, targetName);
+    const scaledRadius = Scale(targetRadius, scale);
+
+    return scaledRadius * 2;
+  }
+
+  /**
+   * Finds the planet with the given targetName and returns its radius.
+   *
+   * @param {Object[]} orbitals - list of orbitals
+   * @param {String} targetName - id of active orbital target
+   * @returns {Number} orbital radius
+   */
+  static getTargetRadius = (orbitals, targetName) => {
+    let targetRadius;
+
+    orbitals.forEach((orbital) => {
+      if (!targetRadius) {
+        if (orbital.id === targetName) {
+          targetRadius = orbital.radius;
+        } else if (orbital.satellites) {
+          targetRadius = CameraService
+            .getTargetRadius(orbital.satellites, targetName);
+        }
+      }
+    });
+    return targetRadius;
   }
 }

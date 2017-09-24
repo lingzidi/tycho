@@ -10,7 +10,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       "z": 0,
     }
   }
-  bodyRadius={0.6378}
+  bodyRadius={1.2678}
   bodyRotation={
     Euler {
       "_order": "XYZ",

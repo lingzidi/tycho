@@ -7,6 +7,7 @@ import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import {SceneContainer} from '../SceneContainer';
 import Controls from '../../utils/Controls';
+import CameraService from '../../services/CameraService';
 import data from '../../global/fixtures';
 
 describe('Scene Container', () => {
@@ -62,6 +63,33 @@ describe('Scene Container', () => {
   describe('prop update methods', () => {
     beforeEach(() => {
       sceneContainer.controls = new Controls(new Camera());
+    });
+
+    describe('maybePreventCameraCollision()', () => {
+      it('should update the minDistance if the targetName has changed', () => {
+        const nextProps = {targetName: 'Mars'};
+        const minDistance = 3;
+
+        CameraService.getMinDistance = () => minDistance;
+        sceneContainer.props = {targetName: 'Earth'};
+        sceneContainer.controls.minDistance = 5;
+        sceneContainer.maybePreventCameraCollision(nextProps);
+
+        expect(sceneContainer.controls.minDistance).toEqual(minDistance);
+      });
+
+      it('should update the minDistance if the scale has changed', () => {
+        const targetName = 'Earth';
+        const nextProps = {targetName, scale: 5};
+        const minDistance = 3;
+
+        CameraService.getMinDistance = () => minDistance;
+        sceneContainer.props = {targetName};
+        sceneContainer.controls.minDistance = 5;
+        sceneContainer.maybePreventCameraCollision(nextProps);
+
+        expect(sceneContainer.controls.minDistance).toEqual(minDistance);
+      });
     });
 
     describe('maybeUpdateAutoOrbit()', () => {
@@ -244,7 +272,13 @@ describe('Scene Container', () => {
   });
 
   describe('render()', () => {
-    it('should render the scene container successfully', () => {
+    it('should render the scene container without the camera', () => {
+      expect(toJson(component)).toMatchSnapshot();
+    });
+
+    it('should render the scene container with the camera', () => {
+      sceneContainer.camera = new Camera();
+      sceneContainer.render();
       expect(toJson(component)).toMatchSnapshot();
     });
   });

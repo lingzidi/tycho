@@ -2,6 +2,25 @@ import CameraService from '../CameraService';
 import TWEEN from 'tween.js';
 import {Vector3, Camera} from 'three';
 
+const fixture = [
+  {
+    id: 'Mars',
+    radius: 4
+  },
+  {
+    id: 'Earth',
+    radius: 5,
+    satellites: [{
+      id: 'Moon',
+      radius: 2
+    }]
+  },
+  {
+    id: 'Venus',
+    radius: 3
+  }
+];
+
 describe('Camera Service', () => {
   describe('vectorToObject()', () => {
     it('should extract the x, y, z properties into an object from the given vector', () => {
@@ -74,6 +93,26 @@ describe('Camera Service', () => {
       expect(result).toBeDefined();
       expect(result).toBeInstanceOf(Vector3);
       expect(result).toEqual(new Vector3(0, 0, 0));
+    });
+  });
+
+  describe('getMinDistance()', () => {
+    it('should return the min distance required for a given planet', () => {
+      expect(CameraService.getMinDistance(fixture, 'Earth')).toEqual(0.00001);
+    });
+  });
+
+  describe('getTargetRadius()', () => {
+    it('should return a planet\'s radius', () => {
+      expect(CameraService.getTargetRadius(fixture, 'Earth')).toEqual(5);
+    });
+
+    it('should return a satellite\'s radius', () => {
+      expect(CameraService.getTargetRadius(fixture, 'Moon')).toEqual(2);
+    });
+
+    it('should return a mid-entry list item radius', () => {
+      expect(CameraService.getTargetRadius(fixture, 'Mars')).toEqual(4);
     });
   });
 });

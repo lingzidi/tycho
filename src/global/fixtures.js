@@ -7,7 +7,7 @@ export default [
   axialTilt: 23.26,
   semimajor: 249598261,
   semiminor: 249556483,
-  radius: 637800.0,
+  radius: 1267800.0,
   arcRotate: 45.0411, // in arcseconds
   inclination: 1.57869,
   argPeriapsis: 114.20763,

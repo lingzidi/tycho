@@ -9,6 +9,7 @@ import * as AnimationActions from '../actions/AnimationActions';
 import * as UIControlsActions from '../actions/UIControlsActions';
 import * as TourActions from '../actions/TourActions';
 import ReduxService from '../services/ReduxService';
+import CameraService from '../services/CameraService';
 import CameraContainer from './CameraContainer';
 
 export class SceneContainer extends React.Component {
@@ -33,6 +34,22 @@ export class SceneContainer extends React.Component {
   componentWillReceiveProps = (nextProps) => {
     this.maybeUpdateControlsZoom(nextProps.zoom);
     this.maybeUpdateAutoOrbit(nextProps.isAutoOrbitEnabled);
+    this.maybePreventCameraCollision(nextProps);
+  }
+
+  /**
+   * Sets the min distance to the radius of the target, if the scale or target updated.
+   * This prevents the camera from colliding with the target, should the zoom change.
+   *
+   * @param {Object} props - object properties
+   * @param {String} props.targetName - id of active target
+   * @param {Number} props.scale - user-defined planet scale
+   */
+  maybePreventCameraCollision = ({targetName, scale}) => {
+    if (this.props.targetName !== targetName || this.props.scale !== scale) {
+      this.controls.minDistance = CameraService
+        .getMinDistance(this.props.orbitalData, targetName, scale);
+    }
   }
 
   /**
@@ -61,21 +78,10 @@ export class SceneContainer extends React.Component {
    * Animation frame update method.
    */
   onAnimate = () => {
-    this.updateCameraPosition();
     this.props.onAnimate();
     this.controls.update();
+    this.forceUpdate();
     TWEEN.update();
-  }
-
-  /**
-   * Updates the active camera position, if any.
-   */
-  updateCameraPosition = () => {
-    if (this.camera) {
-      this.setState({
-        cameraMatrix: this.camera.position.clone()
-      });
-    }
   }
 
   /**
@@ -145,18 +151,16 @@ export class SceneContainer extends React.Component {
               zoomIn={this.zoomIn}
               controls={this.controls}
               ref="cameraBase" />
-            {this.camera ?
-              <Scene
-                time={this.props.time}
-                camera={this.camera}
-                updatePosition={this.props.action.setPosition}
-                orbitalData={this.props.orbitalData}
-                scale={this.props.scale}
-                highlightedOrbital={this.props.highlightedOrbital}
-                cameraMatrix={this.camera.position.clone()}>
-                {this.props.children}
-              </Scene>
-            : null}
+            {this.camera && <Scene
+              time={this.props.time}
+              camera={this.camera}
+              updatePosition={this.props.action.setPosition}
+              orbitalData={this.props.orbitalData}
+              scale={this.props.scale}
+              highlightedOrbital={this.props.highlightedOrbital}
+              cameraMatrix={this.camera.position.clone()}>
+              {this.props.children}
+            </Scene>}
           </scene>
         </React3>
       </div>

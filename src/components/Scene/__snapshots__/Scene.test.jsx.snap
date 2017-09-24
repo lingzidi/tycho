@@ -27,7 +27,7 @@ exports[`Scene Component render() should render the scene 1`] = `
         "next": 1167987600,
       }
     }
-    radius={637800}
+    radius={1267800}
     ring={
       Object {
         "innerRadius": 6630,
