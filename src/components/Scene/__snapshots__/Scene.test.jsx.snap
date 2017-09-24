@@ -10,9 +10,10 @@ exports[`Scene Component render() should render the scene 1`] = `
 <group>
   <AnimatedComponent
     GM={6836529}
+    active={false}
     arcRotate={45.0411}
     argPeriapsis={114.20763}
-    atmosphereColor={8421504}
+    atmosphereColor={0}
     axialTilt={23.26}
     eccentricity={0.01671123}
     id="dummyOuter"
@@ -40,9 +41,10 @@ exports[`Scene Component render() should render the scene 1`] = `
   />
   <AnimatedComponent
     GM={6836529}
+    active={false}
     arcRotate={45.0411}
     argPeriapsis={114.20763}
-    atmosphereColor={8421504}
+    atmosphereColor={0}
     axialTilt={23.26}
     eccentricity={0.01671123}
     id="dummyParent"
@@ -93,6 +95,7 @@ exports[`Scene Component render() should render the scene 1`] = `
   >
     <AnimatedComponent
       GM={6836529}
+      active={false}
       arcRotate={15.0411}
       argPeriapsis={114.20763}
       atmosphereColor={16711680}

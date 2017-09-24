@@ -6,3 +6,10 @@ export const setActiveOrbital = (targetName) => {
     targetName
   };
 }
+
+export const setHighlightedOrbital = (highlightedOrbital) => {
+  return {
+    type: Actions.SET_HIGHLIGHTED_ORBITAL,
+    highlightedOrbital
+  };
+}

@@ -83,8 +83,8 @@ export default class Ellipse {
    * @param {Number} props.scale - scaling factor
    */
   scale = ({semimajor, semiminor, eccentricity, scale}) => {
-    this.semimajor = Scale(semimajor, scale);
-    this.semiminor = Scale(semiminor, scale);
+    this.semimajor = Scale(semimajor);
+    this.semiminor = Scale(semiminor);
     this.eccentricity = eccentricity;
     this.render();
   }

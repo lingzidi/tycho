@@ -19,7 +19,8 @@ export class OrbitalContainer extends React.Component {
     isSatellite: PropTypes.bool,
     active: PropTypes.bool,
     camera: PropTypes.object,
-    updatePosition: PropTypes.func.isRequired
+    updatePosition: PropTypes.func.isRequired,
+    atmosphereColor: PropTypes.number.isRequired
   }
 
   componentWillMount = () => {
@@ -46,9 +47,9 @@ export class OrbitalContainer extends React.Component {
   }
 
   setPathOpacity = (active) => {
-    const pathOpacity = active ? 1 : 0.2;
-
-    this.setState({pathOpacity});
+    this.setState({
+      pathOpacity: Service.getPathOpacity(active)
+    });
   }
 
   setGroupRotations = (props) => {
@@ -89,6 +90,7 @@ export class OrbitalContainer extends React.Component {
         bodyRadius={this.state.bodyRadius}
         pathOpacity={this.state.pathOpacity}
         updatePosition={this.updatePosition}
+        atmosphereColor={this.props.atmosphereColor}
         id={this.props.id}>
         {this.props.children}
       </Orbital>

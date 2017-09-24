@@ -52,6 +52,24 @@ describe('Label Container', () => {
     });
   });
 
+  describe('removeHighlightedOrbital()', () => {
+    it('should call the setActiveOrbital action with null', () => {
+      const setHighlightedOrbital = jest.fn();
+      const id = null;
+
+      labelContainer.props = {
+        action: {setHighlightedOrbital},
+        id
+      };
+      const spy = jest.spyOn(labelContainer.props.action, 'setHighlightedOrbital');
+
+      labelContainer.removeHighlightedOrbital();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(id);
+    });
+  });
+
   describe('isActive()', () => {
     describe('when UI controls are enabled', () => {
       it('should return true if the targetName is the current id and zoom is <= 25%', () => {

@@ -13,4 +13,16 @@ describe('Label Actions', () => {
       expect(result.targetName).toEqual(targetName);
     });
   });
+
+  describe('setHighlightedOrbital()', () => {
+    it('should be of type SET_HIGHLIGHTED_ORBITAL with the highlightedOrbital payload', () => {
+      const highlightedOrbital = 'Mars';
+      const result = Actions.setHighlightedOrbital(highlightedOrbital);
+      
+      expect(result).toHaveProperty('type');
+      expect(result).toHaveProperty('highlightedOrbital');
+      expect(result.type).toEqual(ActionType.SET_HIGHLIGHTED_ORBITAL);
+      expect(result.highlightedOrbital).toEqual(highlightedOrbital);
+    });
+  });
 });

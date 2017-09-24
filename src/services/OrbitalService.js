@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import Math2 from './Math2';
 import Scale from '../utils/Scale';
+import Constants from '../constants';
 
 export default class OrbitalService {
   
@@ -89,6 +90,19 @@ export default class OrbitalService {
   }
 
   /**
+   * Calculates path opacity based on current active state.
+   *
+   * @param {Boolean} active - active state of orbital
+   * @returns {Number} opacity
+   */
+  static getPathOpacity = (active) => {
+    if (active) {
+      return Constants.UI.HOVER_OPACITY_ON;
+    }
+    return Constants.UI.HOVER_OPACITY_OFF;
+  }
+
+  /**
    * Checks if the given vector is within the given camera frustum.
    *
    * @param {THREE.Camera} camera - active renderer camera
@@ -169,4 +183,3 @@ export default class OrbitalService {
     return new THREE.Euler(toRad(x), toRad(y), toRad(z));
   }
 }
-

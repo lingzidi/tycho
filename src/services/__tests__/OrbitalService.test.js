@@ -1,5 +1,6 @@
 import {Euler, Matrix4, Vector3, Camera} from 'three';
 import OrbitalService from '../OrbitalService';
+import Constants from '../../constants';
 import Math2 from '../Math2';
 
 describe('Orbital Service', () => {
@@ -113,6 +114,16 @@ describe('Orbital Service', () => {
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(props.time, props.periapses);
+    });
+  });
+
+  describe('getPathOpacity()', () => {
+    it('should return the ON opacity if active', () => {
+      expect(OrbitalService.getPathOpacity(true)).toEqual(Constants.UI.HOVER_OPACITY_ON);
+    });
+
+    it('should return the OFF opacity if inactive', () => {
+      expect(OrbitalService.getPathOpacity(false)).toEqual(Constants.UI.HOVER_OPACITY_OFF);
     });
   });
 

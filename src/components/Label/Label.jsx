@@ -21,6 +21,8 @@ export default class Label extends React.Component {
       <span
         className="label__text"
         style={this.props.position}
+        onMouseOver={this.props.onMouseOver}
+        onMouseOut={this.props.onMouseOut}
         onClick={this.props.onClick}>
         {!this.props.active && this.props.text}
       </span>

@@ -17,7 +17,7 @@ export default [
   },
   eccentricity: 0.01671123,
   longAscNode: 348.73936,
-  atmosphereColor: 0x808080,
+  atmosphereColor: 0x000000,
   ring: {
     innerRadius: 6630,
     outerRadius: 950000
@@ -41,7 +41,7 @@ export default [
   },
   eccentricity: 0.01671123,
   longAscNode: 348.73936,
-  atmosphereColor: 0x808080,
+  atmosphereColor: 0x000000,
   ring: {
     innerRadius: 6630,
     outerRadius: 950000

@@ -13,6 +13,10 @@ export default class Scene extends React.Component {
     scale: PropTypes.number
   }
 
+  isActive = (id) => {
+    return id === this.props.highlightedOrbital;
+  }
+
   getOrbitalElements = (orbitals, isSatellite) => {
     return orbitals.map((orbital) => (
       <OrbitalContainer
@@ -22,6 +26,7 @@ export default class Scene extends React.Component {
         camera={this.props.camera}
         updatePosition={this.props.updatePosition}
         isSatellite={isSatellite}
+        active={this.isActive(orbital.id)}
         key={orbital.id}>
         {orbital.satellites && this.getOrbitalElements(orbital.satellites, !isSatellite)}
       </OrbitalContainer>

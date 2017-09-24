@@ -152,6 +152,7 @@ export class SceneContainer extends React.Component {
                 updatePosition={this.props.action.setPosition}
                 orbitalData={this.props.orbitalData}
                 scale={this.props.scale}
+                highlightedOrbital={this.props.highlightedOrbital}
                 cameraMatrix={this.camera.position.clone()}>
                 {this.props.children}
               </Scene>
@@ -168,6 +169,7 @@ export default connect(
     'uiControls.zoom',
     'uiControls.scale',
     'label.targetName',
+    'label.highlightedOrbital',
     'tour.isAutoOrbitEnabled',
     'animation.positions'
   ),

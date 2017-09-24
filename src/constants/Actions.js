@@ -6,6 +6,7 @@ export default keyMirror({
   SCALE_CHANGE: null,
   TIME_OFFSET_CHANGE: null,
   SET_ACTIVE_ORBITAL: null,
+  SET_HIGHLIGHTED_ORBITAL: null,
   SET_PERCENT_LOADED: null,
   SET_CAMERA_ORBIT: null,
   SET_TEXTURE_LOADED: null,

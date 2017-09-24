@@ -29,6 +29,13 @@ export class LabelContainer extends React.Component {
   }
 
   /**
+   * Removes the currently-highlighted orbital path.
+   */
+  removeHighlightedOrbital = () => {
+    this.props.action.setHighlightedOrbital(null);
+  }
+
+  /**
    * Determine if the current label is active or not.
    *
    * @returns {Boolean} state of label
@@ -56,7 +63,8 @@ export class LabelContainer extends React.Component {
       <Label
         position={this.getPosition()}
         onClick={this.setActiveOrbital}
-        onHover={this.setHighlightedOrbital}
+        onMouseOver={this.setHighlightedOrbital}
+        onMouseOut={this.removeHighlightedOrbital}
         active={this.isActive()}
         enabled={this.props.controlsEnabled}
         text={this.props.text}>

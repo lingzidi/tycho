@@ -7,6 +7,8 @@ export default function(state = {}, payload) {
   switch(payload.type) {
     case Actions.SET_ACTIVE_ORBITAL:
       return assign('targetName');
+    case Actions.SET_HIGHLIGHTED_ORBITAL:
+      return assign('highlightedOrbital');
     default:
       return state;
   }

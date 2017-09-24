@@ -2,6 +2,7 @@
 
 exports[`Orbital Container render() should render the OrbitalContainer successfully 1`] = `
 <AnimatedComponent
+  atmosphereColor={0}
   bodyPosition={
     Vector3 {
       "x": -36.497112160668884,

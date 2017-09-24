@@ -18,3 +18,7 @@ export const ZOOM_LABEL_TRIGGER = 25;
 export const SPIN_LABEL_ARROW_COUNT = 4;
 
 export const WHEEL_DELTA_DIVISOR = 50;
+
+export const HOVER_OPACITY_ON = 1;
+
+export const HOVER_OPACITY_OFF = 0.2;
