@@ -17,6 +17,8 @@ export default function(state = {}, payload) {
       return assign('timeOffset');
     case Actions.SET_UI_CONTROLS:
       return assign('controlsEnabled');
+    case Actions.MODAL_ACTIVE:
+      return assign('modalActive');
     default:
       return state;
   }

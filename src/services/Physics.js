@@ -1,3 +1,5 @@
+import Scale from '../utils/Scale';
+
 export default class Physics {
 
   static MAX_ECCENTRICITY = 0.8
@@ -99,10 +101,10 @@ export default class Physics {
   
   /**
    * Calculates a mass' specific orbital energy constant.
-   * Approximation for Tsiokolsky's rocket equation.
+   * Approximation for Tsiolkovsky's rocket equation.
    *
    * @param {Number} GM - gravitational constant
-   * @param {Number} r - orbital radius
+   * @param {Number} r - magnitude of vector to origin
    * @param {Number} semimajor - size of semimajor axis
    * @returns {Number} orbital energy constant
    */
@@ -118,10 +120,10 @@ export default class Physics {
    * Converts given kilometers to astronomical units.
    *
    * @param {Number} x - kilometers
-   * @param {Number} scale - scaling factor
+   * @param {Number} scale = 1 - scaling factor
    * @returns {Number} result in astronomical units
    */
-  static toAU(x, scale) {
+  static toAU(x, scale = 1) {
     return x * scale * this.KM_TO_AU;
   }
 }

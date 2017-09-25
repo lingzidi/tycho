@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Component should render the Modal successfully 1`] = `
+<div
+  className="modal modal--closed"
+>
+  <div
+    className="modal__header"
+  >
+    <span>
+      Test Modal
+    </span>
+    <span
+      className="modal__close"
+      onClick={[Function]}
+    >
+      ×
+    </span>
+  </div>
+  <div
+    className="modal__content"
+  >
+    <ReactMarkdown
+      containerTagName="div"
+      parserOptions={Object {}}
+      source="Test Description"
+    />
+  </div>
+  <div
+    className="modal__footer"
+  >
+    <div
+      className="modal__info"
+    >
+      <span>
+        Velocity at vector:
+      </span>
+      <br />
+      <span>
+        Distance to Sun:
+      </span>
+    </div>
+    <div
+      className="modal__info"
+    >
+      <span>
+         km/s
+      </span>
+      <br />
+      <span>
+         AU
+      </span>
+    </div>
+  </div>
+</div>
+`;

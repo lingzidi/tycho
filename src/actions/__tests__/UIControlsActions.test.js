@@ -61,4 +61,16 @@ describe('UIControls Actions', () => {
       expect(result.controlsEnabled).toEqual(controlsEnabled);
     });
   });
+
+  describe('toggleModal()', () => {
+    it('should be of type MODAL_ACTIVE with the modalActive payload', () => {
+      const modalActive = true;
+      const result = Actions.toggleModal(modalActive);
+      
+      expect(result).toHaveProperty('type');
+      expect(result).toHaveProperty('modalActive');
+      expect(result.type).toEqual(ActionType.MODAL_ACTIVE);
+      expect(result.modalActive).toEqual(modalActive);
+    });
+  });
 });

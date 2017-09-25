@@ -17,6 +17,13 @@ exports[`UIControls Component render() should render the UIControls successfully
     />
   </div>
   <div
+    className="uicontrols__control uicontrols__control--target-label"
+  >
+    <span>
+      Target label
+    </span>
+  </div>
+  <div
     className="uicontrols__control uicontrols__control--datetime"
   >
     <DatePickerContainer />

@@ -34,3 +34,10 @@ export const setUIControls = (controlsEnabled) => {
     controlsEnabled
   };
 }
+
+export const toggleModal = (modalActive) => {
+  return {
+    type: Actions.MODAL_ACTIVE,
+    modalActive
+  };
+}

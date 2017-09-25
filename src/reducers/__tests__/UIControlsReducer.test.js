@@ -69,4 +69,14 @@ describe('UIControls Reducer', () => {
 
     expect(result).toEqual({controlsEnabled});
   });
+
+  it('should handle MODAL_ACTIVE', () => {
+    const modalActive = true;
+    const result = reducer(undefined, {
+      type: Actions.MODAL_ACTIVE,
+      modalActive
+    });
+
+    expect(result).toEqual({modalActive});
+  });
 });

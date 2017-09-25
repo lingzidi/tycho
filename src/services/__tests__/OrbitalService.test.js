@@ -2,6 +2,7 @@ import {Euler, Matrix4, Vector3, Camera} from 'three';
 import OrbitalService from '../OrbitalService';
 import Constants from '../../constants';
 import Math2 from '../Math2';
+import fixture from './__fixtures__/planets.json';
 
 describe('Orbital Service', () => {
 
@@ -213,6 +214,45 @@ describe('Orbital Service', () => {
     
       expect(result.y).toEqual(0);
       expect(result.z).toEqual(0);
+    });
+  });
+
+  describe('getDistanceToSun()', () => {
+    it('should return 0 if positions is not defined', () => {
+      const result = OrbitalService.getDistanceToSun();
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(0);
+    });
+
+    it('should return 0 if the position of the targetName was not found', () => {
+      const result = OrbitalService.getDistanceToSun({Earth: {}}, 'Mars');
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(0);
+    });
+
+    it('should return the magnitude of the current position', () => {
+      const targetName = 'Earth';
+      const position3d = {x: 1, y: 2, z: 3};
+      const result = OrbitalService.getDistanceToSun({[targetName]: {position3d}}, targetName);
+    
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(2.501144555105522e-8);
+    });
+  });
+
+  describe('getTargetByName()', () => {
+    it('should return a planet\'s radius', () => {
+      expect(OrbitalService.getTargetByName(fixture, 'Earth')).toEqual(fixture[1]);
+    });
+
+    it('should return a satellite\'s radius', () => {
+      expect(OrbitalService.getTargetByName(fixture, 'Moon')).toEqual(fixture[1].satellites[0]);
+    });
+
+    it('should return a mid-entry list item radius', () => {
+      expect(OrbitalService.getTargetByName(fixture, 'Mars')).toEqual(fixture[0]);
     });
   });
 });

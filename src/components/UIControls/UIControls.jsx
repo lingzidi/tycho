@@ -25,6 +25,10 @@ export default class UIControls extends React.Component {
           />
         </div>
 
+        <div className="uicontrols__control uicontrols__control--target-label">
+          <span onClick={this.props.openModal}>Target label</span>
+        </div>
+
         <div className="uicontrols__control uicontrols__control--datetime">
           <DatePickerContainer 
             time={this.props.time} 

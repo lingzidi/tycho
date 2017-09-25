@@ -27,6 +27,37 @@ describe('UIControls Container', () => {
     });
   });
 
+  describe('openModal()', () => {
+    beforeEach(() => {
+      container.props = {
+        action: {
+          toggleModal: jest.fn(),
+          setUIControls: jest.fn()
+        }
+      };
+    });
+
+    it('should open the modal', () => {
+      const spy = jest.spyOn(container.props.action, 'toggleModal');
+
+      container.openModal();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(true);
+    });
+
+    it('should hide the UI Controls', () => {
+      const spy = jest.spyOn(container.props.action, 'setUIControls');
+
+      container.openModal();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(false);
+    });
+  });
+
   describe('render()', () => {
     it('should successfully render the ui controls container', () => {
       expect(toJson(component)).toMatchSnapshot();

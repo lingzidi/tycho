@@ -23,10 +23,19 @@ export class UIControlsContainer extends React.Component {
     return 'disabled';
   }
 
+  /**
+   * Opens the modal and hides the controls
+   */
+  openModal = () => {
+    this.props.action.toggleModal(true);
+    this.props.action.setUIControls(false);
+  }
+
   render() {
     return (
       <UIControls
         modifier={this.getClassModifier()}
+        openModal={this.openModal}
         {...this.props}
         {...this.props.action}
       />
