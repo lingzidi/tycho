@@ -1,11 +1,11 @@
-import AtmosphereMaterial from './AtmosphereMaterial';
-import {Camera, BackSide} from 'three';
+import DayNightMaterial from '../DayNightMaterial';
+import {FaceColors} from 'three';
 
-describe('Atmosphere Material', () => {
+describe('Day/Night Material', () => {
   let material;
 
   beforeEach(() => {
-    material = AtmosphereMaterial(new Camera(), 50);
+    material = DayNightMaterial();
   });
 
   it('should be an object', () => {
@@ -27,15 +27,9 @@ describe('Atmosphere Material', () => {
     expect(typeof material.uniforms).toBe('object');
   });
 
-  it('should set the side of the textures to THREE.BackSide', () => {
-    expect(material).toHaveProperty('side');
-    expect(typeof material.side).toBe('number');
-    expect(material.side).toEqual(BackSide);
-  });
-
-  it('should be transparent', () => {
-    expect(material).toHaveProperty('transparent');
-    expect(typeof material.transparent).toBe('boolean');
-    expect(material.transparent).toEqual(true);
+  it('should set the side of the textures to THREE.FaceColors', () => {
+    expect(material).toHaveProperty('vertexColors');
+    expect(typeof material.vertexColors).toBe('number');
+    expect(material.vertexColors).toEqual(FaceColors);
   });
 });

@@ -1,12 +1,26 @@
 import * as THREE from 'three';
 
-export default function DayNightMaterial() {
+/**
+ * @module Day/Night Texture Rendering Shader
+ *
+ * @copyright Sean O'Neil
+ * @copyright James Baicoianu
+ */
+
+/**
+ * Returns the shader material for day/night transition textures.
+ *
+ * @param {String} mapDay - url of day map
+ * @param {String} mapNight - url of night map
+ * @returns {Object} config object for shader material
+ */
+export default function DayNightMaterial(mapDay, mapNight) {
   const textureLoader = new THREE.TextureLoader();
 
   const uniforms = {
     sunDirection: {value: new THREE.Vector3(0,1,0) },
-    dayTexture: { value: textureLoader.load( "map.jpg" ) },
-    nightTexture: { value: textureLoader.load( "https://eoimages.gsfc.nasa.gov/images/imagerecords/55000/55167/earth_lights_lrg.jpg" ) }
+    dayTexture: { value: textureLoader.load(mapDay) },
+    nightTexture: { value: textureLoader.load(mapNight) }
   };
 
   return {
@@ -17,6 +31,12 @@ export default function DayNightMaterial() {
   };
 }
 
+/**
+ * Day/Night texture map vertex shader
+ *
+ * @author Sean O'Neil
+ * @copyright 2004 Sean O'Neil
+ */
 const vertexShader = `
 	varying vec2 vUv;
 	varying vec3 vNormal;
@@ -31,6 +51,12 @@ const vertexShader = `
 	}
 `;
 
+/**
+ * Day/Night texture map fragmentShader shader
+ *
+ * @author Sean O'Neil
+ * @copyright 2004 Sean O'Neil
+ */
 const fragmentShader = `
 	uniform sampler2D dayTexture;
 	uniform sampler2D nightTexture;

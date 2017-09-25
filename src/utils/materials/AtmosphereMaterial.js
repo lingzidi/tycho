@@ -37,9 +37,9 @@ export default function AtmosphereMaterial(camera, radius, mapDay, mapNight) {
   };
 
   const textureLoader = new THREE.TextureLoader();
-  const diffuse = textureLoader.load( "https://upload.wikimedia.org/wikipedia/commons/a/ac/Earthmap1000x500.jpg" );
-  const diffuseSpecular = textureLoader.load( "https://upload.wikimedia.org/wikipedia/commons/a/ac/Earthmap1000x500.jpg" );
-  const diffuseNight = textureLoader.load( "https://eoimages.gsfc.nasa.gov/images/imagerecords/55000/55167/earth_lights_lrg.jpg" );
+  const diffuse = textureLoader.load(mapDay);
+  const diffuseSpecular = textureLoader.load(mapDay);
+  const diffuseNight = textureLoader.load(mapNight);
 
   const cameraHeight = camera.position.length();
   const uniforms = configureUniforms(diffuse, diffuseSpecular, diffuseNight, atmosphere, cameraHeight);
