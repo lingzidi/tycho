@@ -8,7 +8,7 @@ import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import CameraContainer from '../CameraContainer';
 import Controls from '../../utils/Controls';
-import data from '../../global/fixtures';
+import data from './__fixtures__/orbitals.json';
 import CameraService from '../../services/CameraService';
 
 jest.mock('../../services/CameraService');

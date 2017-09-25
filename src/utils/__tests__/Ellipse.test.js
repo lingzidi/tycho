@@ -1,7 +1,7 @@
 import {EllipseCurve, Path, Geometry, Vector3} from 'three';
 import Ellipse from '../Ellipse';
 import Scale from '../Scale';
-import data from '../../global/fixtures';
+import data from './__fixtures__/orbitals.json';
 
 describe('Ellipse', () => {
   let ellipse, mockData;

@@ -8,7 +8,7 @@ import toJson from 'enzyme-to-json';
 import {SceneContainer} from '../SceneContainer';
 import Controls from '../../utils/Controls';
 import CameraService from '../../services/CameraService';
-import data from '../../global/fixtures';
+import data from './__fixtures__/orbitals.json';
 
 describe('Scene Container', () => {
   let component, sceneContainer;
@@ -19,7 +19,7 @@ describe('Scene Container', () => {
         orbitalData={data}
         updateScreenPosition={() => {}}
         onAnimate={() => {}}
-        action={{}}
+        action={{setPosition: jest.fn()}}
         width={500}
         height={300}
         time={1}

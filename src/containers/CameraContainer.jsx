@@ -6,7 +6,7 @@ import Constants from '../constants';
 
 export default class CameraContainer extends React.Component {
 
-  static propTypes= {
+  static propTypes = {
     cameraRef: PropTypes.func,
     positions: PropTypes.object,
     targetName: PropTypes.string,

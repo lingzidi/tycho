@@ -2,7 +2,7 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {LabelGroupContainer} from '../LabelGroupContainer';
-import data from '../../global/fixtures';
+import data from './__fixtures__/orbitals.json';
 
 describe('Label Group Container', () => {
   let component;

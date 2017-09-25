@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
-<div>
-  SPLASH SCREEN
-</div>
-`;
-
 exports[`SplashScreen Component render() should render the Splash Screen successfully 1`] = `
 <div>
   SPLASH SCREEN

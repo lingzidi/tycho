@@ -7,7 +7,7 @@ import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import Scene from '../Scene';
 import Controls from '../../utils/Controls';
-import data from '../../global/fixtures';
+import data from './__fixtures__/orbitals.json';
 
 describe('Scene Component', () => {
   let component, scene;

@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import data from '../global/fixtures';
 import Clock from '../utils/Clock';
 import ReduxService from '../services/ReduxService';
 import App from '../components/App';
@@ -43,7 +42,6 @@ export class AppContainer extends React.Component {
       return (
         <App
           time={this.state.time}
-          orbitalData={data}
           onAnimate={this.onAnimate}
           targetName={Constants.UI.DEFAULT_TARGET_NAME}
         />
