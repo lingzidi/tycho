@@ -11,14 +11,14 @@ export default class UIControls extends React.Component {
         <div className="uicontrols__control uicontrols__control--scales">
           <ScaleSlider
             value={this.props.speed}
-            label="Time speed: &times; 10^"
+            label={this.props.pageText.speedScale}
             onChange={this.props.changeSpeed}
             min={Constants.UI.Sliders.Speed.MIN}
             max={Constants.UI.Sliders.Speed.MAX}
           />
           <ScaleSlider
             value={this.props.scale}
-            label="Planet scale: &times; "
+            label={this.props.pageText.planetScale}
             onChange={this.props.changeScale}
             min={Constants.UI.Sliders.Scale.MIN}
             max={Constants.UI.Sliders.Scale.MAX}

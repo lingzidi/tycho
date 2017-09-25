@@ -11,6 +11,8 @@ export default keyMirror({
   SET_CAMERA_ORBIT: null,
   SET_TEXTURE_LOADED: null,
   SET_POSITION: null,
+  SET_ORBITAL_DATA: null,
+  SET_PAGE_TEXT: null,
   SHOW_LABEL: null,
   SET_UI_CONTROLS: null,
   TOUR_COMPLETED: null,

@@ -7,8 +7,13 @@ import Clock from '../../utils/Clock';
 describe('App Container', () => {
   let component, appContainer;
 
+  const action = {
+    requestOrbitalData: jest.fn(),
+    requestPageText: jest.fn()
+  };
+
   beforeEach(() => {
-    component = shallow(<AppContainer />);
+    component = shallow(<AppContainer action={action} />);
     appContainer = component.instance();
   });
 
@@ -59,7 +64,28 @@ describe('App Container', () => {
   });
 
   describe('render()', () => {
+    it('should render the splash screen if orbitalData is undefined', () => {
+      component = shallow(<AppContainer
+        pageText={{}}
+        action={action}
+      />);
+      expect(toJson(component)).toMatchSnapshot();
+    });
+    
+    it('should render the splash screen if pageText is undefined', () => {
+      component = shallow(<AppContainer
+        orbitalData={{}}
+        action={action}
+      />);
+      expect(toJson(component)).toMatchSnapshot();
+    });
+
     it('should render the app successfully', () => {
+      component = shallow(<AppContainer
+        orbitalData={{}}
+        pageText={{}}
+        action={action}
+      />);
       component.setState({time: 1});
       expect(toJson(component)).toMatchSnapshot();
     });

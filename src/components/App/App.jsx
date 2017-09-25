@@ -13,14 +13,10 @@ export default class App extends React.Component {
         <SceneContainer
           onAnimate={this.props.onAnimate}
           time={this.props.time}
-          orbitalData={this.props.orbitalData}
           width={window.innerWidth}
           height={window.innerHeight}
-          perspective={false}
         />
-        <LabelGroupContainer
-          orbitalData={this.props.orbitalData}
-        />
+        <LabelGroupContainer />
         <UIControlsContainer time={this.props.time} />
         <LoaderContainer />
         <TourContainer labels={Constants.Tour.LABELS} />

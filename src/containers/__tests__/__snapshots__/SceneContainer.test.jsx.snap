@@ -1,31 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Scene Container render() should render the scene container successfully 1`] = `
-<div
-  onMouseDown={[Function]}
-  onTouchStart={[Function]}
-  onWheel={[Function]}
->
-  <React3
-    alpha={true}
-    antialias={true}
-    canvasRef={[Function]}
-    context="3d"
-    height={300}
-    mainCamera="camera"
-    onAnimate={[Function]}
-    width={500}
-  >
-    <scene>
-      <CameraContainer
-        cameraRef={[Function]}
-        zoomIn={[Function]}
-      />
-    </scene>
-  </React3>
-</div>
-`;
-
 exports[`Scene Container render() should render the scene container with the camera 1`] = `
 <div
   onMouseDown={[Function]}

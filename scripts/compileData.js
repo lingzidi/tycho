@@ -73,7 +73,7 @@ const mapSatellitesToParents = (data) => {
       data[id].satellites = satellites
         .map((satellite) => {
           satelliteKeys.push(satellite);
-          return Object.assign(data[satellite], {id});
+          return Object.assign(data[satellite], {id: satellite});
         })
       .filter((satellite) => !!satellite);
     }
@@ -133,9 +133,9 @@ const getOrbitalDataBundle = () => {
  * @param {String} fileName - name of JSON file to write
  */
 const compileDataFile = (data, fileName) => {
-  const filePath = path.join(__dirname, `../build/static/data/${fileName}.json`);
+  const filePath = path.join(__dirname, `../public/static/data/${fileName}.json`);
 
-  fs.writeFile(filePath, data, (err) => {
+  fs.writeFile(filePath, data, {flag: 'w'}, (err) => {
     if (err) {
       return console.log('Error: ', err);
     }

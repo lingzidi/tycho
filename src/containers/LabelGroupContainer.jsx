@@ -29,7 +29,8 @@ export class LabelGroupContainer extends React.Component {
 
 export default connect(
   ReduxService.mapStateToProps(
-    'uiControls.positions'
+    'uiControls.positions',
+    'data.orbitalData'
   ),
   null
 )(LabelGroupContainer);

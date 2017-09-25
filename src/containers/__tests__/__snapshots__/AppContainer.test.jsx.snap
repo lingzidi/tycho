@@ -74,7 +74,11 @@ exports[`App Container render() should render the app successfully 1`] = `
       },
     ]
   }
-  targetName="dummyOuter"
+  targetName="dummyPlanet"
   time={1}
 />
 `;
+
+exports[`App Container render() should render the splash screen if orbitalData is undefined 1`] = `<SplashScreen />`;
+
+exports[`App Container render() should render the splash screen if pageText is undefined 1`] = `<SplashScreen />`;

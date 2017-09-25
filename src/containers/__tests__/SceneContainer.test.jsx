@@ -154,17 +154,6 @@ describe('Scene Container', () => {
     });
   });
   
-  describe('updateCameraPosition()', () => {
-    it('should returned the cloned position vector', () => {
-      const position = new Vector3(1, 2, 3);
-      
-      sceneContainer.camera = {position};  
-      sceneContainer.updateCameraPosition();
-
-      expect(component.state('cameraMatrix')).toEqual(position);
-    });
-  });
-
   describe('changeZoom()', () => {
     it('should call controls.wheelZoom()', () => {
       const wheelZoom = jest.fn();

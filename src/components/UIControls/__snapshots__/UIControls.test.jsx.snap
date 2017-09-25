@@ -8,12 +8,10 @@ exports[`UIControls Component render() should render the UIControls successfully
     className="uicontrols__control uicontrols__control--scales"
   >
     <ScaleSlider
-      label="Time speed: × 10^"
       max={10}
       min={0}
     />
     <ScaleSlider
-      label="Planet scale: × "
       max={10}
       min={1}
     />

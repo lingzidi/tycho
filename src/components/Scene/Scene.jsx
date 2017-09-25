@@ -18,7 +18,8 @@ export default class Scene extends React.Component {
   }
 
   getOrbitalElements = (orbitals, isSatellite) => {
-    return orbitals.map((orbital) => (
+    return orbitals.map((orbital) => {
+      return (
       <OrbitalContainer
         {...orbital}
         scale={this.props.scale}
@@ -30,7 +31,8 @@ export default class Scene extends React.Component {
         key={orbital.id}>
         {orbital.satellites && this.getOrbitalElements(orbital.satellites, !isSatellite)}
       </OrbitalContainer>
-    ));
+      )
+    });
   }
 
   render() {

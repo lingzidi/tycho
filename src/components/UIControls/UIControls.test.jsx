@@ -6,7 +6,7 @@ import UIControls from './UIControls';
 describe('UIControls Component', () => {
  describe('render()', () => {
     it('should render the UIControls successfully', () => {
-      const component = shallow(<UIControls />);
+      const component = shallow(<UIControls pageText={{}} />);
       expect(toJson(component)).toMatchSnapshot();
     });
   });

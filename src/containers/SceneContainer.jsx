@@ -175,7 +175,8 @@ export default connect(
     'label.targetName',
     'label.highlightedOrbital',
     'tour.isAutoOrbitEnabled',
-    'animation.positions'
+    'animation.positions',
+    'data.orbitalData'
   ),
   ReduxService.mapDispatchToProps(
     UIControlsActions,

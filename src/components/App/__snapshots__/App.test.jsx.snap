@@ -5,14 +5,10 @@ exports[`App Component render() should render the app successfully 1`] = `
   <Connect(SceneContainer)
     height={768}
     onAnimate={[Function]}
-    orbitalData={Array []}
-    perspective={false}
     time={1}
     width={1024}
   />
-  <Connect(LabelGroupContainer)
-    orbitalData={Array []}
-  />
+  <Connect(LabelGroupContainer) />
   <Connect(UIControlsContainer)
     time={1}
   />
