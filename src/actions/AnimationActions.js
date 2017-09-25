@@ -7,3 +7,10 @@ export const setPosition = (position, id) => {
     id
   };
 }
+
+export const setTime = (time) => {
+  return {
+    type: Actions.SET_TIME,
+    time
+  };
+}

@@ -1,8 +1,8 @@
-// import ReduxService from '../services/ReduxService';
+import ReduxService from '../services/ReduxService';
 import Actions from '../constants/Actions';
 
 export default function(state = {}, payload) {
-  // const assign = (...props) => ReduxService.assign(state, payload, ...props);
+  const assign = (...props) => ReduxService.assign(state, payload, ...props);
 
   switch(payload.type) {
     case Actions.SET_POSITION:
@@ -13,6 +13,8 @@ export default function(state = {}, payload) {
       }
 
       return Object.assign({}, state, {positions});
+    case Actions.SET_TIME:
+      return assign('time');
     default:
       return state;
   }

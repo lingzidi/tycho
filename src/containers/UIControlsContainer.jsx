@@ -49,7 +49,8 @@ export default connect(
     'uiControls.zoom',
     'uiControls.scale',
     'uiControls.controlsEnabled',
-    'data.pageText'
+    'data.pageText',
+    'animation.time'
   ),
   ReduxService.mapDispatchToProps(Actions)
 )(UIControlsContainer);

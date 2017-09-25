@@ -31,7 +31,7 @@ export class TourContainer extends React.Component {
   }
 
   /**
-   * Initlaizes the tour.
+   * Initializes the tour.
    */
   initializeTour = () => {
     const {action, labels} = this.props;

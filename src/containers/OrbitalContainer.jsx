@@ -14,7 +14,7 @@ export class OrbitalContainer extends React.Component {
     arcRotate: PropTypes.number.isRequired,
     radius: PropTypes.number.isRequired,
     axialTilt: PropTypes.number.isRequired,
-    time: PropTypes.number.isRequired,
+    time: PropTypes.number,
     id: PropTypes.string.isRequired,
     isSatellite: PropTypes.bool,
     active: PropTypes.bool,

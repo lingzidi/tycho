@@ -15,5 +15,16 @@ describe('Animation Actions', () => {
       expect(result.position).toEqual(position);
     });
   });
+
+  describe('setTime()', () => {
+    it('should be of type SET_TIME with the time payload', () => {
+      const time = 1;
+      const result = Actions.setTime(time);
+      
+      expect(result).toHaveProperty('time');
+      expect(result.type).toEqual(ActionType.SET_TIME);
+      expect(result.time).toEqual(time);
+    });
+  });
 });
  

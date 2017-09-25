@@ -176,6 +176,7 @@ export default connect(
     'label.highlightedOrbital',
     'tour.isAutoOrbitEnabled',
     'animation.positions',
+    'animation.time',
     'data.orbitalData'
   ),
   ReduxService.mapDispatchToProps(

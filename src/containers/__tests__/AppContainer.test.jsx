@@ -42,21 +42,29 @@ describe('App Container', () => {
   });
 
   describe('onAnimate()', () => {
-    it('should set state time to the clock\'s current time', () => {
-      const spy = jest.spyOn(appContainer.clock, 'getTime');
+    beforeEach(() => {
+      appContainer.props = {
+        action: {setTime: jest.fn()}
+      };
+    });
 
+    it('should set state time to the clock\'s current time', () => {
+      const time = 1;
+      const spy = jest.spyOn(appContainer.props.action, 'setTime');
+
+      appContainer.clock.getTime = () => time;
       appContainer.onAnimate();
 
-      expect(typeof appContainer.state.time).toBe('number');
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(time);
     });
 
     it('should update the clock speed', () => {
       const speed = 2;
       const spy = jest.spyOn(appContainer.clock, 'speed');
 
-      appContainer.props = {speed};
+      appContainer.props.speed = speed;
       appContainer.onAnimate();
 
       expect(spy).toHaveBeenCalledTimes(1);

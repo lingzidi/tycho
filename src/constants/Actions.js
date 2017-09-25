@@ -13,6 +13,7 @@ export default keyMirror({
   SET_POSITION: null,
   SET_ORBITAL_DATA: null,
   SET_PAGE_TEXT: null,
+  SET_TIME: null,
   SHOW_LABEL: null,
   SET_UI_CONTROLS: null,
   TOUR_COMPLETED: null,

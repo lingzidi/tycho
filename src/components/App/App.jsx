@@ -13,12 +13,11 @@ export default class App extends React.Component {
       <div>
         <SceneContainer
           onAnimate={this.props.onAnimate}
-          time={this.props.time}
           width={window.innerWidth}
           height={window.innerHeight}
         />
         <LabelGroupContainer />
-        <UIControlsContainer time={this.props.time} />
+        <UIControlsContainer />
         <LoaderContainer />
         <TourContainer labels={Constants.Tour.LABELS} />
         <ModalContainer />

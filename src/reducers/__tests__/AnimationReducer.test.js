@@ -40,4 +40,14 @@ describe('Animation Reducer', () => {
       expect(result).toEqual({positions});
     });
   });
+
+  it('should handle SET_TIME', () => {
+    const time = 1;
+    const result = reducer(undefined, {
+      type: Actions.SET_TIME,
+      time
+    });
+
+    expect(result).toEqual({time});
+  });
 });
