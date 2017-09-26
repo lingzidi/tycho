@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.16.2",
     "classnames": "^2.2.5",
     "deep-assign": "^2.0.0",
     "jest-cli": "^21.0.2",
@@ -34,7 +33,6 @@
     "coverage": "rimraf coverage && npm run build-css && react-scripts test --env=jsdom --coverage"
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.9.0",
     "codecov": "^2.3.0",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "2.0.0",

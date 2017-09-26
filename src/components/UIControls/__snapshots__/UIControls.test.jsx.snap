@@ -19,7 +19,9 @@ exports[`UIControls Component render() should render the UIControls successfully
   <div
     className="uicontrols__control uicontrols__control--target-label"
   >
-    <span />
+    <span
+      className="uicontrols__control uicontrols__control--modal-opener"
+    />
   </div>
   <div
     className="uicontrols__control uicontrols__control--datetime"

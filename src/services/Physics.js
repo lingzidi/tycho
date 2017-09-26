@@ -1,5 +1,3 @@
-import Scale from '../utils/Scale';
-
 export default class Physics {
 
   static MAX_ECCENTRICITY = 0.8

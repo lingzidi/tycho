@@ -1,21 +1,30 @@
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import * as Actions from '../DataActions';
 import ActionType from '../../constants/Actions';
 import orbitalFixtures from './__fixtures__/orbitals.json';
 import pageTextFixtures from './__fixtures__/pageText.json';
 
-const mock = new MockAdapter(axios);
+const mockJsonFetch = (jsonData) => {
+  return jest.fn()
+    .mockImplementation(() => {
+      return new Promise((resolve) => {
+        resolve({
+          json: () => jsonData
+        });
+      });
+    });
+}
 
 describe('Data Actions', () => {
   describe('requestOrbitalData()', () => {
+    beforeEach(() => {
+      global.fetch = mockJsonFetch(orbitalFixtures);
+    });
+
     it('should be a thunk', () => {
       expect(typeof Actions.requestOrbitalData()).toBe('function');
     });
 
     it('should request orbitals.json', () => {
-      mock.onGet('/static/data/orbitals.json').reply(200, orbitalFixtures);
-
       const dispatch = (data) => {
         expect(data).toEqual({
           type: ActionType.SET_ORBITAL_DATA,
@@ -27,13 +36,15 @@ describe('Data Actions', () => {
   });
 
   describe('requestPageText()', () => {
+    beforeEach(() => {
+      global.fetch = mockJsonFetch(pageTextFixtures);
+    });
+
     it('should be a thunk', () => {
       expect(typeof Actions.requestPageText()).toBe('function');
     });
 
     it('should request pageText.json', () => {
-      mock.onGet('/static/data/pageText.json').reply(200, pageTextFixtures);
-
       const dispatch = (data) => {
         expect(data).toEqual({
           type: ActionType.SET_PAGE_TEXT,
