@@ -14,6 +14,18 @@ describe('Label Actions', () => {
     });
   });
 
+  describe('setLabelText()', () => {
+    it('should be of type SET_LABEL_TEXT with the setLabelText payload', () => {
+      const labelText = 'Mars';
+      const result = Actions.setLabelText(labelText);
+      
+      expect(result).toHaveProperty('type');
+      expect(result).toHaveProperty('labelText');
+      expect(result.type).toEqual(ActionType.SET_LABEL_TEXT);
+      expect(result.labelText).toEqual(labelText);
+    });
+  });
+
   describe('setHighlightedOrbital()', () => {
     it('should be of type SET_HIGHLIGHTED_ORBITAL with the highlightedOrbital payload', () => {
       const highlightedOrbital = 'Mars';

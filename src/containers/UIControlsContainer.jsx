@@ -49,6 +49,7 @@ export default connect(
     'uiControls.zoom',
     'uiControls.scale',
     'uiControls.controlsEnabled',
+    'label.labelText',
     'data.pageText',
     'animation.time'
   ),

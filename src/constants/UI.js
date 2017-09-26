@@ -11,6 +11,8 @@ export const Sliders = {
 
 export const DEFAULT_TARGET_NAME = 'dummyPlanet';
 
+export const DEFAULT_LABEL_TEXT = 'Dummy Planet';
+
 export const UX_DATE_FORMAT = 'MMM DD, YYYY h:mm a';
 
 export const ZOOM_LABEL_TRIGGER = 25;

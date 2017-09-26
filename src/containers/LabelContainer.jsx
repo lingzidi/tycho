@@ -19,6 +19,7 @@ export class LabelContainer extends React.Component {
    */
   setActiveOrbital = () => {
     this.props.action.setActiveOrbital(this.props.id);
+    this.props.action.setLabelText(this.props.text);
   }
 
   /**

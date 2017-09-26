@@ -47,8 +47,7 @@ export class TourContainer extends React.Component {
    * Callback to invoke once the tour orbit has completed.
    */
   onOrbitComplete = () => {
-    this.props.action.setActiveOrbital(Constants.UI.DEFAULT_TARGET_NAME);
-
+    this.setDefaultActiveOrbital();
     setTimeout(this.onTourComplete, 5000);
   }
 
@@ -68,7 +67,15 @@ export class TourContainer extends React.Component {
     action.tourCompleted(true);
     action.setCameraOrbit(false);
     action.setUIControls(true);
-    action.setActiveOrbital(Constants.UI.DEFAULT_TARGET_NAME);
+    this.setDefaultActiveOrbital();
+  }
+
+  /**
+   * Sets the active orbital targetName and the header label text to UI defaults.
+   */
+  setDefaultActiveOrbital = () => {
+    this.props.action.setActiveOrbital(Constants.UI.DEFAULT_TARGET_NAME);
+    this.props.action.setLabelText(Constants.UI.DEFAULT_LABEL_TEXT);
   }
 
   /**

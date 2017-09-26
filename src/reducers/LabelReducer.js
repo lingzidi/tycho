@@ -9,6 +9,8 @@ export default function(state = {}, payload) {
       return assign('targetName');
     case Actions.SET_HIGHLIGHTED_ORBITAL:
       return assign('highlightedOrbital');
+    case Actions.SET_LABEL_TEXT:
+      return assign('labelText');
     default:
       return state;
   }

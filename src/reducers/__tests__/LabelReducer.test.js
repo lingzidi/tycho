@@ -29,4 +29,14 @@ describe('Label Reducer', () => {
 
     expect(result).toEqual({highlightedOrbital});
   });
+  
+  it('should handle SET_LABEL_TEXT', () => {
+    const labelText = 'Mars';
+    const result = reducer(undefined, {
+      type: Actions.SET_LABEL_TEXT,
+      labelText
+    });
+
+    expect(result).toEqual({labelText});
+  });
 });

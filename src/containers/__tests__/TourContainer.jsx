@@ -30,6 +30,7 @@ describe('Tour Container', () => {
       setUIControls: jest.fn(),
       setCameraOrbit: jest.fn(),
       setActiveOrbital: jest.fn(),
+      setLabelText: jest.fn(),
       tourCompleted: jest.fn(),
       tourSkipped: jest.fn(),
       showLabel: jest.fn()

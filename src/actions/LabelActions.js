@@ -7,6 +7,13 @@ export const setActiveOrbital = (targetName) => {
   };
 }
 
+export const setLabelText = (labelText) => {
+  return {
+    type: Actions.SET_LABEL_TEXT,
+    labelText
+  };
+}
+
 export const setHighlightedOrbital = (highlightedOrbital) => {
   return {
     type: Actions.SET_HIGHLIGHTED_ORBITAL,

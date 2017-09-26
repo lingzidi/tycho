@@ -17,20 +17,38 @@ describe('Label Container', () => {
   });
 
   describe('setActiveOrbital()', () => {
-    it('should call the setActiveOrbital action with the id', () => {
+    const id = 'testPlanet';
+    const text = 'Test Planet';
+
+    beforeEach(() => {
       const setActiveOrbital = jest.fn();
-      const id = 'testPlanet';
+      const setLabelText = jest.fn();
 
       labelContainer.props = {
-        action: {setActiveOrbital},
-        id
+        action: {setActiveOrbital, setLabelText},
+        id,
+        text
       };
+    });
+
+    it('should call the setActiveOrbital action with the id', () => {
       const spy = jest.spyOn(labelContainer.props.action, 'setActiveOrbital');
 
       labelContainer.setActiveOrbital();
 
       expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(id);
+    });
+
+    it('should call the setActiveOrbital action with the id', () => {
+      const spy = jest.spyOn(labelContainer.props.action, 'setLabelText');
+
+      labelContainer.setActiveOrbital();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(text);
     });
   });
 

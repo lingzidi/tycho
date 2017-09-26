@@ -26,7 +26,11 @@ export default class UIControls extends React.Component {
         </div>
 
         <div className="uicontrols__control uicontrols__control--target-label">
-          <span onClick={this.props.openModal}>Target label</span>
+          <span
+            className="uicontrols__control uicontrols__control--modal-opener"
+            onClick={this.props.openModal}>
+            {this.props.labelText}
+          </span>
         </div>
 
         <div className="uicontrols__control uicontrols__control--datetime">
