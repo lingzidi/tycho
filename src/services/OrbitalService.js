@@ -59,8 +59,8 @@ export default class OrbitalService {
    * @returns {Number} degree of rotation [0,360]
    */
   static getRotationCompleted = (sidereal, time) => {
-    // const unixTimeToDays = time / 1000 / 60 / 60 / 24; // millisecs to days
-    const percentRotated = (time / sidereal) % 1;
+    const unixTimeToDays = time / 1000 / 60 / 60 / 24; // millisecs to days
+    const percentRotated = (unixTimeToDays / sidereal) % 1;
     const degreesRotated = percentRotated * 360;
     
     return degreesRotated;
