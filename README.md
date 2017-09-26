@@ -8,6 +8,7 @@
 [![Build Status](https://travis-ci.org/jshor/tycho2.svg?branch=master)](https://travis-ci.org/jshor/tycho2)
 [![dependency Status](https://david-dm.org/jshor/tycho2/status.png)](https://david-dm.org/jshor/tycho2#info=dependencies)
 [![devDependency Status](https://david-dm.org/jshor/tycho2/dev-status.png)](https://david-dm.org/jshor/tycho2#info=devDependencies)
+[![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE.md)
 
 ## Table of Contents
 
