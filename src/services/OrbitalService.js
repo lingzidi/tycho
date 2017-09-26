@@ -36,7 +36,7 @@ export default class OrbitalService {
     });
   }
 
-  /**`
+  /**
    * Calculates the Eulerian vector of the orbital group
    *
    * @param {Object} props - OrbitalContainer props
@@ -54,15 +54,31 @@ export default class OrbitalService {
    *
    * @param {Object} props - OrbitalContainer props
    * @param {Number} props.axialTilt - axis tilt
-   * @param {Number} props.arcRotate - orbital rotation, in arcseconds
-   * @param {Number} props.time - current time, in seconds
+   * @param {Number} props.sidereal - apparent sidereal rotation of orbital (in sidereal days)
+   * @param {Number} props.time - UNIX timestamp at position (in milliseconds)
    * @returns {THREE.Euler} Eulerian vector
    */
-  static getBodyRotation = ({axialTilt, arcRotate, time}) => {
+  static getBodyRotation = ({axialTilt, sidereal, time}) => {
     return OrbitalService.toEuler({
       x: Math.abs(90 - axialTilt),
-      y: Math2.arcSecToDeg(time, arcRotate),
+      y: OrbitalService.getRotationCompleted(sidereal, time)
     });
+  }
+
+  /**
+   * Returns the rotation of the given sidereal in degrees w.r.t. time.
+   *
+   * @note All rotation periods are w.r.t. to one Earth day (not sidereal days!)
+   * @param {Number} sidereal - apparent sidereal rotation of orbital (in sidereal days)
+   * @param {Number} time - UNIX timestamp at position (in milliseconds)
+   * @returns {Number} degree of rotation [0,360]
+   */
+  static getRotationCompleted = (sidereal, time) => {
+    const unixTimeToDays = time / 1000 / 60 / 60 / 24; // millisecs to days
+    const percentRotated = (time / sidereal) % 1;
+    const degreesRotated = percentRotated * 360;
+    
+    return degreesRotated;
   }
 
   /**
