@@ -8,7 +8,7 @@
 [![Build Status](https://travis-ci.org/jshor/tycho2.svg?branch=master)](https://travis-ci.org/jshor/tycho2)
 [![dependency Status](https://david-dm.org/jshor/tycho2/status.png)](https://david-dm.org/jshor/tycho2#info=dependencies)
 [![devDependency Status](https://david-dm.org/jshor/tycho2/dev-status.png)](https://david-dm.org/jshor/tycho2#info=devDependencies)
-[![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE.md)
+[![License](http://img.shields.io/:license-MIT-blue.svg)](LICENSE.md)
 
 ## Table of Contents
 
@@ -32,6 +32,8 @@
   - [yarn test-scripts](#yarn-test-scripts)
   - [yarn coverage](#yarn-coverage)
   - [yarn build](#yarn-build)
+  - [yarn orbitals](#yarn-orbitals)
+  - [yarn ephemeris](#yarn-ephemeris)
 - [Supported Language Features and Polyfills](#supported-language-features-and-polyfills)
 - [Credits](#credits)
 
@@ -141,6 +143,9 @@ Static assets, such as textures, media, and data are stored in the `public` fold
   |   |   `-- ./index.test.js
   |   `-- ./index.js
   |-- ./index.js
+./scripts
+  |-- ./lib
+  `-- ./index.js
 ```
 
 ## Available Scripts
@@ -186,6 +191,10 @@ The build is minified and the filenames include the hashes.<br>
 ### `yarn orbitals`
 
 Runs the compilation script for the orbital data json.
+
+### `yarn ephemeris`
+
+Takes all orbital JSONs, probes the [NASA/JPL HORIZONS database]() for ephemeris data, and updates each JSON accordingly. For more information on this script, and on the prerequisite data format, please see [this wiki page](https://github.com/jshor/tycho2/wiki/Orbital-JSONs#nasa-jpl-horizons).
 
 ## Supported Language Features and Polyfills
 

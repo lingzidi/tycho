@@ -50,7 +50,7 @@ export class SceneContainer extends React.Component {
 
     if (positions && this.props.targetName !== targetName) {
       this.props.action.changeSpeed(1);
-      this.refs.cameraBase.startTween(targetName, this.endCameraTween);
+      this.refs.cameraBase.startTween(targetName, this.endCameraTween.bind(this, speed));
     }
   }
 

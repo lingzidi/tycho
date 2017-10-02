@@ -30,8 +30,10 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test": "npm run build-css && react-scripts test --env=jsdom",
-    "test-scripts": "mocha --reporter dot --require ./scripts/__tests__/index.js ./scripts/__tests__/*.test.js",
-    "coverage": "rimraf coverage && npm run build-css && react-scripts test --env=jsdom --coverage"
+    "test-scripts": "mocha --reporter dot --require ./scripts/index.test.js ./scripts/**/*.test.js",
+    "coverage": "rimraf coverage && npm run build-css && react-scripts test --env=jsdom --coverage",
+    "ephemeris": "node ./scripts/index.js ephemeris",
+    "orbitals": "node ./scripts/index.js orbitals"
   },
   "devDependencies": {
     "chai": "^4.1.2",

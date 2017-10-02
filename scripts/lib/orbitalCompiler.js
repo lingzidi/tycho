@@ -72,14 +72,18 @@ const mapSatellitesToParents = (data) => {
     if (Array.isArray(satellites)) {
       data[id].satellites = satellites
         .map((satellite) => {
+          if (!data[satellite]) {
+            data[satellite] = {};
+          }
           satelliteKeys.push(satellite);
+          
           return Object.assign(data[satellite], {id: satellite});
         })
-      .filter((satellite) => !!satellite);
+        .filter((satellite) => !!satellite);
     }
     mapping[id] = data[id];
   }
-
+  
   return removeSatellites(mapping, satelliteKeys);
 }
 
@@ -104,16 +108,18 @@ const orbitalsToArray = (orbitalData) => {
 /**
  * Returns all *.json files recursively in the given path.
  *
+ * @private
  * @param {String} pathName - base path to look in
  * @returns {String[]} list of paths to JSON files.
  */
 const getFilePaths = (pathName) => {
-  return glob.sync(path.join(__dirname, '../public/static/data/orbitals/**/*.json'));
+  return glob.sync(path.join(__dirname, '../../public/static/data/orbitals/**/*.json'));
 }
 
 /**
  * Compiles data from the given base path.
  *
+ * @private
  * @param {String} basePath - base path for json files
  * @returns {String} JSON-stringified data bundle
  */
@@ -129,17 +135,18 @@ const getOrbitalDataBundle = () => {
 /**
  * Writes the given data to the specified file.
  *
+ * @private
  * @param {String} data - JSON-encoded data
  * @param {String} fileName - name of JSON file to write
  */
 const compileDataFile = (data, fileName) => {
-  const filePath = path.join(__dirname, `../public/static/data/${fileName}.json`);
+  const filePath = path.join(__dirname, `../../public/static/data/${fileName}.json`);
 
   fs.writeFile(filePath, data, {flag: 'w'}, (err) => {
     if (err) {
       return console.log('Error: ', err);
     }
-    console.log(`Created bundle in: ${filePath}`);
+    console.log(`🌎  Created orbitals bundle in: ${filePath}`);
   }); 
 }
 
@@ -150,4 +157,12 @@ const compileBundles = () => {
   compileDataFile(getOrbitalDataBundle(), 'orbitals');
 }
 
-compileBundles();
+module.exports = {
+  getKeyFromPath,
+  jsonFilesToObject,
+  removeSatellites,
+  mapSatellitesToParents,
+  orbitalsToArray,
+  getOrbitalDataBundle,
+  compileBundles
+};
