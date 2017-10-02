@@ -32,16 +32,33 @@ export class SceneContainer extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.maybeUpdateControlsZoom(nextProps.zoom);
-    this.maybeUpdateAutoOrbit(nextProps.isAutoOrbitEnabled);
+    this.maybeTweenCameraPosition(nextProps);
+    this.maybeUpdateControlsZoom(nextProps);
+    this.maybeUpdateAutoOrbit(nextProps);
     this.maybePreventCameraCollision(nextProps);
+  }
+
+  /**
+   * Starts tweening the camera to the new target if targetName has changed.
+   * This resets the speed back to 1x until the camera has finished tweening.
+   *
+   * @param {Object} props
+   * @param {String} props.targetName
+   */
+  maybeTweenCameraPosition = ({targetName}) => {
+    const {positions, speed} = this.props;
+
+    if (positions && this.props.targetName !== targetName) {
+      this.props.action.changeSpeed(1);
+      this.refs.cameraBase.startTween(targetName, this.endCameraTween);
+    }
   }
 
   /**
    * Sets the min distance to the radius of the target, if the scale or target updated.
    * This prevents the camera from colliding with the target, should the zoom change.
    *
-   * @param {Object} props - object properties
+   * @param {Object} props
    * @param {String} props.targetName - id of active target
    * @param {Number} props.scale - user-defined planet scale
    */
@@ -55,9 +72,10 @@ export class SceneContainer extends React.Component {
   /**
    * Updates zoom level if the zoom prop has changed.
    *
-   * @param {Number} zoom - new zoom prop value
+   * @param {Object} props
+   * @param {Number} props.zoom - new zoom prop value
    */
-  maybeUpdateControlsZoom = (zoom) => {
+  maybeUpdateControlsZoom = ({zoom}) => {
     if (this.props.zoom !== zoom) {
       this.controls.zoom(zoom);
     }
@@ -66,9 +84,10 @@ export class SceneContainer extends React.Component {
   /**
    * Updates the auto orbit state if the isAutoOrbitEnabled has changed.
    *
-   * @param {Boolean} isAutoOrbitEnabled - new isAutoOrbitEnabled prop value
+   * @param {Object} props
+   * @param {Boolean} props.isAutoOrbitEnabled - new isAutoOrbitEnabled prop value
    */
-  maybeUpdateAutoOrbit = (isAutoOrbitEnabled) => {
+  maybeUpdateAutoOrbit = ({isAutoOrbitEnabled}) => {
     if (this.props.isAutoOrbitEnabled !== isAutoOrbitEnabled) {
       this.controls.autoRotate = isAutoOrbitEnabled;
     }
@@ -122,6 +141,16 @@ export class SceneContainer extends React.Component {
   }
 
   /**
+   * Ends camera tween and restores the user-defined speed.
+   *
+   * @param {Number} speed - user-defined speed
+   */
+  endCameraTween = (speed) => {
+    this.refs.cameraBase.endTween();
+    this.props.action.changeSpeed(speed);
+  }
+
+  /**
    * Sets the renderer DOM element.
    */
   setDomElement = (domElement) => {
@@ -172,6 +201,7 @@ export default connect(
   ReduxService.mapStateToProps(
     'uiControls.zoom',
     'uiControls.scale',
+    'uiControls.speed',
     'label.targetName',
     'label.highlightedOrbital',
     'tour.isAutoOrbitEnabled',

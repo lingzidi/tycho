@@ -20,14 +20,6 @@ export default class CameraContainer extends React.Component {
     }
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    const {positions, targetName} = this.props;
-
-    if (positions && targetName !== nextProps.targetName) {
-       this.startTween(nextProps.targetName);
-    }
-  }
-
   /**
    * Removes any active Tween.
    */
@@ -49,7 +41,7 @@ export default class CameraContainer extends React.Component {
   /**
    * Starts Tween to the position having a key of targetName.
    */
-  startTween = (targetName) => {
+  startTween = (targetName, callback) => {
     const target = this.props.positions[targetName];
 
     if (target) {
@@ -57,7 +49,7 @@ export default class CameraContainer extends React.Component {
       this.assignTween();
       this.props.zoomIn();
 
-      CameraService.startTween(this.tweenBase, target.position3d, this.endTween);
+      CameraService.startTween(this.tweenBase, target.position3d, callback);
     }
   }
 
@@ -72,6 +64,8 @@ export default class CameraContainer extends React.Component {
   /**
    * Returns the calculated active target position.
    * If a Tween is in progress, it will return that current position.
+   *
+   * @returns {THREE.Vector3} target vector
    */
   getTargetPosition = () => {
     const {positions, targetName} = this.props;

@@ -51,35 +51,6 @@ describe('Camera Container', () => {
       expect(spy).not.toHaveBeenCalled();
     });
   });
-
-  describe('componentWillReceiveProps()', () => {
-    it('should start tweening to `targetName` if the prop has changed', () => {
-      const controls = new Controls(new Camera());
-      const targetName = 'Mars';
-      const nextProps = {targetName: 'Earth'};
-      const positions = {};
-      const spy = jest.spyOn(cameraContainer, 'startTween');
-
-      cameraContainer.props = {targetName, controls, positions};
-      cameraContainer.componentWillReceiveProps(nextProps);
-
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(nextProps.targetName);
-    });
-
-    it('should not tween if the `targetName` if the prop has not changed', () => {
-      const controls = new Controls(new Camera());
-      const targetName = 'Mars';
-      const nextProps = {targetName};
-      const positions = {};
-      const spy = jest.spyOn(cameraContainer, 'startTween');
-
-      cameraContainer.props = {targetName, controls, positions};
-      cameraContainer.componentWillReceiveProps(nextProps);
-
-      expect(spy).not.toHaveBeenCalled();
-    });
-  });
  
   describe('endTween()', () => {
     it('should dispose of the tweenData and tweenBase', () => {
@@ -126,9 +97,14 @@ describe('Camera Container', () => {
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    it('should initialize a new tween', () => {
+    it('should initialize a new tween if target defined', () => {
       cameraContainer.startTween(targetName);
       expect(typeof cameraContainer.tweenBase).toEqual('object');
+    });
+
+    it('should not initialize a new tween if target is undefined', () => {
+      cameraContainer.startTween();
+      expect(cameraContainer.tweenBase).not.toBeDefined();
     });
   });
 

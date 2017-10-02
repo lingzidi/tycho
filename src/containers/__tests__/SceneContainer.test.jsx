@@ -10,7 +10,9 @@ import Controls from '../../utils/Controls';
 import CameraService from '../../services/CameraService';
 import data from './__fixtures__/orbitals.json';
 
-describe('Scene Container', () => {
+jest.mock('../../services/CameraService');
+
+describe.only('Scene Container', () => {
   let component, sceneContainer;
 
   beforeEach(() => {
@@ -63,6 +65,46 @@ describe('Scene Container', () => {
   describe('prop update methods', () => {
     beforeEach(() => {
       sceneContainer.controls = new Controls(new Camera());
+    });
+
+    describe('componentWillReceiveProps()', () => {
+      const action = {
+        changeSpeed: jest.fn()
+      };
+
+      beforeEach(() => {
+        sceneContainer.refs = {
+          cameraBase: {
+            startTween: jest.fn(),
+            endTween: jest.fn()
+          }
+        };
+      });
+
+      it('should start tweening to `targetName` if the prop has changed', () => {
+        const targetName = 'Mars';
+        const nextProps = {targetName: 'Earth'};
+        const positions = {};
+        const spy = jest.spyOn(sceneContainer.refs.cameraBase, 'startTween');
+
+        sceneContainer.props = {targetName, positions, action};
+        sceneContainer.componentWillReceiveProps(nextProps);
+
+        expect(spy).toHaveBeenCalledTimes(1);
+        //expect(spy).toHaveBeenCalledWith(nextProps.targetName);
+      });
+
+      it('should not tween if the `targetName` if the prop has not changed', () => {
+        const targetName = 'Mars';
+        const nextProps = {targetName};
+        const positions = {};
+        const spy = jest.spyOn(sceneContainer.refs.cameraBase, 'startTween');
+
+        sceneContainer.props = {targetName, positions, action};
+        sceneContainer.componentWillReceiveProps(nextProps);
+
+        expect(spy).not.toHaveBeenCalled();
+      });
     });
 
     describe('maybePreventCameraCollision()', () => {
@@ -247,6 +289,42 @@ describe('Scene Container', () => {
 
       expect(sceneContainer).toHaveProperty('camera');
       expect(sceneContainer.camera).toEqual(camera);
+    });
+  });
+
+  describe('endCameraTween()', () => {
+    const speed = 5;
+    
+    beforeEach(() => {
+      sceneContainer.props = {
+        action: {
+          changeSpeed: jest.fn()
+        }
+      };
+      sceneContainer.refs = {
+        cameraBase: {
+          endTween: jest.fn()
+        }
+      };
+    });
+
+    it('should restore the user-defined speed', () => {
+      const spy = jest.spyOn(sceneContainer.refs.cameraBase, 'endTween');
+
+      sceneContainer.endCameraTween(speed);
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should restore the user-defined speed', () => {
+      const spy = jest.spyOn(sceneContainer.props.action, 'changeSpeed');
+
+      sceneContainer.endCameraTween(speed);
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(speed);
     });
   });
 

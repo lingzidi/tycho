@@ -15,7 +15,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
     Euler {
       "_order": "XYZ",
       "_x": 1.1648327427810155,
-      "_y": 0.0002183654149222272,
+      "_y": 0,
       "_z": 0,
     }
   }
