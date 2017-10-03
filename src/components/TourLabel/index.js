@@ -1,4 +1,3 @@
-import TourLabel from './TourLabel';
 import './TourLabel.css';
 
-export default TourLabel;
+export {default} from './TourLabel';

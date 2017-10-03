@@ -1,3 +1,1 @@
-import Skybox from './Skybox';
-
-export default Skybox;
+export {default} from './Skybox';

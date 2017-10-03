@@ -1,3 +1,1 @@
-import ZoomSlider from './ZoomSlider';
-
-export default ZoomSlider;
+export {default} from './ZoomSlider';

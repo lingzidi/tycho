@@ -1,3 +1,1 @@
-import ScaleSlider from './ScaleSlider';
-
-export default ScaleSlider;
+export {default} from './ScaleSlider';

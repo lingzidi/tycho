@@ -1,4 +1,3 @@
-import Tour from './Tour';
 import './Tour.css';
 
-export default Tour;
+export {default} from './Tour';

@@ -1,4 +1,3 @@
-import Slider from './Slider';
 import './Slider.css';
 
-export default Slider;
+export {default} from './Slider';
