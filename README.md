@@ -57,7 +57,7 @@ Each DOM component contains a corresponding [Sass](http://sass-lang.com/) styles
 
 ### Testing
 
-Tests use [Jest](https://facebook.github.io/jest/) and [snapshot testing](https://facebook.github.io/jest/docs/en/snapshot-testing.html#content) for components.
+Tests use [Jest](https://facebook.github.io/jest/), [enzyme](https://github.com/airbnb/enzyme), and [snapshot testing](https://facebook.github.io/jest/docs/en/snapshot-testing.html#content) for components.
 
 #### Testing Guidelines
 
