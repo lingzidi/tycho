@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import Math2 from './Math2';
 import Scale from '../utils/Scale';
 import Constants from '../constants';
-import Physics from './Physics';
 
 export default class OrbitalService {
   
@@ -205,14 +204,14 @@ export default class OrbitalService {
    *
    * @param {Object} positions - positions map of orbitals
    * @param {String} targetName - name of the active target
-   * @returns {Number} current distance to the Sun, in AU
+   * @returns {Number} current distance to the Sun, in kilometers
    */
   static getDistanceToSun = (positions, targetName) => {
     if (positions && positions[targetName]) {
       const {x, y, z} = positions[targetName].position3d;
       const magnitude = Math.sqrt(x * x + y * y + z * z);
       
-      return Physics.toAU(magnitude);
+      return magnitude * Constants.WebGL.UNIT_SCALE;
     }
     return 0;
   }

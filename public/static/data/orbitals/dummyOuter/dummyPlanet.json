@@ -1,9 +1,10 @@
 {
   "name": "Dummy Outer",
-  "GM": 6836529,
+  "mass": 5.97237e+24,
+  "centralMass": 1.9891e+30, 
   "axialTilt": 23.26,
-  "semimajor": 249598261,
-  "semiminor": 249556483,
+  "semimajor": 149598261,
+  "semiminor": 149556483,
   "radius": 637800,
   "arcRotate": 45.0411,
   "inclination": 1.57869,

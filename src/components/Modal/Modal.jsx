@@ -11,8 +11,9 @@ export default class Modal extends React.Component {
     closeModal: PropTypes.func.isRequired,
     title: PropTypes.string,
     description: PropTypes.string.isRequired,
-    velocity: PropTypes.number,
-    magnitude: PropTypes.number
+    velocity: PropTypes.string,
+    magnitude: PropTypes.string,
+    time: PropTypes.string
   }
 
   render() {
@@ -34,12 +35,14 @@ export default class Modal extends React.Component {
 				
         <div className="modal__footer">
           <div className="modal__info">
+            <span>Current Earth time:</span><br />
             <span>Velocity at vector:</span><br />
             <span>Distance to Sun:</span>
           </div>
           <div className="modal__info">
+            <span>{this.props.time}</span><br />
             <span>{this.props.velocity} km/s</span><br />
-            <span>{this.props.magnitude} AU</span>
+            <span>{this.props.magnitude} km</span>
           </div>
 				</div>
 			</div>

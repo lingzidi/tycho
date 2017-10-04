@@ -4,6 +4,8 @@ export default class Physics {
 
   static KM_TO_AU = 6.68459e-9;
 
+  static GRAVITATIONAL_CONSTANT = 6.67408e-11;
+
   /**
    * Calclates the mean anomaly in degrees.
    * Mean anomaly is the angular distance from 
@@ -98,20 +100,21 @@ export default class Physics {
   }
   
   /**
-   * Calculates a mass' specific orbital energy constant.
-   * Approximation for Tsiolkovsky's rocket equation.
+   * Calculates a mass' specific orbital energy constant at present vector.
+   * Utilizes the calculation derived from Kepler's First Law.
    *
-   * @param {Number} GM - gravitational constant
-   * @param {Number} r - magnitude of vector to origin
-   * @param {Number} semimajor - size of semimajor axis
-   * @returns {Number} orbital energy constant
+   * @param {Number} mass - mass of the orbital body, in kilograms
+   * @param {Number} magnitude - magnitude of vector to origin, in kilometers
+   * @param {Number} semimajor - size of semimajor axis, in kilometers
+   * @returns {Number} orbital energy constant at present vector, in km/s
    */
-  static orbitalEnergyConservation(GM, r, semimajor) {
-    return Math.sqrt(
-      Math.abs(
-        GM * ((2 /r) - (1 / semimajor))
-      )
-    );
+  static orbitalEnergyConservation(centralMass, magnitude, semimajor) {
+    const a = semimajor * 1000; // km to m
+    const r = magnitude * 1000; // km to m
+    const GM = Physics.GRAVITATIONAL_CONSTANT * centralMass; // m^3/s^2
+    const speed = Math.sqrt(GM * ((2 / r) - (1 / a))); // m/s
+  
+    return speed / 1000; // m to km
   }
   
   /**
