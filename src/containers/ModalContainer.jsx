@@ -113,4 +113,3 @@ export default connect(
   ),
   ReduxService.mapDispatchToProps(Actions)
 )(AnimatedModal);
-

@@ -1,6 +1,6 @@
 import CameraService from '../CameraService';
 import TWEEN from 'tween.js';
-import {Vector3, Camera} from 'three';
+import {Vector3, Camera, Object3D, Scene} from 'three';
 import fixture from './__fixtures__/planets.json';
 
 describe('Camera Service', () => {
@@ -46,35 +46,84 @@ describe('Camera Service', () => {
     });
   });
 
-  describe('getTargetPosition()', () => {
-    it('should return the `position3d` if the target is defined', () => {
-      const position3d = {x: 1, y: 1, z: 1};
-      const targetName = 'Mars';
-      const positions = {
-        [targetName]: {position3d}
-      };
+  describe('getPivotTween()', () => {
+    // TODO: write better tests for this...
+    it('should return a new instance of Tween', () => {
+      const tween = CameraService.getPivotTween();
 
-      const result = CameraService.getTargetPosition(positions, targetName);
+      expect(tween).toBeDefined();
+      expect(tween).toBeInstanceOf(TWEEN.Tween);
+    });
+  });
 
-      expect(result).toBeDefined();
-      expect(result).toEqual(position3d);
+  describe('movePivot()', () => {
+    const target = new Object3D();
+    const pivot = new Object3D();
+
+    it('should add the given pivot to the target', () => {
+      const spy = jest.spyOn(target, 'add');
+
+      CameraService.movePivot(pivot, target);
+
+      expect(spy).toHaveBeenCalled;
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(pivot);
     });
 
-    it('should return <0> when the targetName is not defined', () => {
-      const state = {positions: {}};
-      const result = CameraService.getTargetPosition(state, {});
+    it('should reset the pivot position to <0>', () => {
+      const spy = jest.spyOn(pivot.position, 'set');
 
-      expect(result).toBeDefined();
-      expect(result).toBeInstanceOf(Vector3);
-      expect(result).toEqual(new Vector3(0, 0, 0));
+      CameraService.movePivot(pivot, target);
+
+      expect(spy).toHaveBeenCalled;
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(0, 0, 0);
+    });
+  });
+
+  describe('setPivotPosition()', () => {
+    it('should reset the pivot position to the given vector', () => {
+      const x = 1, y = 2, z = 3;
+      const pivot = new Object3D();
+      const spy = jest.spyOn(pivot.position, 'set');
+
+      CameraService.setPivotPosition(pivot, {x, y, z});
+
+      expect(spy).toHaveBeenCalled;
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(x, y, z);
+    });
+  });
+
+  describe('getWorldPosition()', () => {
+    const scene = new Scene();
+    const object = new Object3D();
+    const position = new Vector3(5, 6, 1);
+
+    beforeEach(() => {
+      scene.add(object);
+      object.position.copy(position);
     });
 
-    it('should return <0> when positions is not defined', () => {
-      const result = CameraService.getTargetPosition(undefined, {});
+    it('should call updateMatrixWorld() on the target', () => {
+      const spy = jest.spyOn(object, 'updateMatrixWorld');
 
-      expect(result).toBeDefined();
+      CameraService.getWorldPosition(object);
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+    
+    it('should be an instance of Vector3', () => {
+      const result = CameraService.getWorldPosition(object);
+
       expect(result).toBeInstanceOf(Vector3);
-      expect(result).toEqual(new Vector3(0, 0, 0));
+    });
+
+    it('should return the world position of a given object', () => {
+      const result = CameraService.getWorldPosition(object);
+
+      expect(result).toEqual(position);
     });
   });
 

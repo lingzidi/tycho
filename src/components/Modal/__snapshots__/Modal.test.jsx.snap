@@ -33,6 +33,10 @@ exports[`Modal Component should render the Modal successfully 1`] = `
       className="modal__info"
     >
       <span>
+        Current Earth time:
+      </span>
+      <br />
+      <span>
         Velocity at vector:
       </span>
       <br />
@@ -43,12 +47,14 @@ exports[`Modal Component should render the Modal successfully 1`] = `
     <div
       className="modal__info"
     >
+      <span />
+      <br />
       <span>
          km/s
       </span>
       <br />
       <span>
-         AU
+         km
       </span>
     </div>
   </div>

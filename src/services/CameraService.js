@@ -6,7 +6,7 @@ import Scale from '../utils/Scale';
 
 export default class CameraService {
 
-  static CAMERA_INITIAL_POSITION = new Vector3(300, 300, 300)
+  static CAMERA_INITIAL_POSITION = new Vector3(300, 300, 300) // TODO: const
 
   /**
    * Converts an instance of Vector3 to a plain object with x, y, z properties.
@@ -45,21 +45,6 @@ export default class CameraService {
   }
 
   /**
-   * Returns the vector of the active target position.
-   * If no target position is found, it will return <0>.
-   *
-   * @param {Object} state - scene state
-   * @param {Object} props - scene props
-   * @returns {Vector3} - active target vector
-   */
-  static getTargetPosition = (positions, targetName) => {
-    if (positions && positions[targetName]) {
-      return positions[targetName].position3d;
-    }
-    return new Vector3(0, 0, 0);
-  }
-
-  /**
    * Calculates the min distance from target to camera to avoid collision.
    *
    * @param {Object[]} orbitals - list of orbitals
@@ -72,5 +57,61 @@ export default class CameraService {
     const scaledRadius = Scale(targetRadius, scale);
 
     return scaledRadius * 2;
+  }
+  
+  /**
+   * Creates an instance of Tween for moving a pivot to a given target.
+   *
+   * @param {Vector3} from - starting position
+   * @param {Vector3} to - target position
+   * @param {Object3D} target - new target
+   * @param {Object3D} group - camera pivot
+   * @returns {Tween}
+   */
+  static getPivotTween = (from, to, target, group) => {
+    return new TWEEN
+      .Tween(from)
+      .to(to, 2000)
+      .onUpdate(CameraService.setPivotPosition.bind(this, group, from))
+      .onComplete(CameraService.movePivot.bind(this, group, target))
+      .start();
+  }
+
+  /**
+   * Moves the given pivot to the new target at <0>.
+   *
+   * @param {Object3D} group - camera pivot
+   * @param {Object3D} target - new target
+   */
+  static movePivot = (group, target) => {
+    target.add(group);
+    group.position.set(0, 0, 0);
+  }
+
+  /**
+   * Sets the camera pivot position.
+   *
+   * @param {Object3D} group - camera pivot
+   * @param {Vector3} vect - new vector position
+   */
+  static setPivotPosition = (group, {x, y, z}) => {
+    group.position.set(x, y, z);
+  }
+
+  /**
+   * Returns the world position (i.e., w.r.t. <0>) of the given target.
+   *
+   * @param {Object3D} target - object to get world position of
+   * @returns {Vector3} world position
+   */
+  static getWorldPosition = (target) => {
+    target.updateMatrixWorld();
+
+    const matrix = target.matrixWorld;
+    const vect = new Vector3();
+
+    vect.setFromMatrixPosition(matrix);
+
+    return vect;
   }
 }

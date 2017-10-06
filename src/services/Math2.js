@@ -1,9 +1,5 @@
 export default class Math2 {
 
-  static HalfPI = Math.PI / 2;
-
-  static TAU = Math.PI * 2;
-  
   /**
    * Calculates the circumference of an ellipse.
    * This uses Ramanujan's elliptical approximation formula.

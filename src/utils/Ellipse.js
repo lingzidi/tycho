@@ -52,7 +52,7 @@ export default class Ellipse {
       focus, 
       this.semiminor,
       this.semimajor,
-    -Math2.HalfPI, 3 * Math2.HalfPI);
+      0, 2 * Math.PI);
   }
 
   /**

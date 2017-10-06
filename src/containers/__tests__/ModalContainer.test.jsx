@@ -64,15 +64,12 @@ describe('Modal Container', () => {
 
   describe('updateOrbitalStats()', () => {
     it('should update the component state with the velocity and magnitude', () => {
-      const magnitude = 5;
-      const velocity = 4;
-
-      OrbitalService.getDistanceToSun = () => magnitude;
-      Physics.orbitalEnergyConservation = () => velocity;
+      OrbitalService.getDistanceToSun = () => 5;
+      Physics.orbitalEnergyConservation = () => 4;
       modalContainer.updateOrbitalStats();
 
-      expect(component.state('magnitude')).toEqual(magnitude);
-      expect(component.state('velocity')).toEqual(velocity);
+      expect(component.state('magnitude')).toEqual('5.000');
+      expect(component.state('velocity')).toEqual('4.000');
     });
   });
 
@@ -109,15 +106,12 @@ describe('Modal Container', () => {
 
   describe('onAnimationFrame()', () => {
     it('should call updateOrbitalStats with the current targetName', () => {
-      const targetName = 'Earth';
-      modalContainer.state = {targetName};
       const spy = jest.spyOn(modalContainer, 'updateOrbitalStats');
 
       modalContainer.onAnimationFrame();
 
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1)
-      expect(spy).toHaveBeenCalledWith(targetName);
+      expect(spy).toHaveBeenCalledTimes(1);
     });
   });
 

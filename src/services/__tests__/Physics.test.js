@@ -105,16 +105,23 @@ describe('Physics Service', () => {
       const result = Physics.orbitalEnergyConservation(GM, r, semimamjor);
 
       expect(typeof result).toBe('number');
-      expect(result).toBe(43.58898943540674);
+      expect(result).toBe(1.1260884512328505e-8);
     });
   });
 
   describe('toAU()', () => {
-    it('should convert the given parameter value to astronomical units', () => {
+    it('should convert the given parameter value to astronomical units using given scale', () => {
       const result = Physics.toAU(100, 10000);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(0.00668459);
+    });
+
+    it('should convert the given parameter value to astronomical units using 1 as scale', () => {
+      const result = Physics.toAU(100);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(6.68459e-7);
     });
   });
 });

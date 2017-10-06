@@ -1,20 +1,6 @@
 import Math2 from '../Math2';
 
 describe('Math2 Service', () => {
-  describe('HalfPI', () => {
-    it('should equal PI / 2', () => {
-      expect(typeof Math2.HalfPI).toBe('number');
-      expect(Math2.HalfPI).toEqual(Math.PI / 2);
-    });
-  });
-
-  describe('TAU', () => {
-    it('should equal PI * 2', () => {
-      expect(typeof Math2.TAU).toBe('number');
-      expect(Math2.TAU).toEqual(Math.PI * 2);
-    });
-  });
-
   describe('ramanujan()', () => {
     it('should solve for the circumference of an ellipse', () => {
       const result = Math2.ramanujan(5, 10);

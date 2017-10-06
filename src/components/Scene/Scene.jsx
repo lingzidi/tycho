@@ -35,6 +35,10 @@ export default class Scene extends React.Component {
     });
   }
 
+  componentDidMount = () => {
+    this.refs.sun.up.set(0,0,1);
+  }
+
   render() {
     return (
       <group>
@@ -46,7 +50,7 @@ export default class Scene extends React.Component {
           distance={500}
         />
         <Skybox />
-        <mesh lookAt={this.props.cameraMatrix}>
+        <mesh lookAt={this.props.cameraMatrix} ref="sun">
           <planeGeometry width={100} height={100} />
           <meshBasicMaterial color={0x00ff00} />
         </mesh>

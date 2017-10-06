@@ -8,20 +8,6 @@ describe('Orbital Service', () => {
 
   afterEach(() => jest.resetAllMocks());
 
-  describe('getInclination()', () => {
-    const incline = 123;
-
-    it('should return the inclination if the `odd` parameter is truthy', () => {
-      const result = OrbitalService.getInclination(incline, true);
-      expect(result).toEqual(incline);
-    });
-
-    it('should return the inclination rotated by 90 degrees if the `odd` parameter is falsy', () => {
-      const result = OrbitalService.getInclination(incline);
-      expect(result).toEqual(incline - 90);
-    });
-  });
-
   describe('getEclipticGroupRotation()', () => {
     const param = {
       inclination: 10,
@@ -32,15 +18,6 @@ describe('Orbital Service', () => {
     it('should return an Eulerian vector', () => {
       const result = OrbitalService.getEclipticGroupRotation(param);
       expect(result).toBeInstanceOf(Euler);
-    });
-
-    it('should call getInclination() on the provided inclination', () => {
-      const spy = jest.spyOn(OrbitalService, 'getInclination');
-      OrbitalService.getEclipticGroupRotation(param);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(param.inclination, param.isSatellite);
     });
 
     it('should not set a y-dimensional Eulerian rotation', () => {
@@ -238,7 +215,7 @@ describe('Orbital Service', () => {
       const result = OrbitalService.getDistanceToSun({[targetName]: {position3d}}, targetName);
     
       expect(typeof result).toBe('number');
-      expect(result).toEqual(2.501144555105522e-8);
+      expect(result).toEqual(3741657.386773941);
     });
   });
 

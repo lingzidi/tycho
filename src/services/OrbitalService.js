@@ -6,20 +6,6 @@ import Constants from '../constants';
 export default class OrbitalService {
   
   /**
-   * Calculates inclination at a right angle if parity matches.
-   *
-   * @param {Number} inclination - angle of inclination, in degrees
-   * @param {Boolean} [isSatellite = false] - parity
-   * @returns {Number} calculated inclination
-   */
-  static getInclination = (inclination, isSatellite = false) => {
-    if (isSatellite) {
-      return inclination;
-    }
-    return inclination - 90;
-  }
-
-  /**
    * Calculates the Eulerian vector of the ecliptic group
    *
    * @param {Object} props - OrbitalContainer props
@@ -30,7 +16,7 @@ export default class OrbitalService {
    */
   static getEclipticGroupRotation = ({inclination, longitudeOfAscendingNode, isSatellite}) => {
     return OrbitalService.toEuler({
-      x: OrbitalService.getInclination(inclination, isSatellite),
+      x: inclination,
       z: longitudeOfAscendingNode
     });
   }

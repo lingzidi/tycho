@@ -1,31 +1,92 @@
 import React from 'react';
-import TWEEN from 'tween.js';
 import PropTypes from 'prop-types';
 import CameraService from '../services/CameraService';
+import Controls from '../utils/Controls';
 import Constants from '../constants';
 
 export default class CameraContainer extends React.Component {
 
   static propTypes = {
-    cameraRef: PropTypes.func,
-    positions: PropTypes.object,
+    ratio: PropTypes.number.isRequired,
     targetName: PropTypes.string,
-    zoomIn: PropTypes.func,
-    controls: PropTypes.object
+    actions: PropTypes.object,
+    speed: PropTypes.number,
+    scale: PropTypes.number,
+    zoom: PropTypes.number,
+    scene: PropTypes.object,
+    isAutoOrbitEnabled: PropTypes.bool,
+    orbitalData: PropTypes.array,
+    domElement: PropTypes.instanceOf(<canvas />),
   }
 
   componentDidMount = () => {
-    if (this.props.cameraRef) {
-      this.props.cameraRef(this.refs.camera);
+    this.refs.camera.up.set(0, 0, 1);
+    this.controls = new Controls(this.refs.camera, this.props.domElement);
+  }
+
+  componentWillUnmount = () => {
+    this.controls.dispose();
+    delete this.controls;
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    this.maybeTweenCameraPosition(nextProps);
+    this.maybeUpdateControlsZoom(nextProps);
+    this.maybeUpdateAutoOrbit(nextProps);
+    this.maybePreventCameraCollision(nextProps);
+  }
+
+  /**
+   * Starts tweening the camera to the new target if targetName has changed.
+   * This resets the speed back to 1x until the camera has finished tweening.
+   *
+   * @param {Object} props
+   * @param {String} props.targetName
+   */
+  maybeTweenCameraPosition = ({targetName}) => {
+    if (this.props.targetName !== targetName) {
+      this.setControls(false);
+      this.startTween(targetName);
     }
   }
 
   /**
-   * Removes any active Tween.
+   * Sets the min distance to the radius of the target, if the scale or target updated.
+   * This prevents the camera from colliding with the target, should the zoom change.
+   *
+   * @param {Object} props
+   * @param {String} props.targetName - id of active target
+   * @param {Number} props.scale - user-defined planet scale
    */
-  endTween = () => {
-    delete this.tweenData;
-    delete this.tweenBase;
+  maybePreventCameraCollision = ({targetName, scale}) => {
+    if (this.props.targetName !== targetName || this.props.scale !== scale) {
+      this.controls.minDistance = CameraService
+        .getMinDistance(this.props.orbitalData, targetName, scale);
+    }
+  }
+
+  /**
+   * Updates zoom level if the zoom prop has changed.
+   *
+   * @param {Object} props
+   * @param {Number} props.zoom - new zoom prop value
+   */
+  maybeUpdateControlsZoom = ({zoom}) => {
+    if (this.props.zoom !== zoom) {
+      this.controls.zoom(zoom);
+    }
+  }
+
+  /**
+   * Updates the auto orbit state if the isAutoOrbitEnabled has changed.
+   *
+   * @param {Object} props
+   * @param {Boolean} props.isAutoOrbitEnabled - new isAutoOrbitEnabled prop value
+   */
+  maybeUpdateAutoOrbit = ({isAutoOrbitEnabled}) => {
+    if (this.props.isAutoOrbitEnabled !== isAutoOrbitEnabled) {
+      this.controls.autoRotate = isAutoOrbitEnabled;
+    }
   }
 
   /**
@@ -34,56 +95,77 @@ export default class CameraContainer extends React.Component {
   cancelTween = () => {
     if (this.tweenBase) {
       this.tweenBase.stop();
-      this.endTween();
+      delete this.tweenBase;
     }
   }
 
   /**
    * Starts Tween to the position having a key of targetName.
+   *
+   * @param {String} targetName - name of orbital to move to
    */
-  startTween = (targetName, callback) => {
-    const target = this.props.positions[targetName];
+  startTween = (targetName) => {
+    const {scene} = this.props;
+    const {pivot} = this.refs;
+    const target = scene.getObjectByName(targetName);
 
-    if (target) {
-      this.cancelTween();
-      this.assignTween();
-      this.props.zoomIn();
-
-      CameraService.startTween(this.tweenBase, target.position3d, callback);
+    if (target) { 
+      scene.add(pivot);
+      this.tweenPivot(target, pivot);
     }
   }
 
   /**
-   * Assigns a new Tween to the active target position.
+   * Starts a new Tween to the active target position.
+   * Any Tween already in progress will be cancelled.
+   *
+   * @param {THREE.Object3D} target - target object
+   * @param {THREE.Group} pivot - camera pivot
    */
-  assignTween = () => {
-    this.tweenData = CameraService.vectorToObject(this.getTargetPosition());
-    this.tweenBase = new TWEEN.Tween(this.tweenData);
+  tweenPivot = (target, pivot) => {
+    const v = CameraService.getWorldPosition(target);
+    const w = CameraService.getWorldPosition(pivot);
+    
+    // set the pivot position to active position
+    CameraService.setPivotPosition(pivot, w);
+
+    this.cancelTween();
+    this.zoomIn();
+    this.tweenBase = CameraService
+      .getPivotTween(w, v, target, pivot)
+      .onComplete(this.setControls);
+  }
+
+  /**
+   * Enables/disables controls.
+   *
+   * @param {Boolean} disabled - whether or not controls are disabled
+   */
+  setControls = (enabled) => {
+    this.props.action.setUIControls(!!enabled);
+    // this.props.action.setPaused(!disabled);
+    this.controls.enabled = !!enabled;
   }
   
   /**
-   * Returns the calculated active target position.
-   * If a Tween is in progress, it will return that current position.
-   *
-   * @returns {THREE.Vector3} target vector
+   * Tweens zoom to 1%.
    */
-  getTargetPosition = () => {
-    const {positions, targetName} = this.props;
-
-    if (this.tweenData) {
-      return CameraService.objectToVector(this.tweenData);
-    }
-    return CameraService.getTargetPosition(positions, targetName);
+  zoomIn = () => {
+    this.controls.tweenZoom(1, this.props.action.changeZoom);
   }
 
+  update = () => {
+    this.controls.update();
+  }
+  
   render() {
     return (
-      <group position={this.getTargetPosition()}>
+      <group ref="pivot">
         <perspectiveCamera
           name="camera"
           ref="camera"
+          aspect={this.props.ratio}
           fov={Constants.WebGL.Camera.FOV}
-          aspect={window.innerWidth / window.innerHeight}
           near={Constants.WebGL.Camera.NEAR}
           far={Constants.WebGL.Camera.FAR}
           position={CameraService.CAMERA_INITIAL_POSITION}

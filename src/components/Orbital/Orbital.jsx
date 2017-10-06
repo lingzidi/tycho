@@ -25,7 +25,8 @@ export default class Orbital extends React.Component {
       <group rotation={this.props.eclipticGroupRotation}>
         <group
           rotation={this.props.orbitalGroupRotation}
-          position={this.props.bodyPosition}>
+          position={this.props.bodyPosition}
+          name={this.props.id}>
           <Body
             rotation={this.props.bodyRotation}
             radius={this.props.bodyRadius}

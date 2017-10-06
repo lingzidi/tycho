@@ -1,17 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Camera Container render() should render the scene container successfully 1`] = `
-<group
-  position={
-    Object {
-      "x": 1,
-      "y": 1,
-      "z": 1,
-    }
-  }
->
+<group>
   <perspectiveCamera
-    aspect={1.3333333333333333}
+    aspect={1.5}
     far={10000}
     fov={50}
     name="camera"
