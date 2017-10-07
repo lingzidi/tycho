@@ -2,6 +2,7 @@ import TWEEN from 'tween.js';
 import {Vector3} from 'three';
 import Constants from '../constants';
 import OrbitalService from './OrbitalService';
+import Gyroscope from '../utils/Gyroscope';
 import Scale from '../utils/Scale';
 
 export default class CameraService {
@@ -66,26 +67,17 @@ export default class CameraService {
    * @param {Vector3} to - target position
    * @param {Object3D} target - new target
    * @param {Object3D} group - camera pivot
+   * @param {Function} cb - callback fn when tween ends
    * @returns {Tween}
    */
-  static getPivotTween = (from, to, target, group) => {
+  static getPivotTween = (from, to, target, group, cb) => {
     return new TWEEN
       .Tween(from)
-      .to(to, 2000)
+      .to(to, 1000)
       .onUpdate(CameraService.setPivotPosition.bind(this, group, from))
-      .onComplete(CameraService.movePivot.bind(this, group, target))
+      .onComplete(CameraService.attachToGyroscope.bind(this, target, group, cb))
+      .onStop(cb)
       .start();
-  }
-
-  /**
-   * Moves the given pivot to the new target at <0>.
-   *
-   * @param {Object3D} group - camera pivot
-   * @param {Object3D} target - new target
-   */
-  static movePivot = (group, target) => {
-    target.add(group);
-    group.position.set(0, 0, 0);
   }
 
   /**
@@ -113,5 +105,33 @@ export default class CameraService {
     vect.setFromMatrixPosition(matrix);
 
     return vect;
+  }
+
+  /**
+   * Attaches camera pivot to the global scene at given position.
+   *
+   * @param {Scene} scene - scene
+   * @param {Object3D} pivot - camera pivot
+   * @param {Vector3} position - world position
+   */
+  static attachToWorld = (scene, pivot, position) => {
+    scene.add(pivot);
+    pivot.position.copy(position);
+  }
+
+  /**
+   * Attaches camera pivot to target via gyroscope at <0>.
+   * The gyroscope keeps the camera level with the ecliptic plane.
+   *
+   * @param {Object3D} target - target object
+   * @param {Object3D} pivot - camera pivot
+   */
+  static attachToGyroscope = (target, pivot, cb) => {
+		let gyro = new Gyroscope();
+
+    gyro.add(pivot);
+    target.add(gyro);
+    pivot.position.set(0, 0, 0);
+    cb();
   }
 }

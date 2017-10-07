@@ -1,6 +1,7 @@
-import CameraService from '../CameraService';
-import TWEEN from 'tween.js';
 import {Vector3, Camera, Object3D, Scene} from 'three';
+import TWEEN from 'tween.js';
+import CameraService from '../CameraService';
+import Gyroscope from '../../utils/Gyroscope';
 import fixture from './__fixtures__/planets.json';
 
 describe('Camera Service', () => {
@@ -56,31 +57,6 @@ describe('Camera Service', () => {
     });
   });
 
-  describe('movePivot()', () => {
-    const target = new Object3D();
-    const pivot = new Object3D();
-
-    it('should add the given pivot to the target', () => {
-      const spy = jest.spyOn(target, 'add');
-
-      CameraService.movePivot(pivot, target);
-
-      expect(spy).toHaveBeenCalled;
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(pivot);
-    });
-
-    it('should reset the pivot position to <0>', () => {
-      const spy = jest.spyOn(pivot.position, 'set');
-
-      CameraService.movePivot(pivot, target);
-
-      expect(spy).toHaveBeenCalled;
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(0, 0, 0);
-    });
-  });
-
   describe('setPivotPosition()', () => {
     it('should reset the pivot position to the given vector', () => {
       const x = 1, y = 2, z = 3;
@@ -104,16 +80,6 @@ describe('Camera Service', () => {
       scene.add(object);
       object.position.copy(position);
     });
-
-    it('should call updateMatrixWorld() on the target', () => {
-      const spy = jest.spyOn(object, 'updateMatrixWorld');
-
-      CameraService.getWorldPosition(object);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-    });
-    
     it('should be an instance of Vector3', () => {
       const result = CameraService.getWorldPosition(object);
 
@@ -130,6 +96,43 @@ describe('Camera Service', () => {
   describe('getMinDistance()', () => {
     it('should return the min distance required for a given planet', () => {
       expect(CameraService.getMinDistance(fixture, 'Earth')).toEqual(0.00001);
+    });
+  });
+
+  describe('attachToWorld()', () => {
+    const scene = new Object3D();
+    const pivot = new Object3D();
+    const position = new Vector3(1, 2, 3);
+
+    beforeEach(() => {
+      CameraService.attachToWorld(scene, pivot, position);
+    });
+
+    it('should add the given pivot to the scene', () => {
+      expect(scene.children).toContainEqual(pivot);
+    });
+
+    it('should set the position of the pivot to the given vector', () => {
+      expect(pivot.position).toEqual(position);
+    });
+  });
+
+  describe('attachToGyroscope()', () => {
+    const target = new Object3D();
+    const pivot = new Object3D();
+    const callback = jest.fn();
+
+    beforeEach(() => {
+      CameraService.attachToGyroscope(target, pivot, callback);
+    });
+
+    it('should add a gyroscope to the given target', () => {
+      expect(target.children).toHaveLength(1);
+      expect(target.children[0]).toBeInstanceOf(Gyroscope);
+    });
+
+    it('should set the position of the pivot to <0>', () => {
+      expect(pivot.position).toEqual(new Vector3(0, 0, 0));
     });
   });
 });

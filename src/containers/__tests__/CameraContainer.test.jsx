@@ -200,17 +200,16 @@ describe('Camera Container', () => {
   describe('startTween()', () => {
     const pivot = new Object3D();
     const targetName = 'Mars';
+    const scene = {
+      add: jest.fn(),
+      getObjectByName: jest.fn()
+    };
 
     beforeEach(() => {
-      cameraContainer.props = {
-        scene: {
-          add: jest.fn(),
-          getObjectByName: jest.fn()
-        }
-      };
+      cameraContainer.props = {scene, action};
       cameraContainer.refs = {pivot};
       cameraContainer.cancelTween = jest.fn();
-      cameraContainer.zoomIn = jest.fn();
+      cameraContainer.zoomInFull = jest.fn();
       cameraContainer.controls = new Controls(new Camera());
 
       CameraService.getPivotTween = () => new TWEEN.Tween();
@@ -223,14 +222,14 @@ describe('Camera Container', () => {
         cameraContainer.props.scene.getObjectByName = () => target;
       });
 
-      it('should add the pivot to the scene', () => {
-        const spy = jest.spyOn(cameraContainer.props.scene, 'add');
+      it('should freeze UI interactivity', () => {
+        const spy = jest.spyOn(cameraContainer, 'setInteractivity');
 
         cameraContainer.startTween(targetName);
 
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(pivot);
+        expect(spy).toHaveBeenCalledWith(false);
       });
 
       it('should tween the pivot to the discovered target', () => {
@@ -240,7 +239,7 @@ describe('Camera Container', () => {
 
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(target, pivot);
+        expect(spy).toHaveBeenCalledWith(target, pivot, scene);
       });
     });
 
@@ -256,12 +255,25 @@ describe('Camera Container', () => {
     });
   });
 
+  describe('endTween()', () => {
+    it('should call setInteractivity with true', () => {
+      const spy = jest.spyOn(cameraContainer, 'setInteractivity');
+
+      cameraContainer.controls = {};
+      cameraContainer.endTween();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(true);
+    });
+  });
+
   describe('tweenPivot()', () => {
     const target = new Vector3();
     const pivot = new Vector3();
 
     beforeEach(() => {
-      cameraContainer.zoomIn = jest.fn();
+      cameraContainer.zoomInFull = jest.fn();
       CameraService.getPivotTween = () => new TWEEN.Tween();
     });
 
@@ -271,8 +283,8 @@ describe('Camera Container', () => {
       expect(cameraContainer.tweenBase).toBeInstanceOf(TWEEN.Tween);
     });
 
-    it('should call zoomIn()', () => {
-      const spy = jest.spyOn(cameraContainer, 'zoomIn');
+    it('should call zoomInFull()', () => {
+      const spy = jest.spyOn(cameraContainer, 'zoomInFull');
 
       cameraContainer.tweenPivot(target, pivot);
 
@@ -281,7 +293,7 @@ describe('Camera Container', () => {
     });
   });
 
-  describe('zoomIn()', () => {
+  describe('zoomInFull()', () => {
     it('should call controls.tweenZoom()', () => {
       const changeZoom = jest.fn();
       const tweenZoom = jest.fn();
@@ -291,7 +303,7 @@ describe('Camera Container', () => {
       
       const spy = jest.spyOn(cameraContainer.controls, 'tweenZoom');
 
-      cameraContainer.zoomIn();
+      cameraContainer.zoomInFull();
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);

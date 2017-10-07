@@ -45,7 +45,6 @@ export default class CameraContainer extends React.Component {
    */
   maybeTweenCameraPosition = ({targetName}) => {
     if (this.props.targetName !== targetName) {
-      this.setControls(false);
       this.startTween(targetName);
     }
   }
@@ -109,11 +108,16 @@ export default class CameraContainer extends React.Component {
     const {pivot} = this.refs;
     const target = scene.getObjectByName(targetName);
 
-    if (target) { 
-      scene.add(pivot);
-      this.tweenPivot(target, pivot);
+    if (target) {
+      this.setInteractivity(false);
+      this.tweenPivot(target, pivot, scene);
     }
   }
+
+  /**
+   * Teardown for pivot tweening.
+   */
+  endTween = () => this.setInteractivity(true)
 
   /**
    * Starts a new Tween to the active target position.
@@ -122,26 +126,25 @@ export default class CameraContainer extends React.Component {
    * @param {THREE.Object3D} target - target object
    * @param {THREE.Group} pivot - camera pivot
    */
-  tweenPivot = (target, pivot) => {
+  tweenPivot = (target, pivot, scene) => {
     const v = CameraService.getWorldPosition(target);
     const w = CameraService.getWorldPosition(pivot);
     
-    // set the pivot position to active position
-    CameraService.setPivotPosition(pivot, w);
+    // set the pivot position to active position    
+    CameraService.attachToWorld(scene, pivot, w);
 
     this.cancelTween();
-    this.zoomIn();
-    this.tweenBase = CameraService
-      .getPivotTween(w, v, target, pivot)
-      .onComplete(this.setControls);
+    this.zoomInFull();
+
+    this.tweenBase = CameraService.getPivotTween(w, v, target, pivot, this.endTween);
   }
 
   /**
-   * Enables/disables controls.
+   * Enables/disables scene interactivity.
    *
    * @param {Boolean} disabled - whether or not controls are disabled
    */
-  setControls = (enabled) => {
+  setInteractivity = (enabled) => {
     this.props.action.setUIControls(!!enabled);
     // this.props.action.setPaused(!disabled);
     this.controls.enabled = !!enabled;
@@ -150,7 +153,7 @@ export default class CameraContainer extends React.Component {
   /**
    * Tweens zoom to 1%.
    */
-  zoomIn = () => {
+  zoomInFull = () => {
     this.controls.tweenZoom(1, this.props.action.changeZoom);
   }
 
