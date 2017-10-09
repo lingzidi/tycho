@@ -7,43 +7,11 @@ import Scale from '../utils/Scale';
 
 export default class CameraService {
 
-  static CAMERA_INITIAL_POSITION = new Vector3(300, 300, 300) // TODO: const
-
-  /**
-   * Converts an instance of Vector3 to a plain object with x, y, z properties.
-   *
-   * @param {Vector3} v - vector to convert
-   * @returns {Object} - plain object with x, y, z properties
-   */
-  static vectorToObject = (v) => {
-    const {x, y, z} = v;
-    return {x, y, z};
-  }
-
-  /**
-   * Converts a plain object to an instance of Vector3.
-   *
-   * @param {Object} o - object, with x, y, z properties
-   * @returns {Vector3} - converted vector
-   */
-  static objectToVector = (o) => {
-    return new Vector3(o.x, o.y, o.z);
-  }
-
-  /**
-   * Runs a given tween instance with the provided params.
-   *
-   * @param {Tween} tween - instance of tween
-   * @param {Vector3} dest - destination vector
-   * @param {Function} onComplete - callback
-   */
-  static startTween = (tween, dest, onComplete) => {
-    return tween
-      .easing(TWEEN.Easing.Quadratic.Out)
-      .to(CameraService.vectorToObject(dest), Constants.WebGL.Tween.NORMAL)
-      .onComplete(onComplete)
-      .start();
-  }
+  static CAMERA_INITIAL_POSITION = new Vector3(
+    Constants.WebGL.Camera.X,
+    Constants.WebGL.Camera.Y,
+    Constants.WebGL.Camera.Z
+  )
 
   /**
    * Calculates the min distance from target to camera to avoid collision.
@@ -54,10 +22,12 @@ export default class CameraService {
    * @returns {Number} min distance
    */
   static getMinDistance = (orbitals, targetName, scale) => {
-    const targetRadius = OrbitalService.getTargetByName(orbitals, targetName).radius;
-    const scaledRadius = Scale(targetRadius, scale);
+    const targetRadius = OrbitalService.getTargetByName(orbitals, targetName);
 
-    return scaledRadius * 2;
+    if (targetRadius) {
+      return Scale(targetRadius.radius, scale) * 2;
+    }
+    return 0;
   }
   
   /**
@@ -74,6 +44,7 @@ export default class CameraService {
     return new TWEEN
       .Tween(from)
       .to(to, 1000)
+      .easing(TWEEN.Easing.Quadratic.Out)
       .onUpdate(CameraService.setPivotPosition.bind(this, group, from))
       .onComplete(CameraService.attachToGyroscope.bind(this, target, group, cb))
       .onStop(cb)
@@ -125,13 +96,14 @@ export default class CameraService {
    *
    * @param {Object3D} target - target object
    * @param {Object3D} pivot - camera pivot
+   * @param {Function} callback - callback 
    */
-  static attachToGyroscope = (target, pivot, cb) => {
+  static attachToGyroscope = (target, pivot, callback) => {
 		let gyro = new Gyroscope();
 
     gyro.add(pivot);
     target.add(gyro);
     pivot.position.set(0, 0, 0);
-    cb();
+    callback();
   }
 }

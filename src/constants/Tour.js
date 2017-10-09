@@ -13,4 +13,6 @@ export const LABELS = [
   }
 ];
 
+export const TRANSITION_TIME = 5000;
+
 export const SEPARATION_INTERVAL = 1000;

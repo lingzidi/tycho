@@ -9,6 +9,9 @@ export const Sliders = {
   }
 };
 
+
+export const ALTERNATE_TARGET_NAME = 'Sun';
+
 export const DEFAULT_TARGET_NAME = 'dummyPlanet';
 
 export const DEFAULT_LABEL_TEXT = 'Dummy Planet';

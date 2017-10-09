@@ -52,7 +52,7 @@ describe('Tour Container', () => {
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(true);;
+      expect(spy).toHaveBeenCalledWith(true);
     });
 
     it('should initialize the tour if the tour cannot be skipped', () => {
@@ -134,14 +134,27 @@ describe('Tour Container', () => {
   });
 
   describe('onOrbitComplete()', () => {
-    it('should call setActiveOrbital with the default orbital name', () => {
-      const spy = jest.spyOn(tourContainer.props.action, 'setActiveOrbital');
+    beforeEach(() => {
+      tourContainer.setDefaultActiveOrbital = jest.fn();
+    });
 
+    it('should call setActiveOrbital with the default orbital name if tour is not completed', () => {
+      const spy = jest.spyOn(tourContainer, 'setDefaultActiveOrbital');
+
+      tourContainer.props = {isComplete: false};
       tourContainer.onOrbitComplete();
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(Constants.UI.DEFAULT_TARGET_NAME);
+    });
+
+    it('should not call setActiveOrbital if tour is completed', () => {
+      const spy = jest.spyOn(tourContainer, 'setDefaultActiveOrbital');
+
+      tourContainer.props = {isComplete: true};
+      tourContainer.onOrbitComplete();
+
+      expect(spy).not.toHaveBeenCalled();
     });
   });
 
@@ -184,7 +197,8 @@ describe('Tour Container', () => {
       tourContainer.skipTour();
 
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledTimes(2);
+      expect(spy).toHaveBeenCalledWith(Constants.UI.ALTERNATE_TARGET_NAME);
       expect(spy).toHaveBeenCalledWith(Constants.UI.DEFAULT_TARGET_NAME);
     });
   });

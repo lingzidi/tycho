@@ -30,7 +30,7 @@ export default class CameraContainer extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.maybeTweenCameraPosition(nextProps);
+    this.maybeMoveCameraPivot(nextProps);
     this.maybeUpdateControlsZoom(nextProps);
     this.maybeUpdateAutoOrbit(nextProps);
     this.maybePreventCameraCollision(nextProps);
@@ -38,14 +38,15 @@ export default class CameraContainer extends React.Component {
 
   /**
    * Starts tweening the camera to the new target if targetName has changed.
-   * This resets the speed back to 1x until the camera has finished tweening.
    *
    * @param {Object} props
    * @param {String} props.targetName
    */
-  maybeTweenCameraPosition = ({targetName}) => {
+  maybeMoveCameraPivot = ({targetName}) => {
+  console.log('old/new: ', this.props.targetName, targetName);
     if (this.props.targetName !== targetName) {
-      this.startTween(targetName);
+    console.log('YES');
+      this.movePivot(targetName, !!this.props.targetName);
     }
   }
 
@@ -89,28 +90,29 @@ export default class CameraContainer extends React.Component {
   }
 
   /**
+   * Starts Tween to the position having a key of targetName.
+   *
+   * @param {String} targetName - name of orbital to move to
+   * @param {Boolean} animate - set to true if it should animate
+   */
+  movePivot = (targetName, animate) => {
+    const {scene} = this.props;
+    const {pivot} = this.refs;
+    const target = scene.getObjectByName(targetName);
+
+    if (target && animate) {
+      this.setInteractivity(false);
+      this.startTween(target, pivot, scene);
+    }
+  }
+
+  /**
    * Cancels any Tween in progress.
    */
   cancelTween = () => {
     if (this.tweenBase) {
       this.tweenBase.stop();
       delete this.tweenBase;
-    }
-  }
-
-  /**
-   * Starts Tween to the position having a key of targetName.
-   *
-   * @param {String} targetName - name of orbital to move to
-   */
-  startTween = (targetName) => {
-    const {scene} = this.props;
-    const {pivot} = this.refs;
-    const target = scene.getObjectByName(targetName);
-
-    if (target) {
-      this.setInteractivity(false);
-      this.tweenPivot(target, pivot, scene);
     }
   }
 
@@ -126,7 +128,7 @@ export default class CameraContainer extends React.Component {
    * @param {THREE.Object3D} target - target object
    * @param {THREE.Group} pivot - camera pivot
    */
-  tweenPivot = (target, pivot, scene) => {
+  startTween = (target, pivot, scene) => {
     const v = CameraService.getWorldPosition(target);
     const w = CameraService.getWorldPosition(pivot);
     

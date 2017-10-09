@@ -5,50 +5,7 @@ import Gyroscope from '../../utils/Gyroscope';
 import fixture from './__fixtures__/planets.json';
 
 describe('Camera Service', () => {
-  describe('vectorToObject()', () => {
-    it('should extract the x, y, z properties into an object from the given vector', () => {
-      const x = 1;
-      const y = 2;
-      const z = 3;
-
-      const result = CameraService.vectorToObject(new Vector3(x, y, z));
-
-      expect(typeof result).toBe('object');
-      expect(result.x).toEqual(x);
-      expect(result.y).toEqual(y);
-      expect(result.z).toEqual(z);
-    });
-  });
-
-  describe('objectToVector()', () => {
-    it('should convert a plain object with x, y, z values to a Vector3', () => {
-        const x = 1;
-        const y = 2;
-        const z = 3;
-
-        const result = CameraService.objectToVector({x, y, z});
-
-        expect(result).toBeInstanceOf(Vector3);
-        expect(result.x).toEqual(x);
-        expect(result.y).toEqual(y);
-        expect(result.z).toEqual(z);
-    });
-  });
-
-  describe('startTween()', () => {
-    it('should start the given tween', () => {
-      const tween = new TWEEN.Tween({});
-      const spy = jest.spyOn(tween, 'start');
-
-      CameraService.startTween(tween, {});
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-    });
-  });
-
   describe('getPivotTween()', () => {
-    // TODO: write better tests for this...
     it('should return a new instance of Tween', () => {
       const tween = CameraService.getPivotTween();
 
@@ -96,6 +53,10 @@ describe('Camera Service', () => {
   describe('getMinDistance()', () => {
     it('should return the min distance required for a given planet', () => {
       expect(CameraService.getMinDistance(fixture, 'Earth')).toEqual(0.00001);
+    });
+
+    it('should return 0 if the target distance is not available', () => {
+      expect(CameraService.getMinDistance(fixture, 'Bogus')).toEqual(0);
     });
   });
 

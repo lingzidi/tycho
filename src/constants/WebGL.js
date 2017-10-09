@@ -23,5 +23,8 @@ export const Camera = {
   FAR: 10000,
   FOV: 50,
   MAX_DISTANCE: 500,
-  MIN_DISTANCE: 1
+  MIN_DISTANCE: 1,
+  X: 300,
+  Y: 300,
+  Z: 300
 };

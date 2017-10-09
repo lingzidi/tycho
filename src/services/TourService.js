@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import Constants from '../constants';
 
 export default class TourService {
 
@@ -26,14 +27,13 @@ export default class TourService {
    * @returns {Number} total duration
    */
   static getTourDuration = (labels) => {
-    const SEPARATION_INTERVAL = 1000;
-
-    let duration = SEPARATION_INTERVAL;
+    const interval = Constants.Tour.SEPARATION_INTERVAL;
+    let duration = interval;
     
     duration += labels.reduce((cur, next) => {
-      return cur + next.duration + SEPARATION_INTERVAL;
+      return cur + next.duration + interval;
     }, 0);
-    duration += SEPARATION_INTERVAL;
+    duration += interval;
 
     return duration;
   }
