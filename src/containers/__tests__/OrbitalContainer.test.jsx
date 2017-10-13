@@ -49,54 +49,6 @@ describe('Orbital Container', () => {
     });
   });
 
-  describe('componentDidUpdate()', () => {
-    it('should call setEllipseScale if the `scale` prop is defined', () => {
-      const scale = 5;
-      const spy = jest.spyOn(orbitalContainer, 'setEllipseScale');
-
-      orbitalContainer.props = {scale};
-      orbitalContainer.componentDidUpdate();
-
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(scale);
-    });
-
-    it('should not call setEllipseScale if the `scale` prop is undefined', () => {
-      const spy = jest.spyOn(orbitalContainer, 'setEllipseScale');
-
-      orbitalContainer.props = {};
-      orbitalContainer.componentDidUpdate();
-
-      expect(spy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('setEllipseScale()', () => {
-    it('should set the ellipse scale with the given scaling factor if the orbital is a satellite', () => {
-      const scale = 5;
-      const props = {isSatellite: true};
-      const spy = jest.spyOn(orbitalContainer.ellipse, 'scale');
-
-      orbitalContainer.props = props;
-      orbitalContainer.setEllipseScale(scale);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith({...props, scale});
-    });
-
-    it('should set the ellipse scale with no scaling factor if the orbital is not a satellite', () => {
-      const scale = 5;
-      const props = {};
-      const spy = jest.spyOn(orbitalContainer.ellipse, 'scale');
-
-      orbitalContainer.props = props;
-      orbitalContainer.setEllipseScale(scale);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(props);
-    });
-  });
-
   describe('setPathOpacity()', () => {
     it('should set the pathOpacity to 1 in local state when active = true', () => {
       orbitalContainer.setPathOpacity(true);

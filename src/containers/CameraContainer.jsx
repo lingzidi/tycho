@@ -43,9 +43,7 @@ export default class CameraContainer extends React.Component {
    * @param {String} props.targetName
    */
   maybeMoveCameraPivot = ({targetName}) => {
-  console.log('old/new: ', this.props.targetName, targetName);
     if (this.props.targetName !== targetName) {
-    console.log('YES');
       this.movePivot(targetName, !!this.props.targetName);
     }
   }

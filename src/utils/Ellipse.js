@@ -7,6 +7,23 @@ import Scale from '../utils/Scale';
 export default class Ellipse {
 
   /**
+   * Ininitializes a new instance of Ellipse.
+   *
+   * @note Triggers render.
+   * @param {Object} props - orbital data
+   * @param {Number} props.semimajor - semimajor axis, in km
+   * @param {Number} props.semiminor - semiminor axis, in km
+   * @param {Number} props.eccentricity - orbital path eccentricity
+   * @param {Number} props.scale - scaling factor
+   */
+  constructor({semimajor, semiminor, eccentricity, scale}) {
+    this.semimajor = Scale(semimajor);
+    this.semiminor = Scale(semiminor);
+    this.eccentricity = eccentricity;
+    this.render();
+  }
+
+  /**
    * Renders the ellipse prop.
    *
    * @returns {Object3D} ellipse
@@ -70,22 +87,5 @@ export default class Ellipse {
     const vector2d = this.path.getPoint(percent);
 
     return new THREE.Vector3(vector2d.x, vector2d.y);
-  }
-
-  /**
-   * Updates the ellipse path semimajor and semiminor scales.
-   *
-   * @note Triggers render.
-   * @param {Object} props - orbital data
-   * @param {Number} props.semimajor - semimajor axis, in km
-   * @param {Number} props.semiminor - semiminor axis, in km
-   * @param {Number} props.eccentricity - orbital path eccentricity
-   * @param {Number} props.scale - scaling factor
-   */
-  scale = ({semimajor, semiminor, eccentricity, scale}) => {
-    this.semimajor = Scale(semimajor);
-    this.semiminor = Scale(semiminor);
-    this.eccentricity = eccentricity;
-    this.render();
   }
 }
