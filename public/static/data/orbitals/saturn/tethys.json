@@ -1,0 +1,16 @@
+{
+  "name": "Tethys",
+  "albedo": 1.229,
+  "radius": 531.1,
+  "markdown": "tethys.md",
+  "mass": 6.17449e+20,
+  "centralMass": 5.6834e+26,
+  "axialTilt": 0,
+  "inclination":  1.12,
+  "atmosphere": 13087130,
+  "ephemeris": {
+    "nasaOrbitalCode": "603",
+    "nasaBarycenterCode": "6",
+    "revolutionOrder": "d"
+  }
+}

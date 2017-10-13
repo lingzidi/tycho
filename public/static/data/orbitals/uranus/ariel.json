@@ -1,0 +1,16 @@
+{
+  "name": "Ariel",
+  "albedo": 0.53,
+  "radius": 578.9,
+  "markdown": "ariel.md",
+  "mass": 1.353e+21,
+  "centralMass": 8.6810e+25,
+  "axialTilt": 0,
+  "inclination": 0.260,
+  "atmosphere": 8421504,
+  "ephemeris": {
+    "nasaOrbitalCode": "701",
+    "nasaBarycenterCode": "7",
+    "revolutionOrder": "d"
+  }
+}

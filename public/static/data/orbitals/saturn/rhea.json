@@ -1,0 +1,16 @@
+{
+  "name": "Rhea",
+  "albedo": 0.949,
+  "radius": 763.8,
+  "markdown": "rhea.md",
+  "mass": 2.306518e+21,
+  "centralMass": 5.6834e+26,
+  "axialTilt": 0,
+  "inclination": 0.345,
+  "atmosphere": 4538410,
+  "ephemeris": {
+    "nasaOrbitalCode": "608",
+    "nasaBarycenterCode": "6",
+    "revolutionOrder": "d"
+  }
+}

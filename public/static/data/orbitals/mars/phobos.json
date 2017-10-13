@@ -1,0 +1,16 @@
+{
+  "name": "Phobos",
+  "albedo": 0.071,
+  "radius": 11.2667,
+  "markdown": "phobos.md",
+  "mass": 1.0659e+16,
+  "centralMass": 6.4171e+23,
+  "axialTilt": 0,
+  "inclination": 1.093,
+  "atmosphere": 10523269,
+  "ephemeris": {
+    "nasaOrbitalCode": "401",
+    "nasaBarycenterCode": "4",
+    "revolutionOrder": "d"
+  }
+}

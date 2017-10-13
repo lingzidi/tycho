@@ -1,0 +1,16 @@
+{
+  "name": "Titan",
+  "albedo": 0.22,
+  "radius": 2575.5,
+  "markdown": "titan.md",
+  "mass": 1.3452e+23,
+  "centralMass": 5.6836e+26,
+  "axialTilt": 0,
+  "inclination": 0.34854,
+  "atmosphere": 16634447,
+  "ephemeris": {
+    "nasaOrbitalCode": "606",
+    "nasaBarycenterCode": "6",
+    "revolutionOrder": "d"
+  }
+}

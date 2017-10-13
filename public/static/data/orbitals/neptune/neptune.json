@@ -1,0 +1,20 @@
+{
+  "name": "Neptune",
+  "albedo": 0.41,
+  "sidereal": 0.6713,
+  "radius": 24622,
+  "markdown": "neptune.md",
+  "mass": 1.0243e+26,
+  "centralMass": 1.989e+30,
+  "axialTilt": 28.32,
+  "inclination": 6.43,
+  "atmosphere": 4871817,
+  "satellites": [
+    "triton"
+  ],
+  "ephemeris": {
+    "nasaOrbitalCode": "8",
+    "nasaBarycenterCode": "0",
+    "revolutionOrder": "y"
+  }
+}

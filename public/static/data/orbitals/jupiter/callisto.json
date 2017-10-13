@@ -1,0 +1,16 @@
+{
+  "name": "Callisto",
+  "albedo": 0.17,
+  "radius": 2410.3,
+  "markdown": "callisto.md",
+  "mass": 1.075938e+23,
+  "centralMass": 1.898e+27,
+  "axialTilt": 0,
+  "inclination": 2.017,
+  "atmosphere": 4601634,
+  "ephemeris": {
+    "nasaOrbitalCode": "504",
+    "nasaBarycenterCode": "5",
+    "revolutionOrder": "d"
+  }
+}

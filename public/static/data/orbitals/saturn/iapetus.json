@@ -1,0 +1,16 @@
+{
+  "name": "Iapetus",
+  "albedo": 0.25,
+  "radius": 734.5,
+  "markdown": "iapetus.md",
+  "mass": 1.805635e+21,
+  "centralMass": 5.6834e+26,
+  "axialTilt": 0,
+  "inclination": 15.47,
+  "atmosphere": 12632256,
+  "ephemeris": {
+    "nasaOrbitalCode": "601",
+    "nasaBarycenterCode": "6",
+    "revolutionOrder": "d"
+  }
+}

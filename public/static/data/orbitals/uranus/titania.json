@@ -1,0 +1,16 @@
+{
+  "name": "Titania",
+  "albedo": 0.35,
+  "radius": 788.4,
+  "markdown": "titania.md",
+  "mass": 3.527e+21,
+  "centralMass": 8.6810e+25,
+  "axialTilt": 0,
+  "inclination": 0.340,
+  "atmosphere": 8421504,
+  "ephemeris": {
+    "nasaOrbitalCode": "703",
+    "nasaBarycenterCode": "7",
+    "revolutionOrder": "d"
+  }
+}

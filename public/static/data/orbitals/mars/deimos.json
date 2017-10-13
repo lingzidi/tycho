@@ -1,0 +1,16 @@
+{
+  "name": "Deimos",
+  "albedo": 0.068,
+  "radius": 6.2,
+  "markdown": "deimos.md",
+  "mass": 1.4762e+15,
+  "centralMass": 6.4171e+23,
+  "axialTilt": 0,
+  "inclination": 0.93,
+  "atmosphere": 12761507,
+  "ephemeris": {
+    "nasaOrbitalCode": "402",
+    "nasaBarycenterCode": "4",
+    "revolutionOrder": "d"
+  }
+}

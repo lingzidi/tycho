@@ -1,0 +1,16 @@
+{
+  "name": "Umbriel",
+  "albedo": 0.26,
+  "radius": 584.7,
+  "markdown": "umbriel.md",
+  "mass": 1.172e+21,
+  "centralMass": 8.6810e+25,
+  "axialTilt": 0,
+  "inclination": 0.128,
+  "atmosphere": 8421504,
+  "ephemeris": {
+    "nasaOrbitalCode": "702",
+    "nasaBarycenterCode": "7",
+    "revolutionOrder": "d"
+  }
+}

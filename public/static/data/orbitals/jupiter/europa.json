@@ -1,0 +1,16 @@
+{
+  "name": "Europa",
+  "albedo": 0.67,
+  "radius": 1560.8,
+  "markdown": "europa.md",
+  "mass": 4.799844e+22,
+  "centralMass": 1.898e+27,
+  "axialTilt": 0.1,
+  "inclination": 0.470,
+  "atmosphere": 9734782,
+  "ephemeris": {
+    "nasaOrbitalCode": "502",
+    "nasaBarycenterCode": "5",
+    "revolutionOrder": "d"
+  }
+}

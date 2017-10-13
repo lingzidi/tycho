@@ -1,0 +1,20 @@
+{
+  "name": "Pluto",
+  "albedo": 0.66,
+  "sidereal": 6.387230,
+  "radius": 1189.9,
+  "markdown": "pluto.md",
+  "mass": 1.303e+22,
+  "centralMass": 1.989e+30,
+  "axialTilt": 119.591,
+  "inclination": 11.88,
+  "atmosphere": 13872777,
+  "satellites": [
+    "charon"
+  ],
+  "ephemeris": {
+    "nasaOrbitalCode": "9",
+    "nasaBarycenterCode": "0",
+    "revolutionOrder": "y"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Mars",
+  "albedo": 0.170,
+  "sidereal": 1.025957,
+  "radius": 3389.5,
+  "markdown": "mars.md",
+  "mass": 6.4171e+23,
+  "centralMass": 1.989e+30,
+  "axialTilt": 25.19,
+  "inclination": 5.65,
+  "atmosphere": 12746585,
+  "satellites": [
+    "phobos",
+    "deimos"
+  ],
+  "ephemeris": {
+    "nasaOrbitalCode": "4",
+    "nasaBarycenterCode": "0",
+    "revolutionOrder": "y"
+  }
+}

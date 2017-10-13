@@ -1,0 +1,26 @@
+{
+  "name": "Saturn",
+  "albedo": 0.499,
+  "sidereal": 0.4395,
+  "radius": 58232,
+  "markdown": "saturn.md",
+  "mass": 5.6834e+26,
+  "centralMass": 1.989e+30,
+  "axialTilt": 26.73,
+  "inclination": 5.51,
+  "atmosphere": 9931069,
+  "satellites": [
+    "dione",
+    "enceladus",
+    "iapetus",
+    "mimas",
+    "rhea",
+    "tethys",
+    "titan"
+  ],
+  "ephemeris": {
+    "nasaOrbitalCode": "6",
+    "nasaBarycenterCode": "0",
+    "revolutionOrder": "y"
+  }
+}

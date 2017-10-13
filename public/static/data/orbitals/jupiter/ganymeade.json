@@ -1,0 +1,16 @@
+{
+  "name": "Ganymeade",
+  "albedo": 0.43,
+  "radius": 2634.1,
+  "markdown": "ganymeade.md",
+  "mass": 1.4819e+23,
+  "centralMass": 1.898e+27,
+  "axialTilt": 0.33,
+  "inclination": 0.20,
+  "atmosphere": 8355711,
+  "ephemeris": {
+    "nasaOrbitalCode": "503",
+    "nasaBarycenterCode": "5",
+    "revolutionOrder": "d"
+  }
+}

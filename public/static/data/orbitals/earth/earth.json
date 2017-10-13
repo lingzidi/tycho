@@ -1,0 +1,20 @@
+{
+  "name": "Earth",
+  "albedo": 0.367,
+  "sidereal": 0.99726968,
+  "radius": 6371.0,
+  "markdown": "earth.md",
+  "mass": 5.97237e+24,
+  "centralMass": 1.989e+30,
+  "axialTilt": 23.4392811,
+  "inclination": 7.155,
+  "atmosphere": 35260,
+  "satellites": [
+    "moon"
+  ],
+  "ephemeris": {
+    "nasaOrbitalCode": "3",
+    "nasaBarycenterCode": "0",
+    "revolutionOrder": "y"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Moon",
+  "albedo": 0.136,
+  "radius": 1737.1,
+  "markdown": "moon.md",
+  "mass": 5.97237e+24,
+  "centralMass": 5.97237e+24,
+  "axialTilt": 6.687,
+  "inclination": 5.145,
+  "atmosphere": 10066278,
+  "ephemeris": {
+    "nasaOrbitalCode": "301",
+    "nasaBarycenterCode": "3",
+    "revolutionOrder": "d"
+  }
+}

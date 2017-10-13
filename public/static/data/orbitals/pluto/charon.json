@@ -1,0 +1,16 @@
+{
+  "name": "Charon",
+  "albedo": 0.35,
+  "radius": 1189.9,
+  "markdown": "charon.md",
+  "mass": 1.586e+21,
+  "centralMass": 1.303e+22,
+  "axialTilt": 119.591,
+  "inclination": 0.001,
+  "atmosphere": 12759459,
+  "ephemeris": {
+    "nasaOrbitalCode": "901",
+    "nasaBarycenterCode": "9",
+    "revolutionOrder": "d"
+  }
+}

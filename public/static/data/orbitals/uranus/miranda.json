@@ -1,0 +1,16 @@
+{
+  "name": "Miranda",
+  "albedo": 0.32,
+  "radius": 235.8,
+  "markdown": "miranda.md",
+  "mass": 6.59e+19,
+  "centralMass": 8.6810e+25,
+  "axialTilt": 0,
+  "inclination": 4.232,
+  "atmosphere": 8421504,
+  "ephemeris": {
+    "nasaOrbitalCode": "705",
+    "nasaBarycenterCode": "7",
+    "revolutionOrder": "d"
+  }
+}

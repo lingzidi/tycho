@@ -1,0 +1,16 @@
+{
+  "name": "Io",
+  "albedo": 0.63,
+  "radius": 421700,
+  "markdown": "io.md",
+  "mass": 8.931938e+22,
+  "centralMass": 1.898e+27,
+  "axialTilt": 0,
+  "inclination": 0.05,
+  "atmosphere": 10521177,
+  "ephemeris": {
+    "nasaOrbitalCode": "501",
+    "nasaBarycenterCode": "5",
+    "revolutionOrder": "d"
+  }
+}

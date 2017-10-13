@@ -1,0 +1,17 @@
+{
+  "name": "Venus",
+  "albedo": 0.689,
+  "sidereal": −243.025,
+  "radius": 6051.8,
+  "markdown": "venus.md",
+  "mass": 4.8675e+24,
+  "centralMass": 1.989e+30,
+  "axialTilt": 2.64,
+  "inclination": 3.86,
+  "atmosphere": 16052641,
+  "ephemeris": {
+    "nasaOrbitalCode": "2",
+    "nasaBarycenterCode": "0",
+    "revolutionOrder": "y"
+  }
+}
