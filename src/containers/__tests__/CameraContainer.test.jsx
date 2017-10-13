@@ -105,6 +105,36 @@ describe.only('Camera Container', () => {
       });
     });
 
+    describe('maybeCreateControls()', () => {
+      beforeEach(() => {
+        delete cameraContainer.controls;
+      });
+
+      it('should create a new instance of Controls if the domElement has changed', () => {
+        const controls = new Controls(new Camera());
+        const domElement = <canvas />;
+
+        cameraContainer.props = {domElement};
+        cameraContainer.maybeCreateControls({domElement});
+
+        expect(cameraContainer.controls).not.toBeDefined();
+      });
+
+      it('should not create a new instance of Controls if domElement is unchanged', () => {
+        const camera = new Camera();
+        const domElement = {
+          addEventListener: jest.fn()
+        };
+
+        cameraContainer.refs = {camera};
+        cameraContainer.props = {};
+        cameraContainer.maybeCreateControls({domElement});
+
+        expect(cameraContainer.controls).toBeDefined();
+        expect(cameraContainer.controls).toBeInstanceOf(Controls);
+      });
+    });
+
     describe('maybePreventCameraCollision()', () => {
       it('should update the minDistance if the targetName has changed', () => {
         const nextProps = {targetName: 'Mars'};

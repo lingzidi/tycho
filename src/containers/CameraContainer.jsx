@@ -15,13 +15,11 @@ export default class CameraContainer extends React.Component {
     zoom: PropTypes.number,
     scene: PropTypes.object,
     isAutoOrbitEnabled: PropTypes.bool,
-    orbitalData: PropTypes.array,
-    domElement: PropTypes.instanceOf(<canvas />),
+    orbitalData: PropTypes.array
   }
 
   componentDidMount = () => {
     this.refs.camera.up.set(0, 0, 1);
-    this.controls = new Controls(this.refs.camera, this.props.domElement);
   }
 
   componentWillUnmount = () => {
@@ -30,10 +28,23 @@ export default class CameraContainer extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
+    this.maybeCreateControls(nextProps);
     this.maybeMoveCameraPivot(nextProps);
     this.maybeUpdateControlsZoom(nextProps);
     this.maybeUpdateAutoOrbit(nextProps);
     this.maybePreventCameraCollision(nextProps);
+  }
+
+  /**
+   * Re-renders controls with updated canvas DOM Element.
+   *
+   * @param {Object} props
+   * @param {HTMLElement} props.domElement
+   */
+  maybeCreateControls = ({domElement}) => {
+    if (this.props.domElement !== domElement) {
+      this.controls = new Controls(this.refs.camera, domElement);
+    }
   }
 
   /**
