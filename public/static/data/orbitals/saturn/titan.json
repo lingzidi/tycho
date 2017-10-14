@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "606",
     "nasaBarycenterCode": "6",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 173.4209524500883,
+  "eccentricity": 0.02863073196285055,
+  "longAscNode": 169.0962668018458,
+  "semimajor": 1221644.204661192,
+  "semiminor": 1221143.3996418167,
+  "periapses": {
+    "last": 1508233136675.276,
+    "next": 1509610864914.3352
   }
 }

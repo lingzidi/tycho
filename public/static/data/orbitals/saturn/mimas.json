@@ -3,7 +3,7 @@
   "albedo": 0.962,
   "radius": 198.2,
   "markdown": "mimas.md",
-  "mass": 3.7493e+19,
+  "mass": 37493000000000000000,
   "centralMass": 5.6834e+26,
   "axialTilt": 0,
   "inclination": 1.574,
@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "601",
     "nasaBarycenterCode": "6",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 124.2444111634118,
+  "eccentricity": 0.02180387099452891,
+  "longAscNode": 172.452607865443,
+  "semimajor": 185824.3549837387,
+  "semiminor": 185780.17846672857,
+  "periapses": {
+    "last": 1509307261288.2346,
+    "next": 1510776942059.84
   }
 }

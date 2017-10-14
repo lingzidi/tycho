@@ -1,7 +1,7 @@
 {
   "name": "Venus",
   "albedo": 0.689,
-  "sidereal": −243.025,
+  "sidereal": -243.025,
   "radius": 6051.8,
   "markdown": "venus.md",
   "mass": 4.8675e+24,
@@ -13,5 +13,14 @@
     "nasaOrbitalCode": "2",
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
+  },
+  "argPeriapsis": 55.186,
+  "eccentricity": 0.0067,
+  "longAscNode": 76.678,
+  "semimajor": 108208179,
+  "semiminor": 107477094,
+  "periapses": {
+    "last": 1429348560000,
+    "next": 1448787300000
   }
 }

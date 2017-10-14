@@ -4,7 +4,7 @@
   "sidereal": -0.71833,
   "radius": 25362,
   "markdown": "uranus.md",
-  "mass": 8.6810e+25,
+  "mass": 8.681e+25,
   "centralMass": 1.989e+30,
   "axialTilt": 97.77,
   "inclination": 6.48,
@@ -20,5 +20,14 @@
     "nasaOrbitalCode": "7",
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
+  },
+  "argPeriapsis": 97.10093681233873,
+  "eccentricity": 0.04737199527143244,
+  "longAscNode": 74.00200944736554,
+  "semimajor": 2870331038.1469154,
+  "semiminor": 2867108565.77866745,
+  "periapses": {
+    "last": 1391558400000,
+    "next": 1399161600000
   }
 }

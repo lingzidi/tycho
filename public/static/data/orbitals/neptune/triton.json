@@ -1,6 +1,6 @@
 {
   "name": "Triton",
-  "albedo":   0.76,
+  "albedo": 0.76,
   "radius": 1353.4,
   "markdown": "triton.md",
   "mass": 2.14e+24,
@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "801",
     "nasaBarycenterCode": "0",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 109.4889739758744,
+  "eccentricity": 0.5958657051834922,
+  "longAscNode": 161.5491913515666,
+  "semimajor": 54.93799545046435,
+  "semiminor": 44.11983028029238,
+  "periapses": {
+    "last": 1509858240000,
+    "next": 1510366020000
   }
 }

@@ -2,7 +2,7 @@
   "name": "Earth",
   "albedo": 0.367,
   "sidereal": 0.99726968,
-  "radius": 6371.0,
+  "radius": 6371,
   "markdown": "earth.md",
   "mass": 5.97237e+24,
   "centralMass": 1.989e+30,
@@ -16,5 +16,14 @@
     "nasaOrbitalCode": "3",
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
+  },
+  "argPeriapsis": 321.8847237861644,
+  "eccentricity": 0.01355360061112275,
+  "longAscNode": 122.8729298454188,
+  "semimajor": 150759239.957000494,
+  "semiminor": 150745392.07806867361,
+  "periapses": {
+    "last": 1136430000000,
+    "next": 1167987600000
   }
 }

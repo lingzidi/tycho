@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "901",
     "nasaBarycenterCode": "9",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 120.9229819343566,
+  "eccentricity": 0.002041042987321711,
+  "longAscNode": 227.4019227527363,
+  "semimajor": 17427.61068440962,
+  "semiminor": 17427.5743839094,
+  "periapses": {
+    "last": 1507628540556.7285,
+    "next": 1508180397263.2886
   }
 }

@@ -6,11 +6,20 @@
   "mass": 4.799844e+22,
   "centralMass": 1.898e+27,
   "axialTilt": 0.1,
-  "inclination": 0.470,
+  "inclination": 0.47,
   "atmosphere": 9734782,
   "ephemeris": {
     "nasaOrbitalCode": "502",
     "nasaBarycenterCode": "5",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 125.5057366173581,
+  "eccentricity": 0.009395490355489243,
+  "longAscNode": 336.8983735172455,
+  "semimajor": 670984.3521102832,
+  "semiminor": 670954.7358046415,
+  "periapses": {
+    "last": 1508117011787.984,
+    "next": 1508421060718.207
   }
 }

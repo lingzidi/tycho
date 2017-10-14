@@ -4,7 +4,7 @@
   "radius": 761.4,
   "markdown": "oberon.md",
   "mass": 3.014e+21,
-  "centralMass": 8.6810e+25,
+  "centralMass": 8.681e+25,
   "axialTilt": 0,
   "inclination": 0.058,
   "atmosphere": 8421504,
@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "704",
     "nasaBarycenterCode": "7",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 164.9351033170295,
+  "eccentricity": 0.0005573604132157858,
+  "longAscNode": 167.7263622840152,
+  "semimajor": 583450.7259606287,
+  "semiminor": 583450.6353359538,
+  "periapses": {
+    "last": 1507979183564.7405,
+    "next": 1509333318483.4912
   }
 }

@@ -3,7 +3,7 @@
   "albedo": 1.375,
   "radius": 252.1,
   "markdown": "enceladus.md",
-  "mass": 1.08022e+20,
+  "mass": 108022000000000000000,
   "centralMass": 5.6834e+26,
   "axialTilt": 0,
   "inclination": 0.019,
@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "602",
     "nasaBarycenterCode": "6",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 199.7667628013468,
+  "eccentricity": 0.003980403809233389,
+  "longAscNode": 169.5421607337014,
+  "semimajor": 238953.9048047703,
+  "semiminor": 238952.01185049882,
+  "periapses": {
+    "last": 1508004551601.2324,
+    "next": 1508245552205.2378
   }
 }

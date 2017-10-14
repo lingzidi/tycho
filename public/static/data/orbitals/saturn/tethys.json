@@ -3,14 +3,23 @@
   "albedo": 1.229,
   "radius": 531.1,
   "markdown": "tethys.md",
-  "mass": 6.17449e+20,
+  "mass": 617449000000000000000,
   "centralMass": 5.6834e+26,
   "axialTilt": 0,
-  "inclination":  1.12,
+  "inclination": 1.12,
   "atmosphere": 13087130,
   "ephemeris": {
     "nasaOrbitalCode": "603",
     "nasaBarycenterCode": "6",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 132.1526849373334,
+  "eccentricity": 0.0007546596744776474,
+  "longAscNode": 170.0960771016055,
+  "semimajor": 294445.4739219323,
+  "semiminor": 294445.39007691917,
+  "periapses": {
+    "last": 1508009034401.5808,
+    "next": 1508111370302.6309
   }
 }

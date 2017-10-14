@@ -4,7 +4,7 @@
   "radius": 584.7,
   "markdown": "umbriel.md",
   "mass": 1.172e+21,
-  "centralMass": 8.6810e+25,
+  "centralMass": 8.681e+25,
   "axialTilt": 0,
   "inclination": 0.128,
   "atmosphere": 8421504,
@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "702",
     "nasaBarycenterCode": "7",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 31.88166875314568,
+  "eccentricity": 0.003387290235028168,
+  "longAscNode": 167.6873854927646,
+  "semimajor": 265984.7575359356,
+  "semiminor": 265983.2316122295,
+  "periapses": {
+    "last": 1507948254218.924,
+    "next": 1508304564752.7024
   }
 }

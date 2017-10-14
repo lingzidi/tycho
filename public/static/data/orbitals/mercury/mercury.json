@@ -13,5 +13,14 @@
     "nasaOrbitalCode": "1",
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
+  },
+  "argPeriapsis": 25.58643458205566,
+  "eccentricity": 0.2061210422938445,
+  "longAscNode": 47.91381339232119,
+  "semimajor": 0.3787414194506795,
+  "semiminor": 0.3706085164938304,
+  "periapses": {
+    "last": 1672564975497.5886,
+    "next": 1885517466742.7034
   }
 }

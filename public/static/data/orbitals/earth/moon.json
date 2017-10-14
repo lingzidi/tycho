@@ -1,6 +1,7 @@
 {
   "name": "Moon",
   "albedo": 0.136,
+  "sidereal": 0.99726968,
   "radius": 1737.1,
   "markdown": "moon.md",
   "mass": 5.97237e+24,
@@ -12,5 +13,14 @@
     "nasaOrbitalCode": "301",
     "nasaBarycenterCode": "3",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 282.5992409518417,
+  "eccentricity": 0.03405532141489297,
+  "longAscNode": 142.3595722910625,
+  "semimajor": 376126.5103019063,
+  "semiminor": 375908.33786092995,
+  "periapses": {
+    "last": 1509927058416.626,
+    "next": 1512377208118.1555
   }
 }

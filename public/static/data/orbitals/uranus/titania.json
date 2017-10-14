@@ -4,13 +4,22 @@
   "radius": 788.4,
   "markdown": "titania.md",
   "mass": 3.527e+21,
-  "centralMass": 8.6810e+25,
+  "centralMass": 8.681e+25,
   "axialTilt": 0,
-  "inclination": 0.340,
+  "inclination": 0.34,
   "atmosphere": 8421504,
   "ephemeris": {
     "nasaOrbitalCode": "703",
     "nasaBarycenterCode": "7",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 229.4612718970353,
+  "eccentricity": 0.002427845604961269,
+  "longAscNode": 167.6230717443308,
+  "semimajor": 436325.1831235358,
+  "semiminor": 436323.8971765822,
+  "periapses": {
+    "last": 1508514225330.399,
+    "next": 1509252004912.0679
   }
 }

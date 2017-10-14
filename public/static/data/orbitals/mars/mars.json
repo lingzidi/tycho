@@ -1,6 +1,6 @@
 {
   "name": "Mars",
-  "albedo": 0.170,
+  "albedo": 0.17,
   "sidereal": 1.025957,
   "radius": 3389.5,
   "markdown": "mars.md",
@@ -17,5 +17,14 @@
     "nasaOrbitalCode": "4",
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
+  },
+  "argPeriapsis": 284.8358029011748,
+  "eccentricity": 0.0953722727807235,
+  "longAscNode": 49.42123745809248,
+  "semimajor": 227582913.31597495079,
+  "semiminor": 226545516.5764200389,
+  "periapses": {
+    "last": 1536722819680.9753,
+    "next": 1596227891033.855
   }
 }

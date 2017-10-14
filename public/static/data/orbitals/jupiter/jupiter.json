@@ -1,9 +1,8 @@
 {
   "name": "Europa",
   "albedo": 0.52,
-  "sidereal": 0.41354,
-  "radius": 69911,
   "sidereal": 1234,
+  "radius": 69911,
   "markdown": "europa.md",
   "mass": 1.8986e+27,
   "centralMass": 1.989e+30,
@@ -20,5 +19,14 @@
     "nasaOrbitalCode": "5",
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
+  },
+  "argPeriapsis": 273.3693624909697,
+  "eccentricity": 0.04950132482345224,
+  "longAscNode": 100.5127949391526,
+  "semimajor": 777172431.35127103329,
+  "semiminor": 776219662.99022746086,
+  "periapses": {
+    "last": 1673868533235.231,
+    "next": 2049496439992.9583
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "Pluto",
   "albedo": 0.66,
-  "sidereal": 6.387230,
+  "sidereal": 6.38723,
   "radius": 1189.9,
   "markdown": "pluto.md",
   "mass": 1.303e+22,
@@ -16,5 +16,14 @@
     "nasaOrbitalCode": "9",
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
+  },
+  "argPeriapsis": 113.7723827932027,
+  "eccentricity": 0.2490248088194554,
+  "longAscNode": 110.3010209840363,
+  "semimajor": 5907467183.4006595612,
+  "semiminor": 5721364871.7127380371,
+  "periapses": {
+    "last": 620975940000,
+    "next": 8449136575642.012
   }
 }

@@ -3,8 +3,8 @@
   "albedo": 0.32,
   "radius": 235.8,
   "markdown": "miranda.md",
-  "mass": 6.59e+19,
-  "centralMass": 8.6810e+25,
+  "mass": 65900000000000000000,
+  "centralMass": 8.681e+25,
   "axialTilt": 0,
   "inclination": 4.232,
   "atmosphere": 8421504,
@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "705",
     "nasaBarycenterCode": "7",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 244.0701800710327,
+  "eccentricity": 0.001314431963182846,
+  "longAscNode": 172.0696010336766,
+  "semimajor": 129875.8183677679,
+  "semiminor": 129875.70617245563,
+  "periapses": {
+    "last": 1507985848438.427,
+    "next": 1508232090014.8093
   }
 }

@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "501",
     "nasaBarycenterCode": "5",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 307.674227707047,
+  "eccentricity": 0.003991401067937321,
+  "longAscNode": 338.4213288782511,
+  "semimajor": 421535.0399832816,
+  "semiminor": 421531.6821730083,
+  "periapses": {
+    "last": 1507964128150.8074,
+    "next": 1508117075106.2883
   }
 }

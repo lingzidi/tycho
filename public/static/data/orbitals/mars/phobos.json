@@ -3,7 +3,7 @@
   "albedo": 0.071,
   "radius": 11.2667,
   "markdown": "phobos.md",
-  "mass": 1.0659e+16,
+  "mass": 10659000000000000,
   "centralMass": 6.4171e+23,
   "axialTilt": 0,
   "inclination": 1.093,
@@ -12,5 +12,14 @@
     "nasaOrbitalCode": "401",
     "nasaBarycenterCode": "4",
     "revolutionOrder": "d"
+  },
+  "argPeriapsis": 291.9393576881656,
+  "eccentricity": 0.01537099178317446,
+  "longAscNode": 82.96758792024443,
+  "semimajor": 9377.918901174819,
+  "semiminor": 9376.81098752629,
+  "periapses": {
+    "last": 1508532273186.4795,
+    "next": 1509221388674.8328
   }
 }
