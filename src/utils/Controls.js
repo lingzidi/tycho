@@ -9,7 +9,7 @@ export default class Controls extends OrbitControls(THREE) {
     super(camera, domElement);
 
     this.camera = camera;
-    this.level = 100;
+    this.level = Constants.WebGL.Zoom.MAX;
     this.enabled = true;
     this.enableZoom = false;
     this.enablePan = false;
@@ -54,7 +54,7 @@ export default class Controls extends OrbitControls(THREE) {
     let zoom = this.level;
     
     zoom += (delta / Constants.UI.WHEEL_DELTA_DIVISOR);
-    zoom = Math.max(zoom, 1);
+    zoom = Math.max(zoom, 0);
     zoom = Math.min(zoom, 100);
    
     return zoom;
@@ -66,31 +66,35 @@ export default class Controls extends OrbitControls(THREE) {
    * @param {Number} percent - percentage of zoom [0,1]
    */
   pan = (percent) => {
-    let p = this.camera.position;
-    let v = this.getZoomVector(p, percent);
+    let position = this.camera.position;
+    let newVector = this.getZoomVector(position, this.maxDistance * percent);
+    let minVector = this.getZoomVector(position, this.minDistance);
     
-    p.set(v.x, v.y, v.z);
+    if (newVector.length() >= this.minDistance) {
+      position.copy(newVector);
+    } else {
+      position.copy(minVector);
+    }
   }
 
   /**
-   * Returns the current vector scaled to the desired zoom.
+   * Returns the current vector scaled to the desired magnitude.
    *
-   * @param {Vector3} v - current position vector
-   * @param {Number} p - percentage of zoom [0,1]
+   * @param {Vector3} vector - current position vector
+   * @param {Number} scalar - magnitude of vector
    * @returns {Vector3}
    */
-  getZoomVector = (v, p) => {
-    return v
+  getZoomVector = (vector, scalar) => {
+    return vector
       .clone()
       .normalize()
-      .multiplyScalar(
-        this.maxDistance * p
-      );
+      .multiplyScalar(scalar);
   }
 
   /**
    * Returns the distance between <0> and current camera position.
-   * @return {Number} distance
+   * 
+   * @returns {Number} distance
    */
   getDistance = () => {
     return this.maxDistance - this.minDistance;
@@ -177,7 +181,7 @@ export default class Controls extends OrbitControls(THREE) {
     this.tweenBase = new TWEEN
       .Tween(this.tweenData)
       .easing(TWEEN.Easing.Quadratic.Out)
-      .to({level}, Constants.WebGL.Tween.SLOW)
+      .to({level}, Constants.WebGL.Tween.NORMAL)
       .onUpdate(this.updateTween)
       .onComplete(this.completeTween)
       .start();

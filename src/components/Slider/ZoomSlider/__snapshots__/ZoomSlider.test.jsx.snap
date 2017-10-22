@@ -7,10 +7,10 @@ exports[`Zoom Slider Component render() when the slider value is defined should 
   <Slider
     invert={true}
     max={100}
-    min={1}
+    min={0.0005}
     onChange={[Function]}
     orientation="vertical"
-    step={1}
+    step={0.005}
     value={100}
   />
 </div>
@@ -23,10 +23,10 @@ exports[`Zoom Slider Component render() when the slider value is undefined shoul
   <Slider
     invert={true}
     max={100}
-    min={1}
+    min={0.0005}
     onChange={[Function]}
     orientation="vertical"
-    step={1}
+    step={0.005}
     value={40}
   />
 </div>

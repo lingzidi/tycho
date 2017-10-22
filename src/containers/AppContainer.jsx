@@ -13,6 +13,8 @@ export class AppContainer extends React.Component {
     this.props.action.requestOrbitalData();
     this.props.action.requestPageText();
     this.clock = new Clock();
+    this.lastTime = 0;
+    this.state = {};
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -25,16 +27,33 @@ export class AppContainer extends React.Component {
     }
   }
 
+  maybeUpdateTime = () => {
+    if (this.clock.getTime() !== this.lastTime) {
+      this.lastTime = this.clock.getTime();
+      this.props.action.setTime(this.clock.getTime());
+    }
+  }
+
   onAnimate = () => {
-    this.props.action.setTime(this.clock.getTime());
+    // this.props.action.setTime(this.clock.getTime());
+    this.maybeUpdateTime();
     this.clock.speed(this.props.speed);
     this.clock.update();
+  }
+
+  updatePosition = (position, id) => {
+    // const old = this.state.positions;
+    // const positions = Object.assign(old, {
+    //   [id]: position
+    // });
+
+    // this.setState({positions});
   }
 
   render() {
     const {orbitalData, pageText} = this.props;
     if (orbitalData && pageText) {
-      return <App onAnimate={this.onAnimate} />
+      return <App onAnimate={this.onAnimate} positions={this.state.positions} updatePosition={this.updatePosition} />
     }
     return <SplashScreen />
   }

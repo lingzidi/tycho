@@ -10,6 +10,7 @@
     "keymirror": "^0.1.1",
     "moment": "^2.18.1",
     "npm-run-all": "^4.1.1",
+    "nvm": "^0.0.4",
     "react": "^15.6.1",
     "react-animation-frame": "0.3.4",
     "react-datetime": "^2.10.1",
@@ -21,6 +22,7 @@
     "redux-thunk": "^2.2.0",
     "three": "0.87.1",
     "three-orbit-controls": "^82.1.0",
+    "threex-domevents": "^1.0.0",
     "tween.js": "^16.6.0"
   },
   "scripts": {

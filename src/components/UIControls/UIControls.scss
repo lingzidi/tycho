@@ -11,7 +11,7 @@
   }
 
   &__button {
-    background-color: #000;
+    background-color: #fff;
     width: 32px;
     height: 32px;
     display: block;
@@ -47,7 +47,7 @@
       transition: text-shadow 0.5s;
 
       &:hover {
-        text-shadow: 1px 1px 10px #000;
+        text-shadow: 1px 1px 10px #fff;
       }
     }
     

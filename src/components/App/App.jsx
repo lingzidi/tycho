@@ -1,5 +1,4 @@
 import React from 'react';
-import LabelGroupContainer from '../../containers/LabelGroupContainer';
 import SceneContainer from '../../containers/SceneContainer';
 import UIControlsContainer from '../../containers/UIControlsContainer';
 import LoaderContainer from '../../containers/LoaderContainer';
@@ -13,10 +12,10 @@ export default class App extends React.Component {
       <div>
         <SceneContainer
           onAnimate={this.props.onAnimate}
+          updatePosition={this.props.updatePosition}
           width={window.innerWidth}
           height={window.innerHeight}
         />
-        <LabelGroupContainer />
         <UIControlsContainer />
         <LoaderContainer />
         <TourContainer labels={Constants.Tour.LABELS} />

@@ -9,12 +9,11 @@ export const Sliders = {
   }
 };
 
-
 export const ALTERNATE_TARGET_NAME = 'Sun';
 
-export const DEFAULT_TARGET_NAME = 'dummyPlanet';
+export const DEFAULT_TARGET_NAME = 'earth';
 
-export const DEFAULT_LABEL_TEXT = 'Dummy Planet';
+export const DEFAULT_LABEL_TEXT = 'Earth';
 
 export const UX_DATE_FORMAT = 'MMM DD, YYYY h:mm a';
 
@@ -22,7 +21,7 @@ export const ZOOM_LABEL_TRIGGER = 25;
 
 export const SPIN_LABEL_ARROW_COUNT = 4;
 
-export const WHEEL_DELTA_DIVISOR = 50;
+export const WHEEL_DELTA_DIVISOR = 100000;
 
 export const HOVER_OPACITY_ON = 1;
 

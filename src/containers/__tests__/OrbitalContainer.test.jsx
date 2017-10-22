@@ -5,16 +5,28 @@ import data from './__fixtures__/orbitals.json';
 import {OrbitalContainer} from '../OrbitalContainer';
 import {Orbital} from '../../components/Orbital';
 import Ellipse from '../../utils/Ellipse';
+import Label from '../../utils/Label';
 import Service from '../../services/OrbitalService';
+
+jest.mock('../../utils/Label', () => {
+  return function() {
+    this.onClick = jest.fn();
+    this.onHover = jest.fn();
+    this.onMouseOut = jest.fn();
+  }
+});
 
 describe('Orbital Container', () => {
   let component, orbitalContainer;
 
   beforeEach(() => {
     component = shallow(
-      <OrbitalContainer {...data[0]}
+      <OrbitalContainer
+        {...data[0]}
         time={1}
-        updatePosition={() => {}}
+        action={{
+          setActiveOrbital: jest.fn()
+        }}
       />);
 
     orbitalContainer = component.instance();
@@ -23,6 +35,12 @@ describe('Orbital Container', () => {
   afterEach(() => jest.resetAllMocks());
 
   describe('componentWillMount()', () => {
+    beforeEach(() => {
+      orbitalContainer.setBodyState = jest.fn();
+      orbitalContainer.setGroupRotations = jest.fn();
+      orbitalContainer.setPathOpacity = jest.fn();
+    });
+
     it('should initialize a new instance of Ellipse', () => {
       orbitalContainer.componentWillMount();
       
@@ -84,37 +102,9 @@ describe('Orbital Container', () => {
     });
   });
 
-  describe('updatePosition()', () => {
-    it('should call the onUpdate callback prop', () => {
-      const updatePosition = jest.fn();
-
-      component = shallow(
-        <OrbitalContainer {...data[0]}
-          time={1}
-          updatePosition={updatePosition}
-        />);
-
-      orbitalContainer = component.instance();
-      const props = component.props();
-
-      orbitalContainer.updatePosition();
-
-      expect(updatePosition).toHaveBeenCalled();
-      expect(updatePosition).toHaveBeenCalledWith({
-        position2d: null,
-        position3d: null
-      }, props.id);
-    });
-  });
-
-  describe('onAnimationFrame()', () => {
-    it('should update the present body position and rotation', () => {
-      const spy = jest.spyOn(orbitalContainer, 'setBodyState');
-
-      orbitalContainer.componentWillMount();
-      
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(orbitalContainer.props, orbitalContainer.ellipse);
+  describe('getLabel()', () => {
+    it('should return an instance of label', () => {
+      expect(typeof orbitalContainer.getLabel()).toBe('object');
     });
   });
 

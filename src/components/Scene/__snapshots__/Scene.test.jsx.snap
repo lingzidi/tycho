@@ -8,7 +8,7 @@ exports[`Scene Component getOrbitalElements() should match the snapshot of Orbit
 
 exports[`Scene Component render() should render the scene 1`] = `
 <group>
-  <AnimatedComponent
+  <OrbitalContainer
     GM={6836529}
     active={false}
     arcRotate={45.0411}
@@ -39,7 +39,7 @@ exports[`Scene Component render() should render the scene 1`] = `
     time={1}
     updatePosition={[Function]}
   />
-  <AnimatedComponent
+  <OrbitalContainer
     GM={6836529}
     active={false}
     arcRotate={45.0411}
@@ -93,7 +93,7 @@ exports[`Scene Component render() should render the scene 1`] = `
     time={1}
     updatePosition={[Function]}
   >
-    <AnimatedComponent
+    <OrbitalContainer
       GM={6836529}
       active={false}
       arcRotate={15.0411}
@@ -119,7 +119,7 @@ exports[`Scene Component render() should render the scene 1`] = `
       time={1}
       updatePosition={[Function]}
     />
-  </AnimatedComponent>
+  </OrbitalContainer>
   <axisHelper
     size={500}
   />

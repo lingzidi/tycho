@@ -157,18 +157,32 @@ export default class CameraContainer extends React.Component {
    */
   setInteractivity = (enabled) => {
     this.props.action.setUIControls(!!enabled);
-    // this.props.action.setPaused(!disabled);
+    // this.props.action.setPaused(!disabled); // TODO
     this.controls.enabled = !!enabled;
+  }
+
+  /**
+   * Updates the scale of all scene label sprites.
+   */
+  updateSpriteScale = () => {
+    const sprites = CameraService.getObjectsByType(this.props.scene, 'Sprite');
+    const cameraWorld = CameraService.getWorldPosition(this.refs.camera);
+
+    sprites.forEach((sprite) => {
+      const scale = CameraService.getSpriteScale(sprite, cameraWorld);
+      sprite.scale.set(scale, scale, 1);
+    });
   }
   
   /**
-   * Tweens zoom to 1%.
+   * Tweens zoom to minimum allowable zoom.
    */
   zoomInFull = () => {
-    this.controls.tweenZoom(1, this.props.action.changeZoom);
+    this.controls.tweenZoom(Constants.WebGL.Zoom.MIN, this.props.action.changeZoom);
   }
 
   update = () => {
+    this.updateSpriteScale();
     this.controls.update();
   }
   

@@ -26,15 +26,6 @@ describe('Orbital Component', () => {
     orbital = component.instance();
   });
 
-  describe('onAnimationFrame()', () => {
-    it('should call the updatePosition callback prop', () => {
-      orbital.onAnimationFrame();
-
-      expect(updatePosition).toHaveBeenCalled();
-      expect(updatePosition).toHaveBeenCalledTimes(1);
-    });
-  });
-
   describe('render()', () => {
     it('should render the orbital successfully', () => {
       expect(toJson(component)).toMatchSnapshot();

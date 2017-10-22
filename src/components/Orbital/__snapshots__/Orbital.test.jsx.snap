@@ -15,7 +15,9 @@ exports[`Orbital Component render() should render the orbital successfully 1`] =
     />
   </group>
   <line>
-    <lineBasicMaterial />
+    <lineBasicMaterial
+      transparent={true}
+    />
     <geometry
       vertices={Array []}
     />

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactAnimationFrame from 'react-animation-frame';
 import PropTypes from 'prop-types';
 import Ellipse from '../utils/Ellipse';
+import Label from '../utils/Label';
 import Service from '../services/OrbitalService';
 import Orbital from '../components/Orbital';
 
@@ -14,20 +15,19 @@ export class OrbitalContainer extends React.Component {
     arcRotate: PropTypes.number.isRequired,
     radius: PropTypes.number.isRequired,
     axialTilt: PropTypes.number.isRequired,
-    time: PropTypes.number,
+    atmosphere: PropTypes.number,
     id: PropTypes.string.isRequired,
+    time: PropTypes.number,
     isSatellite: PropTypes.bool,
-    active: PropTypes.bool,
-    camera: PropTypes.object,
-    updatePosition: PropTypes.func.isRequired,
-    atmosphereColor: PropTypes.number.isRequired
+    active: PropTypes.bool
   }
 
   componentWillMount = () => {
     this.state = {};
     this.ellipse = new Ellipse(this.props);
     this.setGroupRotations(this.props);
-    this.onAnimationFrame();
+    this.setBodyState(this.props, this.ellipse);
+    this.setPathOpacity();
   }
 
   setPathOpacity = (active) => {
@@ -51,16 +51,15 @@ export class OrbitalContainer extends React.Component {
     });
   }
 
-  updatePosition = (mesh) => {
-    const position3d = Service.getWorldPosition(mesh);
-    const position2d = Service.translateWorldToScreen(position3d, this.props.camera);
+  getLabel = () => {
+    const {action, name, domEvents, id, isSatellite} = this.props;
+    const label = new Label(name, domEvents, isSatellite);
 
-    this.props.updatePosition({position2d, position3d}, this.props.id);
-  }
+    label.onClick(action.setActiveOrbital.bind(this, id));
+    label.onHover(this.setPathOpacity.bind(this, true));
+    label.onMouseOut(this.setPathOpacity.bind(this, false));
 
-  onAnimationFrame = () => {
-    this.setBodyState(this.props, this.ellipse);
-    this.setPathOpacity(this.props.active);
+    return label;
   }
 
   render() {
@@ -73,8 +72,8 @@ export class OrbitalContainer extends React.Component {
         bodyRotation={this.state.bodyRotation}
         bodyRadius={this.state.bodyRadius}
         pathOpacity={this.state.pathOpacity}
-        updatePosition={this.updatePosition}
-        atmosphereColor={this.props.atmosphereColor}
+        atmosphere={this.props.atmosphere}
+        label={this.getLabel()}
         id={this.props.id}>
         {this.props.children}
       </Orbital>
@@ -82,4 +81,4 @@ export class OrbitalContainer extends React.Component {
   }
 }
 
-export default ReactAnimationFrame(OrbitalContainer);
+export default OrbitalContainer;

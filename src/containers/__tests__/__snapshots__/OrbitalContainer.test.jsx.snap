@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Orbital Container render() should render the OrbitalContainer successfully 1`] = `
-<AnimatedComponent
-  atmosphereColor={0}
+<Orbital
+  atmosphere={16711680}
   bodyPosition={
     Vector3 {
       "x": 246.87412833828495,
@@ -28,6 +28,13 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
     }
   }
   id="dummyOuter"
+  label={
+     {
+      "onClick": [Function],
+      "onHover": [Function],
+      "onMouseOut": [Function],
+    }
+  }
   orbitalGroupRotation={
     Euler {
       "_order": "XYZ",
@@ -2546,6 +2553,5 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
     ]
   }
-  updatePosition={[Function]}
 />
 `;

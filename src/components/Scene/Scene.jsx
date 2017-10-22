@@ -10,7 +10,8 @@ export default class Scene extends React.Component {
     updatePosition: PropTypes.func.isRequired,
     time: PropTypes.number,
     camera: PropTypes.object,
-    scale: PropTypes.number
+    scale: PropTypes.number,
+    domEvents: PropTypes.object
   }
 
   isActive = (id) => {
@@ -18,21 +19,23 @@ export default class Scene extends React.Component {
   }
 
   getOrbitalElements = (orbitals, isSatellite) => {
-    return orbitals.map((orbital) => {
-      return (
+    return orbitals.map((orbital) => (
       <OrbitalContainer
         {...orbital}
+        key={orbital.id}
+        action={this.props.action}
         scale={this.props.scale}
         time={this.props.time}
         camera={this.props.camera}
+        domEvents={this.props.domEvents}
         updatePosition={this.props.updatePosition}
-        isSatellite={isSatellite}
         active={this.isActive(orbital.id)}
-        key={orbital.id}>
-        {orbital.satellites && this.getOrbitalElements(orbital.satellites, !isSatellite)}
+        isSatellite={isSatellite}>
+        {orbital.satellites && this.getOrbitalElements(
+          orbital.satellites, !isSatellite
+        )}
       </OrbitalContainer>
-      )
-    });
+    ));
   }
 
   componentDidMount = () => {

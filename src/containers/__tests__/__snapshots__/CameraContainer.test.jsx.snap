@@ -7,7 +7,7 @@ exports[`Camera Container render() should render the scene container successfull
     far={10000}
     fov={50}
     name="camera"
-    near={1}
+    near={0.001}
     position={
       Vector3 {
         "add": [Function],

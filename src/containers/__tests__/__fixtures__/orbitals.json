@@ -15,7 +15,7 @@
 	},
 	"eccentricity": 0.01671123,
 	"longAscNode": 348.73936,
-	"atmosphereColor": 0,
+	"atmosphere": 16711680,
 	"ring": {
 		"innerRadius": 6630,
 		"outerRadius": 950000
@@ -37,7 +37,7 @@
 	},
 	"eccentricity": 0.01671123,
 	"longAscNode": 348.73936,
-	"atmosphereColor": 0,
+	"atmosphere": 16711680,
 	"ring": {
 		"innerRadius": 6630,
 		"outerRadius": 950000
@@ -59,6 +59,6 @@
 		},
 		"eccentricity": 0.01671123,
 		"longAscNode": 348.73936,
-		"atmosphereColor": 16711680
+		"atmosphere": 16711680
 	}]
 }]

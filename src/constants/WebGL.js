@@ -18,13 +18,20 @@ export const Tween = {
   SLOW: 5000
 };
 
+export const Zoom = {
+  MIN: 0.0005,
+  MAX: 100,
+  STEP: 0.005
+};
+
 export const Camera = {
-  NEAR: 1,
+  NEAR: 0.001,
   FAR: 10000,
   FOV: 50,
-  MAX_DISTANCE: 500,
-  MIN_DISTANCE: 1,
   X: 300,
   Y: 300,
-  Z: 300
+  Z: 300,
+  MAX_DISTANCE: 500,
+  MIN_DISTANCE: 0,
+  SATELLITE_LABEL_RANGE: 7
 };

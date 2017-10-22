@@ -1,4 +1,4 @@
-import {Vector3, Camera, Object3D, Scene} from 'three';
+import {Vector3, Camera, Object3D, Scene, Matrix4} from 'three';
 import TWEEN from 'tween.js';
 import CameraService from '../CameraService';
 import Gyroscope from '../../utils/Gyroscope';
@@ -37,6 +37,7 @@ describe('Camera Service', () => {
       scene.add(object);
       object.position.copy(position);
     });
+
     it('should be an instance of Vector3', () => {
       const result = CameraService.getWorldPosition(object);
 
@@ -94,6 +95,69 @@ describe('Camera Service', () => {
 
     it('should set the position of the pivot to <0>', () => {
       expect(pivot.position).toEqual(new Vector3(0, 0, 0));
+    });
+  });
+
+
+  describe('getObjectsByType()', () => {
+    it('should return an array of all children having \'Sprite\' type', () => {
+      const children = [{type: 'Sprite'}];
+      const mockScene = {children};
+      const result = CameraService.getObjectsByType(mockScene, 'Sprite');
+
+      expect(Array.isArray(result)).toBe(true);
+      expect(result).toHaveLength(1);
+      expect(result).toEqual(children);
+    });
+
+    it('should search the children recursively, if any', () => {
+      const children = [{
+        type: 'Sprite',
+        children: [{}]
+      }];
+      const mockScene = {children};
+      const result = CameraService.getObjectsByType(mockScene, 'Sprite');
+
+      expect(Array.isArray(result)).toBe(true);
+      expect(result).toHaveLength(1);
+      expect(result).toEqual(children);
+    });
+  });
+
+  describe('getSpriteScale()', () => {
+    let sprite;
+
+    beforeEach(() => {
+      sprite = new Object3D();
+    });
+
+    describe('when the target sprite belongs to a regular, non-satellite orbital', () => {
+      it('should return one-tenth the magnitude of the camera-to-sprite distance', () => {
+        const scale = CameraService.getSpriteScale(sprite, new Vector3(5, 5, 5));
+
+        expect(typeof scale).toBe('number');
+        expect(scale.toFixed(3)).toEqual('0.866');
+      });
+    });
+
+    describe('when the target sprite belongs to satellite', () => {
+      beforeEach(() => {
+        sprite.isSatellite = true;
+      });
+
+      it('should return 0 if the label is not in range', () => {
+        const scale = CameraService.getSpriteScale(sprite, new Vector3(5, 5, 5));
+
+        expect(typeof scale).toBe('number');
+        expect(scale).toEqual(0);
+      });
+
+      it('should calculate the scale if the label is in range', () => {
+        const scale = CameraService.getSpriteScale(sprite, new Vector3(2, 2, 2));
+
+        expect(typeof scale).toBe('number');
+        expect(scale.toFixed(3)).toEqual('0.346');
+      });
     });
   });
 });

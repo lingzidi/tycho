@@ -52,7 +52,7 @@ describe('Controls', () => {
       const result = controls.getZoomDelta(-40);
 
       expect(typeof result).toBe('number');
-      expect(result).toEqual(49.2);
+      expect(result).toEqual(49.9996);
     });
   });
 
@@ -76,11 +76,12 @@ describe('Controls', () => {
       controls.maxDistance = 4;
 
       const result = controls.getZoomVector(vector, scalar);
+      const expected = vector.normalize().multiplyScalar(scalar);
 
       expect(result).toBeInstanceOf(Vector3);
-      expect(result.x).toEqual(10.690449676496975);
-      expect(result.y).toEqual(21.38089935299395);
-      expect(result.z).toEqual(32.071349029490925);
+      expect(result.x).toEqual(expected.x);
+      expect(result.y).toEqual(expected.y);
+      expect(result.z).toEqual(expected.z);
     });
   });
 

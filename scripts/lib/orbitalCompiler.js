@@ -2,6 +2,8 @@ const glob = require('glob');
 const path = require('path');
 const fs = require('fs');
 
+const DATA_PATH = path.join(__dirname, '../../public/static/data/orbitals');
+
 /**
  * Returns JSON data from the given file path.
  *
@@ -109,11 +111,10 @@ const orbitalsToArray = (orbitalData) => {
  * Returns all *.json files recursively in the given path.
  *
  * @private
- * @param {String} pathName - base path to look in
  * @returns {String[]} list of paths to JSON files.
  */
-const getFilePaths = (pathName) => {
-  return glob.sync(path.join(__dirname, '../../public/static/data/orbitals/**/*.json'));
+const getFilePaths = () => {
+  return glob.sync(`${DATA_PATH}/**/*.json`);
 }
 
 /**
@@ -133,20 +134,28 @@ const getOrbitalDataBundle = () => {
 }
 
 /**
- * Writes the given data to the specified file.
+ * Writes the given data to the location of the specified orbital.
  *
  * @private
  * @param {String} data - JSON-encoded data
- * @param {String} fileName - name of JSON file to write
+ * @param {String} fileName - name of orbital JSON to write
  */
 const compileDataFile = (data, fileName) => {
-  const filePath = path.join(__dirname, `../../public/static/data/${fileName}.json`);
+  writeFile(data, `${DATA_PATH}/${fileName}.json`);
+}
 
+/**
+ * Writes the given data to the specified file.
+ *
+ * @param {String} data - file contents
+ * @param {String} filePath - full path of file to write
+ */
+const writeFile = (data, filePath) => {
   fs.writeFile(filePath, data, {flag: 'w'}, (err) => {
     if (err) {
       return console.log('Error: ', err);
     }
-    console.log(`🌎  Created orbitals bundle in: ${filePath}`);
+    console.log(`🌎  Created orbital file in: ${filePath}`);
   }); 
 }
 
@@ -154,11 +163,15 @@ const compileDataFile = (data, fileName) => {
  * Compiles all bundles.
  */
 const compileBundles = () => {
-  compileDataFile(getOrbitalDataBundle(), 'orbitals');
+  compileDataFile(getOrbitalDataBundle(), '../orbitals');
 }
 
 module.exports = {
+  DATA_PATH,
+  writeFile,
   getKeyFromPath,
+  getFilePaths,
+  getJsonData,
   jsonFilesToObject,
   removeSatellites,
   mapSatellitesToParents,

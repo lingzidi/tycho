@@ -5,19 +5,16 @@ import Body from '../Body';
 export default class Orbital extends React.Component {
 
   static propTypes = {
-    updatePosition: PropTypes.func.isRequired,
     eclipticGroupRotation: PropTypes.object.isRequired,
     orbitalGroupRotation: PropTypes.object.isRequired,
     pathVertices: PropTypes.array.isRequired,
     bodyPosition: PropTypes.object.isRequired,
     bodyRotation: PropTypes.object.isRequired,
     bodyRadius: PropTypes.number.isRequired,
+    atmosphere: PropTypes.number,
     pathOpacity: PropTypes.number,
+    label: PropTypes.object,
     id: PropTypes.string.isRequired
-  }
-
-  onAnimationFrame = () => {
-    this.props.updatePosition(this.refs.body);
   }
 
   render() {
@@ -30,13 +27,14 @@ export default class Orbital extends React.Component {
           <Body
             rotation={this.props.bodyRotation}
             radius={this.props.bodyRadius}
-            ref="body"
+            label={this.props.label}
           />
           {this.props.children}
         </group>
         <line>
           <lineBasicMaterial
-            color={this.props.atmosphereColor}
+            transparent={true}
+            color={this.props.atmosphere}
             opacity={this.props.pathOpacity}
           />
           <geometry

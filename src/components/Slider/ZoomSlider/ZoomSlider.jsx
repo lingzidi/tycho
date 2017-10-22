@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from '../Slider';
 import PropTypes from 'prop-types';
+import Constants from '../../../constants';
 
 export default class ZoomSlider extends React.Component {
 
@@ -15,10 +16,10 @@ export default class ZoomSlider extends React.Component {
         <Slider
           orientation="vertical"
           invert={true}
-          step={1}
-          min={1}
-          max={100}
-          value={this.props.value || 100}
+          step={Constants.WebGL.Zoom.STEP}
+          min={Constants.WebGL.Zoom.MIN}
+          max={Constants.WebGL.Zoom.MAX}
+          value={this.props.value || Constants.WebGL.Zoom.MAX}
           onChange={this.props.onChange}
         />
       </div>

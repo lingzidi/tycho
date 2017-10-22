@@ -8,6 +8,7 @@ import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import CameraContainer from '../CameraContainer';
 import Controls from '../../utils/Controls';
+import Constants from '../../constants';
 import data from './__fixtures__/orbitals.json';
 import CameraService from '../../services/CameraService';
 
@@ -25,7 +26,7 @@ const scene = {
   add: jest.fn()
 };
 
-describe.only('Camera Container', () => {
+describe('Camera Container', () => {
   let component, cameraContainer;
 
   beforeEach(() => {
@@ -340,6 +341,27 @@ describe.only('Camera Container', () => {
       expect(spy).toHaveBeenCalledWith(true);
     });
   });
+  
+  describe('updateSpriteScale()', () => {
+    const sprite = new Object3D();
+    const scale = 3;
+
+    beforeEach(() => {
+      CameraService.getObjectsByType = () => [sprite];
+      CameraService.getWorldPosition = () => new Vector3();
+      CameraService.getSpriteScale = () => scale;
+    });
+
+    it('should scale each scene sprite to the calculated scale', () => {
+      const spy = jest.spyOn(sprite.scale, 'set');
+
+      cameraContainer.updateSpriteScale();
+
+      expect(sprite.scale.set).toHaveBeenCalled();
+      expect(sprite.scale.set).toHaveBeenCalledTimes(1);
+      expect(sprite.scale.set).toHaveBeenCalledWith(scale, scale, 1);
+    });
+  });
 
   describe('zoomInFull()', () => {
     it('should call controls.tweenZoom()', () => {
@@ -355,7 +377,7 @@ describe.only('Camera Container', () => {
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(1, changeZoom);
+      expect(spy).toHaveBeenCalledWith(Constants.WebGL.Zoom.MIN, changeZoom);
     });
   });
 

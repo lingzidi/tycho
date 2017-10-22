@@ -7,8 +7,10 @@ import Scene from '../components/Scene';
 import * as AnimationActions from '../actions/AnimationActions';
 import * as UIControlsActions from '../actions/UIControlsActions';
 import * as TourActions from '../actions/TourActions';
+import * as LabelActions from '../actions/LabelActions';
 import ReduxService from '../services/ReduxService';
 import CameraContainer from './CameraContainer';
+import DomEvents from '../utils/DomEvents';
 
 export class SceneContainer extends React.Component {
 
@@ -26,7 +28,7 @@ export class SceneContainer extends React.Component {
   onAnimate = () => {
     this.props.onAnimate();
     this.refs.camera.update();
-    this.forceUpdate();
+    // this.forceUpdate();
     TWEEN.update();
   }
 
@@ -93,11 +95,12 @@ export class SceneContainer extends React.Component {
             {camera && <Scene
               time={this.props.time}
               camera={camera.refs.camera}
-              updatePosition={this.props.action.setPosition}
               orbitalData={this.props.orbitalData}
               scale={this.props.scale}
+              action={this.props.action}
               highlightedOrbital={this.props.highlightedOrbital}
-              cameraMatrix={camera.refs.camera.position.clone()}>
+              cameraMatrix={camera.refs.camera.position.clone()}
+              domEvents={DomEvents(camera.refs.camera)}>
               {this.props.children}
             </Scene>}
           </scene>
@@ -122,6 +125,7 @@ export default connect(
   ReduxService.mapDispatchToProps(
     UIControlsActions,
     TourActions,
-    AnimationActions
+    AnimationActions,
+    LabelActions
   )
 )(SceneContainer);

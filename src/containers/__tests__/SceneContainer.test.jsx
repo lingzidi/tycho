@@ -10,7 +10,7 @@ import {CameraContainer} from '../CameraContainer';
 import Controls from '../../utils/Controls';
 import data from './__fixtures__/orbitals.json';
 
-describe.only('Scene Container', () => {
+describe('Scene Container', () => {
   let component, sceneContainer;
 
   beforeEach(() => {
