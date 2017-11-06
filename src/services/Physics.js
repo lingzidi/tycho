@@ -30,8 +30,11 @@ export default class Physics {
    * @returns {Number} calculated eccentric anomaly
    */
   static eccentricAnomaly(ecc, time, periapses) {
-    const timePassed = (time - periapses.last);
-    const period = (periapses.next - periapses.last);
+    const last = periapses.last / 1000;
+    const next = periapses.next / 1000;
+
+    const timePassed = (time - last);
+    const period = (next - last);
 
     let meanAnomaly = this.meanAnomaly(timePassed, period) / 360;
     let E, F;

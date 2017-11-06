@@ -50,21 +50,12 @@ describe('Orbital Service', () => {
     });
 
     it('should set the x Euler rotation param to axialTilt rotated 90 degrees counter-clockwise', () => {
-      const x = Math.abs(90 - param.axialTilt);
+      const x = param.axialTilt;
       const result = OrbitalService.getBodyRotation(param);
       const expected = OrbitalService.toEuler({x});
       
       expect(typeof result.x).toBe('number');
       expect(result.x).toEqual(expected.x);
-    });
-
-    it('should set the y Euler rotation param to the rotation speed, in arcsecs, w.r.t. present time', () => {
-      const y = Math2.arcSecToDeg(param.time, param.arcrotate);
-      const result = OrbitalService.getBodyRotation(param);
-      const expected = OrbitalService.toEuler({y});
-      
-      expect(typeof result.y).toBe('number');
-      expect(result.y).toEqual(expected.y);
     });
 
     it('should omit the z Euler rotation param', () => {

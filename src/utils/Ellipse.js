@@ -42,7 +42,7 @@ export default class Ellipse {
    */
   getGeometry = () => {
     return this.path.createPointsGeometry(
-      Constants.WebGL.ELLIPSE_CURVE_POINTS
+      Constants.WebGL.Ellipse.POINTS
     );
   }
 
@@ -52,9 +52,7 @@ export default class Ellipse {
    * @returns {THREE.Path} path
    */
   getPath = () => {
-    return new THREE.Path(
-      this.ellipse.getPoints(Constants.WebGL.ELLIPSE_CURVE_POINTS)
-    );
+    return new THREE.CurvePath();
   }
 
   /**
@@ -69,7 +67,25 @@ export default class Ellipse {
       focus, 
       this.semiminor,
       this.semimajor,
-      0, 2 * Math.PI);
+      Constants.WebGL.Ellipse.START,
+      Constants.WebGL.Ellipse.END
+    );
+  }
+
+  /**
+   * Calculates vertices needed to form the elliptical curve in 2D space.
+   *
+   * @note temporary workaround for CurvePath being unable to render vertices
+   * @return {THREE.Vector2[]} array of two-dimensional vertices
+   */
+  getVertices = () => {
+    const points = Constants.WebGL.Ellipse.POINTS;
+    const path = new THREE.Path(this.ellipse.getPoints(points));
+    const geometry = path.createPointsGeometry(points);
+
+    path.add(this.ellipse);
+
+    return geometry.vertices;
   }
 
   /**
@@ -80,7 +96,7 @@ export default class Ellipse {
    * @param {Object} periapses - {lastPeriapsis: Number, nextPeriapsis: Number}
    * @returns {Vector3} current position
    */
-  getPosition = (time, periapses) => {
+  getPosition = (time, periapses, name) => {
     const percent = Physics.ellipticPercent(
       this.eccentricity, time, periapses
     );

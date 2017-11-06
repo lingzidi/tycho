@@ -24,7 +24,7 @@ describe('Physics Service', () => {
       const result = Physics.eccentricAnomaly(eccentricity, time, periapses);
 
       expect(typeof result).toBe('number');
-      expect(result).toEqual(6.283185307005053);
+      expect(result).toEqual(3.162141838892115);
     });
 
     it('should calculate eccentric anomaly with E = π, if above or equal to eccentricity threshold', () => {
@@ -32,7 +32,7 @@ describe('Physics Service', () => {
       const result = Physics.eccentricAnomaly(eccentricity, time, periapses);
 
       expect(typeof result).toBe('number');
-      expect(result).toEqual(6.283185306394185);
+      expect(result).toEqual(3.154150555403371);
     });
   });
 
@@ -93,7 +93,7 @@ describe('Physics Service', () => {
       const result = Physics.ellipticPercent(eccentricity, time, periapses);
 
       expect(typeof result).toBe('number');
-      expect(result).toEqual(0.9999999999617267);
+      expect(result).toEqual(0.5024478586268485);
     });
   });
 

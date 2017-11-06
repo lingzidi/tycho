@@ -1,4 +1,4 @@
-import {EllipseCurve, Path, Geometry, Vector3} from 'three';
+import {EllipseCurve, CurvePath, Geometry, Vector3} from 'three';
 import Ellipse from '../Ellipse';
 import Scale from '../Scale';
 import data from './__fixtures__/orbitals.json';
@@ -33,7 +33,7 @@ describe('Ellipse', () => {
 
     it('should set the path property to a new instance of Path', () => {
       expect(ellipse).toHaveProperty('path');
-      expect(ellipse.path).toBeInstanceOf(Path);
+      expect(ellipse.path).toBeInstanceOf(CurvePath);
     });
 
     it('should set the geometry property to the path points geometry', () => {
@@ -69,7 +69,7 @@ describe('Ellipse', () => {
   describe('getPath()', () => {
     it('should return an instance of Path', () => {
       const result = ellipse.getPath();
-      expect(result).toBeInstanceOf(Path);
+      expect(result).toBeInstanceOf(CurvePath);
     });
   });
 

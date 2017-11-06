@@ -47,16 +47,6 @@ describe('Camera Container', () => {
       cameraContainer.controls = new Controls(new Camera());
     });
 
-    describe('componentDidMount()', () => {
-      it('should initialize a new instance of controls', () => {
-        cameraContainer.refs = {camera: new Camera()};
-        cameraContainer.componentDidMount();
-
-        expect(cameraContainer).toHaveProperty('controls');
-        expect(cameraContainer.controls).toBeInstanceOf(Controls);
-      });
-    });
-
     describe('componentWillUnmount()', () => {
       beforeEach(() => {
         const camera = new Camera();

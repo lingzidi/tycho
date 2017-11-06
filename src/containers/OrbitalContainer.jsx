@@ -26,8 +26,13 @@ export class OrbitalContainer extends React.Component {
     this.state = {};
     this.ellipse = new Ellipse(this.props);
     this.setGroupRotations(this.props);
-    this.setBodyState(this.props, this.ellipse);
     this.setPathOpacity();
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.time !== nextProps.time) {
+      this.setBodyState(this.props, this.ellipse);
+    }
   }
 
   setPathOpacity = (active) => {
@@ -65,15 +70,17 @@ export class OrbitalContainer extends React.Component {
   render() {
     return (
       <Orbital
+        {...this.props}
         eclipticGroupRotation={this.state.eclipticGroupRotation}
         orbitalGroupRotation={this.state.orbitalGroupRotation}
-        pathVertices={this.ellipse.geometry.vertices}
+        pathVertices={this.ellipse.getVertices()}
         bodyPosition={this.state.bodyPosition}
         bodyRotation={this.state.bodyRotation}
         bodyRadius={this.state.bodyRadius}
         pathOpacity={this.state.pathOpacity}
         atmosphere={this.props.atmosphere}
         label={this.getLabel()}
+        ellipse={this.ellipse}
         id={this.props.id}>
         {this.props.children}
       </Orbital>

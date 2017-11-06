@@ -3,10 +3,12 @@ import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import data from './__fixtures__/orbitals.json';
 import {OrbitalContainer} from '../OrbitalContainer';
+import OrbitalService from '../../services/OrbitalService';
 import {Orbital} from '../../components/Orbital';
 import Ellipse from '../../utils/Ellipse';
 import Label from '../../utils/Label';
 import Service from '../../services/OrbitalService';
+import Constants from '../../constants';
 
 jest.mock('../../utils/Label', () => {
   return function() {
@@ -56,13 +58,21 @@ describe('Orbital Container', () => {
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props);
     });
+  });
 
-    it('should update the present body position and rotation', () => {
+  describe('componentWillReceiveProps()', () => {
+    it('should call setBodyState() if the time param has changed', () => {
+      orbitalContainer.setBodyState = jest.fn();
+
+      const time = 1;
+      const nextProps = {time: 2};
       const spy = jest.spyOn(orbitalContainer, 'setBodyState');
 
-      orbitalContainer.componentWillMount();
+      orbitalContainer.props = {time};
+      orbitalContainer.componentWillReceiveProps(nextProps);
       
       expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props, orbitalContainer.ellipse);
     });
   });
@@ -72,14 +82,14 @@ describe('Orbital Container', () => {
       orbitalContainer.setPathOpacity(true);
 
       expect(orbitalContainer.state).toHaveProperty('pathOpacity');
-      expect(orbitalContainer.state.pathOpacity).toEqual(1);
+      expect(orbitalContainer.state.pathOpacity).toEqual(Constants.UI.HOVER_OPACITY_ON);
     });
 
     it('should set the pathOpacity to 0.2 in local state when active = false', () => {
       orbitalContainer.setPathOpacity(false);
 
       expect(orbitalContainer.state).toHaveProperty('pathOpacity');
-      expect(orbitalContainer.state.pathOpacity).toEqual(0.2);
+      expect(orbitalContainer.state.pathOpacity).toEqual(Constants.UI.HOVER_OPACITY_OFF);
     });
   });
 
@@ -93,8 +103,12 @@ describe('Orbital Container', () => {
   });
 
   describe('setBodyState()', () => {
+    beforeEach(() => {
+      OrbitalService.getBodyPosition = jest.fn();
+    });
+
     it('should set the present body position, rotation, and radius', () => {
-      orbitalContainer.setGroupRotations(orbitalContainer.props);
+      orbitalContainer.setBodyState(orbitalContainer.props);
 
       expect(orbitalContainer.state).toHaveProperty('bodyPosition');
       expect(orbitalContainer.state).toHaveProperty('bodyRotation');

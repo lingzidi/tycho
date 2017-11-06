@@ -38,10 +38,6 @@ export default class Scene extends React.Component {
     ));
   }
 
-  componentDidMount = () => {
-    this.refs.sun.up.set(0,0,1);
-  }
-
   render() {
     return (
       <group>

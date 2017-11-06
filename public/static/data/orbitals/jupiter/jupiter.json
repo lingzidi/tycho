@@ -1,13 +1,13 @@
 {
-  "name": "Europa",
+  "name": "Jupiter",
   "albedo": 0.52,
   "sidereal": 1234,
   "radius": 69911,
-  "markdown": "europa.md",
+  "markdown": "jupiter.md",
   "mass": 1.8986e+27,
   "centralMass": 1.989e+30,
   "axialTilt": 3.13,
-  "inclination": 6.09,
+  "inclination": 1.303,
   "atmosphere": 9996148,
   "satellites": [
     "io",

@@ -25,4 +25,4 @@ export const WHEEL_DELTA_DIVISOR = 100000;
 
 export const HOVER_OPACITY_ON = 1;
 
-export const HOVER_OPACITY_OFF = 0.2;
+export const HOVER_OPACITY_OFF = 0.7;

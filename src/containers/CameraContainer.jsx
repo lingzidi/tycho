@@ -18,10 +18,6 @@ export default class CameraContainer extends React.Component {
     orbitalData: PropTypes.array
   }
 
-  componentDidMount = () => {
-    this.refs.camera.up.set(0, 0, 1);
-  }
-
   componentWillUnmount = () => {
     this.controls.dispose();
     delete this.controls;

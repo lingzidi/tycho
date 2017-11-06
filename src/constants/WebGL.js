@@ -8,9 +8,13 @@ export const PLANET_SIZE_SCALE = 1;
 
 export const UNIT_SCALE = 1000000;
 
-export const ELLIPSE_CURVE_POINTS = 500;
+export const SKYBOX_RADIUS = 15000;
 
-export const SKYBOX_RADIUS = 700;
+export const Ellipse = {
+  POINTS: 512,
+  START: -Math.PI / 2,
+  END: 3 * Math.PI / 2
+};
 
 export const Tween = {
   FAST: 1000,
@@ -26,12 +30,12 @@ export const Zoom = {
 
 export const Camera = {
   NEAR: 0.001,
-  FAR: 10000,
+  FAR: 13000,
   FOV: 50,
-  X: 300,
-  Y: 300,
-  Z: 300,
-  MAX_DISTANCE: 500,
+  X: 400,
+  Y: 400,
+  Z: 400,
+  MAX_DISTANCE: 12000,
   MIN_DISTANCE: 0,
   SATELLITE_LABEL_RANGE: 7
 };

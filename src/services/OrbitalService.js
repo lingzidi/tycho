@@ -4,33 +4,41 @@ import Scale from '../utils/Scale';
 import Constants from '../constants';
 
 export default class OrbitalService {
+
+  /**
+   * Ascension of the ecliptic plane.
+   * @type {Number}
+   */
+  static ASCENSION = 90
   
   /**
-   * Calculates the Eulerian vector of the ecliptic group
+   * Calculates the Eulerian rotation set of the ecliptic group.
    *
    * @param {Object} props - OrbitalContainer props
-   * @param {Number} props.inclination - angle of inclination, in degrees
    * @param {Number} props.longitudeOfAscendingNode - longitude of ascending node, in degrees
-   * @param {Boolean} props.isSatellite - orbital parity
-   * @returns {THREE.Euler} Eulerian vector
+   * @returns {THREE.Euler} Eulerian rotation set
    */
-  static getEclipticGroupRotation = ({inclination, longitudeOfAscendingNode, isSatellite}) => {
+  static getEclipticGroupRotation = ({longitudeOfAscendingNode, isSatellite}) => {
+    const ascension = isSatellite ? 0 : -OrbitalService.ASCENSION;
+
     return OrbitalService.toEuler({
-      x: inclination,
-      z: longitudeOfAscendingNode
+      x: ascension,
+      z: OrbitalService.ASCENSION + longitudeOfAscendingNode
     });
   }
 
   /**
-   * Calculates the Eulerian vector of the orbital group
+   * Calculates the Eulerian rotation set of the orbital group.
    *
    * @param {Object} props - OrbitalContainer props
+   * @param {Number} props.inclination - inclination, in degrees
    * @param {Number} props.argumentOfPeriapsis - argument of periapsis, in degrees
-   * @returns {THREE.Euler} Eulerian vector
+   * @returns {THREE.Euler} Eulerian rotation set
    */
-  static getOrbitalGroupRotation = ({argumentOfPeriapsis}) => {
+  static getOrbitalGroupRotation = ({inclination, argumentOfPeriapsis}) => {
     return OrbitalService.toEuler({
-      z: argumentOfPeriapsis
+      x: inclination,
+      z: OrbitalService.ASCENSION + argumentOfPeriapsis
     });
   }
 
@@ -45,8 +53,8 @@ export default class OrbitalService {
    */
   static getBodyRotation = ({axialTilt, sidereal, time}) => {
     return OrbitalService.toEuler({
-      x: Math.abs(90 - axialTilt),
-      y: OrbitalService.getRotationCompleted(sidereal, time)
+      x: axialTilt,
+      z: OrbitalService.getRotationCompleted(sidereal, time)
     });
   }
 
@@ -55,11 +63,11 @@ export default class OrbitalService {
    *
    * @note All rotation periods are w.r.t. to one Earth day (not sidereal days!)
    * @param {Number} sidereal - apparent sidereal rotation of orbital (in sidereal days)
-   * @param {Number} time - UNIX timestamp at position (in milliseconds)
+   * @param {Number} time - UNIX timestamp at position (in seconds)
    * @returns {Number} degree of rotation [0,360]
    */
   static getRotationCompleted = (sidereal, time) => {
-    const unixTimeToDays = time / 1000 / 60 / 60 / 24; // millisecs to days
+    const unixTimeToDays = time / 60 / 60 / 24; // seconds to days
     const percentRotated = (unixTimeToDays / sidereal) % 1;
     const degreesRotated = percentRotated * 360;
     
@@ -110,7 +118,7 @@ export default class OrbitalService {
    * @param {THREE.Camera} camera - active renderer camera
    * @param {THREE.Matrix4} matrix - projection matrix
    * @param {THREE.Vector3} vector - vector to check if in frustum
-   * @return {Boolean} whether or not vector is in frustum
+   * @returns {Boolean} whether or not vector is in frustum
    */
   static isInCameraView = (camera, matrix, vector) => {
     const frustum = new THREE.Frustum();
@@ -172,17 +180,22 @@ export default class OrbitalService {
   }
 
   /**
-   * Converts a standard 3D vector to an Eulerian one.
+   * Converts a rotational vector to an Eulerian rotation set.
    *
-   * @param {Object} coords - coordinates
-   * @param {Number} [coords.x = 0] - x coordinate
-   * @param {Number} [coords.y = 0] - y coordinate
-   * @param {Number} [coords.z = 0] - z coordinate
-   * @returns {THREE.Euler} Eulerian vector
+   * @param {Object} coords - rotations
+   * @param {Number} [coords.x = 0] - x rotation, in degrees
+   * @param {Number} [coords.y = 0] - y rotation, in degrees
+   * @param {Number} [coords.z = 0] - z rotation, in degrees
+   * @returns {THREE.Euler} Eulerian rotation set
    */
   static toEuler = ({x, y, z}) => {
-    const toRad = val => val ? Math2.toRadians(val) : 0;
-    return new THREE.Euler(toRad(x), toRad(y), toRad(z));
+    const rad = (x) => {
+      if (x) {
+        return Math2.toRadians(x);
+      }
+      return 0;
+    }
+    return new THREE.Euler(rad(x), rad(y), rad(z))//, 'ZYX');
   }
 
   /**

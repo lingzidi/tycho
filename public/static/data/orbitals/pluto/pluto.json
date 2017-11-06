@@ -7,7 +7,7 @@
   "mass": 1.303e+22,
   "centralMass": 1.989e+30,
   "axialTilt": 119.591,
-  "inclination": 11.88,
+  "inclination": 17.151394,
   "atmosphere": 13872777,
   "satellites": [
     "charon"
@@ -20,8 +20,8 @@
   "argPeriapsis": 113.7723827932027,
   "eccentricity": 0.2490248088194554,
   "longAscNode": 110.3010209840363,
-  "semimajor": 5907467183.4006595612,
-  "semiminor": 5721364871.7127380371,
+  "semimajor": 4437000000,
+  "semiminor": 4162326398,
   "periapses": {
     "last": 620975940000,
     "next": 8449136575642.012
