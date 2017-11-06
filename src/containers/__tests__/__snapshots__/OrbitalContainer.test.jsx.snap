@@ -47,7 +47,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
           "version": 4.5,
         },
         "type": "Geometry",
-        "uuid": "DB11CCE3-43FB-4ECB-AA14-DBA383E02AE2",
+        "uuid": "FE97297C-E2AB-43FF-836A-BC858A11B431",
       },
       "getEllipseCurve": [Function],
       "getGeometry": [Function],

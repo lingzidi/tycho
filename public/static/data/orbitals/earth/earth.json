@@ -17,9 +17,9 @@
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
   },
-  "argPeriapsis": 321.8847237861644,
+  "argumentOfPeriapsis": 114.20763,
   "eccentricity": 0.01355360061112275,
-  "longAscNode": 122.8729298454188,
+  "longitudeOfAscendingNode": 348.73936,
   "semimajor": 150759239.957000494,
   "semiminor": 150745392.07806867361,
   "periapses": {

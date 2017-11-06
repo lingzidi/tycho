@@ -1,0 +1,21 @@
+{
+  "name": "Halley's Comet",
+  "albedo": 0.04,
+  "sidereal": 0,
+  "radius": 15,
+  "markdown": "halley.md",
+  "mass":2.2e+14,
+  "centralMass": 1.989e+30,
+  "axialTilt": 0,
+  "inclination": 162.262691,
+  "atmosphere": 5804449,
+  "argumentOfPeriapsis": 111.3324851045177,
+  "eccentricity": 0.967,
+  "longitudeOfAscendingNode": 58.42008097656843,
+  "semimajor": 2667330000,
+  "semiminor": 679572662,
+  "periapses": {
+    "last": 508291200000,
+    "next": 2889734400000
+  }
+}

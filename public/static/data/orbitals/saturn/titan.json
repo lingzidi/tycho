@@ -13,9 +13,9 @@
     "nasaBarycenterCode": "6",
     "revolutionOrder": "d"
   },
-  "argPeriapsis": 173.4209524500883,
+  "argumentOfPeriapsis": 173.4209524500883,
   "eccentricity": 0.02863073196285055,
-  "longAscNode": 169.0962668018458,
+  "longitudeOfAscendingNode": 169.0962668018458,
   "semimajor": 1221644.204661192,
   "semiminor": 1221143.3996418167,
   "periapses": {
