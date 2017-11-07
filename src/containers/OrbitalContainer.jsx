@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactAnimationFrame from 'react-animation-frame';
 import PropTypes from 'prop-types';
 import Ellipse from '../utils/Ellipse';
 import Label from '../utils/Label';
@@ -10,12 +9,12 @@ export class OrbitalContainer extends React.Component {
 
   static propTypes = {
     inclination: PropTypes.number.isRequired,
-    longAscNode: PropTypes.number.isRequired,
-    argPeriapsis: PropTypes.number.isRequired,
-    arcRotate: PropTypes.number.isRequired,
+    longitudeOfAscendingNode: PropTypes.number.isRequired,
+    argumentOfPeriapsis: PropTypes.number.isRequired,
     radius: PropTypes.number.isRequired,
     axialTilt: PropTypes.number.isRequired,
     atmosphere: PropTypes.number,
+    sidereal: PropTypes.number,
     id: PropTypes.string.isRequired,
     time: PropTypes.number,
     isSatellite: PropTypes.bool,
@@ -26,6 +25,7 @@ export class OrbitalContainer extends React.Component {
     this.state = {};
     this.ellipse = new Ellipse(this.props);
     this.setGroupRotations(this.props);
+    this.setBodyState(this.props, this.ellipse);
     this.setPathOpacity();
   }
 
@@ -70,7 +70,6 @@ export class OrbitalContainer extends React.Component {
   render() {
     return (
       <Orbital
-        {...this.props}
         eclipticGroupRotation={this.state.eclipticGroupRotation}
         orbitalGroupRotation={this.state.orbitalGroupRotation}
         pathVertices={this.ellipse.getVertices()}
@@ -79,11 +78,10 @@ export class OrbitalContainer extends React.Component {
         bodyRadius={this.state.bodyRadius}
         pathOpacity={this.state.pathOpacity}
         atmosphere={this.props.atmosphere}
+        children={this.props.children}
         label={this.getLabel()}
-        ellipse={this.ellipse}
-        id={this.props.id}>
-        {this.props.children}
-      </Orbital>
+        id={this.props.id}
+      />
     );
   }
 }

@@ -27,14 +27,13 @@ exports[`Scene Container render() should render the scene container with the cam
           Array [
             Object {
               "GM": 6836529,
-              "arcRotate": 45.0411,
-              "argPeriapsis": 114.20763,
+              "argumentOfPeriapsis": 114.20763,
               "atmosphere": 16711680,
               "axialTilt": 23.26,
               "eccentricity": 0.01671123,
               "id": "dummyOuter",
               "inclination": 1.57869,
-              "longAscNode": 348.73936,
+              "longitudeOfAscendingNode": 348.73936,
               "name": "Dummy Outer",
               "periapses": Object {
                 "last": 1136430000,
@@ -50,14 +49,13 @@ exports[`Scene Container render() should render the scene container with the cam
             },
             Object {
               "GM": 6836529,
-              "arcRotate": 45.0411,
-              "argPeriapsis": 114.20763,
+              "argumentOfPeriapsis": 114.20763,
               "atmosphere": 16711680,
               "axialTilt": 23.26,
               "eccentricity": 0.01671123,
               "id": "dummyParent",
               "inclination": 15.57869,
-              "longAscNode": 348.73936,
+              "longitudeOfAscendingNode": 348.73936,
               "name": "Dummy Planet",
               "periapses": Object {
                 "last": 1156430000,
@@ -71,14 +69,13 @@ exports[`Scene Container render() should render the scene container with the cam
               "satellites": Array [
                 Object {
                   "GM": 6836529,
-                  "arcRotate": 15.0411,
-                  "argPeriapsis": 114.20763,
+                  "argumentOfPeriapsis": 114.20763,
                   "atmosphere": 16711680,
                   "axialTilt": 23.26,
                   "eccentricity": 0.01671123,
                   "id": "dummyChild",
                   "inclination": 1.57869,
-                  "longAscNode": 348.73936,
+                  "longitudeOfAscendingNode": 348.73936,
                   "name": "Dummy Satellite",
                   "periapses": Object {
                     "last": 1166430000,
@@ -128,14 +125,13 @@ exports[`Scene Container render() should render the scene container without the 
           Array [
             Object {
               "GM": 6836529,
-              "arcRotate": 45.0411,
-              "argPeriapsis": 114.20763,
+              "argumentOfPeriapsis": 114.20763,
               "atmosphere": 16711680,
               "axialTilt": 23.26,
               "eccentricity": 0.01671123,
               "id": "dummyOuter",
               "inclination": 1.57869,
-              "longAscNode": 348.73936,
+              "longitudeOfAscendingNode": 348.73936,
               "name": "Dummy Outer",
               "periapses": Object {
                 "last": 1136430000,
@@ -151,14 +147,13 @@ exports[`Scene Container render() should render the scene container without the 
             },
             Object {
               "GM": 6836529,
-              "arcRotate": 45.0411,
-              "argPeriapsis": 114.20763,
+              "argumentOfPeriapsis": 114.20763,
               "atmosphere": 16711680,
               "axialTilt": 23.26,
               "eccentricity": 0.01671123,
               "id": "dummyParent",
               "inclination": 15.57869,
-              "longAscNode": 348.73936,
+              "longitudeOfAscendingNode": 348.73936,
               "name": "Dummy Planet",
               "periapses": Object {
                 "last": 1156430000,
@@ -172,14 +167,13 @@ exports[`Scene Container render() should render the scene container without the 
               "satellites": Array [
                 Object {
                   "GM": 6836529,
-                  "arcRotate": 15.0411,
-                  "argPeriapsis": 114.20763,
+                  "argumentOfPeriapsis": 114.20763,
                   "atmosphere": 16711680,
                   "axialTilt": 23.26,
                   "eccentricity": 0.01671123,
                   "id": "dummyChild",
                   "inclination": 1.57869,
-                  "longAscNode": 348.73936,
+                  "longitudeOfAscendingNode": 348.73936,
                   "name": "Dummy Satellite",
                   "periapses": Object {
                     "last": 1166430000,

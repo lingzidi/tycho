@@ -6,16 +6,15 @@
 	"semimajor": 249598261,
 	"semiminor": 249556483,
 	"radius": 1267800,
-	"arcRotate": 45.0411,
 	"inclination": 1.57869,
-	"argPeriapsis": 114.20763,
+	"argumentOfPeriapsis": 114.20763,
 	"periapses": {
 		"last": 1136430000,
 		"next": 1167987600
 	},
 	"eccentricity": 0.01671123,
-	"longAscNode": 348.73936,
-	"atmosphereColor": 0,
+	"longitudeOfAscendingNode": 348.73936,
+	"atmosphere": 16711680,
 	"ring": {
 		"innerRadius": 6630,
 		"outerRadius": 950000
@@ -28,16 +27,15 @@
 	"semimajor": 149598261,
 	"semiminor": 149556483,
 	"radius": 637800,
-	"arcRotate": 45.0411,
 	"inclination": 15.57869,
-	"argPeriapsis": 114.20763,
+	"argumentOfPeriapsis": 114.20763,
 	"periapses": {
 		"last": 1156430000,
 		"next": 1167987600
 	},
 	"eccentricity": 0.01671123,
-	"longAscNode": 348.73936,
-	"atmosphereColor": 0,
+	"longitudeOfAscendingNode": 348.73936,
+	"atmosphere": 16711680,
 	"ring": {
 		"innerRadius": 6630,
 		"outerRadius": 950000
@@ -50,15 +48,14 @@
 		"semimajor": 149598261,
 		"semiminor": 149556483,
 		"radius": 637800,
-		"arcRotate": 15.0411,
 		"inclination": 1.57869,
-		"argPeriapsis": 114.20763,
+		"argumentOfPeriapsis": 114.20763,
 		"periapses": {
 			"last": 1166430000,
 			"next": 1167987600
 		},
 		"eccentricity": 0.01671123,
-		"longAscNode": 348.73936,
-		"atmosphereColor": 16711680
+		"longitudeOfAscendingNode": 348.73936,
+		"atmosphere": 16711680
 	}]
 }]

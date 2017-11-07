@@ -62,10 +62,34 @@ export class SceneContainer extends React.Component {
     this.domElement = domElement;
   }
 
+  /**
+   * Renders a new Scene.
+   *
+   * @param {Object} refs
+   * @param {Camera} refs.camera - THREE.Camera component instance
+   * @returns {Scene} instance of scene component
+   */
+  renderScene = ({camera}) => {
+    return (
+      <Scene
+        time={this.props.time}
+        orbitalData={this.props.orbitalData}
+        scale={this.props.scale}
+        action={this.props.action}
+        children={this.props.children}
+        highlightedOrbital={this.props.highlightedOrbital}
+        cameraMatrix={camera.position.clone()}
+        camera={camera}
+        domEvents={DomEvents(camera)}
+      />
+    );
+  }
+
   render() {
     const {width, height} = this.props;
     const {camera} = this.refs;
 
+    // TODO: move parent div to separate container named "SyntheticEventsContainer"
     return (
       <div
         onWheel={this.changeZoom}
@@ -91,18 +115,9 @@ export class SceneContainer extends React.Component {
               isAutoOrbitEnabled={this.props.isAutoOrbitEnabled}
               orbitalData={this.props.orbitalData}
               domElement={this.domElement}
-              ref="camera" />
-            {camera && <Scene
-              time={this.props.time}
-              camera={camera.refs.camera}
-              orbitalData={this.props.orbitalData}
-              scale={this.props.scale}
-              action={this.props.action}
-              highlightedOrbital={this.props.highlightedOrbital}
-              cameraMatrix={camera.refs.camera.position.clone()}
-              domEvents={DomEvents(camera.refs.camera)}>
-              {this.props.children}
-            </Scene>}
+              ref="camera"
+            />
+            {camera && this.renderScene(camera.refs)}
           </scene>
         </React3>
       </div>
@@ -118,7 +133,6 @@ export default connect(
     'label.targetName',
     'label.highlightedOrbital',
     'tour.isAutoOrbitEnabled',
-    'animation.positions',
     'animation.time',
     'data.orbitalData'
   ),

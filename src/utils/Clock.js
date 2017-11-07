@@ -64,7 +64,7 @@ export default class Clock {
       this.stopTween();
       this.offset = this.getTime();
       this.scale = scale;
-      this.clock.start();
+      this.start();
     }
   }
 
@@ -91,7 +91,7 @@ export default class Clock {
     if (this.tween) {
       this.tween.stop();
       this.offset = this.destinationOffset;
-      this.clock.start();
+      this.start();
       delete this.tween;
     }
   }

@@ -7,7 +7,6 @@ export default class Scene extends React.Component {
 
   static propTypes = {
     orbitalData: PropTypes.array.isRequired,
-    updatePosition: PropTypes.func.isRequired,
     time: PropTypes.number,
     camera: PropTypes.object,
     scale: PropTypes.number,
@@ -28,7 +27,6 @@ export default class Scene extends React.Component {
         time={this.props.time}
         camera={this.props.camera}
         domEvents={this.props.domEvents}
-        updatePosition={this.props.updatePosition}
         active={this.isActive(orbital.id)}
         isSatellite={isSatellite}>
         {orbital.satellites && this.getOrbitalElements(

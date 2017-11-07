@@ -20,13 +20,27 @@ export class AppContainer extends React.Component {
   componentWillReceiveProps = (nextProps) => {
     this.maybeUpdateOffset(nextProps.timeOffset);
   }
+  
+  onAnimate = () => {
+    this.maybeUpdateTime();
+    this.clock.speed(this.props.speed);
+    this.clock.update();
+  }
 
+  /**
+   * Updates the offset of the clock instance if not paused.
+   * 
+   * @param  {Number} timeOffset - offset to update, in UNIX time (ms)
+   */
   maybeUpdateOffset = (timeOffset) => {
     if (timeOffset && !this.clock.paused) {
       this.clock.setOffset(timeOffset);
     }
   }
 
+  /**
+   * Updates the global time with clock time, if changed.
+   */
   maybeUpdateTime = () => {
     if (this.clock.getTime() !== this.lastTime) {
       this.lastTime = this.clock.getTime();
@@ -34,26 +48,11 @@ export class AppContainer extends React.Component {
     }
   }
 
-  onAnimate = () => {
-    // this.props.action.setTime(this.clock.getTime());
-    this.maybeUpdateTime();
-    this.clock.speed(this.props.speed);
-    this.clock.update();
-  }
-
-  updatePosition = (position, id) => {
-    // const old = this.state.positions;
-    // const positions = Object.assign(old, {
-    //   [id]: position
-    // });
-
-    // this.setState({positions});
-  }
-
   render() {
     const {orbitalData, pageText} = this.props;
+
     if (orbitalData && pageText) {
-      return <App onAnimate={this.onAnimate} positions={this.state.positions} updatePosition={this.updatePosition} />
+      return <App onAnimate={this.onAnimate} />
     }
     return <SplashScreen />
   }

@@ -75,6 +75,19 @@ describe('Orbital Container', () => {
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props, orbitalContainer.ellipse);
     });
+
+    it('should not call setBodyState() if the time param has not changed', () => {
+      orbitalContainer.setBodyState = jest.fn();
+
+      const time = 1;
+      const nextProps = {time};
+      const spy = jest.spyOn(orbitalContainer, 'setBodyState');
+
+      orbitalContainer.props = {time};
+      orbitalContainer.componentWillReceiveProps(nextProps);
+      
+      expect(spy).not.toHaveBeenCalled();
+    });
   });
 
   describe('setPathOpacity()', () => {
@@ -104,7 +117,7 @@ describe('Orbital Container', () => {
 
   describe('setBodyState()', () => {
     beforeEach(() => {
-      OrbitalService.getBodyPosition = jest.fn();
+      OrbitalService.getBodyPosition = () => ({});
     });
 
     it('should set the present body position, rotation, and radius', () => {

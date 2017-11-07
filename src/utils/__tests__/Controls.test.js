@@ -66,6 +66,17 @@ describe('Controls', () => {
       expect(controls.camera.position).toBeInstanceOf(Vector3);
       expect(controls.camera.position).toEqual(zoomVector);
     });
+
+    it('should set the camera position vector to the smallest possible zoom vector', () => {
+      const zoomVector = new Vector3(0, 0, 0);
+
+      controls.minDistance = 1;
+      controls.getZoomVector = () => zoomVector;
+      controls.pan(0, true);
+
+      expect(controls.camera.position).toBeInstanceOf(Vector3);
+      expect(controls.camera.position).toEqual(zoomVector);
+    });
   });
 
   describe('getZoomVector()', () => {

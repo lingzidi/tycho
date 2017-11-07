@@ -17,9 +17,8 @@ describe('Scene Container', () => {
     component = shallow(
       <SceneContainer
         orbitalData={data}
-        updateScreenPosition={() => {}}
-        onAnimate={() => {}}
         action={{setPosition: jest.fn()}}
+        onAnimate={jest.fn()}
         width={500}
         height={300}
         time={1}
@@ -136,7 +135,7 @@ describe('Scene Container', () => {
     });
 
     it('should render the scene container with the camera', () => {
-      sceneContainer.camera = new Camera();
+      sceneContainer.refs = {camera};
       sceneContainer.render();
       expect(toJson(component)).toMatchSnapshot();
     });
@@ -156,4 +155,3 @@ const camera = {
     }
   }
 };
-

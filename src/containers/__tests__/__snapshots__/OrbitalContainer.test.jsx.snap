@@ -2,82 +2,26 @@
 
 exports[`Orbital Container render() should render the OrbitalContainer successfully 1`] = `
 <Orbital
-  GM={6836529}
-  action={
-    Object {
-      "setActiveOrbital": [Function],
+  atmosphere={16711680}
+  bodyPosition={Object {}}
+  bodyRadius={1.2678}
+  bodyRotation={
+    Euler {
+      "_order": "XYZ",
+      "_x": 0.4059635840138811,
+      "_y": 0,
+      "_z": 0,
     }
   }
-  arcRotate={45.0411}
-  argPeriapsis={114.20763}
-  atmosphere={16711680}
-  axialTilt={23.26}
-  eccentricity={0.01671123}
   eclipticGroupRotation={
     Euler {
       "_order": "XYZ",
       "_x": -1.5707963267948966,
       "_y": 0,
-      "_z": 0,
-    }
-  }
-  ellipse={
-    Ellipse {
-      "eccentricity": 0.01671123,
-      "ellipse": EllipseCurve {
-        "aClockwise": undefined,
-        "aEndAngle": 4.71238898038469,
-        "aRotation": 0,
-        "aStartAngle": -1.5707963267948966,
-        "aX": 0,
-        "aY": 4.566583722526405,
-        "arcLengthDivisions": 200,
-        "xRadius": 249.556483,
-        "yRadius": 249.598261,
-      },
-      "geometry": Object {
-        "data": Object {
-          "faces": Array [],
-          "normals": Array [],
-          "vertices": Array [],
-        },
-        "metadata": Object {
-          "generator": "Geometry.toJSON",
-          "type": "Geometry",
-          "version": 4.5,
-        },
-        "type": "Geometry",
-        "uuid": "FE97297C-E2AB-43FF-836A-BC858A11B431",
-      },
-      "getEllipseCurve": [Function],
-      "getGeometry": [Function],
-      "getPath": [Function],
-      "getPosition": [Function],
-      "getVertices": [Function],
-      "path": CurvePath {
-        "arcLengthDivisions": 200,
-        "autoClose": false,
-        "curves": Array [
-          EllipseCurve {
-            "aClockwise": undefined,
-            "aEndAngle": 4.71238898038469,
-            "aRotation": 0,
-            "aStartAngle": -1.5707963267948966,
-            "aX": 0,
-            "aY": 4.566583722526405,
-            "arcLengthDivisions": 200,
-            "xRadius": 249.556483,
-            "yRadius": 249.598261,
-          },
-        ],
-      },
-      "render": [Function],
-      "semimajor": 249.598261,
-      "semiminor": 249.556483,
+      "_z": 7.6574463900927086,
     }
   }
   id="dummyOuter"
-  inclination={1.57869}
   label={
      {
       "onClick": [Function],
@@ -85,14 +29,12 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       "onMouseOut": [Function],
     }
   }
-  longAscNode={348.73936}
-  name="Dummy Outer"
   orbitalGroupRotation={
     Euler {
       "_order": "XYZ",
       "_x": 0.02755333836830928,
       "_y": 0,
-      "_z": 0,
+      "_z": 3.564095501194348,
     }
   }
   pathOpacity={0.7}
@@ -2665,21 +2607,5 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
     ]
   }
-  periapses={
-    Object {
-      "last": 1136430000,
-      "next": 1167987600,
-    }
-  }
-  radius={1267800}
-  ring={
-    Object {
-      "innerRadius": 6630,
-      "outerRadius": 950000,
-    }
-  }
-  semimajor={249598261}
-  semiminor={249556483}
-  time={1}
 />
 `;

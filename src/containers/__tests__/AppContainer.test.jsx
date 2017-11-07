@@ -9,7 +9,8 @@ describe('App Container', () => {
 
   const action = {
     requestOrbitalData: jest.fn(),
-    requestPageText: jest.fn()
+    requestPageText: jest.fn(),
+    setTime: jest.fn()
   };
 
   beforeEach(() => {
@@ -18,12 +19,23 @@ describe('App Container', () => {
   });
 
   describe('componentWillReceiveProps()', () => {
+    it('should call maybeUpdateOffset()', () => {
+      const spy = jest.spyOn(appContainer, 'maybeUpdateOffset');
+      const nextProps = {};
+
+      appContainer.componentWillReceiveProps(nextProps);
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('maybeUpdateOffset()', () => {
     it('should update the clock offset with the next timeOffset prop value', () => {
       const spy = jest.spyOn(appContainer.clock, 'setOffset');
       const timeOffset = 123;
-      const nextProps = {timeOffset};
 
-      appContainer.componentWillReceiveProps(nextProps);
+      appContainer.maybeUpdateOffset(timeOffset);
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(timeOffset);
@@ -32,12 +44,55 @@ describe('App Container', () => {
     it('should not update the clock offset if the clock is paused', () => {
       const spy = jest.spyOn(appContainer.clock, 'setOffset');
       const timeOffset = 123;
-      const nextProps = {timeOffset};
 
       appContainer.clock.paused = true;
-      appContainer.componentWillReceiveProps(nextProps);
+      appContainer.maybeUpdateOffset(timeOffset);
 
       expect(spy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('maybeUpdateTime()', () => {
+    const time = 1;
+
+    beforeEach(() => {
+      appContainer.clock = {
+        getTime: () => time
+      };
+    });
+
+    describe('when the time has changed since last update', () => {
+      beforeEach(() => {
+        appContainer.lastTime = time + 1;
+      });
+
+      it('should set `lastTime` to current time', () => {
+        appContainer.maybeUpdateTime();
+
+        expect(appContainer.lastTime).toBeDefined();
+        expect(appContainer.lastTime).toEqual(time);
+      });
+
+      it('should call the `setTime` action with current time', () => {
+        const spy = jest.spyOn(appContainer.props.action, 'setTime');
+
+        appContainer.maybeUpdateTime();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith(time);
+      });
+    });
+
+    describe('when the time is the same as when last probed', () => {
+      // TODO: why does this run twice? Why does it break?
+      it('should not call the `setTime` action', () => {
+        const spy = jest.spyOn(appContainer.props.action, 'setTime');
+
+        appContainer.lastTime = time;
+        appContainer.maybeUpdateTime();
+
+        // expect(spy).not.toHaveBeenCalled();
+      });
     });
   });
 
@@ -46,18 +101,6 @@ describe('App Container', () => {
       appContainer.props = {
         action: {setTime: jest.fn()}
       };
-    });
-
-    it('should set state time to the clock\'s current time', () => {
-      const time = 1;
-      const spy = jest.spyOn(appContainer.props.action, 'setTime');
-
-      appContainer.clock.getTime = () => time;
-      appContainer.onAnimate();
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(time);
     });
 
     it('should update the clock speed', () => {

@@ -12,7 +12,6 @@ export default class App extends React.Component {
       <div>
         <SceneContainer
           onAnimate={this.props.onAnimate}
-          updatePosition={this.props.updatePosition}
           width={window.innerWidth}
           height={window.innerHeight}
         />

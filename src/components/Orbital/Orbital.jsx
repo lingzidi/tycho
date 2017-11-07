@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Body from '../Body';
-import Math2 from '../../services/Math2';
 
 export default class Orbital extends React.Component {
 
@@ -16,12 +15,6 @@ export default class Orbital extends React.Component {
     pathOpacity: PropTypes.number,
     label: PropTypes.object,
     id: PropTypes.string.isRequired
-  }
-
-  componentDidMount = () => {
-    // this.refs.ecliptic.rotation.z = Math2.toRadians(this.props.eclipticGroupRotation.z);
-    // this.refs.orbital.rotation.x = Math2.toRadians(this.props.orbitalGroupRotation.x);
-    // this.refs.orbital.rotation.z = Math2.toRadians(this.props.orbitalGroupRotation.z);
   }
 
   render() {

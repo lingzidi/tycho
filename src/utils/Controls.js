@@ -65,7 +65,7 @@ export default class Controls extends OrbitControls(THREE) {
    *
    * @param {Number} percent - percentage of zoom [0,1]
    */
-  pan = (percent) => {
+  pan = (percent, log) => {
     let position = this.camera.position;
     let newVector = this.getZoomVector(position, this.maxDistance * percent);
     let minVector = this.getZoomVector(position, this.minDistance);

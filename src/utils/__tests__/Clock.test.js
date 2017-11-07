@@ -71,13 +71,39 @@ describe('Clock', () => {
   });
   
   describe('speed()', () => {
-    it('should set `scale` to 10^<input>', () => {
+    it('should set `scale` to 10^<input> if changed', () => {
       const input = 5;
+      const scale = 6;
       const clock = new Clock();
+      const spy = jest.spyOn(clock, 'start');
 
+      clock.scale = scale;
       clock.speed(input);
 
       expect(clock.scale).toBe(Math.pow(10, input));
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not change the scale if unchanged', () => {
+      const input = 5;
+      const clock = new Clock();
+      const spy = jest.spyOn(clock, 'start');
+
+      clock.scale = Math.pow(10, input);
+      clock.speed(input);
+
+      expect(clock.scale).toBe(Math.pow(10, input));
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should fallback to an exponent of 0 if param undefined', () => {
+      const clock = new Clock();
+
+      clock.speed();
+
+      expect(clock.scale).toBeDefined();
+      expect(clock.scale).toBe(1);
     });
   });
 

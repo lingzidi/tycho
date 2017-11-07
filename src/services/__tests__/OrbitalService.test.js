@@ -9,22 +9,44 @@ describe('Orbital Service', () => {
   afterEach(() => jest.resetAllMocks());
 
   describe('getEclipticGroupRotation()', () => {
-    const param = {
+    let params = {
       inclination: 10,
-      longitudeOfAscendingNode: 15,
-      odd: false
+      longitudeOfAscendingNode: 15
     };
 
-    it('should return an Eulerian vector', () => {
-      const result = OrbitalService.getEclipticGroupRotation(param);
-      expect(result).toBeInstanceOf(Euler);
+    describe('when the object is not a satellite', () => {
+      beforeEach(() => {
+        params.isSatellite = false;
+      });
+
+      it('should set the x-dimensional rotation to the ascension vector', () => {
+        const result = OrbitalService.getEclipticGroupRotation(params);
+
+        expect(typeof result.x).toBe('number');
+        expect(result.x).toEqual(-Math.PI / 2);
+      });
+
+      it('should return an Eulerian vector', () => {
+        const result = OrbitalService.getEclipticGroupRotation(params);
+        expect(result).toBeInstanceOf(Euler);
+      });
+
+      it('should not set a y-dimensional Eulerian rotation', () => {
+        const result = OrbitalService.getEclipticGroupRotation(params);
+
+        expect(typeof result.y).toBe('number');
+        expect(result.y).toEqual(0);
+      });
     });
 
-    it('should not set a y-dimensional Eulerian rotation', () => {
-      const result = OrbitalService.getEclipticGroupRotation(param);
+    describe('when the object is not a satellite', () => {
+      it('should set the x-dimensional rotation to the ascension vector', () => {
+        params.isSatellite = true;
+        const result = OrbitalService.getEclipticGroupRotation(params);
 
-      expect(typeof result.y).toBe('number');
-      expect(result.y).toEqual(0);
+        expect(typeof result.x).toBe('number');
+        expect(result.x).toEqual(0);
+      });
     });
   });
 
