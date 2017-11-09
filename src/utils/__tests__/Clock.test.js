@@ -1,7 +1,6 @@
 import Clock from '../Clock';
 import moment from 'moment';
 
-
 describe('Clock', () => {
   describe('getOffset()', () => {
     it('should return the offset passed in', () => {

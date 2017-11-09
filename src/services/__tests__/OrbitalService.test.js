@@ -109,12 +109,26 @@ describe('Orbital Service', () => {
   });
 
   describe('getPathOpacity()', () => {
-    it('should return the ON opacity if active', () => {
-      expect(OrbitalService.getPathOpacity(true)).toEqual(Constants.UI.HOVER_OPACITY_ON);
+    it('should set the path opacity to OFF if the highlightedOrbitals is null', () => {
+      const result = OrbitalService.getPathOpacity({id: 'Earth'}, null);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(Constants.UI.HOVER_OPACITY_OFF);
     });
 
-    it('should return the OFF opacity if inactive', () => {
-      expect(OrbitalService.getPathOpacity(false)).toEqual(Constants.UI.HOVER_OPACITY_OFF);
+    it('should set the path opacity to OFF if the list does not contain orbital', () => {
+      const result = OrbitalService.getPathOpacity({id: 'Earth'}, ['Mars']);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(Constants.UI.HOVER_OPACITY_OFF);
+    });
+
+    it('should set the path opacity to ON if the list contains the orbital', () => {
+      const id = 'Earth';
+      const result = OrbitalService.getPathOpacity({id}, [id]);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(Constants.UI.HOVER_OPACITY_ON);
     });
   });
 

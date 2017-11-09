@@ -27,7 +27,9 @@ describe('Orbital Container', () => {
         {...data[0]}
         time={1}
         action={{
-          setActiveOrbital: jest.fn()
+          setActiveOrbital: jest.fn(),
+          addHighlightedOrbital: jest.fn(),
+          removeHighlightedOrbital: jest.fn()
         }}
       />);
 
@@ -61,6 +63,30 @@ describe('Orbital Container', () => {
   });
 
   describe('componentWillReceiveProps()', () => {
+    it('should call maybeUpdateBodyState()', () => {
+      const spy = jest.spyOn(orbitalContainer, 'maybeUpdateBodyState');
+      const nextProps = {};
+
+      orbitalContainer.componentWillReceiveProps(nextProps);
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(nextProps);
+    });
+    
+    it('should call maybeUpdatePathOpacity()', () => {
+      const spy = jest.spyOn(orbitalContainer, 'maybeUpdatePathOpacity');
+      const nextProps = {};
+
+      orbitalContainer.componentWillReceiveProps(nextProps);
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(nextProps);
+    });
+  });
+
+  describe('maybeUpdateBodyState()', () => {
     it('should call setBodyState() if the time param has changed', () => {
       orbitalContainer.setBodyState = jest.fn();
 
@@ -69,7 +95,7 @@ describe('Orbital Container', () => {
       const spy = jest.spyOn(orbitalContainer, 'setBodyState');
 
       orbitalContainer.props = {time};
-      orbitalContainer.componentWillReceiveProps(nextProps);
+      orbitalContainer.maybeUpdateBodyState(nextProps);
       
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
@@ -84,25 +110,51 @@ describe('Orbital Container', () => {
       const spy = jest.spyOn(orbitalContainer, 'setBodyState');
 
       orbitalContainer.props = {time};
-      orbitalContainer.componentWillReceiveProps(nextProps);
+      orbitalContainer.maybeUpdateBodyState(nextProps);
+      
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('maybeUpdatePathOpacity()', () => {
+    it('should call setPathOpacity() if the highlightedOrbitals list has changed', () => {
+      orbitalContainer.setPathOpacity = jest.fn();
+
+      const highlightedOrbitals = ['Mars'];
+      const nextProps = {highlightedOrbitals: ['Earth']};
+      const spy = jest.spyOn(orbitalContainer, 'setPathOpacity');
+
+      orbitalContainer.props = {highlightedOrbitals};
+      orbitalContainer.maybeUpdatePathOpacity(nextProps);
+      
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(orbitalContainer.props, nextProps.highlightedOrbitals);
+    });
+
+    it('should call setPathOpacity() if the highlightedOrbitals list has not changed', () => {
+      orbitalContainer.setPathOpacity = jest.fn();
+
+      const time = 1;
+      const highlightedOrbitals = ['Mars'];
+      const nextProps = {highlightedOrbitals};
+      const spy = jest.spyOn(orbitalContainer, 'setPathOpacity');
+
+      orbitalContainer.props = {highlightedOrbitals};
+      orbitalContainer.maybeUpdatePathOpacity(nextProps);
       
       expect(spy).not.toHaveBeenCalled();
     });
   });
 
   describe('setPathOpacity()', () => {
-    it('should set the pathOpacity to 1 in local state when active = true', () => {
-      orbitalContainer.setPathOpacity(true);
+    it('should set the opacity state to the calculated opacity', () => {
+      const opacity = Constants.UI.HOVER_OPACITY_ON;
+      OrbitalService.getPathOpacity = () => opacity;
+      orbitalContainer.setPathOpacity({}, 'Earth');
 
       expect(orbitalContainer.state).toHaveProperty('pathOpacity');
-      expect(orbitalContainer.state.pathOpacity).toEqual(Constants.UI.HOVER_OPACITY_ON);
-    });
-
-    it('should set the pathOpacity to 0.2 in local state when active = false', () => {
-      orbitalContainer.setPathOpacity(false);
-
-      expect(orbitalContainer.state).toHaveProperty('pathOpacity');
-      expect(orbitalContainer.state.pathOpacity).toEqual(Constants.UI.HOVER_OPACITY_OFF);
+      expect(orbitalContainer.state.pathOpacity).toEqual(opacity);
     });
   });
 

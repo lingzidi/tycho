@@ -18,29 +18,64 @@ export class OrbitalContainer extends React.Component {
     id: PropTypes.string.isRequired,
     time: PropTypes.number,
     isSatellite: PropTypes.bool,
-    active: PropTypes.bool
+    active: PropTypes.bool,
+    highlightedOrbitals: PropTypes.array
   }
 
   componentWillMount = () => {
     this.state = {};
     this.ellipse = new Ellipse(this.props);
     this.setGroupRotations(this.props);
+    this.setPathOpacity(this.props);
     this.setBodyState(this.props, this.ellipse);
-    this.setPathOpacity();
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if (this.props.time !== nextProps.time) {
+    this.maybeUpdateBodyState(nextProps);
+    this.maybeUpdatePathOpacity(nextProps);
+  }
+
+  /**
+   * Updates the body state if time has changed.
+   *
+   * @param {Object} nextProps
+   * @param {Number} nextProps.time - current time, in seconds
+   */
+  maybeUpdateBodyState = ({time}) => {
+    if (this.props.time !== time) {
       this.setBodyState(this.props, this.ellipse);
     }
   }
 
-  setPathOpacity = (active) => {
+  /**
+   * Updates the path opacity if the list of highlighted orbitals changed.
+   *
+   * @param {Object} nextProps
+   * @param {String[]} nextProps.highlightedOrbitals
+   */
+  maybeUpdatePathOpacity = ({highlightedOrbitals}) => {
+    if (this.props.highlightedOrbitals !== highlightedOrbitals) {
+      this.setPathOpacity(this.props, highlightedOrbitals);
+    }
+  }
+
+  /**
+   * Sets the visual opacity of the orbital path ellipse.
+   * 
+   * @param {Object} props - orbital props
+   * @param {String[]} highlightedOrbitals
+   */
+  setPathOpacity = (props, highlightedOrbitals) => {
     this.setState({
-      pathOpacity: Service.getPathOpacity(active)
+      pathOpacity: Service.getPathOpacity(props, highlightedOrbitals)
     });
   }
 
+  /**
+   * Sets the visual opacity of the orbital path ellipse.
+   * 
+   * @param {Object} props - orbital props
+   */
   setGroupRotations = (props) => {
     this.setState({
       eclipticGroupRotation: Service.getEclipticGroupRotation(props),
@@ -48,6 +83,12 @@ export class OrbitalContainer extends React.Component {
     });
   }
 
+  /**
+   * Sets the visual opacity of the orbital path ellipse.
+   * 
+   * @param {Object} props - orbital props
+   * @param {Ellipse} ellipse - instance of orbital ellipse
+   */
   setBodyState = (props, ellipse) => {
     this.setState({
       bodyRotation: Service.getBodyRotation(props),
@@ -56,13 +97,18 @@ export class OrbitalContainer extends React.Component {
     });
   }
 
+  /**
+   * Renders a new label sprite, with mouse events bound to it.
+   * 
+   * @returns {Label} label sprite
+   */
   getLabel = () => {
-    const {action, name, domEvents, id, isSatellite} = this.props;
-    const label = new Label(name, domEvents, isSatellite);
+    const {action, name, domEvents, id} = this.props;
+    const label = new Label(name, domEvents);
 
     label.onClick(action.setActiveOrbital.bind(this, id));
-    label.onHover(this.setPathOpacity.bind(this, true));
-    label.onMouseOut(this.setPathOpacity.bind(this, false));
+    label.onHover(action.addHighlightedOrbital.bind(this, id));
+    label.onMouseOut(action.removeHighlightedOrbital.bind(this, id));
 
     return label;
   }

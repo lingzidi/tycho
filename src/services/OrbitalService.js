@@ -100,14 +100,23 @@ export default class OrbitalService {
   }
 
   /**
-   * Calculates path opacity based on current active state.
+   * Calculates path opacity based on whether or not the orbital with
+   * the given id is in the set of highlighted orbitals.
    *
-   * @param {Boolean} active - active state of orbital
+   * @param {Object} props - OrbitalContainer props
+   * @param {String} props.id - id of orbital
+   * @param {String[]} highlightedOrbitals - list of highlighted orbital ids
    * @returns {Number} opacity
    */
-  static getPathOpacity = (active) => {
-    if (active) {
-      return Constants.UI.HOVER_OPACITY_ON;
+  static getPathOpacity = ({id}, highlightedOrbitals) => {
+    if (Array.isArray(highlightedOrbitals)) {
+      const isHighlighted = highlightedOrbitals
+        .filter((orbital) => orbital === id)
+        .length;
+
+      if (isHighlighted) {
+        return Constants.UI.HOVER_OPACITY_ON;
+      }
     }
     return Constants.UI.HOVER_OPACITY_OFF;
   }
@@ -120,7 +129,7 @@ export default class OrbitalService {
    * @param {THREE.Vector3} vector - vector to check if in frustum
    * @returns {Boolean} whether or not vector is in frustum
    */
-  static isInCameraView = (camera, matrix, vector) => {
+  static isInCameraView = (camera, matrix, vector) => { // TODO: move to CameraService?
     const frustum = new THREE.Frustum();
     frustum.setFromMatrix(matrix);
     

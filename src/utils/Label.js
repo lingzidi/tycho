@@ -2,13 +2,11 @@ import * as THREE from 'three';
 
 export default class Label extends THREE.Sprite {
 
-  constructor(text, domEvents, isSatellite) {
+  constructor(text, domEvents) {
     super();
 
     this.text = text;
     this.domEvents = domEvents;
-    this.isSatellite = isSatellite;
-
     this.render();
   }
 

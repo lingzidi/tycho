@@ -26,14 +26,26 @@ describe('Label Actions', () => {
     });
   });
 
-  describe('setHighlightedOrbital()', () => {
-    it('should be of type SET_HIGHLIGHTED_ORBITAL with the highlightedOrbital payload', () => {
+  describe('addHighlightedOrbital()', () => {
+    it('should be of type ADD_HIGHLIGHTED_ORBITAL with the highlightedOrbital payload', () => {
       const highlightedOrbital = 'Mars';
-      const result = Actions.setHighlightedOrbital(highlightedOrbital);
+      const result = Actions.addHighlightedOrbital(highlightedOrbital);
       
       expect(result).toHaveProperty('type');
       expect(result).toHaveProperty('highlightedOrbital');
-      expect(result.type).toEqual(ActionType.SET_HIGHLIGHTED_ORBITAL);
+      expect(result.type).toEqual(ActionType.ADD_HIGHLIGHTED_ORBITAL);
+      expect(result.highlightedOrbital).toEqual(highlightedOrbital);
+    });
+  });
+
+  describe('removeHighlightedOrbital()', () => {
+    it('should be of type REMOVE_HIGHLIGHTED_ORBITAL with the highlightedOrbital payload', () => {
+      const highlightedOrbital = 'Mars';
+      const result = Actions.removeHighlightedOrbital(highlightedOrbital);
+      
+      expect(result).toHaveProperty('type');
+      expect(result).toHaveProperty('highlightedOrbital');
+      expect(result.type).toEqual(ActionType.REMOVE_HIGHLIGHTED_ORBITAL);
       expect(result.highlightedOrbital).toEqual(highlightedOrbital);
     });
   });

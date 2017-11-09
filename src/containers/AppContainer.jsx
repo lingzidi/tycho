@@ -63,6 +63,7 @@ export default connect(
     'uiControls.speed',
     'uiControls.timeOffset',
     'data.orbitalData',
+    'labels.highlightedOrbitals',
     'data.pageText'
   ),
   ReduxService.mapDispatchToProps(

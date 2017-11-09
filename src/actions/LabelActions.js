@@ -14,9 +14,16 @@ export const setLabelText = (labelText) => {
   };
 }
 
-export const setHighlightedOrbital = (highlightedOrbital) => {
+export const addHighlightedOrbital = (highlightedOrbital) => {
   return {
-    type: Actions.SET_HIGHLIGHTED_ORBITAL,
+    type: Actions.ADD_HIGHLIGHTED_ORBITAL,
+    highlightedOrbital
+  };
+}
+
+export const removeHighlightedOrbital = (highlightedOrbital) => {
+  return {
+    type: Actions.REMOVE_HIGHLIGHTED_ORBITAL,
     highlightedOrbital
   };
 }

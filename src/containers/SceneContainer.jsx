@@ -77,7 +77,7 @@ export class SceneContainer extends React.Component {
         scale={this.props.scale}
         action={this.props.action}
         children={this.props.children}
-        highlightedOrbital={this.props.highlightedOrbital}
+        highlightedOrbitals={this.props.highlightedOrbitals}
         cameraMatrix={camera.position.clone()}
         camera={camera}
         domEvents={DomEvents(camera)}
@@ -131,7 +131,7 @@ export default connect(
     'uiControls.scale',
     'uiControls.speed',
     'label.targetName',
-    'label.highlightedOrbital',
+    'label.highlightedOrbitals',
     'tour.isAutoOrbitEnabled',
     'animation.time',
     'data.orbitalData'
