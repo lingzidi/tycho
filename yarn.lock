@@ -1334,6 +1334,10 @@ caniuse-lite@^1.0.30000697, caniuse-lite@^1.0.30000744:
   version "1.0.30000744"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000744.tgz#860fa5c83ba34fe619397d607f30bb474821671b"
 
+canvas-text-wrapper@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/canvas-text-wrapper/-/canvas-text-wrapper-0.10.2.tgz#cf00996c131c0eac3de25cbf4a56d07d1da2b0c3"
+
 capture-stack-trace@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/capture-stack-trace/-/capture-stack-trace-1.0.0.tgz#4a6fa07399c26bba47f0b2496b4d0fb408c5550d"
@@ -7146,6 +7150,10 @@ text-encoding@0.6.4, text-encoding@^0.6.4:
 text-table@0.2.0, text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
+
+three-dom-label@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/three-dom-label/-/three-dom-label-0.1.4.tgz#10bef04f5cf6bc71a35afc231894127b8634ec31"
 
 three-orbit-controls@^82.1.0:
   version "82.1.0"

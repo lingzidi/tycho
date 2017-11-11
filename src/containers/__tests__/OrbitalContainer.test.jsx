@@ -6,16 +6,11 @@ import {OrbitalContainer} from '../OrbitalContainer';
 import OrbitalService from '../../services/OrbitalService';
 import {Orbital} from '../../components/Orbital';
 import Ellipse from '../../utils/Ellipse';
-import Label from '../../utils/Label';
 import Service from '../../services/OrbitalService';
 import Constants from '../../constants';
 
-jest.mock('../../utils/Label', () => {
-  return function() {
-    this.onClick = jest.fn();
-    this.onHover = jest.fn();
-    this.onMouseOut = jest.fn();
-  }
+jest.mock('three-dom-label', () => {
+  return function() {}
 });
 
 describe('Orbital Container', () => {
@@ -59,6 +54,20 @@ describe('Orbital Container', () => {
       
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props);
+    });
+  });
+
+  describe('componentWillMount()', () => {
+    it('should unmount the label component', () => {
+      orbitalContainer.label = {
+        unmount: jest.fn()
+      };
+      const spy = jest.spyOn(orbitalContainer.label, 'unmount');
+
+      orbitalContainer.componentWillUnmount();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
     });
   });
 

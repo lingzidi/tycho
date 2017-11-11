@@ -132,6 +132,22 @@ describe('Orbital Service', () => {
     });
   });
 
+  describe('getMaxViewDistance()', () => {
+    it('should return the satellite label range when isSatellite is true', () => {
+      const result = OrbitalService.getMaxViewDistance(true);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(Constants.WebGL.Camera.SATELLITE_LABEL_RANGE);
+    });
+
+    it('should return infinity when isSatellite is false', () => {
+      const result = OrbitalService.getMaxViewDistance(false);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(Infinity);
+    });
+  })
+
   describe('isInCameraView()', () => {
     it('should return a boolean', () => {
       const position = new Vector3();

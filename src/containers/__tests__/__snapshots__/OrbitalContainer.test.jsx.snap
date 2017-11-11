@@ -22,13 +22,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
     }
   }
   id="dummyOuter"
-  label={
-     {
-      "onClick": [Function],
-      "onHover": [Function],
-      "onMouseOut": [Function],
-    }
-  }
+  label={ {}}
   orbitalGroupRotation={
     Euler {
       "_order": "XYZ",
@@ -37,7 +31,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       "_z": 3.564095501194348,
     }
   }
-  pathOpacity={0.7}
+  pathOpacity={1}
   pathVertices={
     Array [
       Vector3 {

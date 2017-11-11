@@ -156,19 +156,6 @@ export default class CameraContainer extends React.Component {
     // this.props.action.setPaused(!disabled); // TODO
     this.controls.enabled = !!enabled;
   }
-
-  /**
-   * Updates the scale of all scene label sprites.
-   */
-  updateSpriteScale = () => {
-    const sprites = CameraService.getObjectsByType(this.props.scene, 'Sprite');
-    const cameraWorld = CameraService.getWorldPosition(this.refs.camera);
-
-    sprites.forEach((sprite) => {
-      const scale = CameraService.getSpriteScale(sprite, cameraWorld);
-      sprite.scale.set(scale, scale, 1);
-    });
-  }
   
   /**
    * Tweens zoom to minimum allowable zoom.
@@ -178,7 +165,6 @@ export default class CameraContainer extends React.Component {
   }
 
   update = () => {
-    this.updateSpriteScale();
     this.controls.update();
   }
   

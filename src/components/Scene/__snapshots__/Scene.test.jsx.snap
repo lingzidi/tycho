@@ -10,7 +10,6 @@ exports[`Scene Component render() should render the scene 1`] = `
 <group>
   <OrbitalContainer
     GM={6836529}
-    active={false}
     argumentOfPeriapsis={114.20763}
     atmosphere={16711680}
     axialTilt={23.26}
@@ -36,11 +35,9 @@ exports[`Scene Component render() should render the scene 1`] = `
     semimajor={249598261}
     semiminor={249556483}
     time={1}
-    updatePosition={[Function]}
   />
   <OrbitalContainer
     GM={6836529}
-    active={false}
     argumentOfPeriapsis={114.20763}
     atmosphere={16711680}
     axialTilt={23.26}
@@ -88,11 +85,9 @@ exports[`Scene Component render() should render the scene 1`] = `
     semimajor={149598261}
     semiminor={149556483}
     time={1}
-    updatePosition={[Function]}
   >
     <OrbitalContainer
       GM={6836529}
-      active={false}
       argumentOfPeriapsis={114.20763}
       atmosphere={16711680}
       axialTilt={23.26}
@@ -113,7 +108,6 @@ exports[`Scene Component render() should render the scene 1`] = `
       semimajor={149598261}
       semiminor={149556483}
       time={1}
-      updatePosition={[Function]}
     />
   </OrbitalContainer>
   <axisHelper

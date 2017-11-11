@@ -38,6 +38,7 @@
     "orbitals": "node ./scripts/index.js orbitals"
   },
   "devDependencies": {
+    "canvas-text-wrapper": "^0.10.2",
     "chai": "^4.1.2",
     "codecov": "^2.3.0",
     "enzyme": "^2.9.1",
@@ -50,6 +51,7 @@
     "redux": "^3.7.2",
     "rimraf": "^2.6.1",
     "sinon": "^4.0.0",
-    "sinon-chai": "^2.13.0"
+    "sinon-chai": "^2.13.0",
+    "three-dom-label": "^0.1.4"
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Ellipse from '../utils/Ellipse';
-import Label from '../utils/Label';
+import Label from 'three-dom-label';//../utils/Label';
 import Service from '../services/OrbitalService';
 import Orbital from '../components/Orbital';
 
@@ -28,7 +28,10 @@ export class OrbitalContainer extends React.Component {
     this.setGroupRotations(this.props);
     this.setPathOpacity(this.props);
     this.setBodyState(this.props, this.ellipse);
+    this.label = this.getLabel();
   }
+
+  componentWillUnmount = () => this.label.unmount()
 
   componentWillReceiveProps = (nextProps) => {
     this.maybeUpdateBodyState(nextProps);
@@ -98,19 +101,23 @@ export class OrbitalContainer extends React.Component {
   }
 
   /**
-   * Renders a new label sprite, with mouse events bound to it.
+   * Renders a new label, with mouse events bound to it.
    * 
-   * @returns {Label} label sprite
+   * @returns {Object3D} label
    */
   getLabel = () => {
-    const {action, name, domEvents, id} = this.props;
-    const label = new Label(name, domEvents);
+    const {action, name, camera, id, isSatellite} = this.props;
 
-    label.onClick(action.setActiveOrbital.bind(this, id));
-    label.onHover(action.addHighlightedOrbital.bind(this, id));
-    label.onMouseOut(action.removeHighlightedOrbital.bind(this, id));
-
-    return label;
+    return new Label({
+      text: name,
+      camera,
+      maxDistance: Service.getMaxViewDistance(isSatellite),
+      events: {
+        click: action.setActiveOrbital.bind(this, id),
+        mouseover: action.addHighlightedOrbital.bind(this, id),
+        mouseout: action.removeHighlightedOrbital.bind(this, id)
+      }
+    });
   }
 
   render() {
@@ -125,7 +132,7 @@ export class OrbitalContainer extends React.Component {
         pathOpacity={this.state.pathOpacity}
         atmosphere={this.props.atmosphere}
         children={this.props.children}
-        label={this.getLabel()}
+        label={this.label}
         id={this.props.id}
       />
     );

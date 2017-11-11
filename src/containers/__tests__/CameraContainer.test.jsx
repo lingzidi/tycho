@@ -331,27 +331,6 @@ describe('Camera Container', () => {
       expect(spy).toHaveBeenCalledWith(true);
     });
   });
-  
-  describe('updateSpriteScale()', () => {
-    const sprite = new Object3D();
-    const scale = 3;
-
-    beforeEach(() => {
-      CameraService.getObjectsByType = () => [sprite];
-      CameraService.getWorldPosition = () => new Vector3();
-      CameraService.getSpriteScale = () => scale;
-    });
-
-    it('should scale each scene sprite to the calculated scale', () => {
-      const spy = jest.spyOn(sprite.scale, 'set');
-
-      cameraContainer.updateSpriteScale();
-
-      expect(sprite.scale.set).toHaveBeenCalled();
-      expect(sprite.scale.set).toHaveBeenCalledTimes(1);
-      expect(sprite.scale.set).toHaveBeenCalledWith(scale, scale, 1);
-    });
-  });
 
   describe('zoomInFull()', () => {
     it('should call controls.tweenZoom()', () => {

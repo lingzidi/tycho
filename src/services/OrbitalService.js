@@ -122,6 +122,19 @@ export default class OrbitalService {
   }
 
   /**
+   * Returns the max camera viewing distance, in WebGL units.
+   * 
+   * @param  {Boolean} isSatellite
+   * @return {Number}
+   */
+  static getMaxViewDistance = (isSatellite) => {
+    if (isSatellite) {
+      return 7;
+    }
+    return Infinity;
+  }
+
+  /**
    * Checks if the given vector is within the given camera frustum.
    *
    * @param {THREE.Camera} camera - active renderer camera

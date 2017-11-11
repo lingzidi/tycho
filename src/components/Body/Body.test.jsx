@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
-import {Euler} from 'three';
+import {Euler, Object3D} from 'three';
 import Body from './';
 
 describe('Body Component', () => {
@@ -14,6 +14,24 @@ describe('Body Component', () => {
       radius={radius}
       rotation={rotation}
     />);
+  });
+
+  describe('componentDidMount()', () => {
+    it('should add the label prop to the group', () => {
+      const instance = component.instance();
+      instance.refs = {
+        group: { add: jest.fn() }
+      };
+      instance.props = {
+        label: new Object3D()
+      };
+      instance.componentDidMount();
+      const spy = jest.spyOn(instance.refs.group, 'add');
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(instance.props.label);
+    });
   });
 
   it('should set the body mesh rotation to prop.rotation', () => {
