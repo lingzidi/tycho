@@ -73,4 +73,16 @@ describe('UIControls Actions', () => {
       expect(result.modalActive).toEqual(modalActive);
     });
   });
+
+  describe('toggleSettings()', () => {
+    it('should be of type SETTINGS_ACTIVE with the settingsActive payload', () => {
+      const settingsActive = true;
+      const result = Actions.toggleSettings(settingsActive);
+      
+      expect(result).toHaveProperty('type');
+      expect(result).toHaveProperty('settingsActive');
+      expect(result.type).toEqual(ActionType.SETTINGS_ACTIVE);
+      expect(result.settingsActive).toEqual(settingsActive);
+    });
+  });
 });

@@ -24,6 +24,13 @@ export class UIControlsContainer extends React.Component {
   }
 
   /**
+   * Toggles the settings pane.
+   */
+  toggleSettings = () => {
+    this.props.action.toggleSettings(!this.props.settingsActive);
+  }
+
+  /**
    * Opens the modal and hides the controls
    */
   openModal = () => {
@@ -36,6 +43,7 @@ export class UIControlsContainer extends React.Component {
       <UIControls
         modifier={this.getClassModifier()}
         openModal={this.openModal}
+        toggleSetting={this.toggleSettings}
         {...this.props}
         {...this.props.action}
       />
@@ -49,6 +57,7 @@ export default connect(
     'uiControls.zoom',
     'uiControls.scale',
     'uiControls.controlsEnabled',
+    'uiControls.settingsActive',
     'label.labelText',
     'data.pageText',
     'animation.time'

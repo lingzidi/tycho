@@ -41,3 +41,10 @@ export const toggleModal = (modalActive) => {
     modalActive
   };
 }
+
+export const toggleSettings = (settingsActive) => {
+  return {
+    type: Actions.SETTINGS_ACTIVE,
+    settingsActive
+  };
+}

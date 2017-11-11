@@ -7,13 +7,8 @@ exports[`UIControls Component render() should render the UIControls successfully
   <div
     className="uicontrols__control uicontrols__control--scales"
   >
-    <ScaleSlider
-      max={10}
-      min={0}
-    />
-    <ScaleSlider
-      max={10}
-      min={1}
+    <Settings
+      pageText={Object {}}
     />
   </div>
   <div

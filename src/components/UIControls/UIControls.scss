@@ -36,15 +36,19 @@
       top: 0;
       left: 0;
       right: 0;
-      padding: 1em 64px;
+      padding: 1em;
+      text-align: center;
       pointer-events: none;
     }
 
     &--modal-opener {
+      opacity: 1;
       pointer-events: auto;
       font-family: Georgia, serif;
       font-size: 1.5em;
       transition: text-shadow 0.5s;
+      color: #fff;
+      cursor: pointer;
 
       &:hover {
         text-shadow: 1px 1px 10px #fff;
@@ -52,11 +56,9 @@
     }
     
     &--scales {
-      min-width: 200px;
-      padding: 0 1.25em 1.5em;
       bottom: 0;
       right: 0;
-      color: #fff;
+      pointer-events: none;
     }
     
     &--left-bar {

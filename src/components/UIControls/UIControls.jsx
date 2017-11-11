@@ -1,28 +1,14 @@
 import React from 'react';
-import ScaleSlider from '../Slider/ScaleSlider';
+import Settings from '../Settings';
 import ZoomSlider from '../Slider/ZoomSlider';
 import DatePickerContainer from '../../containers/DatePickerContainer';
-import Constants from '../../constants';
 
 export default class UIControls extends React.Component {
   render() {
     return (
       <div className={`uicontrols--${this.props.modifier}`}>
         <div className="uicontrols__control uicontrols__control--scales">
-          <ScaleSlider
-            value={this.props.speed}
-            label={this.props.pageText.speedScale}
-            onChange={this.props.changeSpeed}
-            min={Constants.UI.Sliders.Speed.MIN}
-            max={Constants.UI.Sliders.Speed.MAX}
-          />
-          <ScaleSlider
-            value={this.props.scale}
-            label={this.props.pageText.planetScale}
-            onChange={this.props.changeScale}
-            min={Constants.UI.Sliders.Scale.MIN}
-            max={Constants.UI.Sliders.Scale.MAX}
-          />
+          <Settings {...this.props} />
         </div>
 
         <div className="uicontrols__control uicontrols__control--target-label">

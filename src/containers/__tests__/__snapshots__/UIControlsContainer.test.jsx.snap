@@ -10,5 +10,6 @@ exports[`UIControls Container render() should successfully render the ui control
   changeSpeed={[Function]}
   modifier="disabled"
   openModal={[Function]}
+  toggleSetting={[Function]}
 />
 `;

@@ -27,6 +27,27 @@ describe('UIControls Container', () => {
     });
   });
 
+  describe('toggleSettings()', () => {
+    beforeEach(() => {
+      container.props = {
+        action: {
+          toggleSettings: jest.fn()
+        },
+        settingsActive: false
+      };
+    });
+
+    it('should open the settings pane', () => {
+      const spy = jest.spyOn(container.props.action, 'toggleSettings');
+
+      container.toggleSettings();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(!container.props.settingsActive);
+    });
+  });
+
   describe('openModal()', () => {
     beforeEach(() => {
       container.props = {

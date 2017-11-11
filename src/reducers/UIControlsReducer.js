@@ -19,6 +19,8 @@ export default function(state = {}, payload) {
       return assign('controlsEnabled');
     case Actions.MODAL_ACTIVE:
       return assign('modalActive');
+    case Actions.SETTINGS_ACTIVE:
+      return assign('settingsActive');
     default:
       return state;
   }

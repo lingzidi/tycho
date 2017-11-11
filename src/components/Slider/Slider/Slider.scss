@@ -7,7 +7,6 @@ $slider-color: #fff;
 .slider {
   flex: 1;
   margin: auto;
-  padding-bottom: 0.75em;
 
   &--horizontal {
     height: $slider-track-width + $slider-handle-width;

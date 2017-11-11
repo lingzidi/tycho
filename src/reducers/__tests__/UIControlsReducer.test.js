@@ -79,4 +79,14 @@ describe('UIControls Reducer', () => {
 
     expect(result).toEqual({modalActive});
   });
+
+  it('should handle SETTINGS_ACTIVE', () => {
+    const settingsActive = true;
+    const result = reducer(undefined, {
+      type: Actions.SETTINGS_ACTIVE,
+      settingsActive
+    });
+
+    expect(result).toEqual({settingsActive});
+  });
 });
