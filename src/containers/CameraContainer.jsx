@@ -32,6 +32,15 @@ export default class CameraContainer extends React.Component {
   }
 
   /**
+   * Updates controls, if mounted.
+   */
+  update = () => {
+    if (this.controls) {
+      this.controls.update();
+    }
+  }
+
+  /**
    * Re-renders controls with updated canvas DOM Element.
    *
    * @param {Object} props
@@ -104,7 +113,7 @@ export default class CameraContainer extends React.Component {
     const {scene} = this.props;
     const {pivot} = this.refs;
     const target = scene.getObjectByName(targetName);
-
+    
     if (target && animate) {
       this.setInteractivity(false);
       this.startTween(target, pivot, scene);
@@ -136,7 +145,7 @@ export default class CameraContainer extends React.Component {
   startTween = (target, pivot, scene) => {
     const v = CameraService.getWorldPosition(target);
     const w = CameraService.getWorldPosition(pivot);
-    
+
     // set the pivot position to active position    
     CameraService.attachToWorld(scene, pivot, w);
 
@@ -162,10 +171,6 @@ export default class CameraContainer extends React.Component {
    */
   zoomInFull = () => {
     this.controls.tweenZoom(Constants.WebGL.Zoom.MIN, this.props.action.changeZoom);
-  }
-
-  update = () => {
-    this.controls.update();
   }
   
   render() {

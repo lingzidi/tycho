@@ -44,7 +44,7 @@ export default class Scene extends React.Component {
           distance={500}
         />
         <Skybox />
-        <mesh lookAt={this.props.cameraMatrix} ref="sun">
+        <mesh lookAt={this.props.cameraMatrix} ref="sun" name="sun">
           <planeGeometry width={100} height={100} />
           <meshBasicMaterial color={0x00ff00} />
         </mesh>

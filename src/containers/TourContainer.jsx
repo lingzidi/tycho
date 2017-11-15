@@ -19,15 +19,40 @@ export class TourContainer extends React.Component {
   componentDidMount = () => {
     if (TourService.canSkip()) {
       this.props.action.tourSkipped(true);
-    } else {
+    }
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    this.maybeSkipTour(nextProps);
+    this.maybeStartTour(nextProps);
+  }
+
+  /**
+   * Skips tour if opted to do so and is not already skipped.
+   * 
+   * @param {Object} nextProps
+   * @param {Boolean} nextProps.isSkipped
+   */
+  maybeSkipTour = ({isSkipped}) => {
+    if (this.props.isSkipped !== isSkipped && isSkipped) {
+      this.skipTour();
+    }
+  }
+
+  /**
+   * Starts tour if not already initialized.
+   * 
+   * @param {Object} nextProps
+   * @param {Boolean} nextProps.isUserEntered
+   */
+  maybeStartTour = ({isUserEntered}) => {
+    if (isUserEntered && !this.props.isUserEntered) {
       this.initializeTour();
     }
   }
 
-  componentWillReceiveProps = ({isSkipped}) => {
-    if (this.props.isSkipped !== isSkipped && isSkipped) {
-      this.skipTour();
-    }
+  shouldRunTour = () => {
+    return this.props.isUserEntered && !this.props.isSkipped;
   }
 
   /**
@@ -37,10 +62,12 @@ export class TourContainer extends React.Component {
     const {action, labels} = this.props;
     const tourDuration = TourService.getTourDuration(labels);
 
-    action.setUIControls(false);
-    action.setCameraOrbit(true);
+    if (!TourService.canSkip()) {
+      action.setUIControls(false);
+      action.setCameraOrbit(true);
 
-    setTimeout(this.onOrbitComplete, tourDuration);
+      setTimeout(this.onOrbitComplete, tourDuration);
+    }
   }
 
   /**
@@ -49,7 +76,7 @@ export class TourContainer extends React.Component {
   onOrbitComplete = () => {
     if (!this.props.isComplete) {
       this.setDefaultActiveOrbital();
-      setTimeout(this.onTourComplete, Constants.Tour.TRANSITION_TIME);
+      setTimeout(this.onTourComplete, Constants.WebGL.Tween.SLOW);
     }
   }
 
@@ -69,6 +96,7 @@ export class TourContainer extends React.Component {
     action.tourCompleted(true);
     action.setCameraOrbit(false);
     action.setUIControls(true);
+
     this.setDefaultActiveOrbital();
   }
 
@@ -116,24 +144,14 @@ export class TourContainer extends React.Component {
     });
   }
 
-  /**
-   * Returns class modifier based on prop state.
-   *
-   * @param {Object} props - component props
-   * @returns {String} modifier
-   */
-  getModifier = ({isComplete, isSkipped}) => {
-    if (isSkipped) {
-      return 'skip';
-    }
-    return isComplete ? 'hide' : 'show';
-  }
-
   render() {
+    if (!this.shouldRunTour()) {
+      return null;
+    }
     return (
       <Tour
+        {...this.props}
         skipTour={this.skipTourTrigger}
-        modifier={this.getModifier(this.props)}
         labels={this.getLabels(this.props.labels)}
       />
     );
@@ -146,7 +164,9 @@ export default connect(
     'uiControls.scale',
     'label.targetName',
     'tour.isComplete',
-    'tour.isSkipped'
+    'tour.isSkipped',
+    'loader.isUserEntered',
+    'data.pageText'
   ),
   ReduxService.mapDispatchToProps(
     UIControlsActions,

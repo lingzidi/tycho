@@ -32,9 +32,9 @@ export const Camera = {
   NEAR: 0.001,
   FAR: 13000,
   FOV: 50,
-  X: 400,
-  Y: 400,
-  Z: 400,
+  X: 12000,
+  Y: 12000,
+  Z: 12000,
   MAX_DISTANCE: 12000,
   MIN_DISTANCE: 0,
   SATELLITE_LABEL_RANGE: 7

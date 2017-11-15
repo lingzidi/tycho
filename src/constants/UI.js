@@ -9,7 +9,7 @@ export const Sliders = {
   }
 };
 
-export const ALTERNATE_TARGET_NAME = 'Sun';
+export const ALTERNATE_TARGET_NAME = 'mars';
 
 export const DEFAULT_TARGET_NAME = 'earth';
 

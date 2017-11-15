@@ -9,10 +9,10 @@ export default class Controls extends OrbitControls(THREE) {
     super(camera, domElement);
 
     this.camera = camera;
-    this.level = Constants.WebGL.Zoom.MAX;
     this.enabled = true;
     this.enableZoom = false;
     this.enablePan = false;
+    this.level = Constants.WebGL.Zoom.MAX;
     this.minDistance = Constants.WebGL.Camera.MIN_DISTANCE;
     this.maxDistance = Constants.WebGL.Camera.MAX_DISTANCE;
   }
@@ -181,7 +181,7 @@ export default class Controls extends OrbitControls(THREE) {
     this.tweenBase = new TWEEN
       .Tween(this.tweenData)
       .easing(TWEEN.Easing.Quadratic.Out)
-      .to({level}, Constants.WebGL.Tween.NORMAL)
+      .to({level}, Constants.WebGL.Tween.SLOW)
       .onUpdate(this.updateTween)
       .onComplete(this.completeTween)
       .start();

@@ -31,28 +31,86 @@ describe('App Container', () => {
   });
 
   describe('maybeUpdateOffset()', () => {
-    it('should update the clock offset with the next timeOffset prop value', () => {
+    it('should update the clock offset if scene is playing', () => {
+
       const spy = jest.spyOn(appContainer.clock, 'setOffset');
       const timeOffset = 123;
 
-      appContainer.maybeUpdateOffset(timeOffset);
+      appContainer.props = {playing: true};
+      appContainer.maybeUpdateOffset({timeOffset});
 
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(timeOffset);
     });
 
-    it('should not update the clock offset if the clock is paused', () => {
+    it('should not update the clock if offset not undefined', () => {
+      const spy = jest.spyOn(appContainer.clock, 'setOffset');
+      const timeOffset = undefined;
+
+      appContainer.props = {playing: true};
+      appContainer.maybeUpdateOffset({timeOffset});
+
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should not update the clock if scene is paused', () => {
       const spy = jest.spyOn(appContainer.clock, 'setOffset');
       const timeOffset = 123;
 
-      appContainer.clock.paused = true;
-      appContainer.maybeUpdateOffset(timeOffset);
+      appContainer.props = {playing: false};
+      appContainer.maybeUpdateOffset({timeOffset});
 
       expect(spy).not.toHaveBeenCalled();
     });
   });
 
   describe('maybeUpdateTime()', () => {
+    const time = 1;
+
+    beforeEach(() => {
+      appContainer.props = {
+        action: {
+          setTime: jest.fn()
+        }
+      };
+      appContainer.clock = {
+        getTime: () => time
+      };
+    });
+
+    it('should update the global time to the clock\'s current time when changed', () => {
+      const spy = jest.spyOn(appContainer.props.action, 'setTime');
+
+      appContainer.shouldUpdateTime = () => true;
+      appContainer.maybeUpdateTime();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(spy).toHaveBeenCalledWith(time);
+    });
+
+    it('should update the global time to the clock\'s current time when forced to', () => {
+      const spy = jest.spyOn(appContainer.props.action, 'setTime');
+
+      appContainer.shouldUpdateTime = () => false;
+      appContainer.maybeUpdateTime(true);
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(spy).toHaveBeenCalledWith(time);
+    });
+
+    it('should update the global time if not changed and not forced to', () => {
+      const spy = jest.spyOn(appContainer.props.action, 'setTime');
+
+      appContainer.shouldUpdateTime = () => false;
+      appContainer.maybeUpdateTime(false);
+
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('shouldUpdateTime()', () => {
     const time = 1;
 
     beforeEach(() => {
@@ -66,32 +124,32 @@ describe('App Container', () => {
         appContainer.lastTime = time + 1;
       });
 
-      it('should set `lastTime` to current time', () => {
-        appContainer.maybeUpdateTime();
+      it('should return true if scene is playing', () => {
+        appContainer.props = {playing: true};
+        
+        const result = appContainer.shouldUpdateTime();
 
-        expect(appContainer.lastTime).toBeDefined();
-        expect(appContainer.lastTime).toEqual(time);
+        expect(typeof result).toBe('boolean');
+        expect(result).toEqual(true);
       });
 
-      it('should call the `setTime` action with current time', () => {
-        const spy = jest.spyOn(appContainer.props.action, 'setTime');
+      it('should return false if scene is paused', () => {
+        appContainer.props = {playing: false};
+        
+        const result = appContainer.shouldUpdateTime();
 
-        appContainer.maybeUpdateTime();
-
-        expect(spy).toHaveBeenCalled();
-        expect(spy).toHaveBeenCalledWith(time);
+        expect(typeof result).toBe('boolean');
+        expect(result).toEqual(false);
       });
     });
 
     describe('when the time is the same as when last probed', () => {
-      // TODO: why does this run twice? Why does it break?
-      it('should not call the `setTime` action', () => {
-        const spy = jest.spyOn(appContainer.props.action, 'setTime');
-
+      it('should return false', () => {
         appContainer.lastTime = time;
-        appContainer.maybeUpdateTime();
+        const result = appContainer.shouldUpdateTime();
 
-        // expect(spy).not.toHaveBeenCalled();
+        expect(typeof result).toBe('boolean');
+        expect(result).toEqual(false);
       });
     });
   });

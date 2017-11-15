@@ -13,12 +13,12 @@ export class AppContainer extends React.Component {
     this.props.action.requestOrbitalData();
     this.props.action.requestPageText();
     this.clock = new Clock();
+    this.maybeUpdateTime(true);
     this.lastTime = 0;
-    this.state = {};
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.maybeUpdateOffset(nextProps.timeOffset);
+    this.maybeUpdateOffset(nextProps);
   }
   
   onAnimate = () => {
@@ -28,12 +28,13 @@ export class AppContainer extends React.Component {
   }
 
   /**
-   * Updates the offset of the clock instance if not paused.
-   * 
-   * @param  {Number} timeOffset - offset to update, in UNIX time (ms)
+   * Updates the offset of the clock instance if scene is not paused.
+   *
+   * @param {Object} nextProps
+   * @param {Number} nextProps.timeOffset - offset to update, in UNIX time (ms)
    */
-  maybeUpdateOffset = (timeOffset) => {
-    if (timeOffset && !this.clock.paused) {
+  maybeUpdateOffset = ({timeOffset}) => {
+    if (timeOffset && this.props.playing) {
       this.clock.setOffset(timeOffset);
     }
   }
@@ -41,11 +42,23 @@ export class AppContainer extends React.Component {
   /**
    * Updates the global time with clock time, if changed.
    */
-  maybeUpdateTime = () => {
-    if (this.clock.getTime() !== this.lastTime) {
+  maybeUpdateTime = (force) => {
+    if (force || this.shouldUpdateTime()) {
       this.lastTime = this.clock.getTime();
-      this.props.action.setTime(this.clock.getTime());
+      this.props.action.setTime(this.lastTime);
     }
+  }
+
+  /**
+   * Determines if a global time update is necessary.
+   * 
+   * @return {Boolean}
+   */
+  shouldUpdateTime = () => {
+    if (this.clock.getTime() !== this.lastTime) {
+      return !!this.props.playing;
+    }
+    return false;
   }
 
   render() {
@@ -63,8 +76,8 @@ export default connect(
     'uiControls.speed',
     'uiControls.timeOffset',
     'data.orbitalData',
-    'labels.highlightedOrbitals',
-    'data.pageText'
+    'data.pageText',
+    'animation.playing'
   ),
   ReduxService.mapDispatchToProps(
     DataActions,

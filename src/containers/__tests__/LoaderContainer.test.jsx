@@ -11,7 +11,8 @@ describe('Loader Container', () => {
     component = shallow(<LoaderContainer
       action={{
         setPercentLoaded: jest.fn(),
-        setTextureLoaded: jest.fn()
+        setTextureLoaded: jest.fn(),
+        setUserEntered: jest.fn()
       }}
     />);
     loaderContainer = component.instance();
@@ -49,36 +50,15 @@ describe('Loader Container', () => {
     });
   });
 
-  describe('getClassName()', () => {
-    const baseClass = 'loader';
+  describe('enterScene()', () => {
+    it('should call the setUserEntered() action with true', () => {
+      const spy = jest.spyOn(loaderContainer.props.action, 'setUserEntered');
 
-    it('should return the base class name', () => {
-      loaderContainer.props = {percent: 50};
-      const result = loaderContainer.getClassName();
+      loaderContainer.enterScene();
 
-      expect(result).toEqual(baseClass);
-    });
-
-    it('should return the hidden class name if fully loaded', () => {
-      loaderContainer.props = {percent: 100};
-      const result = loaderContainer.getClassName();
-
-      expect(result).toEqual(`${baseClass} ${baseClass}--hide`);
-    });
-  });
-
-  describe('getPercent()', () => {
-    it('should return the prop percent', () => {
-      loaderContainer.props = {percent: 50};
-      const result = loaderContainer.getPercent();
-
-      expect(result).toEqual(50);
-    });
-
-    it('should fallback to 0 if prop percent is undefined', () => {
-      const result = loaderContainer.getPercent();
-
-      expect(result).toEqual(0);
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(true);
     });
   });
 

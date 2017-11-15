@@ -14,3 +14,10 @@ export const setTextureLoaded = (url) => {
     url
   };
 }
+
+export const setUserEntered = (isUserEntered) => {
+  return {
+    type: Actions.SET_USER_ENTERED,
+    isUserEntered
+  };
+}

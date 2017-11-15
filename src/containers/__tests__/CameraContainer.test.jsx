@@ -351,7 +351,7 @@ describe('Camera Container', () => {
   });
 
   describe('update()', () => {
-    it('should update the controls', () => {
+    it('should update the controls if controls exist', () => {
       cameraContainer.controls = {update: jest.fn()};
       const spy = jest.spyOn(cameraContainer.controls, 'update');
 
@@ -359,6 +359,13 @@ describe('Camera Container', () => {
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should do nothing if no controls exist', () => {
+      cameraContainer.controls = null;
+      cameraContainer.update();
+
+      expect(cameraContainer.controls).toBeNull();
     });
   });
 

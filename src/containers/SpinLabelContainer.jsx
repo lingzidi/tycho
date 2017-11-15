@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import SpinLabel from '../components/SpinLabel';
 import ReduxService from '../services/ReduxService';
+import * as TourActions from '../actions/TourActions';
+import * as UIControlsActions from '../actions/UIControlsActions';
 import Constants from '../constants';
 
 export class SpinLabelContainer extends React.Component {
@@ -10,6 +12,20 @@ export class SpinLabelContainer extends React.Component {
   static propTypes = {
     isComplete: PropTypes.bool,
     isAutoOrbitEnabled: PropTypes.bool
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    this.maybeStopSpinPrompt(nextProps);
+  }
+
+  /**
+   * Stops auto-rotation of the camera if scene touched while active.
+   */
+  maybeStopSpinPrompt = ({touched}) => {
+    if (this.props.touched !== touched && this.isVisible()) {
+      this.props.action.setCameraOrbit(false);
+      this.props.action.setUIControls(true);
+    }
   }
 
   /**
@@ -35,7 +51,12 @@ export class SpinLabelContainer extends React.Component {
 export default connect(
   ReduxService.mapStateToProps(
     'tour.isComplete',
-    'tour.isAutoOrbitEnabled'
+    'tour.isAutoOrbitEnabled',
+    'event.touched',
+    'event.released'
   ),
-  null  
+  ReduxService.mapDispatchToProps(
+    TourActions,
+    UIControlsActions
+  )  
 )(SpinLabelContainer);

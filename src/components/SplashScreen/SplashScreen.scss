@@ -1,9 +1,103 @@
+$button-height: 50px;
+$button-width: 160px;
+$button-spacing: 15px;
+$button-transition-speed: 0.25s;
+
 .splash-screen {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   background-color: #fff;
-  font-size: 2em;
+  font-size: 1.5em;
+  z-index: 1000;
+  background: url('/static/img/bg-stars-large.png');
+  transition: opacity $button-transition-speed;
+  opacity: 1;
+
+  &--hide {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__hero {
+    width: 50vw;
+    height: 20vw;
+    background-image: url('/static/img/logo-gradient-light.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  &__content {
+    height: $button-height;
+  }
+
+  &__loading {
+    width: 500px;
+    height: 4px;
+    background-color: #808080;
+  }
+
+  &__loading-bar {
+    background-color: #fff;
+    height: 4px;
+  }
+
+  &__button {
+    position: relative;
+    width: $button-width;
+    height: $button-height;
+    margin: 0 $button-spacing;
+    perspective: 1000px;
+  }
+  
+  &__button-anchor {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: translateZ(-($button-height / 2));
+    transition: transform $button-transition-speed;
+    cursor: pointer;
+
+    &::before, &::after {
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      width: $button-width;
+      height: $button-height;
+      position: absolute;
+      border: 5px solid black;
+      box-sizing: border-box;
+      content: attr(title);
+      display: flex;
+    }
+
+    &::before {
+      background-color: #fff;
+      border-color: #000;
+      color: #000;
+      transform: rotateY(0deg) translateZ($button-height / 2);
+    }
+
+    &::after {
+      background-color: #000;
+      color: #fff;
+      transform: rotateX(90deg) translateZ($button-height / 2);
+    }
+
+    &:hover {
+      transform: translateZ($button-height / 2) rotateX(-90deg);
+    }
+  }
 }
+

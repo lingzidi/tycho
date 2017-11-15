@@ -5,12 +5,10 @@ export default function(state = {}, payload) {
   const assign = (...props) => ReduxService.assign(state, payload, ...props);
 
   switch(payload.type) {
-    case Actions.SET_PERCENT_LOADED:
-      return assign('percent');
-    case Actions.SET_TEXTURE_LOADED:
-      return assign('url');
-    case Actions.SET_USER_ENTERED:
-      return assign('isUserEntered');
+    case Actions.SET_TOUCHED:
+      return assign('touched');
+    case Actions.SET_RELEASED:
+      return assign('released');
     default:
       return state;
   }

@@ -26,9 +26,7 @@ exports[`Tour Component should render the Tour component successfully 1`] = `
     >
       <span
         className="tour__skip-link"
-      >
-        Skip Tour
-      </span>
+      />
     </div>
   </div>
   <Connect(SpinLabelContainer) />

@@ -25,7 +25,7 @@ export default class CameraService {
     const targetRadius = OrbitalService.getTargetByName(orbitals, targetName);
 
     if (targetRadius) {
-      return Scale(targetRadius.radius, scale) * 2;
+      return Scale(targetRadius.radius, scale);
     }
     return 0;
   }
@@ -43,7 +43,7 @@ export default class CameraService {
   static getPivotTween = (from, to, target, group, cb) => {
     return new TWEEN
       .Tween(from)
-      .to(to, Constants.WebGL.Tween.NORMAL)
+      .to(to, Constants.WebGL.Tween.SLOW)
       .easing(TWEEN.Easing.Quadratic.Out)
       .onUpdate(CameraService.setPivotPosition.bind(this, group, from))
       .onComplete(CameraService.attachToGyroscope.bind(this, target, group, cb))

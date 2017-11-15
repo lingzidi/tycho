@@ -64,61 +64,6 @@ describe('Scene Container', () => {
     });
   });
 
-  describe('auto rotate methods', () => {
-    beforeEach(() => {
-      sceneContainer.props = {
-        action: {
-          setCameraOrbit: jest.fn(),
-          setUIControls: jest.fn()
-        }
-      };
-    });
-
-    describe('startAutoRotate()', () => {
-      it('should call the setCameraOrbit() action with `true`', () => {
-        const spy = jest.spyOn(sceneContainer.props.action, 'setCameraOrbit');
-
-        sceneContainer.startAutoRotate();
-
-        expect(spy).toHaveBeenCalled();
-        expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(true);
-      });
-
-      it('should call the setUIControls() action with `false`', () => {
-        const spy = jest.spyOn(sceneContainer.props.action, 'setUIControls');
-
-        sceneContainer.startAutoRotate();
-
-        expect(spy).toHaveBeenCalled();
-        expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(false);
-      });
-    });
-
-    describe('stopAutoRotate()', () => {
-      it('should call the setCameraOrbit() action with `false`', () => {
-        const spy = jest.spyOn(sceneContainer.props.action, 'setCameraOrbit');
-
-        sceneContainer.stopAutoRotate();
-        
-        expect(spy).toHaveBeenCalled();
-        expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(false);
-      });
-
-      it('should call the setUIControls() action with `true`', () => {
-        const spy = jest.spyOn(sceneContainer.props.action, 'setUIControls');
-
-        sceneContainer.stopAutoRotate();
-
-        expect(spy).toHaveBeenCalled();
-        expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(true);
-      });
-    });
-  });
-
   describe('setDomElement()', () => {
     it('should set `domElement` to the value of the param passed', () => {
       const elem = <canvas />;

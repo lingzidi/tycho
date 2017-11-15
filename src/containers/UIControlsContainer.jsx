@@ -58,7 +58,7 @@ export default connect(
     'uiControls.scale',
     'uiControls.controlsEnabled',
     'uiControls.settingsActive',
-    'label.labelText',
+    'data.labelText',
     'data.pageText',
     'animation.time'
   ),

@@ -6,11 +6,10 @@ import React3 from 'react-three-renderer';
 import Scene from '../components/Scene';
 import * as AnimationActions from '../actions/AnimationActions';
 import * as UIControlsActions from '../actions/UIControlsActions';
-import * as TourActions from '../actions/TourActions';
 import * as LabelActions from '../actions/LabelActions';
 import ReduxService from '../services/ReduxService';
 import CameraContainer from './CameraContainer';
-import DomEvents from '../utils/DomEvents';
+import EventContainer from './EventContainer';
 
 export class SceneContainer extends React.Component {
 
@@ -28,7 +27,6 @@ export class SceneContainer extends React.Component {
   onAnimate = () => {
     this.props.onAnimate();
     this.refs.camera.update();
-    // this.forceUpdate();
     TWEEN.update();
   }
 
@@ -37,22 +35,6 @@ export class SceneContainer extends React.Component {
    */
   changeZoom = (ev) => {
     this.refs.camera.controls.wheelZoom(ev, this.props.action.changeZoom);
-  }
-
-  /**
-   * Starts auto-rotation of the camera.
-   */
-  startAutoRotate = () => {
-    this.props.action.setCameraOrbit(true);
-    this.props.action.setUIControls(false);
-  }
-
-  /**
-   * Stops auto-rotation of the camera.
-   */
-  stopAutoRotate = () => {
-    this.props.action.setCameraOrbit(false);
-    this.props.action.setUIControls(true);
   }
 
   /**
@@ -80,7 +62,6 @@ export class SceneContainer extends React.Component {
         highlightedOrbitals={this.props.highlightedOrbitals}
         cameraMatrix={camera.position.clone()}
         camera={camera}
-        domEvents={DomEvents(camera)}
       />
     );
   }
@@ -91,10 +72,7 @@ export class SceneContainer extends React.Component {
 
     // TODO: move parent div to separate container named "SyntheticEventsContainer"
     return (
-      <div
-        onWheel={this.changeZoom}
-        onTouchStart={this.stopAutoRotate}
-        onMouseDown={this.stopAutoRotate}>
+      <EventContainer onWheel={this.changeZoom}>
         <React3
           onAnimate={this.onAnimate}
           mainCamera="camera"
@@ -120,7 +98,7 @@ export class SceneContainer extends React.Component {
             {camera && this.renderScene(camera.refs)}
           </scene>
         </React3>
-      </div>
+      </EventContainer>
     );
   }
 }
@@ -138,7 +116,6 @@ export default connect(
   ),
   ReduxService.mapDispatchToProps(
     UIControlsActions,
-    TourActions,
     AnimationActions,
     LabelActions
   )

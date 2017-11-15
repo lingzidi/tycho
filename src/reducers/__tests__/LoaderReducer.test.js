@@ -29,4 +29,14 @@ describe('Loader Reducer', () => {
 
     expect(result).toEqual({percent});
   });
+
+  it('should handle SET_USER_ENTERED', () => {
+    const isUserEntered = true;
+    const result = reducer(undefined, {
+      type: Actions.SET_USER_ENTERED,
+      isUserEntered
+    });
+
+    expect(result).toEqual({isUserEntered});
+  });
 });

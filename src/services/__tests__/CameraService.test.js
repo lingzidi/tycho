@@ -53,7 +53,7 @@ describe('Camera Service', () => {
 
   describe('getMinDistance()', () => {
     it('should return the min distance required for a given planet', () => {
-      expect(CameraService.getMinDistance(fixture, 'Earth')).toEqual(0.00001);
+      expect(CameraService.getMinDistance(fixture, 'Earth')).toEqual(0.000005);
     });
 
     it('should return 0 if the target distance is not available', () => {

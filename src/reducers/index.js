@@ -5,6 +5,7 @@ import loader from './LoaderReducer';
 import tour from './TourReducer';
 import animation from './AnimationReducer';
 import data from './DataReducer';
+import event from './EventReducer';
 
 const rootReducer = combineReducers({
   uiControls,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   loader,
   tour,
   animation,
-  data
+  data,
+  event
 });
 
 export default rootReducer;

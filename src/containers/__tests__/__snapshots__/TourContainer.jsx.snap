@@ -24,31 +24,4 @@ exports[`Tour Container getLabels() should return an array of TourLabels 3`] = `
 />
 `;
 
-exports[`Tour Container render() should render the tour container successfully 1`] = `
-<Tour
-  labels={
-    Array [
-      <TourLabelContainer
-        end={7000}
-        key="0"
-        start={2000}
-        text="Welcome to the Solar System"
-      />,
-      <TourLabelContainer
-        end={13000}
-        key="1"
-        start={8000}
-        text="This is a real-time interactive simulation of major planetary bodies"
-      />,
-      <TourLabelContainer
-        end={17000}
-        key="2"
-        start={14000}
-        text="Let's start exploring"
-      />,
-    ]
-  }
-  modifier="show"
-  skipTour={[Function]}
-/>
-`;
+exports[`Tour Container render() should render the tour container successfully when tour can be run 1`] = `null`;

@@ -1,6 +1,7 @@
 import React from 'react';
 import SpinLabelContainer from '../../containers/SpinLabelContainer';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 
 export default class Tour extends React.Component {
 
@@ -11,24 +12,39 @@ export default class Tour extends React.Component {
   }
 
   render() {
-    const {modifier, labels} = this.props;
+    const {isComplete, isSkipped, labels} = this.props;
     return (
       <div>
-        <div className={`tour tour--${modifier}`}>
+        <div className={cx({
+          'tour': true,
+          'tour--skip': isSkipped,
+          'tour--hide': isComplete,
+          'tour--show': !isComplete
+        })}>
           <div
-            className={`tour__theater-bar tour__theater-bar--${modifier}`}
+            className={cx({
+              'tour__theater-bar': true,
+              'tour__theater-bar--skip': isSkipped,
+              'tour__theater-bar--hide': isComplete,
+              'tour__theater-bar--show': !isComplete
+            })}
             style={{top: 0}}>
           </div>
           <div className="tour__labels">
 						{labels}
 					</div>
           <div
-            className={`tour__theater-bar tour__theater-bar--${modifier}`}
+            className={cx({
+              'tour__theater-bar': true,
+              'tour__theater-bar--skip': isSkipped,
+              'tour__theater-bar--hide': isComplete,
+              'tour__theater-bar--show': !isComplete
+            })}
             style={{bottom: 0}}>
             <span
               className="tour__skip-link"
               onClick={this.props.skipTour}>
-              Skip Tour
+              {this.props.pageText.skipTour}
             </span>
           </div>
 				</div>

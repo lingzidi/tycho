@@ -3,11 +3,25 @@ import {DefaultLoadingManager} from 'three';
 import {connect} from 'react-redux';
 import * as Actions from '../actions/LoaderActions';
 import ReduxService from '../services/ReduxService';
+import SplashScreen from '../components/SplashScreen';
 
 export class LoaderContainer extends React.Component {
 
   componentWillMount = () => {
     DefaultLoadingManager.onProgress = this.onProgress;
+    this.state = {
+      percent: 0
+    };
+
+    const interval = setInterval(() => {
+      if (this.state.percent < 100) {
+        this.setState({
+          percent: this.state.percent + 10
+        });
+      } else {
+        clearInterval(interval);
+      }
+    }, 500);
   }
 
   /**
@@ -23,31 +37,20 @@ export class LoaderContainer extends React.Component {
   }
 
   /**
-   * Returns the class name based on percentage.
-   *
-   * @return {String} class name
+   * Hides the splash screen, revealing the scene.
    */
-  getClassName = () => {
-    let className = 'loader';
-
-    if (this.props.percent === 100) {
-        className += ' loader--hide';
-    }
-    return className;
+  enterScene = () => {
+    this.props.action.setUserEntered(true);
   }
-  
-  /**
-   * Returns current loaded percent, or zero if undefined.
-   * 
-   * @return {String} - loaded percent
-   */
-  getPercent = () => this.props.percent || 0;
 
   render() {
     return (
-      <div className={this.getClassName()}>
-        <h3>{this.getPercent()}% loaded.</h3>
-      </div>
+      <SplashScreen
+        percent={this.state.percent || 0}
+        show={!this.props.isUserEntered}
+        enterScene={this.enterScene}
+        pageText={this.props.pageText}
+      />
     );
   }
 }
@@ -55,7 +58,9 @@ export class LoaderContainer extends React.Component {
 export default connect(
   ReduxService.mapStateToProps(
     'loader.url',
-    'loader.percent'
+    'loader.percent',
+    'loader.isUserEntered',
+    'data.pageText'
   ),
   ReduxService.mapDispatchToProps(Actions)
 )(LoaderContainer);

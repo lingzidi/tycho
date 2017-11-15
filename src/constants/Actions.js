@@ -22,5 +22,8 @@ export default keyMirror({
   TOUR_SKIPPED: null,
   CAMERA_PANNED: null,
   MODAL_ACTIVE: null,
-  SETTINGS_ACTIVE: null
+  SETTINGS_ACTIVE: null,
+  SET_TOUCHED: null,
+  SET_RELEASED: null,
+  SET_USER_ENTERED: null
 });

@@ -84,9 +84,9 @@ exports[`Camera Container render() should render the scene container successfull
         "toArray": [Function],
         "transformDirection": [Function],
         "unproject": [Function],
-        "x": 400,
-        "y": 400,
-        "z": 400,
+        "x": 12000,
+        "y": 12000,
+        "z": 12000,
       }
     }
   />
