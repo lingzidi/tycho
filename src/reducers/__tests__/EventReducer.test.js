@@ -1,5 +1,4 @@
 import reducer from '../EventReducer';
-import ReduxService from '../../services/ReduxService';
 import Actions from '../../constants/Actions';
 
 describe('Data Reducer', () => {

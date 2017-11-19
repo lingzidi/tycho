@@ -28,7 +28,7 @@ describe('Tour Service', () => {
 
     TourService.setSkip();
 
-    expect(spy).toHaveBeenCalled;
+    expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledTimes(1);
   });
 

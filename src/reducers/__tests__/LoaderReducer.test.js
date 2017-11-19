@@ -1,5 +1,4 @@
 import reducer from '../LoaderReducer';
-import ReduxService from '../../services/ReduxService';
 import Actions from '../../constants/Actions';
 
 describe('Loader Reducer', () => {

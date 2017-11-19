@@ -1,5 +1,4 @@
 import reducer from '../TourReducer';
-import ReduxService from '../../services/ReduxService';
 import Actions from '../../constants/Actions';
 
 describe('Tour Reducer', () => {

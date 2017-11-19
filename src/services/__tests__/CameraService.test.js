@@ -1,4 +1,4 @@
-import {Vector3, Camera, Object3D, Scene, Matrix4} from 'three';
+import {Vector3, Object3D, Scene} from 'three';
 import TWEEN from 'tween.js';
 import CameraService from '../CameraService';
 import Gyroscope from '../../utils/Gyroscope';
@@ -22,7 +22,7 @@ describe('Camera Service', () => {
 
       CameraService.setPivotPosition(pivot, {x, y, z});
 
-      expect(spy).toHaveBeenCalled;
+      expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(x, y, z);
     });

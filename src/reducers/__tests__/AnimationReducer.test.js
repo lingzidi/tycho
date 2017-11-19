@@ -1,5 +1,4 @@
 import reducer from '../AnimationReducer';
-import ReduxService from '../../services/ReduxService';
 import Actions from '../../constants/Actions';
 
 describe('Animation Reducer', () => {

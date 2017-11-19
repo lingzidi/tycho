@@ -81,9 +81,7 @@ describe('Orbital Service', () => {
     });
 
     it('should omit the z Euler rotation param', () => {
-      const z = 0;
       const result = OrbitalService.getBodyRotation(param);
-      const expected = OrbitalService.toEuler({z});
       
       expect(typeof result.z).toBe('number');
       expect(result.z).toEqual(0);
@@ -161,7 +159,6 @@ describe('Orbital Service', () => {
   });
 
   describe('translateWorldToScreen()', () => {
-    let result;
     const position = new Vector3();
     const camera = new Camera();
 

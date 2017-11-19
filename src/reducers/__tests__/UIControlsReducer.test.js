@@ -1,5 +1,4 @@
 import reducer from '../UIControlsReducer';
-import ReduxService from '../../services/ReduxService';
 import Actions from '../../constants/Actions';
 
 describe('UIControls Reducer', () => {

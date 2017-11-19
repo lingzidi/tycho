@@ -221,8 +221,6 @@ describe('Clock', () => {
       jest.useFakeTimers();
       jest.runAllTimers();
 
-      const result = clock.setOffset(offset);
-
       expect(clock.offset).toEqual(offset);
     });
   });

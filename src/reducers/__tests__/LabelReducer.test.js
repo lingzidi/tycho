@@ -1,5 +1,4 @@
 import reducer from '../LabelReducer';
-import ReduxService from '../../services/ReduxService';
 import Actions from '../../constants/Actions';
 
 describe('Label Reducer', () => {
