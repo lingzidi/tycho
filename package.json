@@ -6,10 +6,10 @@
     "classnames": "2.2.5",
     "deep-assign": "2.0.0",
     "jest-cli": "21.0.2",
-    "js-cookie": "2.1.4",
+    "js-cookie": "2.2.0",
     "keymirror": "0.1.1",
-    "moment": "2.18.1",
-    "npm-run-all": "4.1.1",
+    "moment": "2.19.2",
+    "npm-run-all": "4.1.2",
     "react": "15.6.1",
     "react-animation-frame": "0.3.4",
     "react-datetime": "2.10.1",
@@ -19,7 +19,7 @@
     "react-slider": "0.9.0",
     "react-three-renderer": "3.2.1",
     "redux-thunk": "2.2.0",
-    "three": "0.87.1",
+    "three": "0.87.0",
     "three-orbit-controls": "82.1.0",
     "tween.js": "16.6.0"
   },
@@ -46,9 +46,9 @@
     "react-redux": "5.0.6",
     "react-test-renderer": "15.6.1",
     "redux": "3.7.2",
-    "rimraf": "2.6.1",
-    "sinon": "4.0.0",
-    "sinon-chai": "2.13.0",
+    "rimraf": "2.6.2",
+    "sinon": "4.1.2",
+    "sinon-chai": "2.14.0",
     "three-dom-label": "0.1.4"
   }
 }
