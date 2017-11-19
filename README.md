@@ -5,7 +5,7 @@
 <br>
 
 [![Code Quality](https://img.shields.io/codacy/grade/fe8a6a1dbe1b4a7eb91f6b655f7f99c8.svg?style=flat-square)](https://www.codacy.com/app/jshor/tycho2)
-[![Coverage](https://img.shields.io/codecov/c/github/jshor/tycho2.svg?style=flat-square)](https://codecov.io/gh/jshor/tycho2)
+[![Coverage](https://img.shields.io/codacy/coverage/fe8a6a1dbe1b4a7eb91f6b655f7f99c8.svg?style=flat-square)](https://www.codacy.com/app/jshor/tycho2)
 [![Build Status](https://img.shields.io/travis/jshor/tycho2.svg?style=flat-square)](https://travis-ci.org/jshor/tycho2)
 [![dependency Status](https://img.shields.io/david/jshor/tycho2.svg?style=flat-square)](https://david-dm.org/jshor/tycho2#info=dependencies)
 [![devDependency Status](https://img.shields.io/david/dev/jshor/tycho2.svg?style=flat-square)](https://david-dm.org/jshor/tycho2#info=devDependencies)

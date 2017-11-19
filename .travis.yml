@@ -14,5 +14,4 @@ script:
   - npm run coverage
 
 after_success:
-- cat ./coverage/lcov.info | ./node_modules/codecov/bin/codecov
 - cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage
