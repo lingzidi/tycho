@@ -4,11 +4,13 @@
 
 <br>
 
-[![codecov](https://codecov.io/gh/jshor/tycho2/branch/develop/graph/badge.svg)](https://codecov.io/gh/jshor/tycho2)
-[![Build Status](https://travis-ci.org/jshor/tycho2.svg?branch=master)](https://travis-ci.org/jshor/tycho2)
-[![dependency Status](https://david-dm.org/jshor/tycho2/status.png)](https://david-dm.org/jshor/tycho2#info=dependencies)
-[![devDependency Status](https://david-dm.org/jshor/tycho2/dev-status.png)](https://david-dm.org/jshor/tycho2#info=devDependencies)
-[![License](http://img.shields.io/:license-MIT-blue.svg)](LICENSE.md)
+[![Code Quality](https://img.shields.io/codacy/grade/fe8a6a1dbe1b4a7eb91f6b655f7f99c8.svg?style=flat-square)](https://www.codacy.com/app/jshor/tycho2)
+[![Coverage](https://img.shields.io/codecov/c/github/jshor/tycho2.svg?style=flat-square)](https://codecov.io/gh/jshor/tycho2)
+[![Build Status](https://img.shields.io/travis/jshor/tycho2.svg?style=flat-square)](https://travis-ci.org/jshor/tycho2)
+[![dependency Status](https://img.shields.io/david/jshor/tycho2.svg?style=flat-square)](https://david-dm.org/jshor/tycho2#info=dependencies)
+[![devDependency Status](https://img.shields.io/david/dev/jshor/tycho2.svg?style=flat-square)](https://david-dm.org/jshor/tycho2#info=devDependencies)
+[![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-square)](LICENSE.md)
+![Version](http://img.shields.io/:version-0.0.1-orange.svg?style=flat-square)
 
 ## Table of Contents
 
