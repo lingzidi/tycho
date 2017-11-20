@@ -11,6 +11,7 @@
     "test": "npm run build-css && react-scripts test --env=jsdom",
     "coverage": "rimraf coverage && npm run build-css && react-scripts test --env=jsdom --coverage",
     "lint": "eslint src/*",
+    "lint:fix": "eslint --fix src/*",
     "ephemeris": "tycho-scripts -m ephemeris",
     "orbitals": "tycho-scripts -m orbitals"
   },
