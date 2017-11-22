@@ -14,11 +14,17 @@
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
   },
+  "textures": [
+    {
+      "slot": "map",
+      "url": "mercury.jpg"
+    }
+  ],
   "argumentOfPeriapsis": 25.58643458205566,
   "eccentricity": 0.2061210422938445,
   "longitudeOfAscendingNode": 47.91381339232119,
-  "semimajor": 0.3787414194506795,
-  "semiminor": 0.3706085164938304,
+  "semimajor": 56658909.89571722,
+  "semiminor": 55442244.930762865,
   "periapses": {
     "last": 1672564975497.5886,
     "next": 1885517466742.7034

@@ -13,6 +13,7 @@ export default class Orbital extends React.Component {
     bodyRadius: PropTypes.number.isRequired,
     atmosphere: PropTypes.number,
     pathOpacity: PropTypes.number,
+    maps: PropTypes.array,
     label: PropTypes.object,
     id: PropTypes.string.isRequired
   }
@@ -29,6 +30,7 @@ export default class Orbital extends React.Component {
               rotation={this.props.bodyRotation}
               radius={this.props.bodyRadius}
               label={this.props.label}
+              maps={this.props.maps}
             />
             {this.props.children}
           </group>

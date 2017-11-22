@@ -1,6 +1,6 @@
 export const SPECULAR_COLOR = 0x000000;
 
-export const MESH_DEFAULT_COLOR = 0x808080;
+export const MESH_DEFAULT_COLOR = 0xFFFFFF;
 
 export const SPHERE_SEGMENTS = 32;
 

@@ -16,6 +16,8 @@
   "argumentOfPeriapsis": 2.317682317771272E+02,
   "eccentricity": 2.953719152844289E-02,
   "longitudeOfAscendingNode": 1.391084672763423E+02,
+  "semimajor": 3560820,
+  "semiminor": 3559266,
   "periapses": {
     "last": 1395164760000,
     "next": 1402018440000

@@ -14,6 +14,12 @@
     "nasaBarycenterCode": "0",
     "revolutionOrder": "y"
   },
+  "maps": [
+    {
+      "slot": "map",
+      "url": "venus.jpg"
+    }
+  ],
   "argumentOfPeriapsis": 55.186,
   "eccentricity": 0.0067,
   "longitudeOfAscendingNode": 76.678,

@@ -9,19 +9,6 @@ export class LoaderContainer extends React.Component {
 
   componentWillMount = () => {
     DefaultLoadingManager.onProgress = this.onProgress;
-    this.state = {
-      percent: 0
-    };
-
-    const interval = setInterval(() => {
-      if (this.state.percent < 100) {
-        this.setState({
-          percent: this.state.percent + 10
-        });
-      } else {
-        clearInterval(interval);
-      }
-    }, 500);
   }
 
   /**
@@ -46,7 +33,7 @@ export class LoaderContainer extends React.Component {
   render() {
     return (
       <SplashScreen
-        percent={this.state.percent || 0}
+        percent={this.props.percent || 0}
         show={!this.props.isUserEntered}
         enterScene={this.enterScene}
         pageText={this.props.pageText}

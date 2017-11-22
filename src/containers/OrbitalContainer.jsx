@@ -19,7 +19,8 @@ export class OrbitalContainer extends React.Component {
     time: PropTypes.number,
     isSatellite: PropTypes.bool,
     active: PropTypes.bool,
-    highlightedOrbitals: PropTypes.array
+    highlightedOrbitals: PropTypes.array,
+    maps: PropTypes.array
   }
 
   componentWillMount = () => {
@@ -131,6 +132,7 @@ export class OrbitalContainer extends React.Component {
         bodyRadius={this.state.bodyRadius}
         pathOpacity={this.state.pathOpacity}
         atmosphere={this.props.atmosphere}
+        maps={this.props.maps}
         children={this.props.children}
         label={this.label}
         id={this.props.id}

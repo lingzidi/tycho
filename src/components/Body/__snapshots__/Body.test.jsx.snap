@@ -12,9 +12,7 @@ exports[`Body Component should render the body successfully 1`] = `
       }
     }
   >
-    <meshPhongMaterial
-      specular={0}
-    />
+    <TextureContainer />
     <sphereGeometry
       heightSegments={32}
       radius={100}

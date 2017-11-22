@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Constants from '../../constants';
+import TextureContainer from '../../containers/TextureContainer';
 
 export default class Body extends React.Component {
 
@@ -18,9 +19,7 @@ export default class Body extends React.Component {
     return (
       <group ref="group">
         <mesh rotation={this.props.rotation}>
-          <meshPhongMaterial
-            specular={Constants.WebGL.SPECULAR_COLOR}
-          />
+          <TextureContainer textures={this.props.maps} />
           <sphereGeometry
             widthSegments={Constants.WebGL.SPHERE_SEGMENTS}
             heightSegments={Constants.WebGL.SPHERE_SEGMENTS}

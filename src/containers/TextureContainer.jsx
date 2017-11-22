@@ -10,6 +10,10 @@ export default class TextureContainer extends React.Component {
     textures: PropTypes.array
   }
 
+  componentWillMount = () => {
+    this.loadedTextures = [];
+  }
+
   componentDidMount = () => {
     this.enqueueTextures(this.props.textures);
   }
@@ -19,9 +23,8 @@ export default class TextureContainer extends React.Component {
    *
    * @param {Texture} texture - instance of THREE.Texture
    */
-  renderTexture = (texture) => {
-    this.refs.material.map = texture;
-    this.refs.material.needsUpdate = true;
+  onTextureLoaded = (textureData) => {
+    this.loadedTextures.push(textureData);
   }
 
   /**
@@ -30,9 +33,10 @@ export default class TextureContainer extends React.Component {
    * @param {Object} prop
    * @param {String} prop.url - url of the texture to load
    */
-  loadTexture = ({url}) => {
-    let loader = new TextureLoader();
-    loader.load(url, this.renderTexture);
+  loadTexture = ({url, slot}) => {
+    const loader = new TextureLoader();
+    url = `/static/textures/map/${url}`; // TODO
+    loader.load(url, () => this.onTextureLoaded({url, slot}));
   }
 
   /**
@@ -41,14 +45,46 @@ export default class TextureContainer extends React.Component {
    * @param {Object[]} textures - list of texture sets
    */
   enqueueTextures = (textures) => {
-    textures.forEach(this.loadTexture);
+    if (Array.isArray(textures)) {
+      textures.forEach(this.loadTexture);
+    }
+  }
+
+  /**
+   * Creates texture components from the loaded textures.
+   * 
+   * @returns {Texture[]} array of texture components
+   */
+  getTextures = () => {
+    return this
+      .loadedTextures
+      .map(({slot, url}, key) => {
+        return <texture
+          url={url}
+          slot={slot}
+          key={key}
+          onLoad={this.updateMaterial}
+        />
+      });
+  }
+
+  /**
+   * Flags material + assets to update on next animation frame.
+   */
+  updateMaterial = () => {
+    const {material} = this.refs;
+
+    if (material.map) {
+      material.map.needsUpdate = true;
+    }
+    material.needsUpdate = true;
   }
 
   render() {
     return (
-      <meshBasicMaterial
+      <meshLambertMaterial
         color={Constants.WebGL.MESH_DEFAULT_COLOR}
-        side={this.props.side}
+        children={this.getTextures()}
         ref="material"
       />
     );
