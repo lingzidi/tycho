@@ -10,8 +10,7 @@ cache:
 script:
   - npm install
   - npm test
-  - npm run test-scripts
-  - npm run coverage
+  - npm run test:coverage
 
 after_success:
 - cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage
