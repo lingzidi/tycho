@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 import Settings from '../Settings';
 import ZoomSlider from '../Slider/ZoomSlider';
 import DatePickerContainer from '../../containers/DatePickerContainer';
@@ -6,7 +7,10 @@ import DatePickerContainer from '../../containers/DatePickerContainer';
 export default class UIControls extends React.Component {
   render() {
     return (
-      <div className={`uicontrols--${this.props.modifier}`}>
+      <div className={cx({
+        'ui-controls--enabled': this.props.controlsEnabled,
+        'ui-controls--disabled': !this.props.controlsEnabled,
+      })}>
         <div className="uicontrols__control uicontrols__control--scales">
           <Settings {...this.props} />
         </div>

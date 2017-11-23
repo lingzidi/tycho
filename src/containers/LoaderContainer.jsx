@@ -1,7 +1,8 @@
 import React from 'react';
 import {DefaultLoadingManager} from 'three';
 import {connect} from 'react-redux';
-import * as Actions from '../actions/LoaderActions';
+import * as AnimationActions from '../actions/AnimationActions';
+import * as LoaderActions from '../actions/LoaderActions';
 import ReduxService from '../services/ReduxService';
 import SplashScreen from '../components/SplashScreen';
 
@@ -24,17 +25,17 @@ export class LoaderContainer extends React.Component {
   }
 
   /**
-   * Hides the splash screen, revealing the scene.
+   * Starts playing the scene.
    */
   enterScene = () => {
-    this.props.action.setUserEntered(true);
+    this.props.action.setPlaying(true);
   }
 
   render() {
     return (
       <SplashScreen
         percent={this.props.percent || 0}
-        show={!this.props.isUserEntered}
+        show={!this.props.playing}
         enterScene={this.enterScene}
         pageText={this.props.pageText}
       />
@@ -46,8 +47,11 @@ export default connect(
   ReduxService.mapStateToProps(
     'loader.url',
     'loader.percent',
-    'loader.isUserEntered',
+    'animation.playing',
     'data.pageText'
   ),
-  ReduxService.mapDispatchToProps(Actions)
+  ReduxService.mapDispatchToProps(
+    AnimationActions,
+    LoaderActions
+  )
 )(LoaderContainer);

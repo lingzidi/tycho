@@ -89,7 +89,7 @@ describe('Tour Container', () => {
 
     it('should call maybeStartTour() with nextProps', () => {
       const spy = jest.spyOn(tourContainer, 'maybeStartTour');
-      const nextProps = {isUserEntered: true};
+      const nextProps = {playing: true};
 
       tourContainer.componentWillReceiveProps(nextProps);
 
@@ -132,8 +132,8 @@ describe('Tour Container', () => {
     it('should initialize the tour if the user-entered status has changed to true', () => {
       const spy = jest.spyOn(tourContainer, 'initializeTour');
 
-      tourContainer.props = {isUserEntered: false};
-      tourContainer.maybeStartTour({isUserEntered: true});
+      tourContainer.props = {playing: false};
+      tourContainer.maybeStartTour({playing: true});
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
@@ -142,7 +142,7 @@ describe('Tour Container', () => {
     it('should initialize the tour if the user-entered status is false', () => {
       const spy = jest.spyOn(tourContainer, 'initializeTour');
 
-      tourContainer.maybeStartTour({isUserEntered: false});
+      tourContainer.maybeStartTour({playing: false});
 
       expect(spy).not.toHaveBeenCalled();
     });
@@ -150,8 +150,8 @@ describe('Tour Container', () => {
     it('should not initialize the tour if it has already been initialized', () => {
       const spy = jest.spyOn(tourContainer, 'initializeTour');
 
-      tourContainer.props = {isUserEntered: true};
-      tourContainer.maybeStartTour({isUserEntered: true});
+      tourContainer.props = {playing: true};
+      tourContainer.maybeStartTour({playing: true});
 
       expect(spy).not.toHaveBeenCalled();
     });
@@ -161,7 +161,7 @@ describe('Tour Container', () => {
     describe('when user has entered scene', () => {
       beforeEach(() => {
         tourContainer.props = {
-          isUserEntered: true
+          playing: true
         };
       });
 
@@ -179,7 +179,7 @@ describe('Tour Container', () => {
     describe('when user has not yet entered scene', () => {
       it('should return false', () => {
         tourContainer.props = {
-          isUserEntered: false,
+          playing: false,
           isSkipped: false
         };
         expect(tourContainer.shouldRunTour()).toBe(false);

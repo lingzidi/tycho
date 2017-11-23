@@ -12,18 +12,6 @@ export class UIControlsContainer extends React.Component {
   }
 
   /**
-   * Returns class modifier based on global controlsEnabled state.
-   *
-   * @return {String} CSS BEM modifier name
-   */
-  getClassModifier = () => {
-    if (this.props.controlsEnabled) {
-      return 'enabled';
-    }
-    return 'disabled';
-  }
-
-  /**
    * Toggles the settings pane.
    */
   toggleSettings = () => {
@@ -41,7 +29,6 @@ export class UIControlsContainer extends React.Component {
   render() {
     return (
       <UIControls
-        modifier={this.getClassModifier()}
         openModal={this.openModal}
         toggleSetting={this.toggleSettings}
         {...this.props}

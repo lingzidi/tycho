@@ -2,7 +2,7 @@
 
 exports[`UIControls Component render() should render the UIControls successfully 1`] = `
 <div
-  className="uicontrols--undefined"
+  className="ui-controls--disabled"
 >
   <div
     className="uicontrols__control uicontrols__control--scales"

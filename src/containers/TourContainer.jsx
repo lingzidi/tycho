@@ -43,16 +43,16 @@ export class TourContainer extends React.Component {
    * Starts tour if not already initialized.
    * 
    * @param {Object} nextProps
-   * @param {Boolean} nextProps.isUserEntered
+   * @param {Boolean} nextProps.playing
    */
-  maybeStartTour = ({isUserEntered}) => {
-    if (isUserEntered && !this.props.isUserEntered) {
+  maybeStartTour = ({playing}) => {
+    if (playing && !this.props.playing) {
       this.initializeTour();
     }
   }
 
   shouldRunTour = () => {
-    return this.props.isUserEntered && !this.props.isSkipped;
+    return this.props.playing && !this.props.isSkipped;
   }
 
   /**
@@ -165,7 +165,7 @@ export default connect(
     'label.targetName',
     'tour.isComplete',
     'tour.isSkipped',
-    'loader.isUserEntered',
+    'animation.playing',
     'data.pageText'
   ),
   ReduxService.mapDispatchToProps(

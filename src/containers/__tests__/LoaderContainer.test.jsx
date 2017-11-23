@@ -12,7 +12,7 @@ describe('Loader Container', () => {
       action={{
         setPercentLoaded: jest.fn(),
         setTextureLoaded: jest.fn(),
-        setUserEntered: jest.fn()
+        setPlaying: jest.fn()
       }}
     />);
     loaderContainer = component.instance();
@@ -51,8 +51,8 @@ describe('Loader Container', () => {
   });
 
   describe('enterScene()', () => {
-    it('should call the setUserEntered() action with true', () => {
-      const spy = jest.spyOn(loaderContainer.props.action, 'setUserEntered');
+    it('should call the setPlaying() action with true', () => {
+      const spy = jest.spyOn(loaderContainer.props.action, 'setPlaying');
 
       loaderContainer.enterScene();
 

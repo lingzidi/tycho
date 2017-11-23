@@ -45,8 +45,8 @@ export class OrbitalContainer extends React.Component {
    * @param {Object} nextProps
    * @param {Number} nextProps.time - current time, in seconds
    */
-  maybeUpdateBodyState = ({time}) => {
-    if (this.props.time !== time) {
+  maybeUpdateBodyState = ({time, scale}) => {
+    if (this.props.time !== time || this.props.scale !== scale) {
       this.setBodyState(this.props, this.ellipse);
     }
   }

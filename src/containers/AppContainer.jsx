@@ -34,7 +34,7 @@ export class AppContainer extends React.Component {
    * @param {Number} nextProps.timeOffset - offset to update, in UNIX time (ms)
    */
   maybeUpdateOffset = ({timeOffset}) => {
-    if (timeOffset && this.props.playing) {
+    if (timeOffset !== this.props.timeOffset && this.props.playing) {
       this.clock.setOffset(timeOffset);
     }
   }
@@ -74,6 +74,7 @@ export class AppContainer extends React.Component {
 export default connect(
   ReduxService.mapStateToProps(
     'uiControls.speed',
+    'uiControls.scale',
     'uiControls.timeOffset',
     'data.orbitalData',
     'data.pageText',
