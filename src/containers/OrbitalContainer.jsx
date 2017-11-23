@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Ellipse from '../utils/Ellipse';
-import Label from 'three-dom-label';//../utils/Label';
+import Label from 'three-dom-label';
 import Service from '../services/OrbitalService';
 import Orbital from '../components/Orbital';
 
@@ -24,12 +24,13 @@ export class OrbitalContainer extends React.Component {
   }
 
   componentWillMount = () => {
-    this.state = {};
     this.ellipse = new Ellipse(this.props);
+    this.label = this.getLabel();
+
     this.setGroupRotations(this.props);
     this.setPathOpacity(this.props);
     this.setBodyState(this.props, this.ellipse);
-    this.label = this.getLabel();
+    this.setState({});
   }
 
   componentWillUnmount = () => this.label.unmount()
@@ -37,6 +38,7 @@ export class OrbitalContainer extends React.Component {
   componentWillReceiveProps = (nextProps) => {
     this.maybeUpdateBodyState(nextProps);
     this.maybeUpdatePathOpacity(nextProps);
+    this.maybeUpdateScale(nextProps);
   }
 
   /**
@@ -45,8 +47,8 @@ export class OrbitalContainer extends React.Component {
    * @param {Object} nextProps
    * @param {Number} nextProps.time - current time, in seconds
    */
-  maybeUpdateBodyState = ({time, scale}) => {
-    if (this.props.time !== time || this.props.scale !== scale) {
+  maybeUpdateBodyState = ({time}) => {
+    if (this.props.time !== time) {
       this.setBodyState(this.props, this.ellipse);
     }
   }
@@ -60,6 +62,28 @@ export class OrbitalContainer extends React.Component {
   maybeUpdatePathOpacity = ({highlightedOrbitals}) => {
     if (this.props.highlightedOrbitals !== highlightedOrbitals) {
       this.setPathOpacity(this.props, highlightedOrbitals);
+    }
+  }
+
+  /**
+   * Updates items that are privy to scale changes when appropriate.
+   * 
+   * @param {Object} nextProps
+   * @param {Number} nextProps.time - current time, in seconds
+   * @param {Number} nextProps.scale - user-defined scale
+   */
+  maybeUpdateScale = ({time, scale}) => {
+    if (scale !== this.props.scale) {
+      if (this.props.isSatellite) {
+        // only update the orbital path scale for satellites
+        this.ellipse.setScale(scale);
+      }
+      this.setBodyState(this.props, this.ellipse);
+      // keep track of last time the scale updated so lines 
+      // don't constantly re-render (which is computationally expensive)
+      this.setState({
+        scaleLastUpdate: time
+      });
     }
   }
 
@@ -132,6 +156,7 @@ export class OrbitalContainer extends React.Component {
         bodyRadius={this.state.bodyRadius}
         pathOpacity={this.state.pathOpacity}
         atmosphere={this.props.atmosphere}
+        scaleLastUpdate={this.state.scaleLastUpdate}
         maps={this.props.maps}
         children={this.props.children}
         label={this.label}

@@ -13,6 +13,7 @@ export default class Orbital extends React.Component {
     bodyRadius: PropTypes.number.isRequired,
     atmosphere: PropTypes.number,
     pathOpacity: PropTypes.number,
+    scaleLastUpdate: PropTypes.number,
     maps: PropTypes.array,
     label: PropTypes.object,
     id: PropTypes.string.isRequired
@@ -35,7 +36,7 @@ export default class Orbital extends React.Component {
             {this.props.children}
           </group>
 
-          <line>
+          <line key={`path-${this.props.id}-${this.props.scaleLastUpdate}`}>
             <lineBasicMaterial
               transparent={true}
               color={this.props.atmosphere}

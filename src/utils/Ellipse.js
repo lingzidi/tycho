@@ -17,10 +17,10 @@ export default class Ellipse {
    * @param {Number} props.scale - scaling factor
    */
   constructor({semimajor, semiminor, eccentricity, scale}) {
-    this.semimajor = Scale(semimajor);
-    this.semiminor = Scale(semiminor);
+    this.semimajor = semimajor;
+    this.semiminor = semiminor;
     this.eccentricity = eccentricity;
-    this.render();
+    this.setScale(scale);
   }
 
   /**
@@ -61,12 +61,14 @@ export default class Ellipse {
    * @returns {EllipseCurve}
    */
   getEllipseCurve = () => {
-    const focus = Math2.getFocus(this.semimajor, this.semiminor);
+    const semimajor = Scale(this.semimajor, this.scale);
+    const semiminor = Scale(this.semiminor, this.scale);
+    const focus = Math2.getFocus(semimajor, semiminor);
 
     return new THREE.EllipseCurve(0,
       focus, 
-      this.semiminor,
-      this.semimajor,
+      semiminor,
+      semimajor,
       Constants.WebGL.Ellipse.START,
       Constants.WebGL.Ellipse.END
     );
@@ -103,5 +105,10 @@ export default class Ellipse {
     const vector2d = this.path.getPoint(percent);
 
     return new THREE.Vector3(vector2d.x, vector2d.y);
+  }
+
+  setScale = (scale) => {
+    this.scale = scale;
+    this.render();
   }
 }

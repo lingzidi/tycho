@@ -16,7 +16,9 @@ exports[`Orbital Component render() should render the orbital successfully 1`] =
         rotation={Object {}}
       />
     </group>
-    <line>
+    <line
+      key="path-testOrbital-undefined"
+    >
       <lineBasicMaterial
         transparent={true}
       />

@@ -156,6 +156,57 @@ describe('Orbital Container', () => {
     });
   });
 
+  describe('maybeUpdateScale()', () => {
+    const scale = 2;
+    const time = 12345;
+
+    beforeEach(() => {
+      orbitalContainer.setBodyState = jest.fn();
+      orbitalContainer.props = {
+        scale: scale + 1
+      };
+    });
+
+    it('should update the ellipse scale if orbital is a satellite', () => {
+      const spy = jest.spyOn(orbitalContainer.ellipse, 'setScale');
+
+      orbitalContainer.props.isSatellite = true;
+      orbitalContainer.maybeUpdateScale({scale, time});
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(scale);
+    });
+
+    it('should not mutate the ellipse scale if orbital is not a satellite', () => {
+      const spy = jest.spyOn(orbitalContainer.ellipse, 'setScale');
+      const scale = 2;
+
+      orbitalContainer.props.isSatellite = false;
+      orbitalContainer.maybeUpdateScale({scale, time});
+      
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should update the body state', () => {
+      const spy = jest.spyOn(orbitalContainer, 'setBodyState');
+      const {props, ellipse} = orbitalContainer;
+
+      orbitalContainer.maybeUpdateScale({scale, time});
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(props, ellipse); 
+    });
+
+    it('should set the scaleLastUpdate state parameter to the current time', () => {
+      orbitalContainer.maybeUpdateScale({scale, time});
+
+      expect(orbitalContainer.state).toHaveProperty('scaleLastUpdate');
+      expect(orbitalContainer.state.scaleLastUpdate).toEqual(time);
+    });
+  });
+
   describe('setPathOpacity()', () => {
     it('should set the opacity state to the calculated opacity', () => {
       const opacity = Constants.UI.HOVER_OPACITY_ON;
