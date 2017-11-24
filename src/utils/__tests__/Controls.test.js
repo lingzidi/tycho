@@ -52,7 +52,17 @@ describe('Controls', () => {
       const result = controls.getZoomDelta(-40);
 
       expect(typeof result).toBe('number');
-      expect(result).toEqual(49.9996);
+      expect(result).toEqual(49.92);
+    });
+  });
+
+  describe('getWheelDeltaDivisor()', () => {
+    it('should calculate the proper wheel delta divisor', () => {
+      controls.level = 50;
+      const result = controls.getWheelDeltaDivisor(0.3);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(500);
     });
   });
 

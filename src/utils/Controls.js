@@ -53,11 +53,33 @@ export default class Controls extends OrbitControls(THREE) {
   getZoomDelta = (delta) => {
     let zoom = this.level;
     
-    zoom += (delta / Constants.UI.WHEEL_DELTA_DIVISOR);
+    zoom += (delta / this.getWheelDeltaDivisor(zoom));
     zoom = Math.max(zoom, 0);
     zoom = Math.min(zoom, 100);
    
     return zoom;
+  }
+
+  /**
+   * Calculates a wheel delta that inflates based on how far away
+   * the user is from the target, because outer space is really big.
+   *
+   * @param {Number} level - current zoom level 
+   * @returns {Number} scrollwheel delta
+   */
+  getWheelDeltaDivisor = (level) => {
+    let delta = Constants.UI.WHEEL_DELTA_DIVISOR;
+    let match = false;
+
+    Constants.WebGL.ScrollScale
+      .forEach(({distance, scale}) => {
+        if (level > distance && !match) {
+          delta *= scale;
+          match = true;
+        }
+      });
+
+    return delta;
   }
 
   /**

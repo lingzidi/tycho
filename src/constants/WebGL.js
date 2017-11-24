@@ -39,3 +39,18 @@ export const Camera = {
   MIN_DISTANCE: 0.001,
   SATELLITE_LABEL_RANGE: 7
 };
+
+export const ScrollScale = [
+  {
+    distance: 0.2,
+    scale: 0.005
+  },
+  {
+    distance: 0.1,
+    scale: 0.05
+  },
+  {
+    distance: 0.05,
+    scale: 0.1
+  }
+];
