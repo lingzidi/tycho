@@ -3,7 +3,7 @@ import Actions from '../../constants/Actions';
 
 describe('Loader Reducer', () => {
   it('should return the state', () => {
-    const state = {targetName: 'Mars'};
+    const state = {targetId: 'Mars'};
     const result = reducer(state, {});
 
     expect(result).toEqual(state);

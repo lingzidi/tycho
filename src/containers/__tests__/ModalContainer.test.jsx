@@ -13,7 +13,7 @@ describe('Modal Container', () => {
     component = shallow(
       <ModalContainer
         orbitalData={orbitalData}
-        targetName="dummyPlanet"
+        targetId="dummyPlanet"
       />
     );
     modalContainer = component.instance();
@@ -24,24 +24,24 @@ describe('Modal Container', () => {
       OrbitalService.getTargetByName = () => orbitalData[0];
     });
 
-    it('should call updateTargetParams if the targetName has changed', () => {
+    it('should call updateTargetParams if the targetId has changed', () => {
       const spy = jest.spyOn(modalContainer, 'updateTargetParams');
-      const targetName = 'Mars';
-      const nextProps = {targetName};
+      const targetId = 'Mars';
+      const nextProps = {targetId};
 
-      modalContainer.props = {targetName: 'Earth'};
+      modalContainer.props = {targetId: 'Earth'};
       modalContainer.componentWillReceiveProps(nextProps);
 
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(targetName);
+      expect(spy).toHaveBeenCalledWith(targetId);
     });
 
-    it('should not call updateTargetParams if the targetName remains the same', () => {
+    it('should not call updateTargetParams if the targetId remains the same', () => {
       const spy = jest.spyOn(modalContainer, 'updateTargetParams');
-      const targetName = 'Earth';
-      const nextProps = {targetName};
+      const targetId = 'Earth';
+      const nextProps = {targetId};
 
-      modalContainer.props = {targetName};
+      modalContainer.props = {targetId};
       modalContainer.componentWillReceiveProps(nextProps);
 
       expect(spy).not.toHaveBeenCalled();
@@ -105,7 +105,7 @@ describe('Modal Container', () => {
   });
 
   describe('onAnimationFrame()', () => {
-    it('should call updateOrbitalStats with the current targetName', () => {
+    it('should call updateOrbitalStats with the current targetId', () => {
       const spy = jest.spyOn(modalContainer, 'updateOrbitalStats');
 
       modalContainer.onAnimationFrame();

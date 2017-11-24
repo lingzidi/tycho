@@ -224,12 +224,12 @@ export default class OrbitalService {
    * Calculates the real-world distance at present position to the Sun.
    *
    * @param {Object} positions - positions map of orbitals
-   * @param {String} targetName - name of the active target
+   * @param {String} targetId - name of the active target
    * @returns {Number} current distance to the Sun, in kilometers
    */
-  static getDistanceToSun = (positions, targetName) => {
-    if (positions && positions[targetName]) {
-      const {x, y, z} = positions[targetName].position3d;
+  static getDistanceToSun = (positions, targetId) => {
+    if (positions && positions[targetId]) {
+      const {x, y, z} = positions[targetId].position3d;
       const magnitude = Math.sqrt(x * x + y * y + z * z);
       
       return magnitude * Constants.WebGL.UNIT_SCALE;
@@ -238,22 +238,22 @@ export default class OrbitalService {
   }
 
   /**
-   * Finds the planet with the given targetName.
+   * Finds the planet with the given targetId.
    *
    * @param {Object[]} orbitals - list of orbitals
-   * @param {String} targetName - id of active orbital target
+   * @param {String} targetId - id of active orbital target
    * @returns {Number} orbital radius
    */
-  static getTargetByName = (orbitals, targetName) => {
+  static getTargetByName = (orbitals, targetId) => {
     let target;
 
     orbitals.forEach((orbital) => {
       if (!target) {
-        if (orbital.id === targetName) {
+        if (orbital.id === targetId) {
           target = orbital;
         } else if (orbital.satellites) {
           target = OrbitalService
-            .getTargetByName(orbital.satellites, targetName);
+            .getTargetByName(orbital.satellites, targetId);
         }
       }
     });

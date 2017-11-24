@@ -3,14 +3,14 @@ import ActionType from '../../constants/Actions';
 
 describe('Label Actions', () => {
   describe('setActiveOrbital()', () => {
-    it('should be of type SET_ACTIVE_ORBITAL with the targetName payload', () => {
-      const targetName = 'Mars';
-      const result = Actions.setActiveOrbital(targetName);
+    it('should be of type SET_ACTIVE_ORBITAL with the targetId payload', () => {
+      const targetId = 'Mars';
+      const result = Actions.setActiveOrbital(targetId);
       
       expect(result).toHaveProperty('type');
-      expect(result).toHaveProperty('targetName');
+      expect(result).toHaveProperty('targetId');
       expect(result.type).toEqual(ActionType.SET_ACTIVE_ORBITAL);
-      expect(result.targetName).toEqual(targetName);
+      expect(result.targetId).toEqual(targetId);
     });
   });
 

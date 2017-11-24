@@ -17,12 +17,12 @@ export default class CameraService {
    * Calculates the min distance from target to camera to avoid collision.
    *
    * @param {Object[]} orbitals - list of orbitals
-   * @param {String} targetName - id of active orbital target
+   * @param {String} targetId - id of active orbital target
    * @param {Number} scale - user-defined planet scale
    * @returns {Number} min distance
    */
-  static getMinDistance = (orbitals, targetName, scale) => {
-    const target = OrbitalService.getTargetByName(orbitals, targetName);
+  static getMinDistance = (orbitals, targetId, scale) => {
+    const target = OrbitalService.getTargetByName(orbitals, targetId);
 
     if (target) {
       return Scale(target.radius, scale) + Constants.WebGL.Camera.MIN_DISTANCE;

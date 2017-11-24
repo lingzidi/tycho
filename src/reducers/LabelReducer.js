@@ -40,7 +40,10 @@ export default function(state = {}, payload) {
 
   switch(payload.type) {
     case Actions.SET_ACTIVE_ORBITAL:
-      return assign('targetName');
+      return Object.assign({}, state, {
+        targetId: payload.targetId,
+        targetName: payload.targetName
+      });
 
     case Actions.SET_LABEL_TEXT:
       return assign('labelText');

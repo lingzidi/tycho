@@ -3,20 +3,20 @@ import Actions from '../../constants/Actions';
 
 describe('Label Reducer', () => {
   it('should return the state', () => {
-    const state = {targetName: 'Mars'};
+    const state = {targetId: 'Mars'};
     const result = reducer(state, {});
 
     expect(result).toEqual(state);
   });
 
   it('should handle SET_ACTIVE_ORBITAL', () => {
-    const targetName = 'Mars';
+    const targetId = 'Mars';
     const result = reducer(undefined, {
       type: Actions.SET_ACTIVE_ORBITAL,
-      targetName
+      targetId
     });
 
-    expect(result).toEqual({targetName});
+    expect(result).toEqual({targetId});
   });
   
   it('should handle SET_LABEL_TEXT', () => {

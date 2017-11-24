@@ -84,7 +84,7 @@ export class SceneContainer extends React.Component {
           <scene ref="scene">
             <CameraContainer
               ratio={width / height}
-              targetName={this.props.targetName}
+              targetId={this.props.targetId}
               action={this.props.action}
               speed={this.props.speed}
               scale={this.props.scale}
@@ -108,7 +108,7 @@ export default connect(
     'uiControls.zoom',
     'uiControls.scale',
     'uiControls.speed',
-    'label.targetName',
+    'label.targetId',
     'label.highlightedOrbitals',
     'tour.isAutoOrbitEnabled',
     'animation.time',

@@ -242,7 +242,7 @@ describe('Orbital Service', () => {
       expect(result).toEqual(0);
     });
 
-    it('should return 0 if the position of the targetName was not found', () => {
+    it('should return 0 if the position of the targetId was not found', () => {
       const result = OrbitalService.getDistanceToSun({Earth: {}}, 'Mars');
 
       expect(typeof result).toBe('number');
@@ -250,9 +250,9 @@ describe('Orbital Service', () => {
     });
 
     it('should return the magnitude of the current position', () => {
-      const targetName = 'Earth';
+      const targetId = 'Earth';
       const position3d = {x: 1, y: 2, z: 3};
-      const result = OrbitalService.getDistanceToSun({[targetName]: {position3d}}, targetName);
+      const result = OrbitalService.getDistanceToSun({[targetId]: {position3d}}, targetId);
     
       expect(typeof result).toBe('number');
       expect(result).toEqual(3741657.386773941);

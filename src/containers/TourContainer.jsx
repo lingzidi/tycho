@@ -101,7 +101,7 @@ export class TourContainer extends React.Component {
   }
 
   /**
-   * Sets the active orbital targetName and the header label text to UI defaults.
+   * Sets the active orbital targetId and the header label text to UI defaults.
    */
   setDefaultActiveOrbital = () => {
     this.props.action.setActiveOrbital(Constants.UI.ALTERNATE_TARGET_NAME);
@@ -162,7 +162,7 @@ export default connect(
   ReduxService.mapStateToProps(
     'uiControls.controlsEnabled',
     'uiControls.scale',
-    'label.targetName',
+    'label.targetId',
     'tour.isComplete',
     'tour.isSkipped',
     'animation.playing',

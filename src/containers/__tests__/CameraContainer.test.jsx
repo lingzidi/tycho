@@ -33,7 +33,7 @@ describe('Camera Container', () => {
     component = shallow(
       <CameraContainer 
         action={action}
-        targetName="testPlanet"
+        targetId="testPlanet"
         orbitalData={data}
         scene={scene}
         ratio={1.5}
@@ -69,27 +69,27 @@ describe('Camera Container', () => {
     });
 
     describe('componentWillReceiveProps()', () => {
-      it('should start tweening to `targetName` if the prop has changed', () => {
-        const targetName = 'Mars';
-        const nextProps = {targetName: 'Earth'};
+      it('should start tweening to `targetId` if the prop has changed', () => {
+        const targetId = 'Mars';
+        const nextProps = {targetId: 'Earth'};
         const spy = jest.spyOn(cameraContainer, 'movePivot');
 
         cameraContainer.startTween = jest.fn();
-        cameraContainer.props = {targetName, target, action, scene};
+        cameraContainer.props = {targetId, target, action, scene};
         cameraContainer.refs = {pivot};
         cameraContainer.componentWillReceiveProps(nextProps);
         
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledTimes(1);
-        expect(spy).toHaveBeenCalledWith(nextProps.targetName, true);
+        expect(spy).toHaveBeenCalledWith(nextProps.targetId, true);
       });
 
-      it('should not tween if the `targetName` if the prop has not changed', () => {
-        const targetName = 'Mars';
-        const nextProps = {targetName};
+      it('should not tween if the `targetId` if the prop has not changed', () => {
+        const targetId = 'Mars';
+        const nextProps = {targetId};
         const spy = jest.spyOn(cameraContainer, 'movePivot');
 
-        cameraContainer.props = {targetName, action, scene};
+        cameraContainer.props = {targetId, action, scene};
         cameraContainer.componentWillReceiveProps(nextProps);
 
         expect(spy).not.toHaveBeenCalled();
@@ -127,12 +127,12 @@ describe('Camera Container', () => {
     });
 
     describe('maybePreventCameraCollision()', () => {
-      it('should update the minDistance if the targetName has changed', () => {
-        const nextProps = {targetName: 'Mars'};
+      it('should update the minDistance if the targetId has changed', () => {
+        const nextProps = {targetId: 'Mars'};
         const minDistance = 3;
 
         CameraService.getMinDistance = () => minDistance;
-        cameraContainer.props = {targetName: 'Earth'};
+        cameraContainer.props = {targetId: 'Earth'};
         cameraContainer.controls.minDistance = 5;
         cameraContainer.maybePreventCameraCollision(nextProps);
 
@@ -140,12 +140,12 @@ describe('Camera Container', () => {
       });
 
       it('should update the minDistance if the scale has changed', () => {
-        const targetName = 'Earth';
-        const nextProps = {targetName, scale: 5};
+        const targetId = 'Earth';
+        const nextProps = {targetId, scale: 5};
         const minDistance = 3;
 
         CameraService.getMinDistance = () => minDistance;
-        cameraContainer.props = {targetName};
+        cameraContainer.props = {targetId};
         cameraContainer.controls.minDistance = 5;
         cameraContainer.maybePreventCameraCollision(nextProps);
 
@@ -232,7 +232,7 @@ describe('Camera Container', () => {
 
   describe('movePivot()', () => {
     describe('when the target exists and is set to animate', () => {
-      const targetName = 'Earth';
+      const targetId = 'Earth';
       
       beforeEach(() => {
         cameraContainer.props = {scene};
@@ -244,7 +244,7 @@ describe('Camera Container', () => {
       it('should freeze UI interactivity', () => {
         const spy = jest.spyOn(cameraContainer, 'setInteractivity');
 
-        cameraContainer.movePivot(targetName, true);
+        cameraContainer.movePivot(targetId, true);
 
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledTimes(1);
@@ -254,7 +254,7 @@ describe('Camera Container', () => {
       it('should initialize the tween', () => {
         const spy = jest.spyOn(cameraContainer, 'startTween');
 
-        cameraContainer.movePivot(targetName, true);
+        cameraContainer.movePivot(targetId, true);
 
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledTimes(1);
@@ -264,11 +264,11 @@ describe('Camera Container', () => {
 
     describe('when the target does not exist', () => {
       it('should not freeze UI interactivity', () => {
-        const targetName = 'Bogus';
+        const targetId = 'Bogus';
         const spy = jest.spyOn(cameraContainer, 'setInteractivity');
         
         cameraContainer.props.scene.getObjectByName = jest.fn();
-        cameraContainer.movePivot(targetName, true);
+        cameraContainer.movePivot(targetId, true);
 
         expect(spy).not.toHaveBeenCalled();
       });
@@ -276,11 +276,11 @@ describe('Camera Container', () => {
 
     describe('when the animate flag is false', () => {
       it('should not freeze UI interactivity', () => {
-        const targetName = 'Bogus';
+        const targetId = 'Bogus';
         const spy = jest.spyOn(cameraContainer, 'setInteractivity');
         
         cameraContainer.props.scene.getObjectByName = jest.fn();
-        cameraContainer.movePivot(targetName, false);
+        cameraContainer.movePivot(targetId, false);
 
         expect(spy).not.toHaveBeenCalled();
       });
@@ -288,7 +288,7 @@ describe('Camera Container', () => {
   });
 
   describe('startTween()', () => {
-    const targetName = 'Mars';
+    const targetId = 'Mars';
 
     beforeEach(() => {
       cameraContainer.props = {scene, action};

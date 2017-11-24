@@ -8,7 +8,7 @@ export default class CameraContainer extends React.Component {
 
   static propTypes = {
     ratio: PropTypes.number.isRequired,
-    targetName: PropTypes.string,
+    targetId: PropTypes.string,
     actions: PropTypes.object,
     speed: PropTypes.number,
     scale: PropTypes.number,
@@ -53,14 +53,14 @@ export default class CameraContainer extends React.Component {
   }
 
   /**
-   * Starts tweening the camera to the new target if targetName has changed.
+   * Starts tweening the camera to the new target if targetId has changed.
    *
    * @param {Object} props
-   * @param {String} props.targetName
+   * @param {String} props.targetId
    */
-  maybeMoveCameraPivot = ({targetName}) => {
-    if (this.props.targetName !== targetName) {
-      this.movePivot(targetName, !!this.props.targetName);
+  maybeMoveCameraPivot = ({targetId}) => {
+    if (this.props.targetId !== targetId) {
+      this.movePivot(targetId, !!this.props.targetId);
     }
   }
 
@@ -69,13 +69,13 @@ export default class CameraContainer extends React.Component {
    * This prevents the camera from colliding with the target, should the zoom change.
    *
    * @param {Object} props
-   * @param {String} props.targetName - id of active target
+   * @param {String} props.targetId - id of active target
    * @param {Number} props.scale - user-defined planet scale
    */
-  maybePreventCameraCollision = ({targetName, scale}) => {
-    if (this.props.targetName !== targetName || this.props.scale !== scale) {
+  maybePreventCameraCollision = ({targetId, scale}) => {
+    if (this.props.targetId !== targetId || this.props.scale !== scale) {
       this.controls.minDistance = CameraService
-        .getMinDistance(this.props.orbitalData, targetName, scale);
+        .getMinDistance(this.props.orbitalData, targetId, scale);
     }
   }
 
@@ -104,15 +104,15 @@ export default class CameraContainer extends React.Component {
   }
 
   /**
-   * Starts Tween to the position having a key of targetName.
+   * Starts Tween to the position having a key of targetId.
    *
-   * @param {String} targetName - name of orbital to move to
+   * @param {String} targetId - name of orbital to move to
    * @param {Boolean} animate - set to true if it should animate
    */
-  movePivot = (targetName, animate) => {
+  movePivot = (targetId, animate) => {
     const {scene} = this.props;
     const {pivot} = this.refs;
-    const target = scene.getObjectByName(targetName);
+    const target = scene.getObjectByName(targetId);
     
     if (target && animate) {
       this.setInteractivity(false);

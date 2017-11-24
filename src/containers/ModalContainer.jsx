@@ -16,21 +16,21 @@ export class ModalContainer extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    const {targetName} = nextProps;
+    const {targetId} = nextProps;
 
-    if (this.props.targetName !== targetName) {
-      this.updateTargetParams(targetName);
+    if (this.props.targetId !== targetId) {
+      this.updateTargetParams(targetId);
     }
   }
 
   /**
    * Update state with active target information
    * 
-   * @param {String} targetName - name of active target
+   * @param {String} targetId - name of active target
    */
-  updateTargetParams = (targetName) => {
+  updateTargetParams = (targetId) => {
     this.setState({
-      ...OrbitalService.getTargetByName(this.props.orbitalData, targetName)
+      ...OrbitalService.getTargetByName(this.props.orbitalData, targetId)
     });
   }
 
@@ -38,10 +38,10 @@ export class ModalContainer extends React.Component {
    * Updates orbital information.
    */
   updateOrbitalStats = () => {
-    const {targetName, positions} = this.props;
+    const {targetId, positions} = this.props;
     const {centralMass, semimajor} = this.state;
 
-    const distance = OrbitalService.getDistanceToSun(positions, targetName);
+    const distance = OrbitalService.getDistanceToSun(positions, targetId);
     const energy = Physics.orbitalEnergyConservation(centralMass, distance, semimajor);
 
     const magnitude = this.formatNumber(distance);
@@ -105,7 +105,7 @@ const AnimatedModal = ReactAnimationFrame(ModalContainer);
 export default connect(
   ReduxService.mapStateToProps(
     'uiControls.modalActive',
-    'label.targetName',
+    'label.targetId',
     'data.orbitalData',
     'data.pageText',
     'animation.time',

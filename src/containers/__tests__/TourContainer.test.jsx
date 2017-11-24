@@ -302,7 +302,7 @@ describe('Tour Container', () => {
       expect(spy).toHaveBeenCalledWith(false);
     });
 
-    it('should call the setActiveOrbital action with the defined targetName', () => {
+    it('should call the setActiveOrbital action with the defined targetId', () => {
       const spy = jest.spyOn(tourContainer.props.action, 'setActiveOrbital');
 
       tourContainer.skipTour();

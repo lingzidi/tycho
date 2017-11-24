@@ -19,7 +19,7 @@ export default class UIControls extends React.Component {
           <span
             className="uicontrols__control uicontrols__control--modal-opener"
             onClick={this.props.openModal}>
-            {this.props.labelText}
+            {this.props.targetName}
           </span>
         </div>
 

@@ -138,7 +138,7 @@ export class OrbitalContainer extends React.Component {
       camera,
       maxDistance: Service.getMaxViewDistance(isSatellite),
       events: {
-        click: action.setActiveOrbital.bind(this, id),
+        click: action.setActiveOrbital.bind(this, id, name),
         mouseover: action.addHighlightedOrbital.bind(this, id),
         mouseout: action.removeHighlightedOrbital.bind(this, id)
       }

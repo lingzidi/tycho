@@ -1,8 +1,9 @@
 import Actions from '../constants/Actions';
 
-export const setActiveOrbital = (targetName) => {
+export const setActiveOrbital = (targetId, targetName) => {
   return {
     type: Actions.SET_ACTIVE_ORBITAL,
+    targetId,
     targetName
   };
 }
