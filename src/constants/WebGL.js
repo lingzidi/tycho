@@ -30,12 +30,12 @@ export const Zoom = {
 
 export const Camera = {
   NEAR: 0.001,
-  FAR: 13000,
+  FAR: 15000,
   FOV: 50,
   X: 12000,
   Y: 12000,
   Z: 12000,
   MAX_DISTANCE: 12000,
-  MIN_DISTANCE: 0,
+  MIN_DISTANCE: 0.001,
   SATELLITE_LABEL_RANGE: 7
 };

@@ -22,10 +22,10 @@ export default class CameraService {
    * @returns {Number} min distance
    */
   static getMinDistance = (orbitals, targetName, scale) => {
-    const targetRadius = OrbitalService.getTargetByName(orbitals, targetName);
+    const target = OrbitalService.getTargetByName(orbitals, targetName);
 
-    if (targetRadius) {
-      return Scale(targetRadius.radius, scale);
+    if (target) {
+      return Scale(target.radius, scale) + Constants.WebGL.Camera.MIN_DISTANCE;
     }
     return 0;
   }
