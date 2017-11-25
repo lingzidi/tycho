@@ -19,44 +19,6 @@ exports[`Modal Component should render the Modal successfully 1`] = `
   </div>
   <div
     className="modal__content"
-  >
-    <ReactMarkdown
-      containerTagName="div"
-      parserOptions={Object {}}
-      source="Test Description"
-    />
-  </div>
-  <div
-    className="modal__footer"
-  >
-    <div
-      className="modal__info"
-    >
-      <span>
-        Current Earth time:
-      </span>
-      <br />
-      <span>
-        Velocity at vector:
-      </span>
-      <br />
-      <span>
-        Distance to Sun:
-      </span>
-    </div>
-    <div
-      className="modal__info"
-    >
-      <span />
-      <br />
-      <span>
-         km/s
-      </span>
-      <br />
-      <span>
-         km
-      </span>
-    </div>
-  </div>
+  />
 </div>
 `;

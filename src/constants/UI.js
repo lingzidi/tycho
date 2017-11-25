@@ -9,13 +9,18 @@ export const Sliders = {
   }
 };
 
+export const ModalTypes = {
+  STATS_MODAL: 'STATS_MODAL',
+  ABOUT_MODAL: 'ABOUT_MODAL'
+};
+
 export const ALTERNATE_TARGET_NAME = 'mars';
 
 export const DEFAULT_TARGET_NAME = 'earth';
 
 export const DEFAULT_LABEL_TEXT = 'Earth';
 
-export const UX_DATE_FORMAT = 'MMM DD, YYYY h:mm a';
+export const UX_DATE_FORMAT = 'MMM DD, YYYY h:mm:ss a';
 
 export const ZOOM_LABEL_TRIGGER = 25;
 

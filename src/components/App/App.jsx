@@ -4,6 +4,7 @@ import UIControlsContainer from '../../containers/UIControlsContainer';
 import LoaderContainer from '../../containers/LoaderContainer';
 import TourContainer from '../../containers/TourContainer';
 import ModalContainer from '../../containers/ModalContainer';
+import StatsContainer from '../../containers/StatsContainer';
 import Constants from '../../constants';
 
 export default class App extends React.Component {
@@ -18,7 +19,12 @@ export default class App extends React.Component {
         <UIControlsContainer />
         <LoaderContainer />
         <TourContainer labels={Constants.Tour.LABELS} />
-        <ModalContainer />
+        <ModalContainer
+          type={Constants.UI.ModalTypes.STATS_MODAL}
+          title={this.props.title}>
+          <StatsContainer />
+        </ModalContainer>
+
       </div>
     );
   }

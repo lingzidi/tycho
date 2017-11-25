@@ -64,13 +64,13 @@ describe('UIControls Actions', () => {
 
   describe('toggleModal()', () => {
     it('should be of type MODAL_ACTIVE with the modalActive payload', () => {
-      const modalActive = true;
-      const result = Actions.toggleModal(modalActive);
+      const activeModal = 'TEST_MODAL';
+      const result = Actions.toggleModal(activeModal);
       
       expect(result).toHaveProperty('type');
-      expect(result).toHaveProperty('modalActive');
+      expect(result).toHaveProperty('activeModal');
       expect(result.type).toEqual(ActionType.MODAL_ACTIVE);
-      expect(result.modalActive).toEqual(modalActive);
+      expect(result.activeModal).toEqual(activeModal);
     });
   });
 

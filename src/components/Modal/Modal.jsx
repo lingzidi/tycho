@@ -1,19 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
-import './Modal.css';
+import PropTypes from 'prop-types';
 
 export default class Modal extends React.Component {
 
   static propTypes = {
     modalActive: PropTypes.bool,
     closeModal: PropTypes.func.isRequired,
-    title: PropTypes.string,
-    description: PropTypes.string.isRequired,
-    velocity: PropTypes.string,
-    magnitude: PropTypes.string,
-    time: PropTypes.string
+    title: PropTypes.string
   }
 
   render() {
@@ -28,23 +22,10 @@ export default class Modal extends React.Component {
 						&times;
 					</span>
 				</div>
-				
-				<div className="modal__content">
-          <ReactMarkdown source={this.props.description} />
-        </div>
-				
-        <div className="modal__footer">
-          <div className="modal__info">
-            <span>Current Earth time:</span><br />
-            <span>Velocity at vector:</span><br />
-            <span>Distance to Sun:</span>
-          </div>
-          <div className="modal__info">
-            <span>{this.props.time}</span><br />
-            <span>{this.props.velocity} km/s</span><br />
-            <span>{this.props.magnitude} km</span>
-          </div>
-				</div>
+
+        <div className="modal__content">
+          {this.props.children}
+        </div>	
 			</div>
     );
   }

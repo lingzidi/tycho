@@ -47,13 +47,14 @@ describe('UIControls Container', () => {
     });
 
     it('should open the modal', () => {
+      const type = 'TEST_MODAL';
       const spy = jest.spyOn(container.props.action, 'toggleModal');
 
-      container.openModal();
+      container.openModal(type);
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(true);
+      expect(spy).toHaveBeenCalledWith(type);
     });
 
     it('should hide the UI Controls', () => {

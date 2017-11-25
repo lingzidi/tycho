@@ -76,7 +76,7 @@ $button-transition-speed: 0.25s;
       width: $button-width;
       height: $button-height;
       position: absolute;
-      border: 5px solid black;
+      border: 5px solid transparent;
       box-sizing: border-box;
       content: attr(title);
       display: flex;
@@ -84,7 +84,6 @@ $button-transition-speed: 0.25s;
 
     &::before {
       background-color: #fff;
-      border-color: #000;
       color: #000;
       transform: rotateY(0deg) translateZ($button-height / 2);
     }

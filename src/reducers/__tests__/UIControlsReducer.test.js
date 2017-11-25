@@ -70,13 +70,13 @@ describe('UIControls Reducer', () => {
   });
 
   it('should handle MODAL_ACTIVE', () => {
-    const modalActive = true;
+    const activeModal = 'TEST_MODAL';
     const result = reducer(undefined, {
       type: Actions.MODAL_ACTIVE,
-      modalActive
+      activeModal
     });
 
-    expect(result).toEqual({modalActive});
+    expect(result).toEqual({activeModal});
   });
 
   it('should handle SETTINGS_ACTIVE', () => {

@@ -3,13 +3,15 @@ import cx from 'classnames';
 import Settings from '../Settings';
 import ZoomSlider from '../Slider/ZoomSlider';
 import DatePickerContainer from '../../containers/DatePickerContainer';
+import Constants from '../../constants';
 
 export default class UIControls extends React.Component {
   render() {
     return (
       <div className={cx({
-        'ui-controls--enabled': this.props.controlsEnabled,
-        'ui-controls--disabled': !this.props.controlsEnabled,
+        'uicontrols': true,
+        'uicontrols--enabled': this.props.controlsEnabled,
+        'uicontrols--disabled': !this.props.controlsEnabled,
       })}>
         <div className="uicontrols__control uicontrols__control--scales">
           <Settings {...this.props} />
@@ -18,7 +20,7 @@ export default class UIControls extends React.Component {
         <div className="uicontrols__control uicontrols__control--target-label">
           <span
             className="uicontrols__control uicontrols__control--modal-opener"
-            onClick={this.props.openModal}>
+            onClick={this.props.openModal.bind(this, Constants.UI.ModalTypes.STATS_MODAL)}>
             {this.props.targetName}
           </span>
         </div>

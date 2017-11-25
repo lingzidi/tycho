@@ -3,7 +3,7 @@
 exports[`Modal Container render() should render the app successfully 1`] = `
 <Modal
   closeModal={[Function]}
-  description="Hello, *world*!"
-  time="Invalid date"
+  modalActive={false}
+  title="Test Modal"
 />
 `;

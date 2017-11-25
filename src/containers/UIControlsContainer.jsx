@@ -19,10 +19,12 @@ export class UIControlsContainer extends React.Component {
   }
 
   /**
-   * Opens the modal and hides the controls
+   * Opens the modal of the given type and hides the controls.
+   * 
+   * @param {String} type - modal type to open
    */
-  openModal = () => {
-    this.props.action.toggleModal(true);
+  openModal = (type) => {
+    this.props.action.toggleModal(type);
     this.props.action.setUIControls(false);
   }
 

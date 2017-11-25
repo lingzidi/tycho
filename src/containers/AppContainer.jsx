@@ -10,11 +10,12 @@ import * as AnimationActions from '../actions/AnimationActions';
 export class AppContainer extends React.Component {
 
   componentWillMount = () => {
+    this.clock = new Clock();
+    this.lastTime = 0;
+
     this.props.action.requestOrbitalData();
     this.props.action.requestPageText();
-    this.clock = new Clock();
     this.maybeUpdateTime(true);
-    this.lastTime = 0;
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -65,7 +66,10 @@ export class AppContainer extends React.Component {
     const {orbitalData, pageText} = this.props;
 
     if (orbitalData && pageText) {
-      return <App onAnimate={this.onAnimate} />
+      return <App
+        onAnimate={this.onAnimate}
+        title={this.props.targetName}
+      />
     }
     return <SplashScreen />
   }
@@ -78,6 +82,7 @@ export default connect(
     'uiControls.timeOffset',
     'data.orbitalData',
     'data.pageText',
+    'label.targetName',
     'animation.playing'
   ),
   ReduxService.mapDispatchToProps(

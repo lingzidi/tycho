@@ -27,6 +27,10 @@ exports[`App Component render() should render the app successfully 1`] = `
       ]
     }
   />
-  <Connect(AnimatedComponent) />
+  <Connect(ModalContainer)
+    type="STATS_MODAL"
+  >
+    <Connect(StatsContainer) />
+  </Connect(ModalContainer)>
 </div>
 `;

@@ -2,12 +2,13 @@
 
 exports[`UIControls Component render() should render the UIControls successfully 1`] = `
 <div
-  className="ui-controls--disabled"
+  className="uicontrols uicontrols--disabled"
 >
   <div
     className="uicontrols__control uicontrols__control--scales"
   >
     <Settings
+      openModal={[Function]}
       pageText={Object {}}
     />
   </div>
@@ -16,6 +17,7 @@ exports[`UIControls Component render() should render the UIControls successfully
   >
     <span
       className="uicontrols__control uicontrols__control--modal-opener"
+      onClick={[Function]}
     />
   </div>
   <div

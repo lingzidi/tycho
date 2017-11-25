@@ -1,1 +1,16 @@
-{"planetScale":"Planet Scale: × ","speedScale":"Speed Scale: × 10^","settings":"Settings","start":"Start","skipTour":"Skip Tour"}
+{
+	"planetScale": "Planet Scale: × ",
+	"speedScale": "Speed Scale: × 10^",
+	"settings": "Settings",
+	"start": "Start",
+    "skipTour": "Skip Tour",
+    "stats": {
+        "currentEarthTime": "Current Earth time:",
+        "velocityAtVector": "Velocity at vector:",
+        "distanceToSun": "Distance to the Sun:"
+    },
+    "abbreviations": {
+        "kilometers": "km",
+        "seconds": "s"
+    }
+}

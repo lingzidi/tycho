@@ -36,37 +36,10 @@ $min-width: 600px;
     padding: 0.5em 0;
   }
 
-  &__info {
-    flex: 1;
-    line-height: 2em;
-  }
-
   &__content {
-    overflow: auto;
-    line-height: 1.5em;
-
-    &::-webkit-scrollbar {
-      width: 5px;
-
-      &-thumb {
-        border-radius: 2px;
-        background-color: transparent;
-      }
-    }
-
-    &:hover {
-      &::-webkit-scrollbar-thumb {
-        background-color: #808080;
-      }
-    }
-  }
-  
-  &__footer {
-    padding-top: 0.5em;
-    border-top: 1px dotted #fff;
     display: flex;
   }
-  
+
   &__close {
     float: right;
     cursor: pointer;
