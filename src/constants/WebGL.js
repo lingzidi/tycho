@@ -18,8 +18,8 @@ export const Ellipse = {
 
 export const Tween = {
   FAST: 1000,
-  NORMAL: 500,//2000,
-  SLOW: 500,//0
+  NORMAL: 2000,
+  SLOW: 5000
 };
 
 export const Zoom = {

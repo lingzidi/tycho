@@ -13,10 +13,10 @@ $button-transition-speed: 0.25s;
   justify-content: center;
   align-items: center;
   display: flex;
-  background-color: #fff;
   font-size: 1.5em;
   z-index: 1000;
   background: url('/static/img/bg-stars-large.png');
+  background-size: cover;
   transition: opacity $button-transition-speed;
   opacity: 1;
 
