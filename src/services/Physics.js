@@ -1,13 +1,28 @@
 export default class Physics {
 
+  /**
+   * Maximum elliptical eccentricity
+   * 
+   * @type {Number}
+   */
   static MAX_ECCENTRICITY = 0.8
 
+  /**
+   * Kilometers to astronomical units.
+   * 
+   * @type {Number}
+   */
   static KM_TO_AU = 6.68459e-9;
 
+  /**
+   * Newton's gravitational constant.
+   * 
+   * @type {Number}
+   */
   static GRAVITATIONAL_CONSTANT = 6.67408e-11;
 
   /**
-   * Calclates the mean anomaly in degrees.
+   * Calculates the mean anomaly in degrees.
    * Mean anomaly is the angular distance from 
    * the focus of an orbit to the present position.
    *
@@ -26,12 +41,12 @@ export default class Physics {
    *
    * @param {Number} ecc - eccentricity of ellipse
    * @param {Number} time - present time, in seconds
-   * @param {Number} periapses - periapses of revolution
+   * @param {Number} periapses - periapses of revolution (in milliseconds)
    * @returns {Number} calculated eccentric anomaly
    */
   static eccentricAnomaly(ecc, time, periapses) {
-    const last = periapses.last / 1000;
-    const next = periapses.next / 1000;
+    const last = periapses.last / 1000; // ms to s
+    const next = periapses.next / 1000; // ms to s
 
     const timePassed = (time - last);
     const period = (next - last);
@@ -43,7 +58,7 @@ export default class Physics {
     E = ecc < this.MAX_ECCENTRICITY ? meanAnomaly : Math.PI;
     F = E - ecc * Math.sin(meanAnomaly) - meanAnomaly;
     
-    // numerical approximation for Kepler's second law
+    // numerical approximation for Kepler's second law (10 iterations)
     for(let i = 0; i < 10; i++) {
       E = E - F / (1 - ecc * Math.cos(E));
       F = E - ecc * Math.sin(E) - meanAnomaly;
@@ -52,7 +67,7 @@ export default class Physics {
   }
   
   /**
-   * Returns the projected orbital angle from eccentricity and eccentric anomaly.
+   * Calculates the projected orbital angle (true anomaly).
    *
    * @param {Number} ecc - eccentricity
    * @param {Number} E - eccentric anomaly, in degrees
@@ -92,14 +107,33 @@ export default class Physics {
    *
    * @param {Number} ecc - eccentricity of ellipse
    * @param {Number} time - present time, in seconds
-   * @param {Object} periapses - {next, last} period, in seconds
-   * @returns {Number} percetnage of ellipse travelled
+   * @param {Object} periapses - {next, last} period, in milliseconds
+   * @returns {Number} percentage of ellipse travelled
    */
   static ellipticPercent(ecc, time, periapses) {
     let E = this.eccentricAnomaly(ecc, time, periapses);
     let theta = this.getTheta(ecc, E);
     
     return this.thetaToPercent(theta);
+  }
+
+  /**
+   * Returns distance from current body to attracting body.
+   *
+   * @param {Number} ecc - eccentricity of ellipse
+   * @param {Number} time - present time, in seconds
+   * @param {Object} periapses - {next, last} period, in milliseconds
+   * @param {Number} semimajor - semimajor axis, in km
+   * @returns {Object} {distance: Number, trueAnomaly: Number}
+   */
+  static getDistanceFromAttractingBody(ecc, time, periapses, semimajor) {
+    const eccAnomaly = this.eccentricAnomaly(ecc, time, periapses);
+    const trueAnomaly = this.getTheta(ecc, eccAnomaly);
+    const a = semimajor * 1000; // km to m
+    const magnitude = a * (1 - ecc * Math.cos(eccAnomaly));
+    const distance = magnitude / 1000; // m to km
+
+    return {distance, trueAnomaly};
   }
   
   /**
@@ -116,7 +150,7 @@ export default class Physics {
     const r = magnitude * 1000; // km to m
     const GM = Physics.GRAVITATIONAL_CONSTANT * centralMass; // m^3/s^2
     const speed = Math.sqrt(GM * ((2 / r) - (1 / a))); // m/s
-  
+
     return speed / 1000; // m to km
   }
   

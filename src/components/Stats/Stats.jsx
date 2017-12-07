@@ -8,6 +8,7 @@ export default class Stats extends React.Component {
         description: PropTypes.string,
         velocity: PropTypes.string,
         magnitude: PropTypes.string,
+        trueAnomaly: PropTypes.string,
         time: PropTypes.string
     }
 
@@ -23,15 +24,17 @@ export default class Stats extends React.Component {
                         <span>{this.props.pageText.stats.currentEarthTime}</span><br />
                         <span>{this.props.pageText.stats.velocityAtVector}</span><br />
                         <span>{this.props.pageText.stats.distanceToSun}</span><br />
+                        <span>{this.props.pageText.stats.trueAnomaly}</span><br />
                     </div>
                     <div className="stats__info">
                         <span>{this.props.time}</span><br />
                         <span>
-                            {this.props.velocity}
+                            {this.props.velocity}&nbsp;
                             {this.props.pageText.abbreviations.kilometers}/
                             {this.props.pageText.abbreviations.seconds}
                         </span><br />
-                        <span>{this.props.magnitude} {this.props.pageText.abbreviations.kilometers}</span>
+                        <span>{this.props.magnitude} {this.props.pageText.abbreviations.kilometers}</span><br />
+                        <span>{this.props.trueAnomaly} {this.props.pageText.abbreviations.theta}</span>
                     </div>
                 </div>
             </div>

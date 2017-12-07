@@ -25,6 +25,8 @@ exports[`Stats should render the stats component with a blank description 1`] = 
       <br />
       <span />
       <br />
+      <span />
+      <br />
     </div>
     <div
       className="stats__info"
@@ -32,7 +34,12 @@ exports[`Stats should render the stats component with a blank description 1`] = 
       <span />
       <br />
       <span>
+         
         /
+      </span>
+      <br />
+      <span>
+         
       </span>
       <br />
       <span>
@@ -68,6 +75,8 @@ exports[`Stats should render the stats component with the given description 1`] 
       <br />
       <span />
       <br />
+      <span />
+      <br />
     </div>
     <div
       className="stats__info"
@@ -75,7 +84,12 @@ exports[`Stats should render the stats component with the given description 1`] 
       <span />
       <br />
       <span>
+         
         /
+      </span>
+      <br />
+      <span>
+         
       </span>
       <br />
       <span>

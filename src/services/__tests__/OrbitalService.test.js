@@ -144,69 +144,6 @@ describe('Orbital Service', () => {
       expect(typeof result).toBe('number');
       expect(result).toEqual(Infinity);
     });
-  })
-
-  describe('isInCameraView()', () => {
-    it('should return a boolean', () => {
-      const position = new Vector3();
-      const camera = new Camera();
-      const matrix = new Matrix4();
-
-      const result = OrbitalService.isInCameraView(camera, matrix, position);
-
-      expect(typeof result).toBe('boolean');
-    });
-  });
-
-  describe('translateWorldToScreen()', () => {
-    const position = new Vector3();
-    const camera = new Camera();
-
-    it('should return an object with left and top properties', () => {
-      const result = OrbitalService.translateWorldToScreen(position, camera);
-
-      expect(typeof result).toBe('object');
-      expect(result).toHaveProperty('top');
-      expect(result).toHaveProperty('left');
-      expect(typeof result.top).toBe('number');
-      expect(typeof result.left).toBe('number');
-    });
-
-    it('should return null if the position vector is not in the camera frustum', () => {
-      OrbitalService.isInCameraView = () => false;
-      const result = OrbitalService.translateWorldToScreen(position, camera);
-      expect(result).toBeNull();
-    });
-
-    it('should return null if position is undefined', () => {
-      const result = OrbitalService.translateWorldToScreen(undefined, camera);
-      expect(result).toBeNull();
-    });
-
-    it('should return null if camera is undefined', () => {
-      const result = OrbitalService.translateWorldToScreen(position, undefined);
-      expect(result).toBeNull();
-    });
-  });
-
-  describe('getWorldPosition()', () => {
-    it('should return the world position of the mesh, if defined', () => {
-      const matrixWorld = new Matrix4();
-      const mockMesh = {
-        _reactInternalInstance: {
-          _threeObject: {matrixWorld}
-        }
-      };
-      const result = OrbitalService.getWorldPosition(mockMesh);
-
-      expect(result).not.toBeNull();
-      expect(typeof result).toEqual('object');
-    });
-
-    it('should return null if the mesh is undefined', () => {
-      const result = OrbitalService.getWorldPosition();
-      expect(result).toBeNull();
-    });
   });
 
   describe('toEuler()', () => {
@@ -231,31 +168,6 @@ describe('Orbital Service', () => {
     
       expect(result.y).toEqual(0);
       expect(result.z).toEqual(0);
-    });
-  });
-
-  describe('getDistanceToSun()', () => {
-    it('should return 0 if positions is not defined', () => {
-      const result = OrbitalService.getDistanceToSun();
-
-      expect(typeof result).toBe('number');
-      expect(result).toEqual(0);
-    });
-
-    it('should return 0 if the position of the targetId was not found', () => {
-      const result = OrbitalService.getDistanceToSun({Earth: {}}, 'Mars');
-
-      expect(typeof result).toBe('number');
-      expect(result).toEqual(0);
-    });
-
-    it('should return the magnitude of the current position', () => {
-      const targetId = 'Earth';
-      const position3d = {x: 1, y: 2, z: 3};
-      const result = OrbitalService.getDistanceToSun({[targetId]: {position3d}}, targetId);
-    
-      expect(typeof result).toBe('number');
-      expect(result).toEqual(3741657.386773941);
     });
   });
 

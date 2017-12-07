@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal Container render() should render the modal successfully 1`] = `
+exports[`Stats Container render() should render the modal successfully 1`] = `
 <Stats
   time="Invalid date"
 />

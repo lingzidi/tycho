@@ -7,10 +7,12 @@
     "stats": {
         "currentEarthTime": "Current Earth time:",
         "velocityAtVector": "Velocity at vector:",
-        "distanceToSun": "Distance to the Sun:"
+        "distanceToSun": "Distance to the Sun:",
+        "trueAnomaly": "True anomaly (Θ):"
     },
     "abbreviations": {
         "kilometers": "km",
-        "seconds": "s"
+        "seconds": "s",
+        "theta": "°"
     }
 }

@@ -34,7 +34,7 @@ export class LoaderContainer extends React.Component {
   render() {
     return (
       <SplashScreen
-        percent={this.props.percent || 0}
+        percent={this.props.percent || 100}
         show={!this.props.playing}
         enterScene={this.enterScene}
         pageText={this.props.pageText}

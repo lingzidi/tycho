@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import Math2 from './Math2';
+import Physics from './Physics';
 import Scale from '../utils/Scale';
 import Constants from '../constants';
 
@@ -7,6 +8,7 @@ export default class OrbitalService {
 
   /**
    * Ascension of the ecliptic plane.
+   * 
    * @type {Number}
    */
   static ASCENSION = 90
@@ -129,76 +131,9 @@ export default class OrbitalService {
    */
   static getMaxViewDistance = (isSatellite) => {
     if (isSatellite) {
-      return 7;
+      return Constants.WebGL.Camera.SATELLITE_LABEL_RANGE;
     }
     return Infinity;
-  }
-
-  /**
-   * Checks if the given vector is within the given camera frustum.
-   *
-   * @param {THREE.Camera} camera - active renderer camera
-   * @param {THREE.Matrix4} matrix - projection matrix
-   * @param {THREE.Vector3} vector - vector to check if in frustum
-   * @returns {Boolean} whether or not vector is in frustum
-   */
-  static isInCameraView = (camera, matrix, vector) => { // TODO: move to CameraService?
-    const frustum = new THREE.Frustum();
-    frustum.setFromMatrix(matrix);
-    
-    return frustum.containsPoint(vector);
-  }
-
-  /**
-   * Translate 3D space coordinates to 2D screen ones.
-   *
-   * @param {THREE.Vector3} position - current position in ellipse
-   * @param {THREE.Camera} camera - active renderer camera
-   * @returns {Object} coordinates with `top` and `left` values
-   */
-  static translateWorldToScreen = (position, camera) => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const matrix = new THREE.Matrix4();
-
-    if (position && camera) {
-      const {x, y, z} = position;
-      const pos = new THREE.Vector3(x, y, z);
-      
-      matrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-
-      if (OrbitalService.isInCameraView(camera, matrix, pos)) {
-        pos.applyMatrix4(matrix);
-
-        const left = (1 + pos.x) * width / 2;
-        const top = (1 - pos.y) * height / 2;
-        
-        return {top, left};
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Returns the vector w.r.t. <0> of the given mesh.
-   *
-   * @param {THREE.Object3D} mesh - object3d to get vector position of
-   * @returns {THREE.Vector3} world position
-   */
-  static getWorldPosition = (mesh) => {
-    if (mesh) {
-      const vect = new THREE.Vector3();
-      const matrix = mesh
-        ._reactInternalInstance
-        ._threeObject
-        .matrixWorld;
-
-      vect.setFromMatrixPosition(matrix);
-
-      const {x, y, z} = vect;
-      return {x, y, z};
-    }
-    return null;
   }
 
   /**
@@ -217,46 +152,70 @@ export default class OrbitalService {
       }
       return 0;
     }
-    return new THREE.Euler(rad(x), rad(y), rad(z))//, 'ZYX');
+    return new THREE.Euler(rad(x), rad(y), rad(z));
   }
 
   /**
-   * Calculates the real-world distance at present position to the Sun.
-   *
-   * @param {Object} positions - positions map of orbitals
-   * @param {String} targetId - name of the active target
-   * @returns {Number} current distance to the Sun, in kilometers
-   */
-  static getDistanceToSun = (positions, targetId) => {
-    if (positions && positions[targetId]) {
-      const {x, y, z} = positions[targetId].position3d;
-      const magnitude = Math.sqrt(x * x + y * y + z * z);
-      
-      return magnitude * Constants.WebGL.UNIT_SCALE;
-    }
-    return 0;
-  }
-
-  /**
-   * Finds the planet with the given targetId.
+   * Finds the planet with the given targetName.
    *
    * @param {Object[]} orbitals - list of orbitals
-   * @param {String} targetId - id of active orbital target
+   * @param {String} targetName - id of active orbital target
    * @returns {Number} orbital radius
    */
-  static getTargetByName = (orbitals, targetId) => {
+  static getTargetByName = (orbitals, targetName) => {
     let target;
 
     orbitals.forEach((orbital) => {
       if (!target) {
-        if (orbital.id === targetId) {
+        if (orbital.id === targetName) {
           target = orbital;
         } else if (orbital.satellites) {
           target = OrbitalService
-            .getTargetByName(orbital.satellites, targetId);
+            .getTargetByName(orbital.satellites, targetName);
         }
       }
     });
     return target;
+  }
+
+  /**
+   * Returns the given stat to the thousands place and commas.
+   *
+   * @param {Number} x - number to format
+   * @returns {String} formatted number
+   */
+  static formatStat = (x) => {
+     return x
+      .toFixed(3)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  /**
+   * Retrieve stats of the given orbital.
+   * 
+   * @param {Object[]} orbital - orbital to retrieve stats of
+   * @param {Number} time - time to get stats at, in UNIX seconds
+   * @returns {Object} {magnitude: Number, velocity: Number, trueAnomaly: Number}
+   */
+  static getOrbitalStats = (target, time) => {
+    const {
+      eccentricity,
+      periapses,
+      centralMass,
+      semimajor
+    } = target;
+
+    const {
+      distance,
+      trueAnomaly
+    } = Physics.getDistanceFromAttractingBody(eccentricity, time, periapses, semimajor);
+    const energy = Physics.orbitalEnergyConservation(centralMass, distance, semimajor);
+
+    const magnitude = OrbitalService.formatStat(distance);
+    const velocity = OrbitalService.formatStat(energy);
+    const theta = OrbitalService.formatStat(trueAnomaly);
+
+    return {magnitude, velocity, trueAnomaly: theta};
   }
 }
