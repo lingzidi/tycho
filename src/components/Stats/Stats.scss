@@ -1,3 +1,5 @@
+@import 'globals.scss';
+
 .stats {
   display: flex;
   flex-direction: column;
@@ -5,12 +7,12 @@
 
   &__info {
     flex: 1;
-    line-height: 2em;
+    line-height: $font-line-height;
   }
 
   &__content {
     overflow: auto;
-    line-height: 1.5em;
+    line-height: $font-line-height;
     flex: 1;
 
     &::-webkit-scrollbar {
@@ -30,8 +32,8 @@
   }
   
   &__footer {
-    padding-top: 0.5em;
-    border-top: 1px dotted #fff;
+    padding-top: $base-spacing / 2;
+    border-top: $dotted-border;
     display: flex;
   }
 }

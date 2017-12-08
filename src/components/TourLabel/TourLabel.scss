@@ -1,16 +1,17 @@
+@import 'globals.scss';
+
 .tour-label {
   position: absolute;
   top: 0;
   width: 100%;
   text-align: center;
-  z-index: 1000;
+  z-index: $z-index-top;
   
   &__text {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 1em;
-    font-family: Georgia, serif;
-    transition: opacity 0.5s;
+    background-color: $opaque-backdrop;
+    color: $brand-primary;
+    padding: $base-spacing;
+    transition: opacity $transition-speed;
     opacity: 0;
 
     &--show {

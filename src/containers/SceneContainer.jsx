@@ -70,7 +70,6 @@ export class SceneContainer extends React.Component {
     const {width, height} = this.props;
     const {camera} = this.refs;
 
-    // TODO: move parent div to separate container named "SyntheticEventsContainer"
     return (
       <EventContainer onWheel={this.changeZoom}>
         <React3

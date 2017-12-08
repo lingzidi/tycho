@@ -1,50 +1,47 @@
-
-$datepicker-fg-color: #fff;
-$datepicker-bg-color: #000;
+@import 'globals.scss';
 
 .clock {
   position: absolute;
   top: 0;
   right: 0;
   min-width: 250px;
-  padding: 1em;
+  padding: $base-spacing;
   text-align: right;
+  z-index: $z-index-top;
   
   &__display {
-    font-family: Georgia, serif;
-    font-size: 1.5em;
-    color: $datepicker-fg-color;
-    transition: text-shadow 0.5s;
+    font-size: $font-size-medium; 
+    color: $brand-primary;
+    transition: text-shadow $transition-speed;
     cursor: pointer;
     
     &:hover {
-      text-shadow: 1px 1px 10px $datepicker-fg-color;
+      text-shadow: $text-shadow;
     }
   }
   
   &__picker {
     display: flex;
     justify-content: flex-end;
-    color: $datepicker-fg-color;
-    font-family: Georgia, serif;
-    font-size: 0.9em;
-    margin-top: 0.5em;
+    color: $brand-primary;
+    font-size: $font-size-tiny;
+    margin-top: $base-spacing / 2;
     
     .rdtPicker {
-      background: $datepicker-bg-color;
+      background: $brand-secondary;
       
       th, td {
         &:hover {
-          background: #1e1e1e !important;
+          background-color: $brand-tertiary !important;
         }
       }
       
       .rdtPrev, .rdtNext {
-        border-color: $datepicker-bg-color;
+        border-color: $brand-secondary;
       }
       
       .rdtCounter .rdtBtn:hover {
-        background: $datepicker-bg-color;
+        background-color: $brand-secondary;
       }
     }
   }

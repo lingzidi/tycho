@@ -1,25 +1,26 @@
+@import 'globals.scss';
+
 $min-width: 600px;
 
 .modal {
-  font-family: Georgia, serif;
-  line-height: 1.3em;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
+  line-height: $font-line-height;
+  background-color: $opaque-backdrop;
+  color: $brand-primary;
   display: flex;
   flex-direction: column;
   position: absolute;
+  overflow: hidden;
+  box-sizing: border-box;
   top: 0;
   right: -999px;
   bottom: 0;
   width: 40%;
   min-width: $min-width;
   opacity: 0;
-  overflow: hidden;
-  padding: 1em;
-  box-sizing: border-box;
+  padding: $base-spacing;
   transition-property: background-color, opacity, right;
-  transition-duration: 0.75s;
-  z-index: 1000;
+  transition-duration: $transition-speed;
+  z-index: $z-index-top;
   
   @media screen and (max-width: $min-width) {
     width: 100%;
@@ -32,9 +33,9 @@ $min-width: 600px;
   }
   
   &__header {
-    border-bottom: 1px dotted #fff;
-    font-size: 2em;
-    padding: 0.5em 0;
+    border-bottom: $dotted-border;
+    font-size: $font-size-large;
+    padding: ($base-spacing / 2) 0;
   }
 
   &__content {
@@ -44,10 +45,10 @@ $min-width: 600px;
   &__close {
     float: right;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all $transition-speed;
     
     &:hover {
-      text-shadow: 1px 1px 10px #e8e8e8;
+      text-shadow: $text-shadow;
     }
   }
 }

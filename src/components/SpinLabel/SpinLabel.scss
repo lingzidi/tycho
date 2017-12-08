@@ -1,3 +1,5 @@
+@import 'globals.scss';
+
 .spin-container {
   display: flex;
   position: absolute;
@@ -21,9 +23,8 @@
 $n: 4; // # of arrows on either side
 
 .spin {
-  font-family: Georgia, serif;
   color: #fff;
-  padding: 1em;
+  padding: $base-spacing;
   display: flex;
   width: 300px;
   margin: auto;
@@ -33,15 +34,15 @@ $n: 4; // # of arrows on either side
   &__label {
     width: 5em;
     height: 5em;
-    margin: 1em;
+    margin: $base-spacing;
     box-sizing: border-box;
     border-radius: 50%;
-    color: #000;
+    color: $brand-secondary;
+    background-color: $brand-primary;
     text-shadow: 1px 1px #e8e8e8;
-    background-color: #fff;
     text-align: center;
     vertical-align: center;
-    padding: 0 0.25em;
+    padding: 0 ($base-spacing / $n);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,8 +58,8 @@ $n: 4; // # of arrows on either side
   }
   
   &__arrow {
-    animation: blink-animation 2s ease-in-out infinite;
-    padding: 0 0.25em;
+    animation: blink-animation ($transition-speed * 2) ease-in-out infinite;
+    padding: 0 ($base-spacing / $n);
     font-weight: bold;
     
     @for $i from $n through 1 {

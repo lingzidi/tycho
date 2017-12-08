@@ -1,6 +1,9 @@
+@import 'globals.scss';
+
 .uicontrols {
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity $transition-speed;
+  z-index: $z-index-top;
 
   &--enabled {
     opacity: 1;
@@ -11,17 +14,17 @@
   }
 
   &__button {
-    background-color: #fff;
-    width: 32px;
-    // height: 32px;
+    background-color: $brand-primary;
+    width: $icon-size;
+    height: $icon-size;
     display: block;
-    margin: 1em;
+    margin: $base-spacing;
   }
 
   &__control {
     position: absolute;
     opacity: 0.5;
-    transition: opacity 0.5s;
+    transition: opacity $transition-speed;
     
     &:hover {
       opacity: 1;
@@ -36,7 +39,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 3em;
+      padding: $base-spacing * 3;
       text-align: center;
       pointer-events: none;
     }
@@ -44,14 +47,13 @@
     &--modal-opener {
       opacity: 1;
       pointer-events: auto;
-      font-family: Georgia, serif;
-      font-size: 1.5em;
-      transition: text-shadow 0.5s;
-      color: #fff;
+      font-size: $font-size-medium;
+      transition: text-shadow $transition-speed;
+      color: $brand-primary;
       cursor: pointer;
 
       &:hover {
-        text-shadow: 1px 1px 10px #fff;
+        text-shadow: $text-shadow;
       }
     }
     

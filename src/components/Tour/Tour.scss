@@ -1,3 +1,5 @@
+@import 'globals.scss';
+
 .tour {
   position: absolute;
   top: 0;
@@ -35,7 +37,7 @@
     left: 0;
     right: 0;
     height: 10%;
-    background-color: #000;
+    background-color: $brand-secondary;
     transition: height 0.5s;
     display: flex;
     align-items: center;
@@ -49,12 +51,11 @@
 
   &__skip-link {
     font-style: italic;
-    color: #fff;
-    font-family: Georgia, serif;
+    color: $brand-primary;
     cursor: pointer;
 
     &:hover {
-      text-shadow: 1px 1px 10px #fff;
+      text-shadow: $text-shadow;
     }
   }
 }

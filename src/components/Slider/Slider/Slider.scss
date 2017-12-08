@@ -1,8 +1,9 @@
+@import 'globals.scss';
+
 /* slider var names are w.r.t. a horizontal orientation */
 $slider-handle-height: 6px;
 $slider-handle-width: 32px;
 $slider-track-width: 4px;
-$slider-color: #fff;
 
 .slider {
   flex: 1;
@@ -19,13 +20,13 @@ $slider-color: #fff;
   &__label {
     box-sizing: border-box;
     display: block;
-    margin: 1em 0;
-    color: $slider-color;
+    margin: $base-spacing 0;
+    color: $brand-primary;
   }
   
   &__container {
-    background-color: $slider-color;
-    color: $slider-color;
+    background-color: $brand-primary;
+    color: $brand-primary;
 
     &--horizontal {
       width: 100%;
@@ -44,7 +45,7 @@ $slider-color: #fff;
   
   &__handle {
     text-align: center;
-    background-color: $slider-color;
+    background-color: $brand-primary;
     font-size: 0;
     cursor: pointer;
     

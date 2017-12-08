@@ -69,7 +69,7 @@ export class TourContainer extends React.Component {
       setTimeout(this.onOrbitComplete, tourDuration);
     }
   }
-
+  
   /**
    * Callback to invoke once the tour orbit has completed.
    */

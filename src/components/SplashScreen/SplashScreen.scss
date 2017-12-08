@@ -1,3 +1,5 @@
+@import 'globals.scss';
+
 $button-height: 50px;
 $button-width: 160px;
 $button-spacing: 15px;
@@ -13,17 +15,18 @@ $button-transition-speed: 0.25s;
   justify-content: center;
   align-items: center;
   display: flex;
-  font-size: 1.5em;
-  z-index: 1000;
+  background-color: $brand-primary;
   background: url('/static/img/bg-stars-large.png');
   background-size: cover;
+  font-size: 1.5em;
   transition: opacity $button-transition-speed;
   opacity: 1;
+  z-index: $z-index-top;
 
   &--hide {
     opacity: 0;
     pointer-events: none;
-    z-index: 0;
+    z-index: $z-index-bottom;
   }
 
   &__hero {
@@ -46,7 +49,7 @@ $button-transition-speed: 0.25s;
   }
 
   &__loading-bar {
-    background-color: #fff;
+    background-color: $brand-primary;
     height: 4px;
   }
 
@@ -83,14 +86,14 @@ $button-transition-speed: 0.25s;
     }
 
     &::before {
-      background-color: #fff;
-      color: #000;
+      background-color: $brand-primary;
+      color: $brand-secondary;
       transform: rotateY(0deg) translateZ($button-height / 2);
     }
 
     &::after {
-      background-color: #000;
-      color: #fff;
+      background-color: $brand-secondary;
+      color: $brand-primary;
       transform: rotateX(90deg) translateZ($button-height / 2);
     }
 

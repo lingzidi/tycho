@@ -1,7 +1,9 @@
+@import 'globals.scss';
+
 .settings-panel {
   min-width: 300px;
-  color: #fff;
-  transition: 1s all;
+  color: $brand-primary;
+  transition: all $transition-speed;
   pointer-events: none;
   
   &__header {
@@ -16,26 +18,26 @@
     flex: 1;
     display: flex;
     align-items: center;
-    padding: 0.75em;
+    padding: $base-spacing / 2;
     opacity: 0;
-    transition: all 1s;
-    font-size: 1.5em;
+    transition: all $transition-speed;
+    font-size: $font-size-medium;
   }
   
   &__content {
-    padding: 0 1em;
+    padding: 0 $base-spacing;
     max-height: 0;
     overflow: hidden;
-    transition: all 1s;
+    transition: all $transition-speed;
   }
   
   &__hamburger {
-    width: 32px;
-    height: 32px;
+    width: $icon-size;
+    height: $icon-size;
     position: relative;
-    margin: 1em;
+    margin: $base-spacing;
     transform: rotate(0deg);
-    transition: 1s ease-in-out;
+    transition: $transition-speed ease-in-out;
     cursor: pointer;
     pointer-events: auto;
 
@@ -91,7 +93,7 @@
   }
   
   &--open {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: $opaque-backdrop;
     pointer-events: auto;
     
     .settings-panel__content {
@@ -99,7 +101,7 @@
     }
     
     .settings-panel__title {
-      display: block;
+      display: flex;
       opacity: 1;
     }
   }
