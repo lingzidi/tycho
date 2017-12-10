@@ -15,6 +15,7 @@
 ## Table of Contents
 
 - [About This Project](#about-this-project)
+- [Running the app](#running-the-app)
 - [Development](#development)
   - [Package Management](#package-management)
   - [Framework + Libraries](#framework--libraries)
@@ -41,7 +42,34 @@
 
 ## About This Project
 
-This is a real-time, WebGL-based, 3D visualization of our Solar System. It's a complete re-write of the [original Tych.io](https://github.com/jshor/tycho.io) project. Check out the full experience at [tycho.io](http://tycho.io)!
+This is a real-time, WebGL-based, 3D visualization of our Solar System. It's a complete re-write of the [original Tycho.io](https://github.com/jshor/tycho.io) project. Check out the full experience at [tycho.io](http://tycho.io) [coming soon]!
+
+
+## Running the app
+
+1. Clone this repo.
+
+```sh
+git clone https://github.com/jshor/tycho2.git
+```
+
+2. Use the right node version.
+
+```sh
+nvm use
+```
+
+3. Install dependencies (via yarn).
+
+```sh
+yarn install
+```
+
+4. Start
+
+```sh
+yarn start
+```
 
 ## Development
 
