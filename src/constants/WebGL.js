@@ -8,8 +8,6 @@ export const PLANET_SIZE_SCALE = 1;
 
 export const UNIT_SCALE = 1000000;
 
-export const SKYBOX_RADIUS = 15000;
-
 export const Ellipse = {
   POINTS: 512,
   START: -Math.PI / 2,
@@ -53,4 +51,13 @@ export const ScrollScale = [
     distance: 0.05,
     scale: 0.1
   }
+];
+
+export const SKYBOX_TEXTURES = [
+  '/static/textures/map/skybox/s_px.jpg',
+  '/static/textures/map/skybox/s_nx.jpg',
+  '/static/textures/map/skybox/s_py.jpg',
+  '/static/textures/map/skybox/s_ny.jpg',
+  '/static/textures/map/skybox/s_pz.jpg',
+  '/static/textures/map/skybox/s_nz.jpg'
 ];

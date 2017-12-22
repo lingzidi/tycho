@@ -5,5 +5,6 @@ exports[`Texture Container getTextures() should set each entry to be a texture c
 exports[`Texture Container render() should render the texture container successfully 1`] = `
 <meshLambertMaterial
   color={16777215}
+  side={0}
 />
 `;

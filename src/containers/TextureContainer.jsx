@@ -1,12 +1,12 @@
 import React from 'react';
-import {TextureLoader} from 'three';
+import {TextureLoader, FrontSide} from 'three';
 import PropTypes from 'prop-types';
 import Constants from '../constants';
 
 export default class TextureContainer extends React.Component {
 
   static propTypes = {
-    side: PropTypes.object,
+    side: PropTypes.number,
     textures: PropTypes.array
   }
 
@@ -85,6 +85,7 @@ export default class TextureContainer extends React.Component {
       <meshLambertMaterial
         color={Constants.WebGL.MESH_DEFAULT_COLOR}
         children={this.getTextures()}
+        side={this.props.side || FrontSide}
         ref="material"
       />
     );

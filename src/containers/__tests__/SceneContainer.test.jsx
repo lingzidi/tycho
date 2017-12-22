@@ -2,7 +2,7 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import renderer from 'react-test-renderer';
 import ReactDOM from 'react-dom';
-import {Vector3, Camera} from 'three';
+import {Vector3, Camera, CubeTexture} from 'three';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import {SceneContainer} from '../SceneContainer';
@@ -71,6 +71,20 @@ describe('Scene Container', () => {
 
       expect(sceneContainer).toHaveProperty('domElement');
       expect(sceneContainer.domElement).toEqual(elem);
+    });
+  });
+
+  describe('renderSkybox()', () => {
+    it('should set the `background` property of the scene to a cube texture', () => {
+      sceneContainer.refs = {
+        scene: {
+          background: null
+        }
+      };
+      sceneContainer.renderSkybox();
+
+      expect(sceneContainer.refs.scene).toHaveProperty('background');
+      expect(sceneContainer.refs.scene.background).toBeInstanceOf(CubeTexture);
     });
   });
 

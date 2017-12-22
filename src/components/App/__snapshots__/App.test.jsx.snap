@@ -13,15 +13,15 @@ exports[`App Component render() should render the app successfully 1`] = `
     labels={
       Array [
         Object {
-          "duration": 1000,
+          "duration": 2500,
           "text": "Welcome to the Solar System",
         },
         Object {
-          "duration": 1000,
+          "duration": 2500,
           "text": "This is a real-time interactive simulation of major planetary bodies",
         },
         Object {
-          "duration": 1000,
+          "duration": 2500,
           "text": "Let's start exploring",
         },
       ]

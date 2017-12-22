@@ -1,9 +1,11 @@
 import TWEEN from 'tween.js';
+import {CubeTextureLoader} from 'three';
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import React3 from 'react-three-renderer';
 import Scene from '../components/Scene';
+import Constants from '../constants';
 import * as AnimationActions from '../actions/AnimationActions';
 import * as UIControlsActions from '../actions/UIControlsActions';
 import * as LabelActions from '../actions/LabelActions';
@@ -20,6 +22,8 @@ export class SceneContainer extends React.Component {
     height: PropTypes.number.isRequired,
     time: PropTypes.number
   }
+
+  // componentDidMount = () => this.renderSkybox()
 
   /**
    * Animation frame update method.
@@ -64,6 +68,14 @@ export class SceneContainer extends React.Component {
         camera={camera}
       />
     );
+  }
+
+  /**
+   * Attaches the skybox to the scene. The skybox uses a cube texture.
+   */
+  renderSkybox = () => {
+    const skybox = new CubeTextureLoader();
+    this.refs.scene.background = skybox.load(Constants.WebGL.SKYBOX_TEXTURES);
   }
 
   render() {

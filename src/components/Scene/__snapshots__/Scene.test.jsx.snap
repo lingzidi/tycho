@@ -115,16 +115,15 @@ exports[`Scene Component render() should render the scene 1`] = `
   />
   <pointLight
     color={16777215}
-    distance={500}
+    distance={2000}
     intensity={0.95}
   />
-  <Skybox />
   <mesh
     name="sun"
   >
     <planeGeometry
-      height={100}
-      width={100}
+      height={1}
+      width={1}
     />
     <meshBasicMaterial
       color={65280}
