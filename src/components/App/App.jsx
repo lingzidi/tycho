@@ -24,7 +24,10 @@ export default class App extends React.Component {
           title={this.props.title}>
           <StatsContainer />
         </ModalContainer>
-
+        <ModalContainer
+          type={Constants.UI.ModalTypes.ABOUT_MODAL}
+          title="About!">
+        </ModalContainer>
       </div>
     );
   }

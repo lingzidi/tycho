@@ -33,7 +33,10 @@ export default class UIControls extends React.Component {
         </div>
 
         <div className="uicontrols__control uicontrols__control--left-bar"> 
-          <div className="uicontrols__button"></div>
+          <div
+            className="uicontrols__button uicontrols__button--about"
+            onClick={this.props.openModal.bind(this, Constants.UI.ModalTypes.ABOUT_MODAL)}>
+          </div>
           <ZoomSlider
             value={this.props.zoom}
             onChange={this.props.changeZoom}

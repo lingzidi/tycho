@@ -17,8 +17,26 @@
     background-color: $brand-primary;
     width: $icon-size;
     height: $icon-size;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: $base-spacing;
+    cursor: pointer;
+
+    &--about {
+      color: $brand-secondary;
+      font-weight: bold;
+      border-radius: 50%;
+      font-family: $font-family-sans-serif;
+
+      &:before {
+        content: '?';
+      }
+
+      &:hover {
+        box-shadow: $text-shadow; 
+      }
+    }
   }
 
   &__control {
@@ -39,7 +57,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: $base-spacing * 3;
+      padding: 3em 0;
       text-align: center;
       pointer-events: none;
     }
