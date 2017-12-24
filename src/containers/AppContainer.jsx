@@ -69,6 +69,7 @@ export class AppContainer extends React.Component {
       return <App
         onAnimate={this.onAnimate}
         title={this.props.targetName}
+        pageText={this.props.pageText}
       />
     }
     return <SplashScreen />

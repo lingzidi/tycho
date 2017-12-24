@@ -16,6 +16,10 @@ describe('App Component', () => {
       orbitalData={[]}
       positions={{}}
       height={500}
+      pageText={{
+        aboutTitle: 'About',
+        aboutInfo: 'About this project'
+      }}
     />);
     app = component.instance();
   });

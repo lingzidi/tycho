@@ -31,9 +31,10 @@ export class StatsContainer extends React.Component {
     const target = OrbitalService.getTargetByName(orbitalData, targetId);
 
     if (target) {
-      const {name} = target;
+      const {name, description} = target;
       this.setState({
         name,
+        description,
         ...OrbitalService.getOrbitalStats(target, time)
       });
     }

@@ -4,7 +4,7 @@ exports[`Camera Container render() should render the scene container successfull
 <group>
   <perspectiveCamera
     aspect={1.5}
-    far={20000}
+    far={15000}
     fov={50}
     name="camera"
     near={0.001}

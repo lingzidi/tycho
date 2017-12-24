@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About Box Component should render the about box successfully 1`] = `
+<div
+  className="about"
+>
+  <ReactMarkdown
+    containerTagName="div"
+    parserOptions={Object {}}
+    source="Hello, world!"
+  />
+</div>
+`;

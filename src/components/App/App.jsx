@@ -5,6 +5,7 @@ import LoaderContainer from '../../containers/LoaderContainer';
 import TourContainer from '../../containers/TourContainer';
 import ModalContainer from '../../containers/ModalContainer';
 import StatsContainer from '../../containers/StatsContainer';
+import About from '../About';
 import Constants from '../../constants';
 
 export default class App extends React.Component {
@@ -26,7 +27,8 @@ export default class App extends React.Component {
         </ModalContainer>
         <ModalContainer
           type={Constants.UI.ModalTypes.ABOUT_MODAL}
-          title="About!">
+          title={this.props.pageText.aboutTitle}>
+          <About text={this.props.pageText.aboutInfo} />
         </ModalContainer>
       </div>
     );

@@ -29,7 +29,8 @@ exports[`UIControls Component render() should render the UIControls successfully
     className="uicontrols__control uicontrols__control--left-bar"
   >
     <div
-      className="uicontrols__button"
+      className="uicontrols__button uicontrols__button--about"
+      onClick={[Function]}
     />
     <ZoomSlider />
     <div

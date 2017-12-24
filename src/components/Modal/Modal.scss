@@ -40,6 +40,20 @@ $min-width: 600px;
 
   &__content {
     display: flex;
+    font-size: $font-size-tiny;
+    line-height: $font-line-height;
+
+    p {
+      text-indent: 50px;
+    }
+
+    a {
+      color: $brand-primary;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   &__close {
