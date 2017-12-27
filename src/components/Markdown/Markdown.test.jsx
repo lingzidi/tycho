@@ -1,16 +1,16 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
-import About from './About';
+import Markdown from './Markdown';
 
-describe('About Box Component', () => {
+describe('Markdown Component', () => {
   let component;
 
   beforeEach(() => {
-    component = shallow(<About text="Hello, world!" />);
+    component = shallow(<Markdown text="Hello, world!" />);
   });
 
-  it('should render the about box successfully', () => {
+  it('should render the markdown container successfully', () => {
     expect(toJson(component)).toMatchSnapshot();
   });
 });

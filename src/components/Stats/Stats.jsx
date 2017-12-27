@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactMarkdown from 'react-markdown';
+import Markdown from '../Markdown';
 
 export default class Stats extends React.Component {
 
@@ -15,9 +15,7 @@ export default class Stats extends React.Component {
     render() {
         return (
             <div className="stats">
-                <div className="stats__content">
-                    <ReactMarkdown source={this.props.description || ''} />
-                </div>
+                <Markdown text={this.props.description || ''} />
 
                 <div className="stats__footer">
                     <div className="stats__info">

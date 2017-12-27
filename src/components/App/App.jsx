@@ -1,11 +1,11 @@
 import React from 'react';
+import Markdown from '../Markdown';
 import SceneContainer from '../../containers/SceneContainer';
 import UIControlsContainer from '../../containers/UIControlsContainer';
 import LoaderContainer from '../../containers/LoaderContainer';
 import TourContainer from '../../containers/TourContainer';
 import ModalContainer from '../../containers/ModalContainer';
 import StatsContainer from '../../containers/StatsContainer';
-import About from '../About';
 import Constants from '../../constants';
 
 export default class App extends React.Component {
@@ -28,7 +28,7 @@ export default class App extends React.Component {
         <ModalContainer
           type={Constants.UI.ModalTypes.ABOUT_MODAL}
           title={this.props.pageText.aboutTitle}>
-          <About text={this.props.pageText.aboutInfo} />
+          <Markdown text={this.props.pageText.aboutInfo} />
         </ModalContainer>
       </div>
     );

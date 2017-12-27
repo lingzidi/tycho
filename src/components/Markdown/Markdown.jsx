@@ -2,7 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 
-export default class About extends React.Component {
+export default class Markdown extends React.Component {
 
     static propTypes = {
         text: PropTypes.string.isRequired
@@ -10,7 +10,7 @@ export default class About extends React.Component {
 
     render() {
         return (
-            <div className="about">
+            <div className="markdown">
                 <ReactMarkdown source={this.props.text} />
             </div>
         )
