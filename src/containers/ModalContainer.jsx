@@ -6,6 +6,23 @@ import Modal from '../components/Modal';
 
 export class ModalContainer extends React.Component {
 
+  componentWillMount = () => {
+    window.addEventListener('keydown', this.onKeyPressed);
+  }
+
+  /**
+   * Closes the modal when the escape key is pressed.
+   * 
+   * @param {Event} evt - keypress event
+   */
+  onKeyPressed = (evt) => {
+    evt = evt || window.event;
+    
+    if (evt.keyCode === 27 && this.isModalActive()) {
+      this.closeModal();
+    }
+  }
+
   /**
    * Checks if current modal instance is open (active).
    * 

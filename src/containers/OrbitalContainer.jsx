@@ -42,7 +42,7 @@ export class OrbitalContainer extends React.Component {
   }
 
   /**
-   * Updates the body state if time has changed.
+   * Updates the body state properties if time has changed.
    *
    * @param {Object} nextProps
    * @param {Number} nextProps.time - current time, in seconds
@@ -100,7 +100,7 @@ export class OrbitalContainer extends React.Component {
   }
 
   /**
-   * Sets the visual opacity of the orbital path ellipse.
+   * Sets the Euler rotations of the orbital and ecliptic planes.
    * 
    * @param {Object} props - orbital props
    */
@@ -112,7 +112,7 @@ export class OrbitalContainer extends React.Component {
   }
 
   /**
-   * Sets the visual opacity of the orbital path ellipse.
+   * Sets the (x,y,z)-coords, radius, and Euler rotation of the body.
    * 
    * @param {Object} props - orbital props
    * @param {Ellipse} ellipse - instance of orbital ellipse
