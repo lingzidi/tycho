@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal Component should render the Modal successfully 1`] = `
+exports[`Play/Pause Button Component should render the PlayPause button successfully 1`] = `
 <div
   className="play-pause"
   onClick={[Function]}

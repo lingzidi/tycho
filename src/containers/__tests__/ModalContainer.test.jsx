@@ -16,6 +16,36 @@ describe('Modal Container', () => {
     modalContainer = component.instance();
   });
 
+  describe('componentWillMount()', () => {
+    it('should add the onKeyPressed() method as a keydown event listener', () => {
+      const spy = jest.spyOn(window, 'addEventListener');
+
+      modalContainer.componentWillMount();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith('keydown', modalContainer.onKeyPressed);
+    });
+  });
+
+  describe('onKeyPressed()', () => {
+    it('should close the modal when the esc key is pressed', () => {
+      const spy = jest.spyOn(modalContainer, 'closeModal');
+
+      modalContainer.props = {
+        action: {
+          toggleModal: jest.fn(),
+          setUIControls: jest.fn()
+        }
+      };
+      modalContainer.isModalActive = () => true;
+      modalContainer.onKeyPressed({keyCode: 27});
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('closeModal()', () => {
     beforeEach(() => {
       modalContainer.props = {
