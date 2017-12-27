@@ -9,6 +9,7 @@ import SplashScreen from '../components/SplashScreen';
 export class LoaderContainer extends React.Component {
 
   componentWillMount = () => {
+    this.setState({hasEntered: false});
     DefaultLoadingManager.onProgress = this.onProgress;
   }
 
@@ -29,13 +30,14 @@ export class LoaderContainer extends React.Component {
    */
   enterScene = () => {
     this.props.action.setPlaying(true);
+    this.setState({hasEntered: true});
   }
 
   render() {
     return (
       <SplashScreen
-        percent={this.props.percent || 0}
-        show={!this.props.playing}
+        percent={this.props.percent || 100}
+        show={!this.state.hasEntered}
         enterScene={this.enterScene}
         pageText={this.props.pageText}
       />

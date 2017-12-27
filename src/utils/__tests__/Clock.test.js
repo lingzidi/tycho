@@ -122,11 +122,44 @@ describe('Clock', () => {
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    it('should set paused = false', () => {
+    it('should set stopped = false', () => {
       clock.start();
 
-      expect(clock).toHaveProperty('paused');
-      expect(clock.paused).toEqual(false);
+      expect(clock).toHaveProperty('stopped');
+      expect(clock.stopped).toEqual(false);
+    });
+  });
+
+  describe('continue()', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = new Clock();
+    });
+
+    it('should call clock.start()', () => {
+      const spy = jest.spyOn(clock.clock, 'start');
+
+      clock.continue();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not reset the clock\'s `elapsedTime`', () => {
+      const elapsedTime = 1234;
+
+      clock.clock.elapsedTime = elapsedTime;
+      clock.continue();
+
+      expect(clock.clock.elapsedTime).toEqual(elapsedTime);
+    });
+
+    it('should set stopped = false', () => {
+      clock.continue();
+
+      expect(clock).toHaveProperty('stopped');
+      expect(clock.stopped).toEqual(false);
     });
   });
 
@@ -146,11 +179,11 @@ describe('Clock', () => {
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
-    it('should set paused = true', () => {
+    it('should set stopped = true', () => {
       clock.stop();
 
-      expect(clock).toHaveProperty('paused');
-      expect(clock.paused).toEqual(true);
+      expect(clock).toHaveProperty('stopped');
+      expect(clock.stopped).toEqual(true);
     });
   });
 

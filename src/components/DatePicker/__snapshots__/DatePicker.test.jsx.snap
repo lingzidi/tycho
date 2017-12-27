@@ -2,10 +2,10 @@
 
 exports[`DatePicker Component render() should render the DatePicker component successfully 1`] = `
 <div
-  className="clock"
+  className="date-picker"
 >
   <span
-    className="clock__display"
+    className="date-picker__display"
     onClick={[Function]}
   >
     04/20/6969

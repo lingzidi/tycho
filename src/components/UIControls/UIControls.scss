@@ -23,7 +23,7 @@
     margin: $base-spacing;
     cursor: pointer;
 
-    &--about {
+    &--about-modal {
       color: $brand-secondary;
       font-weight: bold;
       border-radius: 50%;
@@ -49,6 +49,8 @@
     }
 
     &--datetime {
+      display: flex;
+      align-items: center;
       top: 0;
       right: 0;
     }
@@ -62,7 +64,7 @@
       pointer-events: none;
     }
 
-    &--modal-opener {
+    &--stats-modal {
       opacity: 1;
       pointer-events: auto;
       font-size: $font-size-medium;

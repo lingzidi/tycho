@@ -1,9 +1,7 @@
 @import 'globals.scss';
 
-.clock {
-  position: absolute;
-  top: 0;
-  right: 0;
+.date-picker {
+  display: inline-flex;
   min-width: 250px;
   padding: $base-spacing;
   text-align: right;

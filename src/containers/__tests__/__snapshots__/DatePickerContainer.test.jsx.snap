@@ -5,7 +5,7 @@ exports[`DatePicker Container render() should render the DatePicker component su
   onClick={[Function]}
 >
   <Component
-    className="clock__picker"
+    className="date-picker__picker"
     closeOnSelect={true}
     closeOnTab={true}
     dateFormat={true}
@@ -13,7 +13,7 @@ exports[`DatePicker Container render() should render the DatePicker component su
     input={true}
     inputProps={
       Object {
-        "className": "clock__input",
+        "className": "date-picker__input",
       }
     }
     onBlur={[Function]}

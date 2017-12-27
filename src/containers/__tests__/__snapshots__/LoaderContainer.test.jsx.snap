@@ -3,7 +3,7 @@
 exports[`Loader Container render() should render the loader container successfully 1`] = `
 <SplashScreen
   enterScene={[Function]}
-  percent={0}
+  percent={100}
   show={true}
 />
 `;

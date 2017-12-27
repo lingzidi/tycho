@@ -78,12 +78,12 @@ export default class DatePickerContainer extends React.Component {
         <Datetime
           value={this.state.realTime}
           ref="picker"
-          className="clock__picker"
+          className="date-picker__picker"
           onBlur={this.hidePicker}
           onChange={this.changeTime}
           closeOnSelect={true}
           inputProps={{
-            className: 'clock__input'
+            className: 'date-picker__input'
           }}
         />
       </DatePicker>

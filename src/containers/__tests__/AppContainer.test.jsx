@@ -2,7 +2,6 @@ import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {AppContainer} from '../AppContainer';
-import Clock from '../../utils/Clock';
 
 describe('App Container', () => {
   let component, appContainer;
@@ -110,6 +109,95 @@ describe('App Container', () => {
     });
   });
 
+  describe('maybeContinue()', () => {
+    beforeEach(() => {
+      appContainer.clock = {
+        continue: jest.fn()
+      };
+      appContainer.props = {};
+    });
+
+    describe('when the scene is playing', () => {
+      beforeEach(() => {
+        appContainer.props.playing = true;
+      });
+
+      it('should call continue() on the clock if the clock is stopped', () => {
+        const spy = jest.spyOn(appContainer.clock, 'continue');
+
+        appContainer.clock.stopped = true;
+        appContainer.maybeContinue();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+      });
+      
+      it('should not call continue() on the clock if the clock is running', () => {
+        const spy = jest.spyOn(appContainer.clock, 'continue');
+
+        appContainer.clock.stopped = false;
+        appContainer.maybeContinue();
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when the scene is paused', () => {
+      it('should not call continue() on the clock', () => {
+        const spy = jest.spyOn(appContainer.clock, 'continue');
+
+        appContainer.props.playing = false;
+        appContainer.maybeContinue();
+        
+        expect(spy).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('maybeStop()', () => {
+    beforeEach(() => {
+      appContainer.clock = {
+        stop: jest.fn()
+      };
+      appContainer.props = {};
+    });
+
+    describe('when the scene is playing', () => {
+      beforeEach(() => {
+        appContainer.props.playing = false;
+      });
+
+      it('should call stop() on the clock if the clock is running', () => {
+        const spy = jest.spyOn(appContainer.clock, 'stop');
+
+        appContainer.clock.stopped = false;
+        appContainer.maybeStop();
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+      });
+      
+      it('should not call stop() on the clock if the clock is already stopped', () => {
+        const spy = jest.spyOn(appContainer.clock, 'stop');
+
+        appContainer.clock.stopped = true;
+        appContainer.maybeStop();
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when the scene is playing', () => {
+      it('should not call stop() on the clock', () => {
+        const spy = jest.spyOn(appContainer.clock, 'stop');
+
+        appContainer.props.playing = true;
+        appContainer.maybeStop();
+        
+        expect(spy).not.toHaveBeenCalled();
+      });
+    });
+  });
   describe('shouldUpdateTime()', () => {
     const time = 1;
 

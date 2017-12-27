@@ -3,6 +3,7 @@ import cx from 'classnames';
 import Settings from '../Settings';
 import ZoomSlider from '../Slider/ZoomSlider';
 import DatePickerContainer from '../../containers/DatePickerContainer';
+import PlayPauseContainer from '../../containers/PlayPauseContainer';
 import Constants from '../../constants';
 
 export default class UIControls extends React.Component {
@@ -19,7 +20,7 @@ export default class UIControls extends React.Component {
 
         <div className="uicontrols__control uicontrols__control--target-label">
           <span
-            className="uicontrols__control uicontrols__control--modal-opener"
+            className="uicontrols__control uicontrols__control--stats-modal"
             onClick={this.props.openModal.bind(this, Constants.UI.ModalTypes.STATS_MODAL)}>
             {this.props.targetName}
           </span>
@@ -30,11 +31,12 @@ export default class UIControls extends React.Component {
             time={this.props.time} 
             onUpdate={this.props.changeTimeOffset}
           />
+          <PlayPauseContainer />
         </div>
 
         <div className="uicontrols__control uicontrols__control--left-bar"> 
           <div
-            className="uicontrols__button uicontrols__button--about"
+            className="uicontrols__button uicontrols__button--about-modal"
             onClick={this.props.openModal.bind(this, Constants.UI.ModalTypes.ABOUT_MODAL)}>
           </div>
           <ZoomSlider

@@ -10,9 +10,9 @@ export default class DatePicker extends React.Component {
 
   render() {
     return (
-      <div className="clock">
+      <div className="date-picker">
         <span
-          className="clock__display"
+          className="date-picker__display"
           onClick={this.props.onClick}>
           {this.props.uxTime}
         </span>

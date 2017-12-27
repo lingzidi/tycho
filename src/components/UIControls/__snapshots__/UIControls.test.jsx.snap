@@ -16,7 +16,7 @@ exports[`UIControls Component render() should render the UIControls successfully
     className="uicontrols__control uicontrols__control--target-label"
   >
     <span
-      className="uicontrols__control uicontrols__control--modal-opener"
+      className="uicontrols__control uicontrols__control--stats-modal"
       onClick={[Function]}
     />
   </div>
@@ -24,12 +24,13 @@ exports[`UIControls Component render() should render the UIControls successfully
     className="uicontrols__control uicontrols__control--datetime"
   >
     <DatePickerContainer />
+    <Connect(PlayPauseContainer) />
   </div>
   <div
     className="uicontrols__control uicontrols__control--left-bar"
   >
     <div
-      className="uicontrols__button uicontrols__button--about"
+      className="uicontrols__button uicontrols__button--about-modal"
       onClick={[Function]}
     />
     <ZoomSlider />

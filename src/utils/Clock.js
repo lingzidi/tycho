@@ -72,15 +72,26 @@ export default class Clock {
    * Starts the clock.
    */
   start = () => {
-    this.paused = false;
+    this.stopped = false;
     this.clock.start();
+  }
+
+  /**
+   * Continues the clock from where it left off.
+   */
+  continue = () => {
+    const {elapsedTime} = this.clock;
+
+    this.stopped = false;
+    this.clock.start();
+    this.clock.elapsedTime = elapsedTime;
   }
 
   /**
    * Stops the clock.
    */
   stop = () => {
-    this.paused = true;
+    this.stopped = true;
     this.clock.stop();
   }
 

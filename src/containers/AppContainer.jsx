@@ -22,8 +22,14 @@ export class AppContainer extends React.Component {
     this.maybeUpdateOffset(nextProps);
   }
   
+  /**
+   * Animation frame method.
+   */
   onAnimate = () => {
     this.maybeUpdateTime();
+    this.maybeContinue();
+    this.maybeStop();
+
     this.clock.speed(this.props.speed);
     this.clock.update();
   }
@@ -47,6 +53,24 @@ export class AppContainer extends React.Component {
     if (force || this.shouldUpdateTime()) {
       this.lastTime = this.clock.getTime();
       this.props.action.setTime(this.lastTime);
+    }
+  }
+
+  /**
+   * Continues the global clock if the scene is OK to play but the clock is stopped.
+   */
+  maybeContinue = () => {
+    if (this.props.playing && this.clock.stopped) {
+      this.clock.continue();
+    }
+  }
+
+  /**
+   * Stops the global clock if the scene is stopped but the clock is running.
+   */
+  maybeStop = () => {
+    if (!this.props.playing && !this.clock.stopped) {
+      this.clock.stop();
     }
   }
 
