@@ -5,7 +5,7 @@ import TourLabelContainer from '../TourLabelContainer';
 
 jest.useFakeTimers();
 
-describe('App Container', () => {
+describe('Tour Label Container', () => {
   let component, tourLabelContainer;
 
   beforeEach(() => {
@@ -38,16 +38,42 @@ describe('App Container', () => {
     });
   });
 
+  describe('componentWillUnmount()', () => {
+    it('should set `isCancelled` to true', () => {
+      tourLabelContainer.componentWillUnmount();
+
+      expect(tourLabelContainer).toHaveProperty('isCancelled');
+      expect(tourLabelContainer.isCancelled).toBe(true);
+    });
+  });
+
   describe('setClassAsync()', () => {
-    it('should add the given BEM modifier to the modifier after the given duration', () => {
-      const modifier = 'hide';
+    describe('when the component is mounted', () => {
+      it('should add the given BEM modifier to the modifier after the given duration', () => {
+        const modifier = 'hide';
 
-      component.setState({modifier});
-      tourLabelContainer.setClassAsync(modifier, 1000);
+        component.setState({modifier: 'show'});
+        tourLabelContainer.isCancelled = false;
+        tourLabelContainer.setClassAsync(modifier, 1000);
 
-      jest.runAllTimers();
+        jest.runAllTimers();
 
-      expect(component.state('modifier')).toEqual(modifier);
+        expect(component.state('modifier')).toEqual(modifier);
+      });
+    });
+
+    describe('when the component is not mounted', () => {
+      it('should not change the className modifier', () => {
+        const modifier = 'hide';
+
+        component.setState({modifier: 'show'});
+        tourLabelContainer.isCancelled = true;
+        tourLabelContainer.setClassAsync(modifier, 1000);
+
+        jest.runAllTimers();
+
+        expect(component.state('modifier')).not.toEqual(modifier);
+      });
     });
   });
 

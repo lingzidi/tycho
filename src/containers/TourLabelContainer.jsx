@@ -18,6 +18,10 @@ export default class TourLabelContainer extends React.Component {
     this.setClassAsync('hide', end);
   }
 
+  componentWillUnmount = () => {
+    this.isCancelled = true;
+  }
+
   /**
    * Updates the local state class name with the given modifier at the given delay.
    *
@@ -26,7 +30,9 @@ export default class TourLabelContainer extends React.Component {
    */
   setClassAsync = (modifier, timeout) => {
     setTimeout(() => {
-      this.setState({modifier});
+      if (!this.isCancelled) {
+        this.setState({modifier});
+      }
     }, timeout);
   }
   

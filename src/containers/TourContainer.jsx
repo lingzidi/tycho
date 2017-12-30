@@ -46,11 +46,16 @@ export class TourContainer extends React.Component {
    * @param {Boolean} nextProps.playing
    */
   maybeStartTour = ({playing}) => {
-    if (playing && !this.props.playing) {
+    if (playing && !this.props.playing && !this.props.isComplete) {
       this.initializeTour();
     }
   }
 
+  /**
+   * Returns true if the tour should be run.
+   * 
+   * @returns {Boolean}
+   */
   shouldRunTour = () => {
     return this.props.playing && !this.props.isSkipped;
   }
