@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Body from '../Body';
+import Label from './Label';
 
 export default class Orbital extends React.Component {
 
@@ -15,8 +16,10 @@ export default class Orbital extends React.Component {
     pathOpacity: PropTypes.number,
     scaleLastUpdate: PropTypes.number,
     maps: PropTypes.array,
-    label: PropTypes.object,
-    id: PropTypes.string.isRequired
+    targetId: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    action: PropTypes.object.isRequired
   }
 
   render() {
@@ -30,9 +33,9 @@ export default class Orbital extends React.Component {
             <Body
               rotation={this.props.bodyRotation}
               radius={this.props.bodyRadius}
-              label={this.props.label}
               maps={this.props.maps}
             />
+            <Label {...this.props} />
             {this.props.children}
           </group>
 

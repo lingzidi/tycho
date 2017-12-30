@@ -2,6 +2,13 @@
 
 exports[`Orbital Container render() should render the OrbitalContainer successfully 1`] = `
 <Orbital
+  action={
+    Object {
+      "addHighlightedOrbital": [Function],
+      "removeHighlightedOrbital": [Function],
+      "setActiveOrbital": [Function],
+    }
+  }
   atmosphere={16711680}
   bodyPosition={Object {}}
   bodyRadius={1.2678}
@@ -22,7 +29,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
     }
   }
   id="dummyOuter"
-  label={ {}}
+  maxDistance={Infinity}
   orbitalGroupRotation={
     Euler {
       "_order": "XYZ",
@@ -2601,5 +2608,6 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
     ]
   }
+  text="Dummy Outer"
 />
 `;

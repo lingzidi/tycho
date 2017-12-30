@@ -22,7 +22,7 @@
         }
 
         &--paused {
-            animation: glowing $transition-speed infinite;
+            animation: glowing-box $transition-speed infinite;
             
             &::before {
                 content: '\25B6';
@@ -31,9 +31,9 @@
     }
 }
 
-@keyframes glowing {
-  0%   { box-shadow: 0 0 -10px $brand-primary; }
-  40%  { box-shadow: 0 0  20px $brand-primary; }
-  60%  { box-shadow: 0 0  20px $brand-primary; }
-  100% { box-shadow: 0 0 -10px $brand-primary; }
+@keyframes glowing-box {
+  0%   { box-shadow: 0 }
+  40%  { box-shadow: $text-shadow }
+  60%  { box-shadow: $text-shadow }
+  100% { box-shadow: 0 }
 }

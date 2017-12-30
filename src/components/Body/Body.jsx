@@ -8,16 +8,11 @@ export default class Body extends React.Component {
   static propTypes = {
     radius: PropTypes.number.isRequired,
     rotation: PropTypes.object,
-    label: PropTypes.object
   };
-
-  componentDidMount = () => {
-    this.refs.group.add(this.props.label);
-  }
 
   render() {
     return (
-      <group ref="group">
+      <group>
         <mesh rotation={this.props.rotation}>
           <TextureContainer textures={this.props.maps} />
           <sphereGeometry

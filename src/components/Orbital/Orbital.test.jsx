@@ -21,6 +21,8 @@ describe('Orbital Component', () => {
       bodyRotation={rotation}
       bodyRadius={1}
       id="testOrbital"
+      text="Test Orbital"
+      action={{}}
     />);
 
     orbital = component.instance();

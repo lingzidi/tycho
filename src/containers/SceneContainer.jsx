@@ -62,6 +62,7 @@ export class SceneContainer extends React.Component {
         orbitalData={this.props.orbitalData}
         scale={this.props.scale}
         action={this.props.action}
+        targetId={this.props.targetId}
         children={this.props.children}
         highlightedOrbitals={this.props.highlightedOrbitals}
         cameraMatrix={camera.position.clone()}

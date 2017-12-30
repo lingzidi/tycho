@@ -1,4 +1,4 @@
-import {Euler, Matrix4, Vector3, Camera} from 'three';
+import {Euler} from 'three';
 import OrbitalService from '../OrbitalService';
 import Constants from '../../constants';
 import Math2 from '../Math2';
@@ -107,6 +107,13 @@ describe('Orbital Service', () => {
   });
 
   describe('getPathOpacity()', () => {
+    it('should set the path opacity to ON if the `force` flag is true', () => {
+      const result = OrbitalService.getPathOpacity({id: 'Earth'}, null, true);
+
+      expect(typeof result).toBe('number');
+      expect(result).toEqual(Constants.UI.HOVER_OPACITY_ON);
+    });
+
     it('should set the path opacity to OFF if the highlightedOrbitals is null', () => {
       const result = OrbitalService.getPathOpacity({id: 'Earth'}, null);
 
@@ -132,14 +139,14 @@ describe('Orbital Service', () => {
 
   describe('getMaxViewDistance()', () => {
     it('should return the satellite label range when isSatellite is true', () => {
-      const result = OrbitalService.getMaxViewDistance(true);
+      const result = OrbitalService.getMaxViewDistance({isSatellite: true});
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(Constants.WebGL.Camera.SATELLITE_LABEL_RANGE);
     });
 
     it('should return infinity when isSatellite is false', () => {
-      const result = OrbitalService.getMaxViewDistance(false);
+      const result = OrbitalService.getMaxViewDistance({isSatellite: false});
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(Infinity);

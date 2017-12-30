@@ -108,10 +108,13 @@ export default class OrbitalService {
    * @param {Object} props - OrbitalContainer props
    * @param {String} props.id - id of orbital
    * @param {String[]} highlightedOrbitals - list of highlighted orbital ids
+   * @param {Boolean} force - if true, returns the ON state hover opacity
    * @returns {Number} opacity
    */
-  static getPathOpacity = ({id}, highlightedOrbitals) => {
-    if (Array.isArray(highlightedOrbitals)) {
+  static getPathOpacity = ({id}, highlightedOrbitals, force) => {
+    if (force) {
+      return Constants.UI.HOVER_OPACITY_ON;
+    } else if (Array.isArray(highlightedOrbitals)) {
       const isHighlighted = highlightedOrbitals
         .filter((orbital) => orbital === id)
         .length;
@@ -119,17 +122,18 @@ export default class OrbitalService {
       if (isHighlighted) {
         return Constants.UI.HOVER_OPACITY_ON;
       }
-    }
+    } 
     return Constants.UI.HOVER_OPACITY_OFF;
   }
 
   /**
    * Returns the max camera viewing distance, in WebGL units.
    * 
-   * @param  {Boolean} isSatellite
-   * @return {Number}
+   * @param {Object} props
+   * @param {Boolean} props.isSatellite
+   * @returns {Number}
    */
-  static getMaxViewDistance = (isSatellite) => {
+  static getMaxViewDistance = ({isSatellite}) => {
     if (isSatellite) {
       return Constants.WebGL.Camera.SATELLITE_LABEL_RANGE;
     }

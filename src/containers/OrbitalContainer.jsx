@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Ellipse from '../utils/Ellipse';
-import Label from 'three-dom-label';
 import Service from '../services/OrbitalService';
 import Orbital from '../components/Orbital';
 
@@ -16,6 +15,7 @@ export class OrbitalContainer extends React.Component {
     atmosphere: PropTypes.number,
     sidereal: PropTypes.number,
     id: PropTypes.string.isRequired,
+    targetId: PropTypes.string,
     time: PropTypes.number,
     isSatellite: PropTypes.bool,
     active: PropTypes.bool,
@@ -25,15 +25,11 @@ export class OrbitalContainer extends React.Component {
 
   componentWillMount = () => {
     this.ellipse = new Ellipse(this.props);
-    this.label = this.getLabel();
-
     this.setGroupRotations(this.props);
     this.setPathOpacity(this.props);
     this.setBodyState(this.props, this.ellipse);
     this.setState({});
   }
-
-  componentWillUnmount = () => this.label.unmount()
 
   componentWillReceiveProps = (nextProps) => {
     this.maybeUpdateBodyState(nextProps);
@@ -95,7 +91,7 @@ export class OrbitalContainer extends React.Component {
    */
   setPathOpacity = (props, highlightedOrbitals) => {
     this.setState({
-      pathOpacity: Service.getPathOpacity(props, highlightedOrbitals)
+      pathOpacity: Service.getPathOpacity(props, highlightedOrbitals, this.isTarget())
     });
   }
 
@@ -121,29 +117,20 @@ export class OrbitalContainer extends React.Component {
     this.setState({
       bodyRotation: Service.getBodyRotation(props),
       bodyPosition: Service.getBodyPosition(props, ellipse),
-      bodyRadius: Service.getBodyRadius(props)
+      bodyRadius: Service.getBodyRadius(props),
+      maxDistance: Service.getMaxViewDistance(props)
     });
   }
 
   /**
-   * Renders a new label, with mouse events bound to it.
+   * Returns true if this orbital is the current target.
    * 
-   * @returns {Object3D} label
+   * @returns {Boolean}
    */
-  getLabel = () => {
-    const {action, name, camera, id, isSatellite} = this.props;
-
-    return new Label({
-      text: name,
-      camera,
-      maxDistance: Service.getMaxViewDistance(isSatellite),
-      events: {
-        click: action.setActiveOrbital.bind(this, id, name),
-        mouseover: action.addHighlightedOrbital.bind(this, id),
-        mouseout: action.removeHighlightedOrbital.bind(this, id)
-      }
-    });
+  isTarget = () => {
+    return this.props.id === this.props.targetId;
   }
+
 
   render() {
     return (
@@ -157,9 +144,13 @@ export class OrbitalContainer extends React.Component {
         pathOpacity={this.state.pathOpacity}
         atmosphere={this.props.atmosphere}
         scaleLastUpdate={this.state.scaleLastUpdate}
+        maxDistance={this.state.maxDistance}
+        camera={this.props.camera}
         maps={this.props.maps}
+        text={this.props.name}
+        action={this.props.action}
         children={this.props.children}
-        label={this.label}
+        targetId={this.props.targetId}
         id={this.props.id}
       />
     );

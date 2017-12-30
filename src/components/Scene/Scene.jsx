@@ -10,7 +10,8 @@ export default class Scene extends React.Component {
     camera: PropTypes.object,
     scale: PropTypes.number,
     domEvents: PropTypes.object,
-    highlightedOrbitals: PropTypes.array
+    highlightedOrbitals: PropTypes.array,
+    targetId: PropTypes.string
   }
 
   getOrbitalElements = (orbitals, isSatellite) => {
@@ -23,6 +24,7 @@ export default class Scene extends React.Component {
         time={this.props.time}
         camera={this.props.camera}
         domEvents={this.props.domEvents}
+        targetId={this.props.targetId}
         highlightedOrbitals={this.props.highlightedOrbitals}
         isSatellite={isSatellite}>
         {orbital.satellites && this.getOrbitalElements(

@@ -4,14 +4,9 @@ import toJson from 'enzyme-to-json';
 import data from './__fixtures__/orbitals.json';
 import {OrbitalContainer} from '../OrbitalContainer';
 import OrbitalService from '../../services/OrbitalService';
-import {Orbital} from '../../components/Orbital';
 import Ellipse from '../../utils/Ellipse';
 import Service from '../../services/OrbitalService';
 import Constants from '../../constants';
-
-jest.mock('three-dom-label', () => {
-  return function() {}
-});
 
 describe('Orbital Container', () => {
   let component, orbitalContainer;
@@ -54,20 +49,6 @@ describe('Orbital Container', () => {
       
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props);
-    });
-  });
-
-  describe('componentWillMount()', () => {
-    it('should unmount the label component', () => {
-      orbitalContainer.label = {
-        unmount: jest.fn()
-      };
-      const spy = jest.spyOn(orbitalContainer.label, 'unmount');
-
-      orbitalContainer.componentWillUnmount();
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -238,12 +219,6 @@ describe('Orbital Container', () => {
       expect(orbitalContainer.state).toHaveProperty('bodyPosition');
       expect(orbitalContainer.state).toHaveProperty('bodyRotation');
       expect(orbitalContainer.state).toHaveProperty('bodyRadius');
-    });
-  });
-
-  describe('getLabel()', () => {
-    it('should return an instance of label', () => {
-      expect(typeof orbitalContainer.getLabel()).toBe('object');
     });
   });
 
