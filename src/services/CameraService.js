@@ -47,7 +47,6 @@ export default class CameraService {
       .easing(TWEEN.Easing.Quadratic.Out)
       .onUpdate(CameraService.setPivotPosition.bind(this, group, from))
       .onComplete(CameraService.attachToGyroscope.bind(this, target, group, cb))
-      .onStop(cb)
       .start();
   }
 
