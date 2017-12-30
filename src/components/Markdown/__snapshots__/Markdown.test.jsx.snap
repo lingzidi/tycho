@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`About Box Component should render the about box successfully 1`] = `
+exports[`Markdown Component should render the markdown container successfully 1`] = `
 <div
-  className="about"
+  className="markdown"
 >
   <ReactMarkdown
     containerTagName="div"

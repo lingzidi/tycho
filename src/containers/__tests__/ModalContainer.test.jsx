@@ -29,20 +29,44 @@ describe('Modal Container', () => {
   });
 
   describe('onKeyPressed()', () => {
-    it('should close the modal when the esc key is pressed', () => {
-      const spy = jest.spyOn(modalContainer, 'closeModal');
+    let spy;
 
+    beforeEach(() => {
       modalContainer.props = {
         action: {
           toggleModal: jest.fn(),
           setUIControls: jest.fn()
         }
       };
-      modalContainer.isModalActive = () => true;
-      modalContainer.onKeyPressed({keyCode: 27});
+      spy = jest.spyOn(modalContainer, 'closeModal');
+    });
 
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
+    describe('when the modal is open', () => {
+      beforeEach(() => {
+        modalContainer.isModalActive = () => true;
+      });
+
+      it('should close the modal when the esc key is pressed', () => {
+        modalContainer.onKeyPressed({keyCode: 27});
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should not close the modal when a key other than escape is pressed', () => {
+        modalContainer.onKeyPressed({keyCode: 28});
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when the modal is closed', () => {
+      it('should not close any modal when the esc key is pressed', () => {
+        modalContainer.isModalActive = () => false;
+        modalContainer.onKeyPressed({keyCode: 27});
+
+        expect(spy).not.toHaveBeenCalled();
+      });
     });
   });
 

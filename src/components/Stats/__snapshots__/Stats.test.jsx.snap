@@ -4,15 +4,9 @@ exports[`Stats should render the stats component with a blank description 1`] = 
 <div
   className="stats"
 >
-  <div
-    className="stats__content"
-  >
-    <ReactMarkdown
-      containerTagName="div"
-      parserOptions={Object {}}
-      source="Hello, world."
-    />
-  </div>
+  <Markdown
+    text="Hello, world."
+  />
   <div
     className="stats__footer"
   >
@@ -54,15 +48,9 @@ exports[`Stats should render the stats component with the given description 1`] 
 <div
   className="stats"
 >
-  <div
-    className="stats__content"
-  >
-    <ReactMarkdown
-      containerTagName="div"
-      parserOptions={Object {}}
-      source=""
-    />
-  </div>
+  <Markdown
+    text=""
+  />
   <div
     className="stats__footer"
   >

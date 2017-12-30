@@ -16,8 +16,6 @@ export class ModalContainer extends React.Component {
    * @param {Event} evt - keypress event
    */
   onKeyPressed = (evt) => {
-    evt = evt || window.event;
-    
     if (evt.keyCode === 27 && this.isModalActive()) {
       this.closeModal();
     }

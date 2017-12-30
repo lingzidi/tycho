@@ -67,14 +67,14 @@ describe('Stats Container', () => {
     const targetId = 'earth';
     const target = {targetId, name: 'Earth'};
 
-    xit('should update the component state with the velocity, magnitude, and trueAnomaly params', () => {
+    it('should update the component state with the velocity, magnitude, and trueAnomaly params', () => {
       const magnitude = '5.000';
       const velocity = '4.000';
       const trueAnomaly = '3.000';
 
       OrbitalService.getTargetByName = () => target;
-      OrbitalService.getOrbitalStats = () => {magnitude, velocity, trueAnomaly};
-      statsContainer.updateOrbitalStats(targetId, 1, true);
+      OrbitalService.getOrbitalStats = () => ({magnitude, velocity, trueAnomaly});
+      statsContainer.updateOrbitalStats(targetId, 1);
 
       expect(component.state('magnitude')).toEqual(magnitude);
       expect(component.state('velocity')).toEqual(velocity);
@@ -88,6 +88,15 @@ describe('Stats Container', () => {
     
       expect(typeof component.state('name')).toBe('string');
       expect(component.state('name')).toEqual(target.name);
+    });
+
+    it('should not update the state with magnitude, velocity, or trueAnomaly if the target is missing', () => {
+      OrbitalService.getTargetByName = () => null;
+      statsContainer.updateOrbitalStats(targetId, 1);
+
+      expect(component.state('magnitude')).not.toBeDefined();
+      expect(component.state('velocity')).not.toBeDefined();
+      expect(component.state('trueAnomaly')).not.toBeDefined();
     });
   });
 

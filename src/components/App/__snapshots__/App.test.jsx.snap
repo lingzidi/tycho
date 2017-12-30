@@ -36,7 +36,7 @@ exports[`App Component render() should render the app successfully 1`] = `
     title="About"
     type="ABOUT_MODAL"
   >
-    <About
+    <Markdown
       text="About this project"
     />
   </Connect(ModalContainer)>

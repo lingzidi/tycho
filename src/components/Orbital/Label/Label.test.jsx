@@ -12,7 +12,7 @@ jest.mock('three-dom-label', () => {
     }
 });
 
-describe.only('Orbital Label Component', () => {
+describe('Orbital Label Component', () => {
     let component, label;
 
     beforeEach(() => {
