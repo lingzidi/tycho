@@ -1,9 +1,11 @@
+@import 'globals.scss';
+
 body {
     padding: 0;
     margin: 0;
     overflow: hidden;
-    background-color: #000;
-    font-family: 'Droid Serif', Georgia, serif;
+    background-color: $brand-secondary;
+    font-family: $font-family-serif;
 }
 
 html, body {
