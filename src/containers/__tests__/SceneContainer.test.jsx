@@ -28,6 +28,17 @@ describe('Scene Container', () => {
     sceneContainer = component.instance();
   });
 
+  describe('componentDidMount()', () => {
+    it('should force update once', () => {
+      const spy = jest.spyOn(sceneContainer, 'forceUpdate');
+
+      sceneContainer.componentDidMount();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('onAnimate()', () => {
     beforeEach(() => {
       sceneContainer.props = {onAnimate: jest.fn()};

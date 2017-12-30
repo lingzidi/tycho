@@ -1,6 +1,6 @@
-import index from '../index.js';
+import index from './index.js';
 
-jest.mock('../containers/AppContainer');
+jest.mock('./containers/AppContainer');
 
 describe('Main Entry', () => {
   it('should render without crashing', () => {

@@ -23,7 +23,10 @@ export class SceneContainer extends React.Component {
     time: PropTypes.number
   }
 
-  // componentDidMount = () => this.renderSkybox()
+  componentDidMount = () => {
+    this.forceUpdate();
+    // this.renderSkybox();
+  }
 
   /**
    * Animation frame update method.
