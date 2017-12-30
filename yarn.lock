@@ -7194,9 +7194,9 @@ text-table@0.2.0, text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
-three-dom-label@0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/three-dom-label/-/three-dom-label-0.1.6.tgz#d0f94371078b54299bb50cfcd79d9f81c4d54f47"
+three-dom-label@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/three-dom-label/-/three-dom-label-0.1.7.tgz#d54c878f7664e8d4bbf62b7c656a7aca7ef4ccd4"
 
 three-orbit-controls@82.1.0:
   version "82.1.0"
