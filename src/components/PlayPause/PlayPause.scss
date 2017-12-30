@@ -15,6 +15,10 @@
         align-items: center;
         justify-content: center;
 
+        &:hover {
+            box-shadow: $text-shadow;
+        }
+
         &--playing {
             &::before {
                 content: '\2759\2759';

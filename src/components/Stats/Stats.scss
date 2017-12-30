@@ -11,7 +11,8 @@
   }
   
   &__footer {
-    padding-top: $base-spacing / 2;
+    padding-top: $base-spacing;
+    margin-top: $base-spacing;
     border-top: $dotted-border;
     display: flex;
   }

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import AppContainer from './containers/AppContainer';
 import Store from './store';
-import './assets/styles/styles.css';
 import 'react-datetime/css/react-datetime.css';
+import './index.css';
 
 const StoreInstance = Store();
 
