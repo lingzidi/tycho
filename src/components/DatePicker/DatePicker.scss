@@ -4,7 +4,6 @@
   display: inline-flex;
   min-width: 250px;
   padding: $base-spacing;
-  text-align: right;
   z-index: $z-index-top;
   
   &__display {
@@ -27,7 +26,8 @@
     
     .rdtPicker {
       background: $brand-secondary;
-      
+      margin-top: $font-size-medium;
+
       th, td {
         &:hover {
           background-color: $brand-tertiary !important;
