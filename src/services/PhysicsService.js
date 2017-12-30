@@ -1,4 +1,4 @@
-export default class Physics {
+export default class PhysicsService {
 
   /**
    * Maximum elliptical eccentricity
@@ -148,7 +148,7 @@ export default class Physics {
   static orbitalEnergyConservation(centralMass, magnitude, semimajor) {
     const a = semimajor * 1000; // km to m
     const r = magnitude * 1000; // km to m
-    const GM = Physics.GRAVITATIONAL_CONSTANT * centralMass; // m^3/s^2
+    const GM = PhysicsService.GRAVITATIONAL_CONSTANT * centralMass; // m^3/s^2
     const speed = Math.sqrt(GM * ((2 / r) - (1 / a))); // m/s
 
     return speed / 1000; // m to km

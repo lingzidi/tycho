@@ -1,7 +1,7 @@
 import {Euler} from 'three';
 import OrbitalService from '../OrbitalService';
 import Constants from '../../constants';
-import Math2 from '../Math2';
+import MathService from '../MathService';
 import fixture from './__fixtures__/planets.json';
 
 describe('Orbital Service', () => {
@@ -161,7 +161,7 @@ describe('Orbital Service', () => {
     });
 
     it('should convert a coordinate to radians if defined', () => {
-      const spy = jest.spyOn(Math2, 'toRadians');
+      const spy = jest.spyOn(MathService, 'toRadians');
       const x = 5;
 
       OrbitalService.toEuler({x});

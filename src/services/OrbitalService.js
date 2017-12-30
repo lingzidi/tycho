@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import Math2 from './Math2';
-import Physics from './Physics';
+import MathService from './MathService';
+import PhysicsService from './PhysicsService';
 import Scale from '../utils/Scale';
 import Constants from '../constants';
 
@@ -152,7 +152,7 @@ export default class OrbitalService {
   static toEuler = ({x, y, z}) => {
     const rad = (x) => {
       if (x) {
-        return Math2.toRadians(x);
+        return MathService.toRadians(x);
       }
       return 0;
     }
@@ -213,8 +213,8 @@ export default class OrbitalService {
     const {
       distance,
       trueAnomaly
-    } = Physics.getDistanceFromAttractingBody(eccentricity, time, periapses, semimajor);
-    const energy = Physics.orbitalEnergyConservation(centralMass, distance, semimajor);
+    } = PhysicsService.getDistanceFromAttractingBody(eccentricity, time, periapses, semimajor);
+    const energy = PhysicsService.orbitalEnergyConservation(centralMass, distance, semimajor);
 
     const magnitude = OrbitalService.formatStat(distance);
     const velocity = OrbitalService.formatStat(energy);

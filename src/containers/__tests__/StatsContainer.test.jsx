@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {StatsContainer} from '../StatsContainer';
 import OrbitalService from '../../services/OrbitalService';
-import Physics from '../../services/Physics';
+import PhysicsService from '../../services/PhysicsService';
 import orbitalData from './__fixtures__/orbitals.json';
 
 describe('Stats Container', () => {

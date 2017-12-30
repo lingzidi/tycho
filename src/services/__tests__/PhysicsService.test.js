@@ -1,11 +1,11 @@
-import Physics from '../Physics';
+import PhysicsService from '../PhysicsService';
 
 describe('Physics Service', () => {
   describe('meanAnomaly()', () => {
     it('should calculate the mean anomaly for the given time and period', () => {
       const time = 1904203483930;
       const period = 123;
-      const result = Physics.meanAnomaly(time, period);
+      const result = PhysicsService.meanAnomaly(time, period);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(231.21963500976562);
@@ -21,7 +21,7 @@ describe('Physics Service', () => {
 
     it('should calculate eccentric anomaly with E = mean anomaly, if below eccentricity threshold', () => {
       const eccentricity = 0.1;
-      const result = Physics.eccentricAnomaly(eccentricity, time, periapses);
+      const result = PhysicsService.eccentricAnomaly(eccentricity, time, periapses);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(3.162141838892115);
@@ -29,7 +29,7 @@ describe('Physics Service', () => {
 
     it('should calculate eccentric anomaly with E = π, if above or equal to eccentricity threshold', () => {
       const eccentricity = 0.8;
-      const result = Physics.eccentricAnomaly(eccentricity, time, periapses);
+      const result = PhysicsService.eccentricAnomaly(eccentricity, time, periapses);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(3.154150555403371);
@@ -40,7 +40,7 @@ describe('Physics Service', () => {
     it('should return the angle for the given eccentricity and eccentric anomaly', () => {
       const eccentricity = 0.1;
       const eccAnomaly = 0.52;
-      const result = Physics.getTheta(eccentricity, eccAnomaly);
+      const result = PhysicsService.getTheta(eccentricity, eccAnomaly);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(32.77699586625071);
@@ -49,7 +49,7 @@ describe('Physics Service', () => {
     it('should return the positive complement of the angle, if negative', () => {
       const eccentricity = 0.1;
       const eccAnomaly = -0.52;
-      const result = Physics.getTheta(eccentricity, eccAnomaly);
+      const result = PhysicsService.getTheta(eccentricity, eccAnomaly);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(327.22300413374927);
@@ -59,7 +59,7 @@ describe('Physics Service', () => {
   describe('thetaToPercent()', () => {
     it('should return the percentage of a valid angle', () => {
       const theta = 180;
-      const result = Physics.thetaToPercent(theta);
+      const result = PhysicsService.thetaToPercent(theta);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(0.5);
@@ -67,7 +67,7 @@ describe('Physics Service', () => {
 
     it('should return 0 if the angle is greater than 360 degrees', () => {
       const theta = 361;
-      const result = Physics.thetaToPercent(theta);
+      const result = PhysicsService.thetaToPercent(theta);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(0);
@@ -75,7 +75,7 @@ describe('Physics Service', () => {
 
     it('should return 0 if the provided number is NaN', () => {
       const theta = NaN;
-      const result = Physics.thetaToPercent(theta);
+      const result = PhysicsService.thetaToPercent(theta);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(0);
@@ -90,7 +90,7 @@ describe('Physics Service', () => {
         last: 1704203483930,
         next: 1504203483935
       };
-      const result = Physics.ellipticPercent(eccentricity, time, periapses);
+      const result = PhysicsService.ellipticPercent(eccentricity, time, periapses);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(0.5024478586268485);
@@ -102,7 +102,7 @@ describe('Physics Service', () => {
       const GM = 100000;
       const r = 100;
       const semimamjor = 1000;
-      const result = Physics.orbitalEnergyConservation(GM, r, semimamjor);
+      const result = PhysicsService.orbitalEnergyConservation(GM, r, semimamjor);
 
       expect(typeof result).toBe('number');
       expect(result).toBe(1.1260884512328505e-8);
@@ -111,14 +111,14 @@ describe('Physics Service', () => {
 
   describe('toAU()', () => {
     it('should convert the given parameter value to astronomical units using given scale', () => {
-      const result = Physics.toAU(100, 10000);
+      const result = PhysicsService.toAU(100, 10000);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(0.00668459);
     });
 
     it('should convert the given parameter value to astronomical units using 1 as scale', () => {
-      const result = Physics.toAU(100);
+      const result = PhysicsService.toAU(100);
 
       expect(typeof result).toBe('number');
       expect(result).toEqual(6.68459e-7);

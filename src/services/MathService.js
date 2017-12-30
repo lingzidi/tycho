@@ -1,4 +1,4 @@
-export default class Math2 {
+export default class MathService {
 
   /**
    * Calculates the circumference of an ellipse.
