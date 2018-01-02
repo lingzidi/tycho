@@ -23,5 +23,8 @@
       "error",
       "unix"
     ]
+  },
+  "globals": {
+    "jest": true
   }
 }
