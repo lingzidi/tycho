@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Body from '../Body';
+import Body from './Body';
 import Label from './Label';
 
 export default class Orbital extends React.Component {

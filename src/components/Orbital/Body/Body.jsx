@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Constants from '../../constants';
-import TextureContainer from '../../containers/TextureContainer';
-import Rings from '../Orbital/Rings';
+import Constants from '../../../constants';
+import TextureContainer from '../../../containers/TextureContainer';
+import Rings from '../../Orbital/Rings';
 
 export default class Body extends React.Component {
 

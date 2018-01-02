@@ -3,7 +3,7 @@ import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {Euler, Object3D} from 'three';
 import Body from './';
-import Rings from '../Orbital/Rings';
+import Rings from '../Rings';
 
 describe('Body Component', () => {
   let component;
