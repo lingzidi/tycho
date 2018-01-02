@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rings Component should render the rings successfully 1`] = `
+<mesh>
+  <planeGeometry
+    height={0.0024}
+    width={0.0024}
+  />
+  <TextureContainer
+    side={2}
+    textures={Array []}
+    transparent={true}
+  />
+</mesh>
+`;

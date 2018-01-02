@@ -3,6 +3,7 @@ import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {Euler, Object3D} from 'three';
 import Body from './';
+import Rings from '../Orbital/Rings';
 
 describe('Body Component', () => {
   let component;
@@ -16,8 +17,8 @@ describe('Body Component', () => {
     />);
   });
 
-  it('should set the body mesh rotation to prop.rotation', () => {
-    const mesh = component.find('mesh');
+  it('should set the parent group rotation to props.rotation', () => {
+    const mesh = component.find('group');
     const props = mesh.props();
 
     expect(props).toHaveProperty('rotation');
@@ -30,6 +31,19 @@ describe('Body Component', () => {
 
     expect(props).toHaveProperty('radius');
     expect(props.radius).toEqual(radius);
+  });
+
+  it('should render the rings if the rings prop is defined', () => {
+    component = shallow(<Body
+      radius={radius}
+      rotation={rotation}
+      rings={{
+        outerRadius: 1234,
+        maps: []
+      }}
+    />);
+
+    expect(component.find(Rings).exists()).toBe(true);
   });
 
   it('should render the body successfully', () => {

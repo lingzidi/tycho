@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Body Component should render the body successfully 1`] = `
-<group>
-  <mesh
-    rotation={
-      Euler {
-        "_order": "XYZ",
-        "_x": 1,
-        "_y": 1,
-        "_z": 1,
-      }
+<group
+  rotation={
+    Euler {
+      "_order": "XYZ",
+      "_x": 1,
+      "_y": 1,
+      "_z": 1,
     }
-  >
+  }
+>
+  <mesh>
     <TextureContainer />
     <sphereGeometry
       heightSegments={32}

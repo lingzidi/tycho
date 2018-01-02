@@ -7,7 +7,8 @@ export default class TextureContainer extends React.Component {
 
   static propTypes = {
       side: PropTypes.number,
-      textures: PropTypes.array
+      textures: PropTypes.array,
+      transparent: PropTypes.bool
   }
 
   componentWillMount = () => {
@@ -52,7 +53,7 @@ export default class TextureContainer extends React.Component {
 
   /**
    * Creates texture components from the loaded textures.
-   * 
+   *
    * @returns {Texture[]} array of texture components
    */
   getTextures = () => {
@@ -85,6 +86,7 @@ export default class TextureContainer extends React.Component {
           <meshLambertMaterial
               color={Constants.WebGL.MESH_DEFAULT_COLOR}
               children={this.getTextures()}
+              transparent={this.props.transparent}
               side={this.props.side || FrontSide}
               ref="material"
           />

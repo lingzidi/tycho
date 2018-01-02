@@ -22,6 +22,16 @@
         "nasaBarycenterCode": "0",
         "revolutionOrder": "y"
     },
+    "rings": {
+        "innerRadius": 6630,
+        "outerRadius": 120700,
+        "maps": [
+            {
+                "slot": "map",
+                "url": "saturn_rings.png"
+            }
+        ]
+    },
     "argumentOfPeriapsis": 339.0879545664338,
     "eccentricity": 0.05407082365984361,
     "longitudeOfAscendingNode": 113.5979838713757,

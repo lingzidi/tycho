@@ -19,20 +19,22 @@ export default class Orbital extends React.Component {
     targetId: PropTypes.string,
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    action: PropTypes.object.isRequired
+    action: PropTypes.object.isRequired,
+    rings: PropTypes.object
   }
 
   render() {
     return (
       <group ref="ecliptic" rotation={this.props.eclipticGroupRotation}>
         <group ref="orbital" rotation={this.props.orbitalGroupRotation}>
-          
-          <group 
+
+          <group
             position={this.props.bodyPosition}
             name={this.props.id}>
             <Body
               rotation={this.props.bodyRotation}
               radius={this.props.bodyRadius}
+              rings={this.props.rings}
               maps={this.props.maps}
             />
             <Label {...this.props} />

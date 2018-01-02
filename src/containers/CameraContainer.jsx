@@ -110,7 +110,6 @@ export default class CameraContainer extends React.Component {
    * @param {Boolean} animate - set to true if it should animate
    */
   movePivot = (targetId, animate) => {
-<<<<<<< HEAD
       const {scene} = this.props;
       const {pivot} = this.refs;
       const target = scene.getObjectByName(targetId);
@@ -119,16 +118,6 @@ export default class CameraContainer extends React.Component {
           this.setInteractivity(false);
           this.startTween(target, pivot, scene);
       }
-=======
-    const {scene} = this.props;
-    const {pivot} = this.refs;
-    const target = scene.getObjectByName(targetId);
-
-    if (target && animate) {
-      this.setInteractivity(false);
-      this.startTween(target, pivot, scene);
-    }
->>>>>>> d21abe1... sets scene to pause when transitioning between orbitals
   }
 
   /**
@@ -157,13 +146,8 @@ export default class CameraContainer extends React.Component {
       const v = CameraService.getWorldPosition(target);
       const w = CameraService.getWorldPosition(pivot);
 
-<<<<<<< HEAD
       // set the pivot position to active position
       CameraService.attachToWorld(scene, pivot, w);
-=======
-    // set the pivot position to active position
-    CameraService.attachToWorld(scene, pivot, w);
->>>>>>> d21abe1... sets scene to pause when transitioning between orbitals
 
       this.cancelTween();
       this.zoomInFull();

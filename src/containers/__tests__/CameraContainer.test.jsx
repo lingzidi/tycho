@@ -19,7 +19,8 @@ const target = new Object3D();
 const pivot = new Object3D();
 const action = {
   setUIControls: jest.fn(),
-  changeSpeed: jest.fn()
+  changeSpeed: jest.fn(),
+  setPlaying: jest.fn()
 };
 const scene = {
   getObjectByName: () => target,
@@ -31,7 +32,7 @@ describe('Camera Container', () => {
 
   beforeEach(() => {
     component = shallow(
-      <CameraContainer 
+      <CameraContainer
         action={action}
         targetId="testPlanet"
         orbitalData={data}
@@ -78,7 +79,7 @@ describe('Camera Container', () => {
         cameraContainer.props = {targetId, target, action, scene};
         cameraContainer.refs = {pivot};
         cameraContainer.componentWillReceiveProps(nextProps);
-        
+
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledTimes(1);
         expect(spy).toHaveBeenCalledWith(nextProps.targetId, true);
@@ -157,7 +158,7 @@ describe('Camera Container', () => {
       it('should set controls.autoRotate to the value of `isAutoOrbitEnabled` if it has changed', () => {
         const isAutoOrbitEnabled = false;
         const nextProps = {isAutoOrbitEnabled};
-        
+
         cameraContainer.props = {isAutoOrbitEnabled: !isAutoOrbitEnabled};
         cameraContainer.componentWillReceiveProps(nextProps);
 
@@ -200,7 +201,7 @@ describe('Camera Container', () => {
       });
     });
   });
- 
+
   describe('cancelTween()', () => {
     describe('when a tween is in progress', () => {
       beforeEach(() => {
@@ -233,7 +234,7 @@ describe('Camera Container', () => {
   describe('movePivot()', () => {
     describe('when the target exists and is set to animate', () => {
       const targetId = 'Earth';
-      
+
       beforeEach(() => {
         cameraContainer.props = {scene};
         cameraContainer.refs = {pivot};
@@ -266,7 +267,7 @@ describe('Camera Container', () => {
       it('should not freeze UI interactivity', () => {
         const targetId = 'Bogus';
         const spy = jest.spyOn(cameraContainer, 'setInteractivity');
-        
+
         cameraContainer.props.scene.getObjectByName = jest.fn();
         cameraContainer.movePivot(targetId, true);
 
@@ -278,7 +279,7 @@ describe('Camera Container', () => {
       it('should not freeze UI interactivity', () => {
         const targetId = 'Bogus';
         const spy = jest.spyOn(cameraContainer, 'setInteractivity');
-        
+
         cameraContainer.props.scene.getObjectByName = jest.fn();
         cameraContainer.movePivot(targetId, false);
 
@@ -339,7 +340,7 @@ describe('Camera Container', () => {
 
       cameraContainer.controls = {tweenZoom};
       cameraContainer.props = {action: {changeZoom}};
-      
+
       const spy = jest.spyOn(cameraContainer.controls, 'tweenZoom');
 
       cameraContainer.zoomInFull();
