@@ -11,23 +11,23 @@ export default class ReduxService {
    * @returns {Function<Object>} new props to be assigned
    */
   static mapStateToProps = (...props) => {
-    return function(state) {
-      let data = {};
+      return function(state) {
+          let data = {};
 
-      props.forEach((prop) => {
-        const path = prop.split('.');
-        const reducer = path[0];
-        const key = path[1];
+          props.forEach((prop) => {
+              const path = prop.split('.');
+              const reducer = path[0];
+              const key = path[1];
 
-        if (!data[reducer]) {
-          data[reducer] = {};
-        }
-        if (state[reducer]) {
-          data[key] = state[reducer][key];
-        }
-      });
-      return data;
-    }
+              if (!data[reducer]) {
+                  data[reducer] = {};
+              }
+              if (state[reducer]) {
+                  data[key] = state[reducer][key];
+              }
+          });
+          return data;
+      }
   }
 
   /**
@@ -38,16 +38,16 @@ export default class ReduxService {
    * @returns {Function<Object>}
    */
   static mapDispatchToProps = (...actions) => {
-    // consolidate sets of actions into one object
-    const allActions = actions.reduce((cur, next) => {
-      return Object.assign(cur, next);
-    }, {});
+      // consolidate sets of actions into one object
+      const allActions = actions.reduce((cur, next) => {
+          return Object.assign(cur, next);
+      }, {});
 
-    return function(dispatch) {
-      return {
-        action: bindActionCreators(allActions, dispatch)
-      };
-    }
+      return function(dispatch) {
+          return {
+              action: bindActionCreators(allActions, dispatch)
+          };
+      }
   }
   
   /**
@@ -60,12 +60,12 @@ export default class ReduxService {
    * @return {Object} new assigned state
    */
   static assign = (state, payload, ...props) => {
-    let data = {};
+      let data = {};
 
-    props.forEach((prop) => {
-      data[prop] = payload[prop];
-    });
+      props.forEach((prop) => {
+          data[prop] = payload[prop];
+      });
 
-    return Object.assign({}, state, data);
+      return Object.assign({}, state, data);
   }
 }

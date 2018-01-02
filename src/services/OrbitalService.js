@@ -21,12 +21,12 @@ export default class OrbitalService {
    * @returns {THREE.Euler} Eulerian rotation set
    */
   static getEclipticGroupRotation = ({longitudeOfAscendingNode, isSatellite}) => {
-    const ascension = isSatellite ? 0 : -OrbitalService.ASCENSION;
+      const ascension = isSatellite ? 0 : -OrbitalService.ASCENSION;
 
-    return OrbitalService.toEuler({
-      x: ascension,
-      z: OrbitalService.ASCENSION + longitudeOfAscendingNode
-    });
+      return OrbitalService.toEuler({
+          x: ascension,
+          z: OrbitalService.ASCENSION + longitudeOfAscendingNode
+      });
   }
 
   /**
@@ -38,10 +38,10 @@ export default class OrbitalService {
    * @returns {THREE.Euler} Eulerian rotation set
    */
   static getOrbitalGroupRotation = ({inclination, argumentOfPeriapsis}) => {
-    return OrbitalService.toEuler({
-      x: inclination,
-      z: OrbitalService.ASCENSION + argumentOfPeriapsis
-    });
+      return OrbitalService.toEuler({
+          x: inclination,
+          z: OrbitalService.ASCENSION + argumentOfPeriapsis
+      });
   }
 
   /**
@@ -54,10 +54,10 @@ export default class OrbitalService {
    * @returns {THREE.Euler} Eulerian vector
    */
   static getBodyRotation = ({axialTilt, sidereal, time}) => {
-    return OrbitalService.toEuler({
-      x: axialTilt,
-      z: OrbitalService.getRotationCompleted(sidereal, time)
-    });
+      return OrbitalService.toEuler({
+          x: axialTilt,
+          z: OrbitalService.getRotationCompleted(sidereal, time)
+      });
   }
 
   /**
@@ -69,11 +69,11 @@ export default class OrbitalService {
    * @returns {Number} degree of rotation [0,360]
    */
   static getRotationCompleted = (sidereal, time) => {
-    const unixTimeToDays = time / 60 / 60 / 24; // seconds to days
-    const percentRotated = (unixTimeToDays / sidereal) % 1;
-    const degreesRotated = percentRotated * 360;
+      const unixTimeToDays = time / 60 / 60 / 24; // seconds to days
+      const percentRotated = (unixTimeToDays / sidereal) % 1;
+      const degreesRotated = percentRotated * 360;
     
-    return degreesRotated;
+      return degreesRotated;
   }
 
   /**
@@ -86,7 +86,7 @@ export default class OrbitalService {
    * @returns {THREE.Vector3} projected body position
    */
   static getBodyPosition = ({periapses, time}, ellipse) => {
-    return ellipse.getPosition(time, periapses);
+      return ellipse.getPosition(time, periapses);
   }
 
   /**
@@ -98,7 +98,7 @@ export default class OrbitalService {
    * @returns {Number} scaled body radius
    */
   static getBodyRadius = ({radius, scale}) => {
-    return Scale(radius, scale);
+      return Scale(radius, scale);
   }
 
   /**
@@ -112,18 +112,18 @@ export default class OrbitalService {
    * @returns {Number} opacity
    */
   static getPathOpacity = ({id}, highlightedOrbitals, force) => {
-    if (force) {
-      return Constants.UI.HOVER_OPACITY_ON;
-    } else if (Array.isArray(highlightedOrbitals)) {
-      const isHighlighted = highlightedOrbitals
-        .filter((orbital) => orbital === id)
-        .length;
+      if (force) {
+          return Constants.UI.HOVER_OPACITY_ON;
+      } else if (Array.isArray(highlightedOrbitals)) {
+          const isHighlighted = highlightedOrbitals
+              .filter((orbital) => orbital === id)
+              .length;
 
-      if (isHighlighted) {
-        return Constants.UI.HOVER_OPACITY_ON;
-      }
-    } 
-    return Constants.UI.HOVER_OPACITY_OFF;
+          if (isHighlighted) {
+              return Constants.UI.HOVER_OPACITY_ON;
+          }
+      } 
+      return Constants.UI.HOVER_OPACITY_OFF;
   }
 
   /**
@@ -134,10 +134,10 @@ export default class OrbitalService {
    * @returns {Number}
    */
   static getMaxViewDistance = ({isSatellite}) => {
-    if (isSatellite) {
-      return Constants.WebGL.Camera.SATELLITE_LABEL_RANGE;
-    }
-    return Infinity;
+      if (isSatellite) {
+          return Constants.WebGL.Camera.SATELLITE_LABEL_RANGE;
+      }
+      return Infinity;
   }
 
   /**
@@ -150,13 +150,13 @@ export default class OrbitalService {
    * @returns {THREE.Euler} Eulerian rotation set
    */
   static toEuler = ({x, y, z}) => {
-    const rad = (x) => {
-      if (x) {
-        return MathService.toRadians(x);
+      const rad = (x) => {
+          if (x) {
+              return MathService.toRadians(x);
+          }
+          return 0;
       }
-      return 0;
-    }
-    return new THREE.Euler(rad(x), rad(y), rad(z));
+      return new THREE.Euler(rad(x), rad(y), rad(z));
   }
 
   /**
@@ -167,19 +167,19 @@ export default class OrbitalService {
    * @returns {Number} orbital radius
    */
   static getTargetByName = (orbitals, targetName) => {
-    let target;
+      let target;
 
-    orbitals.forEach((orbital) => {
-      if (!target) {
-        if (orbital.id === targetName) {
-          target = orbital;
-        } else if (orbital.satellites) {
-          target = OrbitalService
-            .getTargetByName(orbital.satellites, targetName);
-        }
-      }
-    });
-    return target;
+      orbitals.forEach((orbital) => {
+          if (!target) {
+              if (orbital.id === targetName) {
+                  target = orbital;
+              } else if (orbital.satellites) {
+                  target = OrbitalService
+                      .getTargetByName(orbital.satellites, targetName);
+              }
+          }
+      });
+      return target;
   }
 
   /**
@@ -189,10 +189,10 @@ export default class OrbitalService {
    * @returns {String} formatted number
    */
   static formatStat = (x) => {
-     return x
-      .toFixed(3)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return x
+          .toFixed(3)
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   /**
@@ -203,23 +203,23 @@ export default class OrbitalService {
    * @returns {Object} {magnitude: Number, velocity: Number, trueAnomaly: Number}
    */
   static getOrbitalStats = (target, time) => {
-    const {
-      eccentricity,
-      periapses,
-      centralMass,
-      semimajor
-    } = target;
+      const {
+          eccentricity,
+          periapses,
+          centralMass,
+          semimajor
+      } = target;
 
-    const {
-      distance,
-      trueAnomaly
-    } = PhysicsService.getDistanceFromAttractingBody(eccentricity, time, periapses, semimajor);
-    const energy = PhysicsService.orbitalEnergyConservation(centralMass, distance, semimajor);
+      const {
+          distance,
+          trueAnomaly
+      } = PhysicsService.getDistanceFromAttractingBody(eccentricity, time, periapses, semimajor);
+      const energy = PhysicsService.orbitalEnergyConservation(centralMass, distance, semimajor);
 
-    const magnitude = OrbitalService.formatStat(distance);
-    const velocity = OrbitalService.formatStat(energy);
-    const theta = OrbitalService.formatStat(trueAnomaly);
+      const magnitude = OrbitalService.formatStat(distance);
+      const velocity = OrbitalService.formatStat(energy);
+      const theta = OrbitalService.formatStat(trueAnomaly);
 
-    return {magnitude, velocity, trueAnomaly: theta};
+      return {magnitude, velocity, trueAnomaly: theta};
   }
 }

@@ -19,10 +19,10 @@ export class PlayPauseContainer extends React.Component {
 }
 
 export default connect(
-  ReduxService.mapStateToProps(
-    'animation.playing'
-  ),
-  ReduxService.mapDispatchToProps(
-    AnimationActions
-  )
+    ReduxService.mapStateToProps(
+        'animation.playing'
+    ),
+    ReduxService.mapDispatchToProps(
+        AnimationActions
+    )
 )(PlayPauseContainer);

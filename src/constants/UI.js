@@ -1,17 +1,17 @@
 export const Sliders = {
-  Scale: {
-    MIN: 1,
-    MAX: 10
-  },
-  Speed: {
-    MIN: 0,
-    MAX: 10
-  }
+    Scale: {
+        MIN: 1,
+        MAX: 10
+    },
+    Speed: {
+        MIN: 0,
+        MAX: 10
+    }
 };
 
 export const ModalTypes = {
-  STATS_MODAL: 'STATS_MODAL',
-  ABOUT_MODAL: 'ABOUT_MODAL'
+    STATS_MODAL: 'STATS_MODAL',
+    ABOUT_MODAL: 'ABOUT_MODAL'
 };
 
 export const ALTERNATE_TARGET_NAME = 'mars';

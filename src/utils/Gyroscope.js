@@ -8,24 +8,24 @@ export default class Gyroscope extends THREE.Object3D {
    * @param {Boolean} force - set to true to force update
    */
   updateMatrixWorld = (force) => {
-    this.maybeAutoUpdateMatrix();
+      this.maybeAutoUpdateMatrix();
 
-    if (this.matrixWorldNeedsUpdate || force) {
-      this.assignMatrixWorld();
-      this.matrixWorldNeedsUpdate = false;
-      force = true;
-    }
+      if (this.matrixWorldNeedsUpdate || force) {
+          this.assignMatrixWorld();
+          this.matrixWorldNeedsUpdate = false;
+          force = true;
+      }
     
-    this.updateChildrenMatrixWorlds(force);
+      this.updateChildrenMatrixWorlds(force);
   }
 
   /**
    * Updates matrix if the matrixAutoUpdate flag is true.
    */
   maybeAutoUpdateMatrix = () => {
-    if (this.matrixAutoUpdate) {
-      this.updateMatrix();
-    }
+      if (this.matrixAutoUpdate) {
+          this.updateMatrix();
+      }
   }
 
   /**
@@ -34,9 +34,9 @@ export default class Gyroscope extends THREE.Object3D {
    * @param {Boolean} force - set to true to force update
    */
   updateChildrenMatrixWorlds = (force) => {
-    for (let i = 0; i < this.children.length; i++) {
-      this.children[i].updateMatrixWorld(force);
-    }
+      for (let i = 0; i < this.children.length; i++) {
+          this.children[i].updateMatrixWorld(force);
+      }
   }
 
   /**
@@ -45,14 +45,14 @@ export default class Gyroscope extends THREE.Object3D {
    * When the context is parentless, it will use its existing matrix.
    */
   assignMatrixWorld = () => {
-    if (this.parent) {
-      this.matrixWorld.multiplyMatrices(this.parent.matrixWorld, this.matrix);
-      this.matrixWorld.decompose(this.translationWorld, this.quaternionWorld, this.scaleWorld);
-      this.matrix.decompose(this.translationObject, this.quaternionObject, this.scaleObject);
-      this.matrixWorld.compose(this.translationWorld, this.quaternionObject, this.scaleWorld);
-    } else {
-      this.matrixWorld.copy(this.matrix);
-    }
+      if (this.parent) {
+          this.matrixWorld.multiplyMatrices(this.parent.matrixWorld, this.matrix);
+          this.matrixWorld.decompose(this.translationWorld, this.quaternionWorld, this.scaleWorld);
+          this.matrix.decompose(this.translationObject, this.quaternionObject, this.scaleObject);
+          this.matrixWorld.compose(this.translationWorld, this.quaternionObject, this.scaleWorld);
+      } else {
+          this.matrixWorld.copy(this.matrix);
+      }
   }
 
   /**

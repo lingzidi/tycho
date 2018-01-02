@@ -31,7 +31,7 @@ export default class PhysicsService {
    * @returns {Number} calculated mean anomaly
    */
   static meanAnomaly(t, P) {
-    return t / P % 1 * 360;
+      return t / P % 1 * 360;
   }
 
   /**
@@ -45,25 +45,25 @@ export default class PhysicsService {
    * @returns {Number} calculated eccentric anomaly
    */
   static eccentricAnomaly(ecc, time, periapses) {
-    const last = periapses.last / 1000; // ms to s
-    const next = periapses.next / 1000; // ms to s
+      const last = periapses.last / 1000; // ms to s
+      const next = periapses.next / 1000; // ms to s
 
-    const timePassed = (time - last);
-    const period = (next - last);
+      const timePassed = (time - last);
+      const period = (next - last);
 
-    let meanAnomaly = this.meanAnomaly(timePassed, period) / 360;
-    let E, F;
+      let meanAnomaly = this.meanAnomaly(timePassed, period) / 360;
+      let E, F;
     
-    meanAnomaly = 2 * Math.PI * (meanAnomaly - Math.floor(meanAnomaly));
-    E = ecc < this.MAX_ECCENTRICITY ? meanAnomaly : Math.PI;
-    F = E - ecc * Math.sin(meanAnomaly) - meanAnomaly;
+      meanAnomaly = 2 * Math.PI * (meanAnomaly - Math.floor(meanAnomaly));
+      E = ecc < this.MAX_ECCENTRICITY ? meanAnomaly : Math.PI;
+      F = E - ecc * Math.sin(meanAnomaly) - meanAnomaly;
     
-    // numerical approximation for Kepler's second law (10 iterations)
-    for(let i = 0; i < 10; i++) {
-      E = E - F / (1 - ecc * Math.cos(E));
-      F = E - ecc * Math.sin(E) - meanAnomaly;
-    }
-    return E;
+      // numerical approximation for Kepler's second law (10 iterations)
+      for(let i = 0; i < 10; i++) {
+          E = E - F / (1 - ecc * Math.cos(E));
+          F = E - ecc * Math.sin(E) - meanAnomaly;
+      }
+      return E;
   }
   
   /**
@@ -74,17 +74,17 @@ export default class PhysicsService {
    * @returns {Number} projected orbital angle
    */
   static getTheta(ecc, E) {
-    const halfPi = Math.PI / 180;
-    const min = Math.sqrt(1 - Math.pow(ecc, 2));
-    const theta = Math.atan2(
-      (min * Math.sin(E)),
-      (Math.cos(E) - ecc)
-    ) / halfPi;
+      const halfPi = Math.PI / 180;
+      const min = Math.sqrt(1 - Math.pow(ecc, 2));
+      const theta = Math.atan2(
+          (min * Math.sin(E)),
+          (Math.cos(E) - ecc)
+      ) / halfPi;
     
-    if (theta < 0) {
-      return 360 + theta;
-    }
-    return theta;
+      if (theta < 0) {
+          return 360 + theta;
+      }
+      return theta;
   }
 
   /**
@@ -94,12 +94,12 @@ export default class PhysicsService {
    * @returns {Number} percentage of ellipse completed
    */
   static thetaToPercent(theta) {
-    const percent = theta / 360;
+      const percent = theta / 360;
 
-    if(percent > 1 || isNaN(percent)) {
-      return 0;
-    }
-    return percent;
+      if(percent > 1 || isNaN(percent)) {
+          return 0;
+      }
+      return percent;
   }
 
   /**
@@ -111,10 +111,10 @@ export default class PhysicsService {
    * @returns {Number} percentage of ellipse travelled
    */
   static ellipticPercent(ecc, time, periapses) {
-    let E = this.eccentricAnomaly(ecc, time, periapses);
-    let theta = this.getTheta(ecc, E);
+      let E = this.eccentricAnomaly(ecc, time, periapses);
+      let theta = this.getTheta(ecc, E);
     
-    return this.thetaToPercent(theta);
+      return this.thetaToPercent(theta);
   }
 
   /**
@@ -127,13 +127,13 @@ export default class PhysicsService {
    * @returns {Object} {distance: Number, trueAnomaly: Number}
    */
   static getDistanceFromAttractingBody(ecc, time, periapses, semimajor) {
-    const eccAnomaly = this.eccentricAnomaly(ecc, time, periapses);
-    const trueAnomaly = this.getTheta(ecc, eccAnomaly);
-    const a = semimajor * 1000; // km to m
-    const magnitude = a * (1 - ecc * Math.cos(eccAnomaly));
-    const distance = magnitude / 1000; // m to km
+      const eccAnomaly = this.eccentricAnomaly(ecc, time, periapses);
+      const trueAnomaly = this.getTheta(ecc, eccAnomaly);
+      const a = semimajor * 1000; // km to m
+      const magnitude = a * (1 - ecc * Math.cos(eccAnomaly));
+      const distance = magnitude / 1000; // m to km
 
-    return {distance, trueAnomaly};
+      return {distance, trueAnomaly};
   }
   
   /**
@@ -146,12 +146,12 @@ export default class PhysicsService {
    * @returns {Number} orbital energy constant at present vector, in km/s
    */
   static orbitalEnergyConservation(centralMass, magnitude, semimajor) {
-    const a = semimajor * 1000; // km to m
-    const r = magnitude * 1000; // km to m
-    const GM = PhysicsService.GRAVITATIONAL_CONSTANT * centralMass; // m^3/s^2
-    const speed = Math.sqrt(GM * ((2 / r) - (1 / a))); // m/s
+      const a = semimajor * 1000; // km to m
+      const r = magnitude * 1000; // km to m
+      const GM = PhysicsService.GRAVITATIONAL_CONSTANT * centralMass; // m^3/s^2
+      const speed = Math.sqrt(GM * ((2 / r) - (1 / a))); // m/s
 
-    return speed / 1000; // m to km
+      return speed / 1000; // m to km
   }
   
   /**
@@ -162,6 +162,6 @@ export default class PhysicsService {
    * @returns {Number} result in astronomical units
    */
   static toAU(x, scale = 1) {
-    return x * scale * this.KM_TO_AU;
+      return x * scale * this.KM_TO_AU;
   }
 }

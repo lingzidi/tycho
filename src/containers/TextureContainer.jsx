@@ -6,16 +6,16 @@ import Constants from '../constants';
 export default class TextureContainer extends React.Component {
 
   static propTypes = {
-    side: PropTypes.number,
-    textures: PropTypes.array
+      side: PropTypes.number,
+      textures: PropTypes.array
   }
 
   componentWillMount = () => {
-    this.loadedTextures = [];
+      this.loadedTextures = [];
   }
 
   componentDidMount = () => {
-    this.enqueueTextures(this.props.textures);
+      this.enqueueTextures(this.props.textures);
   }
 
   /**
@@ -24,7 +24,7 @@ export default class TextureContainer extends React.Component {
    * @param {Texture} texture - instance of THREE.Texture
    */
   onTextureLoaded = (textureData) => {
-    this.loadedTextures.push(textureData);
+      this.loadedTextures.push(textureData);
   }
 
   /**
@@ -34,9 +34,9 @@ export default class TextureContainer extends React.Component {
    * @param {String} prop.url - url of the texture to load
    */
   loadTexture = ({url, slot}) => {
-    const loader = new TextureLoader();
-    url = `/static/textures/map/${url}`; // TODO
-    loader.load(url, () => this.onTextureLoaded({url, slot}));
+      const loader = new TextureLoader();
+      url = `/static/textures/map/${url}`; // TODO
+      loader.load(url, () => this.onTextureLoaded({url, slot}));
   }
 
   /**
@@ -45,9 +45,9 @@ export default class TextureContainer extends React.Component {
    * @param {Object[]} textures - list of texture sets
    */
   enqueueTextures = (textures) => {
-    if (Array.isArray(textures)) {
-      textures.forEach(this.loadTexture);
-    }
+      if (Array.isArray(textures)) {
+          textures.forEach(this.loadTexture);
+      }
   }
 
   /**
@@ -56,38 +56,38 @@ export default class TextureContainer extends React.Component {
    * @returns {Texture[]} array of texture components
    */
   getTextures = () => {
-    return this
-      .loadedTextures
-      .map(({slot, url}, key) => {
-        return <texture
-          url={url}
-          slot={slot}
-          key={key}
-          onLoad={this.updateMaterial}
-        />
-      });
+      return this
+          .loadedTextures
+          .map(({slot, url}, key) => {
+              return <texture
+                  url={url}
+                  slot={slot}
+                  key={key}
+                  onLoad={this.updateMaterial}
+              />
+          });
   }
 
   /**
    * Flags material + assets to update on next animation frame.
    */
   updateMaterial = () => {
-    const {material} = this.refs;
+      const {material} = this.refs;
 
-    if (material.map) {
-      material.map.needsUpdate = true;
-    }
-    material.needsUpdate = true;
+      if (material.map) {
+          material.map.needsUpdate = true;
+      }
+      material.needsUpdate = true;
   }
 
   render() {
-    return (
-      <meshLambertMaterial
-        color={Constants.WebGL.MESH_DEFAULT_COLOR}
-        children={this.getTextures()}
-        side={this.props.side || FrontSide}
-        ref="material"
-      />
-    );
+      return (
+          <meshLambertMaterial
+              color={Constants.WebGL.MESH_DEFAULT_COLOR}
+              children={this.getTextures()}
+              side={this.props.side || FrontSide}
+              ref="material"
+          />
+      );
   }
 }

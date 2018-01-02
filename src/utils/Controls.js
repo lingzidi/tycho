@@ -5,17 +5,17 @@ import Constants from '../constants';
 
 export default class Controls extends OrbitControls(THREE) {
 
-  constructor(camera, domElement) {
-    super(camera, domElement);
+    constructor(camera, domElement) {
+        super(camera, domElement);
 
-    this.camera = camera;
-    this.enabled = true;
-    this.enableZoom = false;
-    this.enablePan = false;
-    this.level = Constants.WebGL.Zoom.MAX;
-    this.minDistance = Constants.WebGL.Camera.MIN_DISTANCE;
-    this.maxDistance = Constants.WebGL.Camera.MAX_DISTANCE;
-  }
+        this.camera = camera;
+        this.enabled = true;
+        this.enableZoom = false;
+        this.enablePan = false;
+        this.level = Constants.WebGL.Zoom.MAX;
+        this.minDistance = Constants.WebGL.Camera.MIN_DISTANCE;
+        this.maxDistance = Constants.WebGL.Camera.MAX_DISTANCE;
+    }
 
   /**
    * Change zoom. Overrides the existing zoom tween in progress.
@@ -23,10 +23,10 @@ export default class Controls extends OrbitControls(THREE) {
    * @param {level} level - percentage of desired zoom level [0,100]
    */
   zoom = (level) => {
-    if(this.level !== level) {
-      this.pan(level / 100);
-      this.level = level;
-    }
+      if(this.level !== level) {
+          this.pan(level / 100);
+          this.level = level;
+      }
   }
 
   /**
@@ -36,12 +36,12 @@ export default class Controls extends OrbitControls(THREE) {
    * @param {Function} action - callback action
    */
   wheelZoom = (ev, action) => {
-    const zoom = this.getZoomDelta(ev.deltaY);
-    const current = Math.round(this.level * 100);
+      const zoom = this.getZoomDelta(ev.deltaY);
+      const current = Math.round(this.level * 100);
 
-    if (current !== zoom) {
-      action(zoom);
-    }
+      if (current !== zoom) {
+          action(zoom);
+      }
   }
 
   /**
@@ -51,13 +51,13 @@ export default class Controls extends OrbitControls(THREE) {
    * @returns {Number} new zoom level
    */
   getZoomDelta = (delta) => {
-    let zoom = this.level;
+      let zoom = this.level;
     
-    zoom += (delta / this.getWheelDeltaDivisor(zoom));
-    zoom = Math.max(zoom, 0);
-    zoom = Math.min(zoom, 100);
+      zoom += (delta / this.getWheelDeltaDivisor(zoom));
+      zoom = Math.max(zoom, 0);
+      zoom = Math.min(zoom, 100);
    
-    return zoom;
+      return zoom;
   }
 
   /**
@@ -68,18 +68,18 @@ export default class Controls extends OrbitControls(THREE) {
    * @returns {Number} scrollwheel delta
    */
   getWheelDeltaDivisor = (level) => {
-    let delta = Constants.UI.WHEEL_DELTA_DIVISOR;
-    let match = false;
+      let delta = Constants.UI.WHEEL_DELTA_DIVISOR;
+      let match = false;
 
-    Constants.WebGL.ScrollScale
-      .forEach(({distance, scale}) => {
-        if (level > distance && !match) {
-          delta *= scale;
-          match = true;
-        }
-      });
+      Constants.WebGL.ScrollScale
+          .forEach(({distance, scale}) => {
+              if (level > distance && !match) {
+                  delta *= scale;
+                  match = true;
+              }
+          });
 
-    return delta;
+      return delta;
   }
 
   /**
@@ -88,15 +88,15 @@ export default class Controls extends OrbitControls(THREE) {
    * @param {Number} percent - percentage of zoom [0,1]
    */
   pan = (percent, log) => {
-    let position = this.camera.position;
-    let newVector = this.getZoomVector(position, this.maxDistance * percent);
-    let minVector = this.getZoomVector(position, this.minDistance);
+      let position = this.camera.position;
+      let newVector = this.getZoomVector(position, this.maxDistance * percent);
+      let minVector = this.getZoomVector(position, this.minDistance);
     
-    if (newVector.length() >= this.minDistance) {
-      position.copy(newVector);
-    } else {
-      position.copy(minVector);
-    }
+      if (newVector.length() >= this.minDistance) {
+          position.copy(newVector);
+      } else {
+          position.copy(minVector);
+      }
   }
 
   /**
@@ -107,10 +107,10 @@ export default class Controls extends OrbitControls(THREE) {
    * @returns {Vector3}
    */
   getZoomVector = (vector, scalar) => {
-    return vector
-      .clone()
-      .normalize()
-      .multiplyScalar(scalar);
+      return vector
+          .clone()
+          .normalize()
+          .multiplyScalar(scalar);
   }
 
   /**
@@ -119,21 +119,21 @@ export default class Controls extends OrbitControls(THREE) {
    * @returns {Number} distance
    */
   getDistance = () => {
-    return this.maxDistance - this.minDistance;
+      return this.maxDistance - this.minDistance;
   }
 
   /**
    * Enable controls.
    */
   enable = () => {
-    this.enabled = true;
+      this.enabled = true;
   }
 
   /**
    * Disable controls.
    */
   disable = () => {
-    this.enabled = false;
+      this.enabled = false;
   }
 
   /**
@@ -142,50 +142,50 @@ export default class Controls extends OrbitControls(THREE) {
    * @param {Number} speed - speed to rotate at
    */
   startAutoRotate = (speed) => {
-    this.autoRotate = true;
-    this.autoRotateSpeed = speed;
+      this.autoRotate = true;
+      this.autoRotateSpeed = speed;
   }
 
   /**
    * Stop autorotating the scene.
    */
   stopAutoRotate = () => {
-    this.autoRotate = false;
+      this.autoRotate = false;
   }
 
   /**
    * Deletes Tween instance and data.
    */
   endTween = () => {
-    delete this.tweenData;
-    delete this.tweenBase;
+      delete this.tweenData;
+      delete this.tweenBase;
   }
 
   /**
    * Cancels Tween, if one is in progress.
    */
   cancelTween = () => {
-    if (this.tweenBase) {
-      this.tweenBase.stop();
-      this.endTween();
-    }
+      if (this.tweenBase) {
+          this.tweenBase.stop();
+          this.endTween();
+      }
   }
 
   /**
    * Zooms to the level of the current Tween data.
    */
   updateTween = () => {
-    this.zoom(this.tweenData.level);
+      this.zoom(this.tweenData.level);
   }
 
   /**
    * Invokes teardown methods for active tween.
    */
   completeTween = () => {
-    if (this.tweenDone) {
-      this.tweenDone(this.level);
-    }
-    this.endTween();
+      if (this.tweenDone) {
+          this.tweenDone(this.level);
+      }
+      this.endTween();
   }
 
   /**
@@ -195,17 +195,17 @@ export default class Controls extends OrbitControls(THREE) {
    * @param {Function} onDone - animation completion callback
    */
   tweenZoom = (level, onDone) => {
-    this.cancelTween();
+      this.cancelTween();
 
-    this.tweenDone = onDone;
-    this.tweenData = {level: this.level};
+      this.tweenDone = onDone;
+      this.tweenData = {level: this.level};
 
-    this.tweenBase = new TWEEN
-      .Tween(this.tweenData)
-      .easing(TWEEN.Easing.Quadratic.Out)
-      .to({level}, Constants.WebGL.Tween.SLOW)
-      .onUpdate(this.updateTween)
-      .onComplete(this.completeTween)
-      .start();
+      this.tweenBase = new TWEEN
+          .Tween(this.tweenData)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .to({level}, Constants.WebGL.Tween.SLOW)
+          .onUpdate(this.updateTween)
+          .onComplete(this.completeTween)
+          .start();
   }
 }

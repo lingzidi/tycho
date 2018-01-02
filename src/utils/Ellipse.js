@@ -6,7 +6,7 @@ import Scale from '../utils/Scale';
 
 export default class Ellipse {
 
-  /**
+    /**
    * Ininitializes a new instance of Ellipse.
    *
    * @note Triggers render.
@@ -16,12 +16,12 @@ export default class Ellipse {
    * @param {Number} props.eccentricity - orbital path eccentricity
    * @param {Number} props.scale - scaling factor
    */
-  constructor({semimajor, semiminor, eccentricity, scale}) {
-    this.semimajor = semimajor;
-    this.semiminor = semiminor;
-    this.eccentricity = eccentricity;
-    this.setScale(scale);
-  }
+    constructor({semimajor, semiminor, eccentricity, scale}) {
+        this.semimajor = semimajor;
+        this.semiminor = semiminor;
+        this.eccentricity = eccentricity;
+        this.setScale(scale);
+    }
 
   /**
    * Renders the ellipse prop.
@@ -29,10 +29,10 @@ export default class Ellipse {
    * @returns {Object3D} ellipse
    */
   render = () => {
-    this.ellipse = this.getEllipseCurve();
-    this.path = this.getPath();
-    this.geometry = this.getGeometry();
-    this.path.add(this.ellipse);
+      this.ellipse = this.getEllipseCurve();
+      this.path = this.getPath();
+      this.geometry = this.getGeometry();
+      this.path.add(this.ellipse);
   }
 
   /**
@@ -41,9 +41,9 @@ export default class Ellipse {
    * @returns {THREE.Geometry} geometry
    */
   getGeometry = () => {
-    return this.path.createPointsGeometry(
-      Constants.WebGL.Ellipse.POINTS
-    );
+      return this.path.createPointsGeometry(
+          Constants.WebGL.Ellipse.POINTS
+      );
   }
 
   /**
@@ -52,7 +52,7 @@ export default class Ellipse {
    * @returns {THREE.Path} path
    */
   getPath = () => {
-    return new THREE.CurvePath();
+      return new THREE.CurvePath();
   }
 
   /**
@@ -61,17 +61,17 @@ export default class Ellipse {
    * @returns {EllipseCurve}
    */
   getEllipseCurve = () => {
-    const semimajor = Scale(this.semimajor, this.scale);
-    const semiminor = Scale(this.semiminor, this.scale);
-    const focus = MathService.getFocus(semimajor, semiminor);
+      const semimajor = Scale(this.semimajor, this.scale);
+      const semiminor = Scale(this.semiminor, this.scale);
+      const focus = MathService.getFocus(semimajor, semiminor);
 
-    return new THREE.EllipseCurve(0,
-      focus, 
-      semiminor,
-      semimajor,
-      Constants.WebGL.Ellipse.START,
-      Constants.WebGL.Ellipse.END
-    );
+      return new THREE.EllipseCurve(0,
+          focus, 
+          semiminor,
+          semimajor,
+          Constants.WebGL.Ellipse.START,
+          Constants.WebGL.Ellipse.END
+      );
   }
 
   /**
@@ -81,13 +81,13 @@ export default class Ellipse {
    * @return {THREE.Vector2[]} array of two-dimensional vertices
    */
   getVertices = () => {
-    const points = Constants.WebGL.Ellipse.POINTS;
-    const path = new THREE.Path(this.ellipse.getPoints(points));
-    const geometry = path.createPointsGeometry(points);
+      const points = Constants.WebGL.Ellipse.POINTS;
+      const path = new THREE.Path(this.ellipse.getPoints(points));
+      const geometry = path.createPointsGeometry(points);
 
-    path.add(this.ellipse);
+      path.add(this.ellipse);
 
-    return geometry.vertices;
+      return geometry.vertices;
   }
 
   /**
@@ -99,16 +99,16 @@ export default class Ellipse {
    * @returns {Vector3} current position
    */
   getPosition = (time, periapses, name) => {
-    const percent = PhysicsService.ellipticPercent(
-      this.eccentricity, time, periapses
-    );
-    const vector2d = this.path.getPoint(percent);
+      const percent = PhysicsService.ellipticPercent(
+          this.eccentricity, time, periapses
+      );
+      const vector2d = this.path.getPoint(percent);
 
-    return new THREE.Vector3(vector2d.x, vector2d.y);
+      return new THREE.Vector3(vector2d.x, vector2d.y);
   }
 
   setScale = (scale) => {
-    this.scale = scale;
-    this.render();
+      this.scale = scale;
+      this.render();
   }
 }

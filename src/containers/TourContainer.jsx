@@ -13,18 +13,18 @@ import Constants from '../constants';
 export class TourContainer extends React.Component {
 
   static propTypes = {
-    labels: PropTypes.array
+      labels: PropTypes.array
   }
 
   componentDidMount = () => {
-    if (TourService.canSkip()) {
-      this.props.action.tourSkipped(true);
-    }
+      if (TourService.canSkip()) {
+          this.props.action.tourSkipped(true);
+      }
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.maybeSkipTour(nextProps);
-    this.maybeStartTour(nextProps);
+      this.maybeSkipTour(nextProps);
+      this.maybeStartTour(nextProps);
   }
 
   /**
@@ -34,9 +34,9 @@ export class TourContainer extends React.Component {
    * @param {Boolean} nextProps.isSkipped
    */
   maybeSkipTour = ({isSkipped}) => {
-    if (this.props.isSkipped !== isSkipped && isSkipped) {
-      this.skipTour();
-    }
+      if (this.props.isSkipped !== isSkipped && isSkipped) {
+          this.skipTour();
+      }
   }
 
   /**
@@ -46,9 +46,9 @@ export class TourContainer extends React.Component {
    * @param {Boolean} nextProps.playing
    */
   maybeStartTour = ({playing}) => {
-    if (playing && !this.props.playing && !this.props.isComplete) {
-      this.initializeTour();
-    }
+      if (playing && !this.props.playing && !this.props.isComplete) {
+          this.initializeTour();
+      }
   }
 
   /**
@@ -57,69 +57,69 @@ export class TourContainer extends React.Component {
    * @returns {Boolean}
    */
   shouldRunTour = () => {
-    return this.props.playing && !this.props.isSkipped;
+      return this.props.playing && !this.props.isSkipped;
   }
 
   /**
    * Initializes the tour.
    */
   initializeTour = () => {
-    const {action, labels} = this.props;
-    const tourDuration = TourService.getTourDuration(labels);
+      const {action, labels} = this.props;
+      const tourDuration = TourService.getTourDuration(labels);
 
-    if (!TourService.canSkip()) {
-      action.setUIControls(false);
-      action.setCameraOrbit(true);
+      if (!TourService.canSkip()) {
+          action.setUIControls(false);
+          action.setCameraOrbit(true);
 
-      setTimeout(this.onOrbitComplete, tourDuration);
-    }
+          setTimeout(this.onOrbitComplete, tourDuration);
+      }
   }
   
   /**
    * Callback to invoke once the tour orbit has completed.
    */
   onOrbitComplete = () => {
-    if (!this.props.isComplete) {
-      this.setDefaultActiveOrbital();
-      setTimeout(this.onTourComplete, Constants.WebGL.Tween.SLOW);
-    }
+      if (!this.props.isComplete) {
+          this.setDefaultActiveOrbital();
+          setTimeout(this.onTourComplete, Constants.WebGL.Tween.SLOW);
+      }
   }
 
   /**
    * Callback to invoke once the entire tour is completed.
    */
   onTourComplete = () => {
-    this.props.action.tourCompleted(true);
+      this.props.action.tourCompleted(true);
   }
 
   /**
    * Skips the tour and zooms directly into the target planet.
    */
   skipTour = () => {
-    const {action} = this.props;
+      const {action} = this.props;
 
-    action.tourCompleted(true);
-    action.setCameraOrbit(false);
-    action.setUIControls(true);
+      action.tourCompleted(true);
+      action.setCameraOrbit(false);
+      action.setUIControls(true);
 
-    this.setDefaultActiveOrbital();
+      this.setDefaultActiveOrbital();
   }
 
   /**
    * Sets the active orbital targetId and the header label text to UI defaults.
    */
   setDefaultActiveOrbital = () => {
-    this.props.action.setActiveOrbital(Constants.UI.ALTERNATE_TARGET_NAME);
-    this.props.action.setActiveOrbital(Constants.UI.DEFAULT_TARGET_NAME);
-    this.props.action.setLabelText(Constants.UI.DEFAULT_LABEL_TEXT);
+      this.props.action.setActiveOrbital(Constants.UI.ALTERNATE_TARGET_NAME);
+      this.props.action.setActiveOrbital(Constants.UI.DEFAULT_TARGET_NAME);
+      this.props.action.setLabelText(Constants.UI.DEFAULT_LABEL_TEXT);
   }
 
   /**
    * Sets the skip tour cookie and skips tour.
    */
   skipTourTrigger = () => {
-    TourService.setSkip();
-    this.skipTour();
+      TourService.setSkip();
+      this.skipTour();
   }
   
   /**
@@ -129,53 +129,53 @@ export class TourContainer extends React.Component {
    * @returns {TourLabelContainer[]}
    */
   getLabels = (labels) => {
-    const separation = Constants.Tour.SEPARATION_INTERVAL;
-    let totalTime = separation;
+      const separation = Constants.Tour.SEPARATION_INTERVAL;
+      let totalTime = separation;
     
-    return labels.map(({text, duration}, key) => {
-      totalTime += separation;
-      const start = totalTime;
-      totalTime += duration;
-      const end = totalTime;
+      return labels.map(({text, duration}, key) => {
+          totalTime += separation;
+          const start = totalTime;
+          totalTime += duration;
+          const end = totalTime;
 
-      return (
-        <TourLabelContainer
-          key={key}
-          text={text}
-          start={start}
-          end={end}
-        />
-      );
-    });
+          return (
+              <TourLabelContainer
+                  key={key}
+                  text={text}
+                  start={start}
+                  end={end}
+              />
+          );
+      });
   }
 
   render() {
-    if (!this.shouldRunTour()) {
-      return null;
-    }
-    return (
-      <Tour
-        {...this.props}
-        skipTour={this.skipTourTrigger}
-        labels={this.getLabels(this.props.labels)}
-      />
-    );
+      if (!this.shouldRunTour()) {
+          return null;
+      }
+      return (
+          <Tour
+              {...this.props}
+              skipTour={this.skipTourTrigger}
+              labels={this.getLabels(this.props.labels)}
+          />
+      );
   }
 }
 
 export default connect(
-  ReduxService.mapStateToProps(
-    'uiControls.controlsEnabled',
-    'uiControls.scale',
-    'label.targetId',
-    'tour.isComplete',
-    'tour.isSkipped',
-    'animation.playing',
-    'data.pageText'
-  ),
-  ReduxService.mapDispatchToProps(
-    UIControlsActions,
-    TourActions,
-    LabelActions
-  )
+    ReduxService.mapStateToProps(
+        'uiControls.controlsEnabled',
+        'uiControls.scale',
+        'label.targetId',
+        'tour.isComplete',
+        'tour.isSkipped',
+        'animation.playing',
+        'data.pageText'
+    ),
+    ReduxService.mapDispatchToProps(
+        UIControlsActions,
+        TourActions,
+        LabelActions
+    )
 )(TourContainer);

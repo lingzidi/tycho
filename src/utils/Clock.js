@@ -5,12 +5,12 @@ import Constants from '../constants';
 
 export default class Clock {
 
-  constructor() {
-    this.clock = new THREE.Clock();
-    this.offset = this.getOffset();
-    this.start();
-    this.scale = 1;
-  }
+    constructor() {
+        this.clock = new THREE.Clock();
+        this.offset = this.getOffset();
+        this.start();
+        this.scale = 1;
+    }
 
   /**
    * Get time offset.
@@ -19,10 +19,10 @@ export default class Clock {
    * @returns {Number} unix timestamp
    */
   getOffset = (time) => {
-    if (time) {
-      return time;
-    }
-    return moment().unix();
+      if (time) {
+          return time;
+      }
+      return moment().unix();
   }
 
   /**
@@ -31,11 +31,11 @@ export default class Clock {
    * @returns {Number} UNIX timestamp
    */
   getTime = () => {
-    let time = this.clock.getElapsedTime();
-        time *= this.scale;
-        time += this.offset;
+      let time = this.clock.getElapsedTime();
+      time *= this.scale;
+      time += this.offset;
 
-    return Math.ceil(time);
+      return Math.ceil(time);
   }
 
   /**
@@ -43,12 +43,12 @@ export default class Clock {
    * an animation loop to prepare the next frame time.
    */
   update = () => {
-    let elapsedTime = this.clock.getElapsedTime();
+      let elapsedTime = this.clock.getElapsedTime();
 
-    if(elapsedTime !== this.elapsedTime) {
-      this.elapsedTime = elapsedTime;
-    }
-    TWEEN.update();
+      if(elapsedTime !== this.elapsedTime) {
+          this.elapsedTime = elapsedTime;
+      }
+      TWEEN.update();
   }
 
   /**
@@ -58,60 +58,60 @@ export default class Clock {
    * @param {Number} e - scalar exponent
    */
   speed = (e) => {
-    const scale = Math.pow(10, e || 0);
+      const scale = Math.pow(10, e || 0);
 
-    if (scale !== this.scale) {
-      this.stopTween();
-      this.offset = this.getTime();
-      this.scale = scale;
-      this.start();
-    }
+      if (scale !== this.scale) {
+          this.stopTween();
+          this.offset = this.getTime();
+          this.scale = scale;
+          this.start();
+      }
   }
 
   /**
    * Starts the clock.
    */
   start = () => {
-    this.stopped = false;
-    this.clock.start();
+      this.stopped = false;
+      this.clock.start();
   }
 
   /**
    * Continues the clock from where it left off.
    */
   continue = () => {
-    const {elapsedTime} = this.clock;
+      const {elapsedTime} = this.clock;
 
-    this.stopped = false;
-    this.clock.start();
-    this.clock.elapsedTime = elapsedTime;
+      this.stopped = false;
+      this.clock.start();
+      this.clock.elapsedTime = elapsedTime;
   }
 
   /**
    * Stops the clock.
    */
   stop = () => {
-    this.stopped = true;
-    this.clock.stop();
+      this.stopped = true;
+      this.clock.stop();
   }
 
   /**
    * Forces the active Tween to stop and updates the current offset to the destination one.
    */
   stopTween = () => {
-    if (this.tween) {
-      this.tween.stop();
-      this.offset = this.destinationOffset;
-      this.start();
-      delete this.tween;
-    }
+      if (this.tween) {
+          this.tween.stop();
+          this.offset = this.destinationOffset;
+          this.start();
+          delete this.tween;
+      }
   }
 
   /**
    * Updates the clock offset with current tween offset time.
    */
   updateTweenOffset = () => {
-    this.offset = this.tweenData.offset;
+      this.offset = this.tweenData.offset;
   }
 
   /**
@@ -121,18 +121,18 @@ export default class Clock {
    * @returns {Tween} - tween instance
    */
   setOffset = (time) => {
-    this.stop();
-    this.stopTween();
-    this.tweenData = {
-      offset: this.offset
-    };
-    this.destinationOffset = time;
+      this.stop();
+      this.stopTween();
+      this.tweenData = {
+          offset: this.offset
+      };
+      this.destinationOffset = time;
 
-    this.tween = new TWEEN.Tween(this.tweenData)
-      .easing(TWEEN.Easing.Quadratic.Out)
-      .to({offset: time}, Constants.WebGL.Tween.NORMAL)
-      .onUpdate(this.updateTweenOffset)
-      .onComplete(this.start)
-      .start();
+      this.tween = new TWEEN.Tween(this.tweenData)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .to({offset: time}, Constants.WebGL.Tween.NORMAL)
+          .onUpdate(this.updateTweenOffset)
+          .onComplete(this.start)
+          .start();
   }
 }

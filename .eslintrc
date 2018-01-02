@@ -1,14 +1,27 @@
 {
-    "extends": "react-app",
-    "rules": {
-        "jsx-a11y/href-no-hash": "off",
-        "jsx-a11y/anchor-is-valid": [
-            "warn",
-            {
-                "aspects": [
-                    "invalidHref"
-                ]
-            }
+  "extends": "react-app",
+  "rules": {
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
+      {
+        "aspects": [
+          "invalidHref"
         ]
-    }
+      }
+    ],
+
+    "indent": [
+      "warn",
+      4,
+      {
+        "SwitchCase": 1,
+        "ObjectExpression": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ]
+  }
 }

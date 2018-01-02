@@ -9,14 +9,14 @@ export default class TourService {
    * @returns {Boolean} ability to skip tour
    */
   static canSkip = () => {
-    return Cookies.get('tourViewed') === 'true';
+      return Cookies.get('tourViewed') === 'true';
   }
 
   /**
    * Sets a cookie to indicate that the tour was either viewed or skipped.
    */
   static setSkip = () => {
-    Cookies.set('tourViewed', 'true', {expires: 365});
+      Cookies.set('tourViewed', 'true', {expires: 365});
   }
 
   /**
@@ -27,14 +27,14 @@ export default class TourService {
    * @returns {Number} total duration
    */
   static getTourDuration = (labels) => {
-    const interval = Constants.Tour.SEPARATION_INTERVAL;
-    let duration = interval;
+      const interval = Constants.Tour.SEPARATION_INTERVAL;
+      let duration = interval;
     
-    duration += labels.reduce((cur, next) => {
-      return cur + next.duration + interval;
-    }, 0);
-    duration += interval;
+      duration += labels.reduce((cur, next) => {
+          return cur + next.duration + interval;
+      }, 0);
+      duration += interval;
 
-    return duration;
+      return duration;
   }
 }

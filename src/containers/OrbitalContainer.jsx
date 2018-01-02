@@ -7,34 +7,34 @@ import Orbital from '../components/Orbital';
 export class OrbitalContainer extends React.Component {
 
   static propTypes = {
-    inclination: PropTypes.number.isRequired,
-    longitudeOfAscendingNode: PropTypes.number.isRequired,
-    argumentOfPeriapsis: PropTypes.number.isRequired,
-    radius: PropTypes.number.isRequired,
-    axialTilt: PropTypes.number.isRequired,
-    atmosphere: PropTypes.number,
-    sidereal: PropTypes.number,
-    id: PropTypes.string.isRequired,
-    targetId: PropTypes.string,
-    time: PropTypes.number,
-    isSatellite: PropTypes.bool,
-    active: PropTypes.bool,
-    highlightedOrbitals: PropTypes.array,
-    maps: PropTypes.array
+      inclination: PropTypes.number.isRequired,
+      longitudeOfAscendingNode: PropTypes.number.isRequired,
+      argumentOfPeriapsis: PropTypes.number.isRequired,
+      radius: PropTypes.number.isRequired,
+      axialTilt: PropTypes.number.isRequired,
+      atmosphere: PropTypes.number,
+      sidereal: PropTypes.number,
+      id: PropTypes.string.isRequired,
+      targetId: PropTypes.string,
+      time: PropTypes.number,
+      isSatellite: PropTypes.bool,
+      active: PropTypes.bool,
+      highlightedOrbitals: PropTypes.array,
+      maps: PropTypes.array
   }
 
   componentWillMount = () => {
-    this.ellipse = new Ellipse(this.props);
-    this.setGroupRotations(this.props);
-    this.setPathOpacity(this.props);
-    this.setBodyState(this.props, this.ellipse);
-    this.setState({});
+      this.ellipse = new Ellipse(this.props);
+      this.setGroupRotations(this.props);
+      this.setPathOpacity(this.props);
+      this.setBodyState(this.props, this.ellipse);
+      this.setState({});
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.maybeUpdateBodyState(nextProps);
-    this.maybeUpdatePathOpacity(nextProps);
-    this.maybeUpdateScale(nextProps);
+      this.maybeUpdateBodyState(nextProps);
+      this.maybeUpdatePathOpacity(nextProps);
+      this.maybeUpdateScale(nextProps);
   }
 
   /**
@@ -44,9 +44,9 @@ export class OrbitalContainer extends React.Component {
    * @param {Number} nextProps.time - current time, in seconds
    */
   maybeUpdateBodyState = ({time}) => {
-    if (this.props.time !== time) {
-      this.setBodyState(this.props, this.ellipse);
-    }
+      if (this.props.time !== time) {
+          this.setBodyState(this.props, this.ellipse);
+      }
   }
 
   /**
@@ -56,9 +56,9 @@ export class OrbitalContainer extends React.Component {
    * @param {String[]} nextProps.highlightedOrbitals
    */
   maybeUpdatePathOpacity = ({highlightedOrbitals}) => {
-    if (this.props.highlightedOrbitals !== highlightedOrbitals) {
-      this.setPathOpacity(this.props, highlightedOrbitals);
-    }
+      if (this.props.highlightedOrbitals !== highlightedOrbitals) {
+          this.setPathOpacity(this.props, highlightedOrbitals);
+      }
   }
 
   /**
@@ -69,18 +69,18 @@ export class OrbitalContainer extends React.Component {
    * @param {Number} nextProps.scale - user-defined scale
    */
   maybeUpdateScale = ({time, scale}) => {
-    if (scale !== this.props.scale) {
-      if (this.props.isSatellite) {
-        // only update the orbital path scale for satellites
-        this.ellipse.setScale(scale);
+      if (scale !== this.props.scale) {
+          if (this.props.isSatellite) {
+              // only update the orbital path scale for satellites
+              this.ellipse.setScale(scale);
+          }
+          this.setBodyState(this.props, this.ellipse);
+          // keep track of last time the scale updated so lines 
+          // don't constantly re-render (which is computationally expensive)
+          this.setState({
+              scaleLastUpdate: time
+          });
       }
-      this.setBodyState(this.props, this.ellipse);
-      // keep track of last time the scale updated so lines 
-      // don't constantly re-render (which is computationally expensive)
-      this.setState({
-        scaleLastUpdate: time
-      });
-    }
   }
 
   /**
@@ -90,9 +90,9 @@ export class OrbitalContainer extends React.Component {
    * @param {String[]} highlightedOrbitals
    */
   setPathOpacity = (props, highlightedOrbitals) => {
-    this.setState({
-      pathOpacity: Service.getPathOpacity(props, highlightedOrbitals, this.isTarget())
-    });
+      this.setState({
+          pathOpacity: Service.getPathOpacity(props, highlightedOrbitals, this.isTarget())
+      });
   }
 
   /**
@@ -101,10 +101,10 @@ export class OrbitalContainer extends React.Component {
    * @param {Object} props - orbital props
    */
   setGroupRotations = (props) => {
-    this.setState({
-      eclipticGroupRotation: Service.getEclipticGroupRotation(props),
-      orbitalGroupRotation: Service.getOrbitalGroupRotation(props)
-    });
+      this.setState({
+          eclipticGroupRotation: Service.getEclipticGroupRotation(props),
+          orbitalGroupRotation: Service.getOrbitalGroupRotation(props)
+      });
   }
 
   /**
@@ -114,12 +114,12 @@ export class OrbitalContainer extends React.Component {
    * @param {Ellipse} ellipse - instance of orbital ellipse
    */
   setBodyState = (props, ellipse) => {
-    this.setState({
-      bodyRotation: Service.getBodyRotation(props),
-      bodyPosition: Service.getBodyPosition(props, ellipse),
-      bodyRadius: Service.getBodyRadius(props),
-      maxDistance: Service.getMaxViewDistance(props)
-    });
+      this.setState({
+          bodyRotation: Service.getBodyRotation(props),
+          bodyPosition: Service.getBodyPosition(props, ellipse),
+          bodyRadius: Service.getBodyRadius(props),
+          maxDistance: Service.getMaxViewDistance(props)
+      });
   }
 
   /**
@@ -128,32 +128,32 @@ export class OrbitalContainer extends React.Component {
    * @returns {Boolean}
    */
   isTarget = () => {
-    return this.props.id === this.props.targetId;
+      return this.props.id === this.props.targetId;
   }
 
 
   render() {
-    return (
-      <Orbital
-        eclipticGroupRotation={this.state.eclipticGroupRotation}
-        orbitalGroupRotation={this.state.orbitalGroupRotation}
-        pathVertices={this.ellipse.getVertices()}
-        bodyPosition={this.state.bodyPosition}
-        bodyRotation={this.state.bodyRotation}
-        bodyRadius={this.state.bodyRadius}
-        pathOpacity={this.state.pathOpacity}
-        atmosphere={this.props.atmosphere}
-        scaleLastUpdate={this.state.scaleLastUpdate}
-        maxDistance={this.state.maxDistance}
-        camera={this.props.camera}
-        maps={this.props.maps}
-        text={this.props.name}
-        action={this.props.action}
-        children={this.props.children}
-        targetId={this.props.targetId}
-        id={this.props.id}
-      />
-    );
+      return (
+          <Orbital
+              eclipticGroupRotation={this.state.eclipticGroupRotation}
+              orbitalGroupRotation={this.state.orbitalGroupRotation}
+              pathVertices={this.ellipse.getVertices()}
+              bodyPosition={this.state.bodyPosition}
+              bodyRotation={this.state.bodyRotation}
+              bodyRadius={this.state.bodyRadius}
+              pathOpacity={this.state.pathOpacity}
+              atmosphere={this.props.atmosphere}
+              scaleLastUpdate={this.state.scaleLastUpdate}
+              maxDistance={this.state.maxDistance}
+              camera={this.props.camera}
+              maps={this.props.maps}
+              text={this.props.name}
+              action={this.props.action}
+              children={this.props.children}
+              targetId={this.props.targetId}
+              id={this.props.id}
+          />
+      );
   }
 }
 

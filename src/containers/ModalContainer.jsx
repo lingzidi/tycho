@@ -7,7 +7,7 @@ import Modal from '../components/Modal';
 export class ModalContainer extends React.Component {
 
   componentWillMount = () => {
-    window.addEventListener('keydown', this.onKeyPressed);
+      window.addEventListener('keydown', this.onKeyPressed);
   }
 
   /**
@@ -16,9 +16,9 @@ export class ModalContainer extends React.Component {
    * @param {Event} evt - keypress event
    */
   onKeyPressed = (evt) => {
-    if (evt.keyCode === 27 && this.isModalActive()) {
-      this.closeModal();
-    }
+      if (evt.keyCode === 27 && this.isModalActive()) {
+          this.closeModal();
+      }
   }
 
   /**
@@ -27,32 +27,32 @@ export class ModalContainer extends React.Component {
    * @returns {Boolean}
    */
   isModalActive = () => {
-    return this.props.activeModal === this.props.type;
+      return this.props.activeModal === this.props.type;
   }
 
   /**
    * Closes the modal.
    */
   closeModal = () => {
-    this.props.action.toggleModal(null);
-    this.props.action.setUIControls(true);
+      this.props.action.toggleModal(null);
+      this.props.action.setUIControls(true);
   }
 
   render() {
-    return (
-      <Modal
-        modalActive={this.isModalActive()}
-        title={this.props.title}
-        closeModal={this.closeModal}
-        children={this.props.children}
-      />
-    );
+      return (
+          <Modal
+              modalActive={this.isModalActive()}
+              title={this.props.title}
+              closeModal={this.closeModal}
+              children={this.props.children}
+          />
+      );
   }
 }
 
 export default connect(
-  ReduxService.mapStateToProps(
-    'uiControls.activeModal'
-  ),
-  ReduxService.mapDispatchToProps(Actions)
+    ReduxService.mapStateToProps(
+        'uiControls.activeModal'
+    ),
+    ReduxService.mapDispatchToProps(Actions)
 )(ModalContainer);

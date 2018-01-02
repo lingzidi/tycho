@@ -8,13 +8,13 @@ import data from './DataReducer';
 import event from './EventReducer';
 
 const rootReducer = combineReducers({
-  uiControls,
-  label,
-  loader,
-  tour,
-  animation,
-  data,
-  event
+    uiControls,
+    label,
+    loader,
+    tour,
+    animation,
+    data,
+    event
 });
 
 export default rootReducer;

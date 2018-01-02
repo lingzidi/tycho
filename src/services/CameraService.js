@@ -8,9 +8,9 @@ import Scale from '../utils/Scale';
 export default class CameraService {
 
   static CAMERA_INITIAL_POSITION = new Vector3(
-    Constants.WebGL.Camera.X,
-    Constants.WebGL.Camera.Y,
-    Constants.WebGL.Camera.Z
+      Constants.WebGL.Camera.X,
+      Constants.WebGL.Camera.Y,
+      Constants.WebGL.Camera.Z
   )
 
   /**
@@ -22,12 +22,12 @@ export default class CameraService {
    * @returns {Number} min distance
    */
   static getMinDistance = (orbitals, targetId, scale) => {
-    const target = OrbitalService.getTargetByName(orbitals, targetId);
+      const target = OrbitalService.getTargetByName(orbitals, targetId);
 
-    if (target) {
-      return Scale(target.radius, scale) + Constants.WebGL.Camera.MIN_DISTANCE;
-    }
-    return 0;
+      if (target) {
+          return Scale(target.radius, scale) + Constants.WebGL.Camera.MIN_DISTANCE;
+      }
+      return 0;
   }
   
   /**
@@ -41,13 +41,13 @@ export default class CameraService {
    * @returns {Tween}
    */
   static getPivotTween = (from, to, target, group, cb) => {
-    return new TWEEN
-      .Tween(from)
-      .to(to, Constants.WebGL.Tween.SLOW)
-      .easing(TWEEN.Easing.Quadratic.Out)
-      .onUpdate(CameraService.setPivotPosition.bind(this, group, from))
-      .onComplete(CameraService.attachToGyroscope.bind(this, target, group, cb))
-      .start();
+      return new TWEEN
+          .Tween(from)
+          .to(to, Constants.WebGL.Tween.SLOW)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .onUpdate(CameraService.setPivotPosition.bind(this, group, from))
+          .onComplete(CameraService.attachToGyroscope.bind(this, target, group, cb))
+          .start();
   }
 
   /**
@@ -57,7 +57,7 @@ export default class CameraService {
    * @param {THREE.Vector3} vect - new vector position
    */
   static setPivotPosition = (group, {x, y, z}) => {
-    group.position.set(x, y, z);
+      group.position.set(x, y, z);
   }
 
   /**
@@ -67,14 +67,14 @@ export default class CameraService {
    * @returns {THREE.Vector3} world position
    */
   static getWorldPosition = (target) => {
-    target.updateMatrixWorld();
+      target.updateMatrixWorld();
 
-    const matrix = target.matrixWorld;
-    const vect = new Vector3();
+      const matrix = target.matrixWorld;
+      const vect = new Vector3();
 
-    vect.setFromMatrixPosition(matrix);
+      vect.setFromMatrixPosition(matrix);
 
-    return vect;
+      return vect;
   }
 
   /**
@@ -85,8 +85,8 @@ export default class CameraService {
    * @param {THREE.Vector3} position - world position
    */
   static attachToWorld = (scene, pivot, position) => {
-    scene.add(pivot);
-    pivot.position.copy(position);
+      scene.add(pivot);
+      pivot.position.copy(position);
   }
 
   /**
@@ -98,11 +98,11 @@ export default class CameraService {
    * @param {Function} callback - callback 
    */
   static attachToGyroscope = (target, pivot, callback) => {
-		let gyro = new Gyroscope();
+      let gyro = new Gyroscope();
 
-    gyro.add(pivot);
-    target.add(gyro);
-    pivot.position.set(0, 0, 0);
-    callback();
+      gyro.add(pivot);
+      target.add(gyro);
+      pivot.position.set(0, 0, 0);
+      callback();
   }
 }

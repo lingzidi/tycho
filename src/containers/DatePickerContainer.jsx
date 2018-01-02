@@ -8,23 +8,23 @@ import Constants from '../constants';
 export default class DatePickerContainer extends React.Component {
 
   static propTypes = {
-    time: PropTypes.number,
-    onUpdate: PropTypes.func
+      time: PropTypes.number,
+      onUpdate: PropTypes.func
   }
 
   componentWillMount = () => {
-    this.state = {};
+      this.setState({});
   }
-  
+
   componentWillReceiveProps = () => {
-    const {time} = this.props;
-    const timeInstance = moment(time * 1000);
-    const realTime = timeInstance.toDate();
-    const uxTime = this.getUXTime(timeInstance);
-    
-    if (!this.isOpen) {
-      this.setState({uxTime, realTime});
-    }
+      const {time} = this.props;
+      const timeInstance = moment(time * 1000);
+      const realTime = timeInstance.toDate();
+      const uxTime = this.getUXTime(timeInstance);
+
+      if (!this.isOpen) {
+          this.setState({uxTime, realTime});
+      }
   }
 
   shouldComponentUpdate = () => !this.isOpen
@@ -36,28 +36,28 @@ export default class DatePickerContainer extends React.Component {
    * @returns {String} user-friendly time
    */
   getUXTime = (timeInstance) => {
-    return timeInstance
-      .format(Constants.UI.UX_DATE_FORMAT)
-      .replace(/ /g, '\u00A0'); // replace spaces with HTML entity
+      return timeInstance
+          .format(Constants.UI.UX_DATE_FORMAT)
+          .replace(/ /g, '\u00A0'); // replace spaces with HTML entity
   }
 
   /**
    * Closes the date picker.
    */
   hidePicker = () => {
-    this.isOpen = false;
+      this.isOpen = false;
   }
 
   /**
    * Opens the date picker.
    */
   showPicker = () => {
-    const {picker} = this.refs;
-    
-    if (picker) {
-      this.isOpen = true;
-      picker.openCalendar();
-    }
+      const {picker} = this.refs;
+
+      if (picker) {
+          this.isOpen = true;
+          picker.openCalendar();
+      }
   }
 
   /**
@@ -66,27 +66,27 @@ export default class DatePickerContainer extends React.Component {
    * @param {Moment} timeInstance - moment instance
    */
   changeTime = (timeInstance) => {
-    const time = timeInstance.unix();
-    this.props.onUpdate(time);
+      const time = timeInstance.unix();
+      this.props.onUpdate(time);
   }
-  
+
   render() {
-    return (
-      <DatePicker
-        onClick={this.showPicker}
-        uxTime={this.state.uxTime}>
-        <Datetime
-          value={this.state.realTime}
-          ref="picker"
-          className="date-picker__picker"
-          onBlur={this.hidePicker}
-          onChange={this.changeTime}
-          closeOnSelect={true}
-          inputProps={{
-            className: 'date-picker__input'
-          }}
-        />
-      </DatePicker>
-    );
+      return (
+          <DatePicker
+              onClick={this.showPicker}
+              uxTime={this.state.uxTime}>
+              <Datetime
+                  value={this.state.realTime}
+                  ref="picker"
+                  className="date-picker__picker"
+                  onBlur={this.hidePicker}
+                  onChange={this.changeTime}
+                  closeOnSelect={true}
+                  inputProps={{
+                      className: 'date-picker__input'
+                  }}
+              />
+          </DatePicker>
+      );
   }
 }

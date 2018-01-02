@@ -8,14 +8,14 @@ import UIControls from '../components/UIControls';
 export class UIControlsContainer extends React.Component {
 
   static propTypes = {
-    time: PropTypes.number
+      time: PropTypes.number
   }
 
   /**
    * Toggles the settings pane.
    */
   toggleSettings = () => {
-    this.props.action.toggleSettings(!this.props.settingsActive);
+      this.props.action.toggleSettings(!this.props.settingsActive);
   }
 
   /**
@@ -24,32 +24,32 @@ export class UIControlsContainer extends React.Component {
    * @param {String} type - modal type to open
    */
   openModal = (type) => {
-    this.props.action.toggleModal(type);
-    this.props.action.setUIControls(false);
+      this.props.action.toggleModal(type);
+      this.props.action.setUIControls(false);
   }
 
   render() {
-    return (
-      <UIControls
-        openModal={this.openModal}
-        toggleSetting={this.toggleSettings}
-        {...this.props}
-        {...this.props.action}
-      />
-    );
+      return (
+          <UIControls
+              openModal={this.openModal}
+              toggleSetting={this.toggleSettings}
+              {...this.props}
+              {...this.props.action}
+          />
+      );
   }
 }
 
 export default connect(
-  ReduxService.mapStateToProps(
-    'uiControls.speed',
-    'uiControls.zoom',
-    'uiControls.scale',
-    'uiControls.controlsEnabled',
-    'uiControls.settingsActive',
-    'label.targetName',
-    'data.pageText',
-    'animation.time'
-  ),
-  ReduxService.mapDispatchToProps(Actions)
+    ReduxService.mapStateToProps(
+        'uiControls.speed',
+        'uiControls.zoom',
+        'uiControls.scale',
+        'uiControls.controlsEnabled',
+        'uiControls.settingsActive',
+        'label.targetName',
+        'data.pageText',
+        'animation.time'
+    ),
+    ReduxService.mapDispatchToProps(Actions)
 )(UIControlsContainer);

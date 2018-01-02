@@ -10,22 +10,22 @@ import Constants from '../constants';
 export class SpinLabelContainer extends React.Component {
 
   static propTypes = {
-    isComplete: PropTypes.bool,
-    isAutoOrbitEnabled: PropTypes.bool
+      isComplete: PropTypes.bool,
+      isAutoOrbitEnabled: PropTypes.bool
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.maybeStopSpinPrompt(nextProps);
+      this.maybeStopSpinPrompt(nextProps);
   }
 
   /**
    * Stops auto-rotation of the camera if scene touched while active.
    */
   maybeStopSpinPrompt = ({touched}) => {
-    if (this.props.touched !== touched && this.isVisible()) {
-      this.props.action.setCameraOrbit(false);
-      this.props.action.setUIControls(true);
-    }
+      if (this.props.touched !== touched && this.isVisible()) {
+          this.props.action.setCameraOrbit(false);
+          this.props.action.setUIControls(true);
+      }
   }
 
   /**
@@ -34,29 +34,29 @@ export class SpinLabelContainer extends React.Component {
    * @returns {Boolean} visibility of label
    */
   isVisible = () => {
-    const {isComplete, isAutoOrbitEnabled} = this.props;
-    return isComplete && isAutoOrbitEnabled;
+      const {isComplete, isAutoOrbitEnabled} = this.props;
+      return isComplete && isAutoOrbitEnabled;
   }
 
   render() {
-    return (
-      <SpinLabel
-        show={this.isVisible()}
-        count={Constants.UI.SPIN_LABEL_ARROW_COUNT}
-      />
-    );
+      return (
+          <SpinLabel
+              show={this.isVisible()}
+              count={Constants.UI.SPIN_LABEL_ARROW_COUNT}
+          />
+      );
   }
 }
 
 export default connect(
-  ReduxService.mapStateToProps(
-    'tour.isComplete',
-    'tour.isAutoOrbitEnabled',
-    'event.touched',
-    'event.released'
-  ),
-  ReduxService.mapDispatchToProps(
-    TourActions,
-    UIControlsActions
-  )  
+    ReduxService.mapStateToProps(
+        'tour.isComplete',
+        'tour.isAutoOrbitEnabled',
+        'event.touched',
+        'event.released'
+    ),
+    ReduxService.mapDispatchToProps(
+        TourActions,
+        UIControlsActions
+    )  
 )(SpinLabelContainer);

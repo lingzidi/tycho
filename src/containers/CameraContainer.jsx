@@ -7,37 +7,37 @@ import Constants from '../constants';
 export default class CameraContainer extends React.Component {
 
   static propTypes = {
-    ratio: PropTypes.number.isRequired,
-    targetId: PropTypes.string,
-    actions: PropTypes.object,
-    speed: PropTypes.number,
-    scale: PropTypes.number,
-    zoom: PropTypes.number,
-    scene: PropTypes.object,
-    isAutoOrbitEnabled: PropTypes.bool,
-    orbitalData: PropTypes.array
+      ratio: PropTypes.number.isRequired,
+      targetId: PropTypes.string,
+      actions: PropTypes.object,
+      speed: PropTypes.number,
+      scale: PropTypes.number,
+      zoom: PropTypes.number,
+      scene: PropTypes.object,
+      isAutoOrbitEnabled: PropTypes.bool,
+      orbitalData: PropTypes.array
   }
 
   componentWillUnmount = () => {
-    this.controls.dispose();
-    delete this.controls;
+      this.controls.dispose();
+      delete this.controls;
   }
 
   componentWillReceiveProps = (nextProps) => {
-    this.maybeCreateControls(nextProps);
-    this.maybeMoveCameraPivot(nextProps);
-    this.maybeUpdateControlsZoom(nextProps);
-    this.maybeUpdateAutoOrbit(nextProps);
-    this.maybePreventCameraCollision(nextProps);
+      this.maybeCreateControls(nextProps);
+      this.maybeMoveCameraPivot(nextProps);
+      this.maybeUpdateControlsZoom(nextProps);
+      this.maybeUpdateAutoOrbit(nextProps);
+      this.maybePreventCameraCollision(nextProps);
   }
 
   /**
    * Updates controls, if mounted.
    */
   update = () => {
-    if (this.controls) {
-      this.controls.update();
-    }
+      if (this.controls) {
+          this.controls.update();
+      }
   }
 
   /**
@@ -47,9 +47,9 @@ export default class CameraContainer extends React.Component {
    * @param {HTMLElement} props.domElement
    */
   maybeCreateControls = ({domElement}) => {
-    if (this.props.domElement !== domElement) {
-      this.controls = new Controls(this.refs.camera, domElement);
-    }
+      if (this.props.domElement !== domElement) {
+          this.controls = new Controls(this.refs.camera, domElement);
+      }
   }
 
   /**
@@ -59,9 +59,9 @@ export default class CameraContainer extends React.Component {
    * @param {String} props.targetId
    */
   maybeMoveCameraPivot = ({targetId}) => {
-    if (this.props.targetId !== targetId) {
-      this.movePivot(targetId, !!this.props.targetId);
-    }
+      if (this.props.targetId !== targetId) {
+          this.movePivot(targetId, !!this.props.targetId);
+      }
   }
 
   /**
@@ -73,10 +73,10 @@ export default class CameraContainer extends React.Component {
    * @param {Number} props.scale - user-defined planet scale
    */
   maybePreventCameraCollision = ({targetId, scale}) => {
-    if (this.props.targetId !== targetId || this.props.scale !== scale) {
-      this.controls.minDistance = CameraService
-        .getMinDistance(this.props.orbitalData, targetId, scale);
-    }
+      if (this.props.targetId !== targetId || this.props.scale !== scale) {
+          this.controls.minDistance = CameraService
+              .getMinDistance(this.props.orbitalData, targetId, scale);
+      }
   }
 
   /**
@@ -86,9 +86,9 @@ export default class CameraContainer extends React.Component {
    * @param {Number} props.zoom - new zoom prop value
    */
   maybeUpdateControlsZoom = ({zoom}) => {
-    if (this.props.zoom !== zoom) {
-      this.controls.zoom(zoom);
-    }
+      if (this.props.zoom !== zoom) {
+          this.controls.zoom(zoom);
+      }
   }
 
   /**
@@ -98,9 +98,9 @@ export default class CameraContainer extends React.Component {
    * @param {Boolean} props.isAutoOrbitEnabled - new isAutoOrbitEnabled prop value
    */
   maybeUpdateAutoOrbit = ({isAutoOrbitEnabled}) => {
-    if (this.props.isAutoOrbitEnabled !== isAutoOrbitEnabled) {
-      this.controls.autoRotate = isAutoOrbitEnabled;
-    }
+      if (this.props.isAutoOrbitEnabled !== isAutoOrbitEnabled) {
+          this.controls.autoRotate = isAutoOrbitEnabled;
+      }
   }
 
   /**
@@ -110,24 +110,24 @@ export default class CameraContainer extends React.Component {
    * @param {Boolean} animate - set to true if it should animate
    */
   movePivot = (targetId, animate) => {
-    const {scene} = this.props;
-    const {pivot} = this.refs;
-    const target = scene.getObjectByName(targetId);
+      const {scene} = this.props;
+      const {pivot} = this.refs;
+      const target = scene.getObjectByName(targetId);
     
-    if (target && animate) {
-      this.setInteractivity(false);
-      this.startTween(target, pivot, scene);
-    }
+      if (target && animate) {
+          this.setInteractivity(false);
+          this.startTween(target, pivot, scene);
+      }
   }
 
   /**
    * Cancels any Tween in progress.
    */
   cancelTween = () => {
-    if (this.tweenBase) {
-      this.tweenBase.stop();
-      delete this.tweenBase;
-    }
+      if (this.tweenBase) {
+          this.tweenBase.stop();
+          delete this.tweenBase;
+      }
   }
 
   /**
@@ -143,16 +143,16 @@ export default class CameraContainer extends React.Component {
    * @param {THREE.Group} pivot - camera pivot
    */
   startTween = (target, pivot, scene) => {
-    const v = CameraService.getWorldPosition(target);
-    const w = CameraService.getWorldPosition(pivot);
+      const v = CameraService.getWorldPosition(target);
+      const w = CameraService.getWorldPosition(pivot);
 
-    // set the pivot position to active position    
-    CameraService.attachToWorld(scene, pivot, w);
+      // set the pivot position to active position    
+      CameraService.attachToWorld(scene, pivot, w);
 
-    this.cancelTween();
-    this.zoomInFull();
+      this.cancelTween();
+      this.zoomInFull();
 
-    this.tweenBase = CameraService.getPivotTween(w, v, target, pivot, this.endTween);
+      this.tweenBase = CameraService.getPivotTween(w, v, target, pivot, this.endTween);
   }
 
   /**
@@ -161,31 +161,31 @@ export default class CameraContainer extends React.Component {
    * @param {Boolean} disabled - whether or not controls are disabled
    */
   setInteractivity = (enabled) => {
-    this.props.action.setUIControls(!!enabled);
-    // this.props.action.setPaused(!disabled); // TODO
-    this.controls.enabled = !!enabled;
+      this.props.action.setUIControls(!!enabled);
+      // this.props.action.setPaused(!disabled); // TODO
+      this.controls.enabled = !!enabled;
   }
   
   /**
    * Tweens zoom to minimum allowable zoom.
    */
   zoomInFull = () => {
-    this.controls.tweenZoom(Constants.WebGL.Zoom.MIN, this.props.action.changeZoom);
+      this.controls.tweenZoom(Constants.WebGL.Zoom.MIN, this.props.action.changeZoom);
   }
   
   render() {
-    return (
-      <group ref="pivot">
-        <perspectiveCamera
-          name="camera"
-          ref="camera"
-          aspect={this.props.ratio}
-          fov={Constants.WebGL.Camera.FOV}
-          near={Constants.WebGL.Camera.NEAR}
-          far={Constants.WebGL.Camera.FAR}
-          position={CameraService.CAMERA_INITIAL_POSITION}
-        />
-      </group>
-    );
+      return (
+          <group ref="pivot">
+              <perspectiveCamera
+                  name="camera"
+                  ref="camera"
+                  aspect={this.props.ratio}
+                  fov={Constants.WebGL.Camera.FOV}
+                  near={Constants.WebGL.Camera.NEAR}
+                  far={Constants.WebGL.Camera.FAR}
+                  position={CameraService.CAMERA_INITIAL_POSITION}
+              />
+          </group>
+      );
   }
 }

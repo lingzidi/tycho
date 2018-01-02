@@ -9,8 +9,8 @@ import SplashScreen from '../components/SplashScreen';
 export class LoaderContainer extends React.Component {
 
   componentWillMount = () => {
-    this.setState({hasEntered: false});
-    DefaultLoadingManager.onProgress = this.onProgress;
+      this.setState({hasEntered: false});
+      DefaultLoadingManager.onProgress = this.onProgress;
   }
 
   /**
@@ -21,39 +21,39 @@ export class LoaderContainer extends React.Component {
    * @param {Number} total - total number of textures enqueued
    */
   onProgress = (url, count, total) => {
-    this.props.action.setPercentLoaded(count, total);
-    this.props.action.setTextureLoaded(url);
+      this.props.action.setPercentLoaded(count, total);
+      this.props.action.setTextureLoaded(url);
   }
 
   /**
    * Starts playing the scene.
    */
   enterScene = () => {
-    this.props.action.setPlaying(true);
-    this.setState({hasEntered: true});
+      this.props.action.setPlaying(true);
+      this.setState({hasEntered: true});
   }
 
   render() {
-    return (
-      <SplashScreen
-        percent={this.props.percent || 0}
-        show={!this.state.hasEntered}
-        enterScene={this.enterScene}
-        pageText={this.props.pageText}
-      />
-    );
+      return (
+          <SplashScreen
+              percent={this.props.percent || 0}
+              show={!this.state.hasEntered}
+              enterScene={this.enterScene}
+              pageText={this.props.pageText}
+          />
+      );
   }
 }
 
 export default connect(
-  ReduxService.mapStateToProps(
-    'loader.url',
-    'loader.percent',
-    'animation.playing',
-    'data.pageText'
-  ),
-  ReduxService.mapDispatchToProps(
-    AnimationActions,
-    LoaderActions
-  )
+    ReduxService.mapStateToProps(
+        'loader.url',
+        'loader.percent',
+        'animation.playing',
+        'data.pageText'
+    ),
+    ReduxService.mapDispatchToProps(
+        AnimationActions,
+        LoaderActions
+    )
 )(LoaderContainer);

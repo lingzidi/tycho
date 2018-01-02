@@ -9,8 +9,8 @@ import './index.css';
 const StoreInstance = Store();
 
 ReactDOM.render(
-  <Provider store={StoreInstance}>
-    <AppContainer />
-  </Provider>,
-  document.getElementById('root') || document.createElement('div')
+    <Provider store={StoreInstance}>
+        <AppContainer />
+    </Provider>,
+    document.getElementById('root') || document.createElement('div')
 );

@@ -9,15 +9,15 @@ import Stats from '../components/Stats';
 export class StatsContainer extends React.Component {
 
   componentWillMount = () => {
-    this.setState({});
+      this.setState({});
   }
 
   componentWillReceiveProps = (nextProps) => {
-    const {targetId, time} = nextProps;
+      const {targetId, time} = nextProps;
 
-    if (this.props.targetId !== targetId || this.props.time !== time) {
-      this.updateOrbitalStats(targetId, time);
-    }
+      if (this.props.targetId !== targetId || this.props.time !== time) {
+          this.updateOrbitalStats(targetId, time);
+      }
   }
 
   /**
@@ -27,17 +27,17 @@ export class StatsContainer extends React.Component {
    * @param {Number} time - current UNIX time
    */
   updateOrbitalStats = (targetId, time) => {
-    const {orbitalData} = this.props;
-    const target = OrbitalService.getTargetByName(orbitalData, targetId);
+      const {orbitalData} = this.props;
+      const target = OrbitalService.getTargetByName(orbitalData, targetId);
 
-    if (target) {
-      const {name, description} = target;
-      this.setState({
-        name,
-        description,
-        ...OrbitalService.getOrbitalStats(target, time)
-      });
-    }
+      if (target) {
+          const {name, description} = target;
+          this.setState({
+              name,
+              description,
+              ...OrbitalService.getOrbitalStats(target, time)
+          });
+      }
   }
   
   /**
@@ -46,30 +46,30 @@ export class StatsContainer extends React.Component {
    * @returns {String} UI-friendly time
    */
   getTime = () => {
-    return moment(this.props.time * 1000)
-      .format(Constants.UI.UX_DATE_FORMAT);
+      return moment(this.props.time * 1000)
+          .format(Constants.UI.UX_DATE_FORMAT);
   }
 
   render() {
-    return (
-      <Stats
-        description={this.state.description}
-        velocity={this.state.velocity}
-        magnitude={this.state.magnitude}
-        trueAnomaly={this.state.trueAnomaly}
-        pageText={this.props.pageText}
-        time={this.getTime()}
-      />
-    );
+      return (
+          <Stats
+              description={this.state.description}
+              velocity={this.state.velocity}
+              magnitude={this.state.magnitude}
+              trueAnomaly={this.state.trueAnomaly}
+              pageText={this.props.pageText}
+              time={this.getTime()}
+          />
+      );
   }
 }
 
 export default connect(
-  ReduxService.mapStateToProps(
-    'label.targetId',
-    'data.orbitalData',
-    'data.pageText',
-    'animation.time'
-  ),
-  null
+    ReduxService.mapStateToProps(
+        'label.targetId',
+        'data.orbitalData',
+        'data.pageText',
+        'animation.time'
+    ),
+    null
 )(StatsContainer);
