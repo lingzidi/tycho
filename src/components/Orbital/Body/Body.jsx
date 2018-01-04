@@ -16,8 +16,8 @@ export default class Body extends React.Component {
         const {rings} = this.props;
 
         return (
-            <group rotation={this.props.rotation}>
-                <mesh>
+            <group>
+                <mesh rotation={this.props.rotation}>
                     <TextureContainer textures={this.props.maps} />
                     <sphereGeometry
                         widthSegments={Constants.WebGL.SPHERE_SEGMENTS}
@@ -25,12 +25,7 @@ export default class Body extends React.Component {
                         radius={this.props.radius}
                     />
                 </mesh>
-                {rings &&
-                    <Rings
-                        outerRadius={rings.outerRadius}
-                        maps={rings.maps}
-                    />
-                }
+                {rings && <Rings {...rings} />}
                 <axisHelper size={200} rotation={this.props.rotation} />
             </group>
         );

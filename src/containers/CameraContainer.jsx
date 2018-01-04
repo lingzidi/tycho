@@ -162,7 +162,7 @@ export default class CameraContainer extends React.Component {
    */
   setInteractivity = (enabled) => {
       this.props.action.setUIControls(!!enabled);
-      this.props.action.setPaused(enabled);
+      this.props.action.setPlaying(enabled);
       this.controls.enabled = !!enabled;
   }
 

@@ -8,11 +8,11 @@ export default class OrbitalService {
 
   /**
    * Ascension of the ecliptic plane.
-   * 
+   *
    * @type {Number}
    */
   static ASCENSION = 90
-  
+
   /**
    * Calculates the Eulerian rotation set of the ecliptic group.
    *
@@ -55,8 +55,8 @@ export default class OrbitalService {
    */
   static getBodyRotation = ({axialTilt, sidereal, time}) => {
       return OrbitalService.toEuler({
-          x: axialTilt,
-          z: OrbitalService.getRotationCompleted(sidereal, time)
+          x: OrbitalService.ASCENSION + axialTilt,
+          y: OrbitalService.getRotationCompleted(sidereal, time),
       });
   }
 
@@ -72,7 +72,7 @@ export default class OrbitalService {
       const unixTimeToDays = time / 60 / 60 / 24; // seconds to days
       const percentRotated = (unixTimeToDays / sidereal) % 1;
       const degreesRotated = percentRotated * 360;
-    
+
       return degreesRotated;
   }
 
@@ -122,13 +122,13 @@ export default class OrbitalService {
           if (isHighlighted) {
               return Constants.UI.HOVER_OPACITY_ON;
           }
-      } 
+      }
       return Constants.UI.HOVER_OPACITY_OFF;
   }
 
   /**
    * Returns the max camera viewing distance, in WebGL units.
-   * 
+   *
    * @param {Object} props
    * @param {Boolean} props.isSatellite
    * @returns {Number}
@@ -197,7 +197,7 @@ export default class OrbitalService {
 
   /**
    * Retrieve stats of the given orbital.
-   * 
+   *
    * @param {Object[]} orbital - orbital to retrieve stats of
    * @param {Number} time - time to get stats at, in UNIX seconds
    * @returns {Object} {magnitude: Number, velocity: Number, trueAnomaly: Number}
