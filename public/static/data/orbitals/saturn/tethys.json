@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "6",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Tethys.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 132.1526849373334,
     "eccentricity": 0.0007546596744776474,
     "longitudeOfAscendingNode": 170.0960771016055,

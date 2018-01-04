@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "6",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Titan.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 173.4209524500883,
     "eccentricity": 0.02863073196285055,
     "longitudeOfAscendingNode": 169.0962668018458,

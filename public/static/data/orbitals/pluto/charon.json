@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "9",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Charon.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 120.9229819343566,
     "eccentricity": 0.002041042987321711,
     "longitudeOfAscendingNode": 227.4019227527363,

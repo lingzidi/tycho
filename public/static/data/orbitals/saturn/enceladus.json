@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "6",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Enceladus.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 199.7667628013468,
     "eccentricity": 0.003980403809233389,
     "longitudeOfAscendingNode": 169.5421607337014,

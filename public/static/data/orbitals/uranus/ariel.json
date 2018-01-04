@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "7",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Ariel.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 155.8639968197608,
     "eccentricity": 0.0005863695456392988,
     "longitudeOfAscendingNode": 167.6429700618532,

@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "7",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Umbriel.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 31.88166875314568,
     "eccentricity": 0.003387290235028168,
     "longitudeOfAscendingNode": 167.6873854927646,

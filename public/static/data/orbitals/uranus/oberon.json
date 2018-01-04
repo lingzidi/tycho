@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "7",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Oberon.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 164.9351033170295,
     "eccentricity": 0.0005573604132157858,
     "longitudeOfAscendingNode": 167.7263622840152,

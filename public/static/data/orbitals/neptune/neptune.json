@@ -16,6 +16,12 @@
         "nasaBarycenterCode": "0",
         "revolutionOrder": "y"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Neptune.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 272.4757294259798,
     "eccentricity": 0.008755529548321343,
     "longitudeOfAscendingNode": 131.7827588793458,

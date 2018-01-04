@@ -16,6 +16,12 @@
         "nasaBarycenterCode": "0",
         "revolutionOrder": "y"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Earth.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 114.20763,
     "eccentricity": 0.01355360061112275,
     "longitudeOfAscendingNode": 348.73936,

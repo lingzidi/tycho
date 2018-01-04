@@ -22,9 +22,16 @@
         "nasaBarycenterCode": "0",
         "revolutionOrder": "y"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Saturn.jpg"
+        }
+    ],
     "rings": {
         "innerRadius": 6630,
         "outerRadius": 120700,
+        "barycenterTilt": 26.73,
         "maps": [
             {
                 "slot": "map",

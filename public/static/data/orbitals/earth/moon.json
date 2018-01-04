@@ -13,6 +13,12 @@
         "nasaBarycenterCode": "3",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Moon.png"
+        }
+    ],
     "argumentOfPeriapsis": 282.5992409518417,
     "eccentricity": 0.03405532141489297,
     "longitudeOfAscendingNode": 142.3595722910625,

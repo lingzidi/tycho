@@ -19,6 +19,12 @@
         "nasaBarycenterCode": "0",
         "revolutionOrder": "y"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Jupiter.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 273.3693624909697,
     "eccentricity": 0.04950132482345224,
     "longitudeOfAscendingNode": 100.5127949391526,

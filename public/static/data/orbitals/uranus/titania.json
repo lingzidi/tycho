@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "7",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Titania.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 229.4612718970353,
     "eccentricity": 0.002427845604961269,
     "longitudeOfAscendingNode": 167.6230717443308,

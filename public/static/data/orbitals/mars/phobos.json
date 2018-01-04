@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "4",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Phobos.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 291.9393576881656,
     "eccentricity": 0.01537099178317446,
     "longitudeOfAscendingNode": 82.96758792024443,

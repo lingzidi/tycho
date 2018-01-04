@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "5",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Io.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 307.674227707047,
     "eccentricity": 0.003991401067937321,
     "longitudeOfAscendingNode": 338.4213288782511,

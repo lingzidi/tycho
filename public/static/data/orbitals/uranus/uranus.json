@@ -20,6 +20,12 @@
         "nasaBarycenterCode": "0",
         "revolutionOrder": "y"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Uranus.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 97.10093681233873,
     "eccentricity": 0.04737199527143244,
     "longitudeOfAscendingNode": 74.00200944736554,

@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "4",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Deimos.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 314.7979839942301,
     "eccentricity": 0.0002590453311331469,
     "longitudeOfAscendingNode": 78.75446920252135,

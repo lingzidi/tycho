@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "0",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Triton.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 109.4889739758744,
     "eccentricity": 0.5958657051834922,
     "longitudeOfAscendingNode": 161.5491913515666,

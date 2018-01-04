@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "6",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Dione.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 334.6730502975491,
     "eccentricity": 0.0009982178776281251,
     "longitudeOfAscendingNode": 169.5765184466714,

@@ -17,6 +17,12 @@
         "nasaBarycenterCode": "0",
         "revolutionOrder": "y"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Mars.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 284.8358029011748,
     "eccentricity": 0.0953722727807235,
     "longitudeOfAscendingNode": 49.42123745809248,

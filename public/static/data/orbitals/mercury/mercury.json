@@ -16,7 +16,7 @@
     "textures": [
         {
             "slot": "map",
-            "url": "mercury.jpg"
+            "url": "Mercury.jpg"
         }
     ],
     "argumentOfPeriapsis": 25.58643458205566,

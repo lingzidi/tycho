@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "6",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Mimas.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 124.2444111634118,
     "eccentricity": 0.02180387099452891,
     "longitudeOfAscendingNode": 172.452607865443,

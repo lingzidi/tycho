@@ -12,6 +12,12 @@
         "nasaBarycenterCode": "6",
         "revolutionOrder": "d"
     },
+    "maps": [
+        {
+            "slot": "map",
+            "url": "Rhea.jpg"
+        }
+    ],
     "argumentOfPeriapsis": 231.6769465371525,
     "eccentricity": 0.02816308986985563,
     "longitudeOfAscendingNode": 138.8781130674562,
