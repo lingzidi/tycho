@@ -37,16 +37,16 @@ describe('Orbital Container', () => {
 
     it('should initialize a new instance of Ellipse', () => {
       orbitalContainer.componentWillMount();
-      
+
       expect(orbitalContainer).toHaveProperty('ellipse');
       expect(orbitalContainer.ellipse).toBeInstanceOf(Ellipse);
     });
-    
+
     it('should initialize group rotations', () => {
       const spy = jest.spyOn(orbitalContainer, 'setGroupRotations');
 
       orbitalContainer.componentWillMount();
-      
+
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props);
     });
@@ -63,7 +63,7 @@ describe('Orbital Container', () => {
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(nextProps);
     });
-    
+
     it('should call maybeUpdatePathOpacity()', () => {
       const spy = jest.spyOn(orbitalContainer, 'maybeUpdatePathOpacity');
       const nextProps = {};
@@ -86,7 +86,7 @@ describe('Orbital Container', () => {
 
       orbitalContainer.props = {time};
       orbitalContainer.maybeUpdateBodyState(nextProps);
-      
+
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props, orbitalContainer.ellipse);
@@ -101,7 +101,7 @@ describe('Orbital Container', () => {
 
       orbitalContainer.props = {time};
       orbitalContainer.maybeUpdateBodyState(nextProps);
-      
+
       expect(spy).not.toHaveBeenCalled();
     });
   });
@@ -116,7 +116,7 @@ describe('Orbital Container', () => {
 
       orbitalContainer.props = {highlightedOrbitals};
       orbitalContainer.maybeUpdatePathOpacity(nextProps);
-      
+
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy).toHaveBeenCalledWith(orbitalContainer.props, nextProps.highlightedOrbitals);
@@ -132,7 +132,7 @@ describe('Orbital Container', () => {
 
       orbitalContainer.props = {highlightedOrbitals};
       orbitalContainer.maybeUpdatePathOpacity(nextProps);
-      
+
       expect(spy).not.toHaveBeenCalled();
     });
   });
@@ -165,7 +165,7 @@ describe('Orbital Container', () => {
 
       orbitalContainer.props.isSatellite = false;
       orbitalContainer.maybeUpdateScale({scale, time});
-      
+
       expect(spy).not.toHaveBeenCalled();
     });
 
@@ -177,7 +177,7 @@ describe('Orbital Container', () => {
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(props, ellipse); 
+      expect(spy).toHaveBeenCalledWith(props, ellipse);
     });
 
     it('should set the scaleLastUpdate state parameter to the current time', () => {
@@ -218,7 +218,6 @@ describe('Orbital Container', () => {
 
       expect(orbitalContainer.state).toHaveProperty('bodyPosition');
       expect(orbitalContainer.state).toHaveProperty('bodyRotation');
-      expect(orbitalContainer.state).toHaveProperty('bodyRadius');
     });
   });
 

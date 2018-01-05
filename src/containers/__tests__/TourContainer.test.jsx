@@ -302,15 +302,28 @@ describe('Tour Container', () => {
       expect(spy).toHaveBeenCalledWith(false);
     });
 
-    it('should call the setActiveOrbital action with the defined targetId', () => {
-      const spy = jest.spyOn(tourContainer.props.action, 'setActiveOrbital');
+    it('should call setDefaultActiveOrbital()', () => {
+      const spy = jest.spyOn(tourContainer, 'setDefaultActiveOrbital');
 
       tourContainer.skipTour();
 
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(2);
-      expect(spy).toHaveBeenCalledWith(Constants.UI.ALTERNATE_TARGET_NAME);
-      expect(spy).toHaveBeenCalledWith(Constants.UI.DEFAULT_TARGET_NAME);
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('setDefaultActiveOrbital()', () => {
+    it('should call the setActiveOrbital action with the alternate and default orbitals', () => {
+      const spy = jest.spyOn(tourContainer.props.action, 'setActiveOrbital');
+
+      tourContainer.setDefaultActiveOrbital();
+
+      setTimeout(() => {
+          expect(spy).toHaveBeenCalled();
+          expect(spy).toHaveBeenCalledTimes(2);
+          expect(spy).toHaveBeenCalledWith(...Constants.UI.Targets.ALTERNATE);
+          expect(spy).toHaveBeenCalledWith(...Constants.UI.Targets.DEFAULT);
+      });
     });
   });
 

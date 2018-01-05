@@ -29,7 +29,7 @@ export class TourContainer extends React.Component {
 
   /**
    * Skips tour if opted to do so and is not already skipped.
-   * 
+   *
    * @param {Object} nextProps
    * @param {Boolean} nextProps.isSkipped
    */
@@ -41,7 +41,7 @@ export class TourContainer extends React.Component {
 
   /**
    * Starts tour if not already initialized.
-   * 
+   *
    * @param {Object} nextProps
    * @param {Boolean} nextProps.playing
    */
@@ -53,7 +53,7 @@ export class TourContainer extends React.Component {
 
   /**
    * Returns true if the tour should be run.
-   * 
+   *
    * @returns {Boolean}
    */
   shouldRunTour = () => {
@@ -74,7 +74,7 @@ export class TourContainer extends React.Component {
           setTimeout(this.onOrbitComplete, tourDuration);
       }
   }
-  
+
   /**
    * Callback to invoke once the tour orbit has completed.
    */
@@ -109,9 +109,10 @@ export class TourContainer extends React.Component {
    * Sets the active orbital targetId and the header label text to UI defaults.
    */
   setDefaultActiveOrbital = () => {
-      this.props.action.setActiveOrbital(Constants.UI.ALTERNATE_TARGET_NAME);
-      this.props.action.setActiveOrbital(Constants.UI.DEFAULT_TARGET_NAME);
-      this.props.action.setLabelText(Constants.UI.DEFAULT_LABEL_TEXT);
+    setTimeout(() => {
+        this.props.action.setActiveOrbital(...Constants.UI.Targets.ALTERNATE);
+        this.props.action.setActiveOrbital(...Constants.UI.Targets.DEFAULT);
+    });
   }
 
   /**
@@ -121,7 +122,7 @@ export class TourContainer extends React.Component {
       TourService.setSkip();
       this.skipTour();
   }
-  
+
   /**
    * Maps the labels list prop to TourLabelContainers.
    *
@@ -131,7 +132,7 @@ export class TourContainer extends React.Component {
   getLabels = (labels) => {
       const separation = Constants.Tour.SEPARATION_INTERVAL;
       let totalTime = separation;
-    
+
       return labels.map(({text, duration}, key) => {
           totalTime += separation;
           const start = totalTime;

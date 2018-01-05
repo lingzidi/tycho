@@ -10,6 +10,7 @@ describe('Rings Component', () => {
         component = shallow(
             <Rings
                 outerRadius={1200}
+                barycenterTilt={20}
                 maps={[]}
             />
         );

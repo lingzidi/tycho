@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import MathService from './MathService';
 import PhysicsService from './PhysicsService';
-import Scale from '../utils/Scale';
 import Constants from '../constants';
 
 export default class OrbitalService {
@@ -87,18 +86,6 @@ export default class OrbitalService {
    */
   static getBodyPosition = ({periapses, time}, ellipse) => {
       return ellipse.getPosition(time, periapses);
-  }
-
-  /**
-   * Scales the body radius by the global scaling factor.
-   *
-   * @param {Object} props - OrbitalContainer props
-   * @param {Number} props.radius - body radius, in kilometers
-   * @param {Number} props.scale=1 - scalar multiple
-   * @returns {Number} scaled body radius
-   */
-  static getBodyRadius = ({radius, scale}) => {
-      return Scale(radius, scale);
   }
 
   /**

@@ -72,17 +72,17 @@ describe('Orbital Service', () => {
         });
 
         it('should set the x Euler rotation param to axialTilt rotated 90 degrees counter-clockwise', () => {
-            const x = param.axialTilt;
+            const x = OrbitalService.ASCENSION + param.axialTilt;
             const result = OrbitalService.getBodyRotation(param);
             const expected = OrbitalService.toEuler({x});
-      
+
             expect(typeof result.x).toBe('number');
             expect(result.x).toEqual(expected.x);
         });
 
         it('should omit the z Euler rotation param', () => {
             const result = OrbitalService.getBodyRotation(param);
-      
+
             expect(typeof result.z).toBe('number');
             expect(result.z).toEqual(0);
         });
@@ -165,14 +165,14 @@ describe('Orbital Service', () => {
             const x = 5;
 
             OrbitalService.toEuler({x});
-    
+
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(x);
         });
 
         it('should set undefined coordinates to zero', () => {
             const result = OrbitalService.toEuler({x: 5});
-    
+
             expect(result.y).toEqual(0);
             expect(result.z).toEqual(0);
         });

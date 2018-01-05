@@ -10,23 +10,26 @@ export default class Rings extends React.Component {
     static propTypes = {
         outerRadius: PropTypes.number.isRequired,
         maps: PropTypes.array.isRequired,
-        barycenterTilt: PropTypes.number.isRequired
+        barycenterTilt: PropTypes.number.isRequired,
+        scale: PropTypes.number
     }
 
     render() {
+        const {outerRadius, scale, maps} = this.props;
         const tilt = MathService.toRadians(this.props.barycenterTilt);
+        const size = Scale(outerRadius * 2, scale);
         const rotation = new Euler(tilt, 0, 0);
 
         return (
             <mesh rotation={rotation}>
                 <planeGeometry
-                    width={Scale(this.props.outerRadius * 2)}
-                    height={Scale(this.props.outerRadius * 2)}
+                    width={size}
+                    height={size}
                 />
                 <TextureContainer
                     transparent={true}
                     side={DoubleSide}
-                    textures={this.props.maps}
+                    textures={maps}
                 />
             </mesh>
         );

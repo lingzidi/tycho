@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Constants from '../../../constants';
+import Scale from '../../../utils/Scale';
 import TextureContainer from '../../../containers/TextureContainer';
 import Rings from '../../Orbital/Rings';
 
@@ -13,7 +14,7 @@ export default class Body extends React.Component {
     };
 
     render() {
-        const {rings} = this.props;
+        const {rings, radius, scale} = this.props;
 
         return (
             <group>
@@ -22,10 +23,10 @@ export default class Body extends React.Component {
                     <sphereGeometry
                         widthSegments={Constants.WebGL.SPHERE_SEGMENTS}
                         heightSegments={Constants.WebGL.SPHERE_SEGMENTS}
-                        radius={this.props.radius}
+                        radius={Scale(radius, scale)}
                     />
                 </mesh>
-                {rings && <Rings {...rings} />}
+                {rings && <Rings {...rings} scale={scale} />}
                 <axisHelper size={200} rotation={this.props.rotation} />
             </group>
         );

@@ -11,11 +11,10 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
   }
   atmosphere={16711680}
   bodyPosition={Object {}}
-  bodyRadius={1.2678}
   bodyRotation={
     Euler {
       "_order": "XYZ",
-      "_x": 0.4059635840138811,
+      "_x": 1.9767599108087777,
       "_y": 0,
       "_z": 0,
     }
@@ -2608,6 +2607,7 @@ exports[`Orbital Container render() should render the OrbitalContainer successfu
       },
     ]
   }
+  radius={1267800}
   text="Dummy Outer"
 />
 `;

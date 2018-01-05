@@ -18,12 +18,12 @@ exports[`Orbital Component render() should render the orbital successfully 1`] =
       <Label
         action={Object {}}
         bodyPosition={Object {}}
-        bodyRadius={1}
         bodyRotation={Object {}}
         eclipticGroupRotation={Object {}}
         id="testOrbital"
         orbitalGroupRotation={Object {}}
         pathVertices={Array []}
+        radius={1}
         text="Test Orbital"
         updatePosition={[Function]}
       />

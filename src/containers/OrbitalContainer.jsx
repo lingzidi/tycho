@@ -118,7 +118,6 @@ export class OrbitalContainer extends React.Component {
         this.setState({
             bodyRotation: Service.getBodyRotation(props),
             bodyPosition: Service.getBodyPosition(props, ellipse),
-            bodyRadius: Service.getBodyRadius(props),
             maxDistance: Service.getMaxViewDistance(props)
         });
     }
@@ -140,7 +139,6 @@ export class OrbitalContainer extends React.Component {
                 pathVertices={this.ellipse.getVertices()}
                 bodyPosition={this.state.bodyPosition}
                 bodyRotation={this.state.bodyRotation}
-                bodyRadius={this.state.bodyRadius}
                 pathOpacity={this.state.pathOpacity}
                 atmosphere={this.props.atmosphere}
                 scaleLastUpdate={this.state.scaleLastUpdate}
@@ -149,9 +147,11 @@ export class OrbitalContainer extends React.Component {
                 maps={this.props.maps}
                 rings={this.props.rings}
                 text={this.props.name}
+                radius={this.props.radius}
                 action={this.props.action}
                 children={this.props.children}
                 targetId={this.props.targetId}
+                scale={this.props.scale}
                 id={this.props.id}
             />
         );

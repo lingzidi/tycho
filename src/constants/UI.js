@@ -14,11 +14,10 @@ export const ModalTypes = {
     ABOUT_MODAL: 'ABOUT_MODAL'
 };
 
-export const ALTERNATE_TARGET_NAME = 'mars';
-
-export const DEFAULT_TARGET_NAME = 'earth';
-
-export const DEFAULT_LABEL_TEXT = 'Earth';
+export const Targets = {
+    ALTERNATE: ['mars', 'Mars'],
+    DEFAULT: ['earth', 'Earth']
+};
 
 export const UX_DATE_FORMAT = 'MMM DD, YYYY h:mm:ss a';
 
