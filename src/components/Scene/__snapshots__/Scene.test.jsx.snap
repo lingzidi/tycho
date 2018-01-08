@@ -110,24 +110,6 @@ exports[`Scene Component render() should render the scene 1`] = `
       time={1}
     />
   </OrbitalContainer>
-  <axisHelper
-    size={500}
-  />
-  <pointLight
-    color={16777215}
-    distance={2000}
-    intensity={0.95}
-  />
-  <mesh
-    name="sun"
-  >
-    <planeGeometry
-      height={1}
-      width={1}
-    />
-    <meshBasicMaterial
-      color={65280}
-    />
-  </mesh>
+  <Sun />
 </group>
 `;

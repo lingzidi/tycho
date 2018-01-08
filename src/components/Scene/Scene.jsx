@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OrbitalContainer from '../../containers/OrbitalContainer';
+import Sun from '../Sun';
 
 export default class Scene extends React.Component {
 
@@ -38,16 +39,7 @@ export default class Scene extends React.Component {
     return (
       <group>
         {this.getOrbitalElements(this.props.orbitalData)}
-        <axisHelper size={500} />
-        <pointLight
-          color={0xffffff}
-          intensity={0.95}
-          distance={2000}
-        />
-        <mesh lookAt={this.props.cameraMatrix} ref="sun" name="sun">
-          <planeGeometry width={1} height={1} />
-          <meshBasicMaterial color={0x00ff00} />
-        </mesh>
+        <Sun  camera={this.props.camera} />
       </group>
     );
   }

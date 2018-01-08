@@ -27,7 +27,6 @@ export default class Body extends React.Component {
                     />
                 </mesh>
                 {rings && <Rings {...rings} scale={scale} />}
-                <axisHelper size={200} rotation={this.props.rotation} />
             </group>
         );
     }
