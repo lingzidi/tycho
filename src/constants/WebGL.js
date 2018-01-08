@@ -54,10 +54,41 @@ export const ScrollScale = [
 ];
 
 export const SKYBOX_TEXTURES = [
-    '/static/textures/map/skybox/s_px.jpg',
-    '/static/textures/map/skybox/s_nx.jpg',
-    '/static/textures/map/skybox/s_py.jpg',
-    '/static/textures/map/skybox/s_ny.jpg',
-    '/static/textures/map/skybox/s_pz.jpg',
-    '/static/textures/map/skybox/s_nz.jpg'
+    '/static/textures/skybox/space.jpg',
+    '/static/textures/skybox/space.jpg',
+    '/static/textures/skybox/space.jpg',
+    '/static/textures/skybox/space.jpg',
+    '/static/textures/skybox/space.jpg',
+    '/static/textures/skybox/space.jpg'
 ];
+
+export const LENS_FLARES = [
+    {
+        url: '0.png',
+        distance: 0.0,
+        diameter: 100
+    },
+    {
+        url: '1.png',
+        distance: 0.3,
+        diameter: 60
+    },
+    {
+        url: '1.png',
+        distance: 0.5,
+        diameter: 30
+    },
+    {
+        url: '2.png',
+        distance: 0.8,
+        diameter: 40
+    }
+];
+
+export const LENS_FLARE_MAX_DISTANCE = 0.995;
+
+export const Sunlight = {
+    COLOR: 0xffffff,
+    INTENSITY: 0.95,
+    DISTANCE: 20000
+};

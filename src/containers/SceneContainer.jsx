@@ -25,7 +25,7 @@ export class SceneContainer extends React.Component {
 
   componentDidMount = () => {
       this.forceUpdate();
-      // this.renderSkybox();
+      this.renderSkybox();
   }
 
   /**

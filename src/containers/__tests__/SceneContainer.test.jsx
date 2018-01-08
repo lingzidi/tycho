@@ -2,7 +2,7 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import renderer from 'react-test-renderer';
 import ReactDOM from 'react-dom';
-import {Vector3, Camera, CubeTexture} from 'three';
+import {Vector3, Camera, CubeTexture, PerspectiveCamera} from 'three';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import {SceneContainer} from '../SceneContainer';
@@ -29,8 +29,21 @@ describe('Scene Container', () => {
   });
 
   describe('componentDidMount()', () => {
+    beforeEach(() => {
+      sceneContainer.renderSkybox = jest.fn();
+    });
+
     it('should force update once', () => {
       const spy = jest.spyOn(sceneContainer, 'forceUpdate');
+
+      sceneContainer.componentDidMount();
+
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should render the skybox', () => {
+      const spy = jest.spyOn(sceneContainer, 'renderSkybox');
 
       sceneContainer.componentDidMount();
 
@@ -47,7 +60,7 @@ describe('Scene Container', () => {
 
     it('should call props.onAnimate()', () => {
       const onAnimateSpy = jest.spyOn(sceneContainer.props, 'onAnimate');
-    
+
       sceneContainer.onAnimate();
 
       expect(onAnimateSpy).toHaveBeenCalled();
@@ -56,19 +69,19 @@ describe('Scene Container', () => {
 
     it('should update the camera component', () => {
       const spy = jest.spyOn(sceneContainer.refs.camera, 'update');
-    
+
       sceneContainer.onAnimate();
 
       expect(spy).toHaveBeenCalled();
     });
   });
-  
+
   describe('changeZoom()', () => {
     it('should call controls.wheelZoom()', () => {
       sceneContainer.refs = {camera};
       sceneContainer.props = {action: {}};
       const spy = jest.spyOn(sceneContainer.refs.camera.controls, 'wheelZoom');
-      
+
       sceneContainer.changeZoom();
 
       expect(spy).toHaveBeenCalled();
