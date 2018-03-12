@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import webglEnabled from 'webgl-detect';
 import Clock from '../utils/Clock';
 import ReduxService from '../services/ReduxService';
 import App from '../components/App';
+import NoWebGL from '../components/NoWebGL';
 import SplashScreen from '../components/SplashScreen';
 import * as DataActions from '../actions/DataActions';
 import * as AnimationActions from '../actions/AnimationActions';
@@ -21,7 +23,7 @@ export class AppContainer extends React.Component {
   componentWillReceiveProps = (nextProps) => {
       this.maybeUpdateOffset(nextProps);
   }
-  
+
   /**
    * Animation frame method.
    */
@@ -76,7 +78,7 @@ export class AppContainer extends React.Component {
 
   /**
    * Determines if a global time update is necessary.
-   * 
+   *
    * @return {Boolean}
    */
   shouldUpdateTime = () => {
@@ -90,13 +92,16 @@ export class AppContainer extends React.Component {
       const {orbitalData, pageText} = this.props;
 
       if (orbitalData && pageText) {
+          if (!webglEnabled) {
+              return <NoWebGL pageText={this.props.pageText} />;
+          }
           return <App
               onAnimate={this.onAnimate}
               title={this.props.targetName}
               pageText={this.props.pageText}
-          />
+          />;
       }
-      return <SplashScreen />
+      return <SplashScreen />;
   }
 }
 

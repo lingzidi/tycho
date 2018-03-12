@@ -7550,6 +7550,10 @@ wbuf@^1.1.0, wbuf@^1.7.2:
   dependencies:
     minimalistic-assert "^1.0.0"
 
+webgl-detect@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/webgl-detect/-/webgl-detect-0.0.1.tgz#9b533c52b9d8e3c5cb8da6a29c02f8f50e888445"
+
 webidl-conversions@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"

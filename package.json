@@ -35,7 +35,8 @@
     "three": "0.87.0",
     "three-dom-label": "^0.1.7",
     "three-orbit-controls": "82.1.0",
-    "tween.js": "16.6.0"
+    "tween.js": "16.6.0",
+    "webgl-detect": "^0.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",

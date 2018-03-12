@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App Container render() should render the app successfully 1`] = `
-<App
-  onAnimate={[Function]}
+<NoWebGL
   pageText={Object {}}
 />
 `;
