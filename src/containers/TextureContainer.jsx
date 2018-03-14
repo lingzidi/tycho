@@ -35,9 +35,13 @@ export default class TextureContainer extends React.Component {
    * @param {String} prop.url - url of the texture to load
    */
   loadTexture = ({url, slot}) => {
-      const loader = new TextureLoader();
       url = `/static/textures/map/${url}`; // TODO
-      loader.load(url, () => this.onTextureLoaded({url, slot}));
+      
+      const loader = new TextureLoader();
+      const cb = () => this.onTextureLoaded({url, slot});
+      const noop = () => {};
+
+      loader.load(url, cb, noop, cb); 
   }
 
   /**
