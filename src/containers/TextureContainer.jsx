@@ -2,6 +2,7 @@ import React from 'react';
 import {TextureLoader, FrontSide} from 'three';
 import PropTypes from 'prop-types';
 import Constants from '../constants';
+import { env } from '../utils/Environment';
 
 export default class TextureContainer extends React.Component {
 
@@ -35,13 +36,13 @@ export default class TextureContainer extends React.Component {
    * @param {String} prop.url - url of the texture to load
    */
   loadTexture = ({url, slot}) => {
-      url = `/static/textures/map/${url}`; // TODO
-      
+      url = env(`/static/textures/map/${url}`);
+
       const loader = new TextureLoader();
       const cb = () => this.onTextureLoaded({url, slot});
       const noop = () => {};
 
-      loader.load(url, cb, noop, cb); 
+      loader.load(url, cb, noop, cb);
   }
 
   /**

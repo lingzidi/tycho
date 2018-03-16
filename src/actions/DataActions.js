@@ -1,8 +1,9 @@
 import Actions from '../constants/Actions';
+import { env } from '../utils/Environment';
 
 export const requestOrbitalData = () => {
     return function(dispatch) {
-        return fetch('/static/data/orbitals.json')
+        return fetch(env('/static/data/orbitals.json'))
             .then((res) => res.json())
             .then((orbitalData) => {
                 dispatch({
@@ -15,7 +16,7 @@ export const requestOrbitalData = () => {
 
 export const requestPageText = () => {
     return function(dispatch) {
-        return fetch('/static/data/pageText.json')
+        return fetch(env('/static/data/pageText.json'))
             .then((res) => res.json())
             .then((pageText) => {
                 dispatch({
