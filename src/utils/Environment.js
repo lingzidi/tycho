@@ -1,7 +1,7 @@
 const environments = [
     {
         host: /^localhost(\:[0-9]+)?$/i,
-        cdn: 'http://localhost'
+        cdn: 'http://localhost:3000'
     },
     {
         host: /^(www\.)?tycho\.io$/i,

@@ -34,8 +34,15 @@
       }
 
       &:hover {
-        box-shadow: $text-shadow; 
+        box-shadow: $text-shadow;
       }
+    }
+
+    &--volume {
+        /* one day this will be useful... */
+        height: 0;
+        margin: 0;
+        background-color: transparent;
     }
   }
 
@@ -43,7 +50,7 @@
     position: absolute;
     opacity: 0.5;
     transition: opacity $transition-speed;
-    
+
     &:hover {
       opacity: 1;
     }
@@ -76,13 +83,13 @@
         text-shadow: $text-shadow;
       }
     }
-    
+
     &--scales {
       bottom: 0;
       right: 0;
       pointer-events: none;
     }
-    
+
     &--left-bar {
       left: 0;
       top: 0;

@@ -11,3 +11,7 @@ body {
 html, body {
     height: 100%;
 }
+
+canvas {
+    cursor: url('/static/img/cursor.png') 38 24, auto;
+}

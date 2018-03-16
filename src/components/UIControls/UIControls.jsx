@@ -42,7 +42,8 @@ export default class UIControls extends React.Component {
           <ZoomSlider
             value={this.props.zoom}
             onChange={this.props.changeZoom}
-          />
+          />               />
+          <div className="uicontrols__button uicontrols__button--volume"></div>
         </div>
       </div>
     );

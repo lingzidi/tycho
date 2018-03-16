@@ -32,7 +32,7 @@ $button-transition-speed: 0.25s;
   &__hero {
     width: 50vw;
     height: 20vw;
-    background-image: url('/static/img/logo-gradient-light.png');
+    background-image: url('/static/img/logo-gradient-dark.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
@@ -60,7 +60,7 @@ $button-transition-speed: 0.25s;
     margin: 0 $button-spacing;
     perspective: 1000px;
   }
-  
+
   &__button-anchor {
     margin: 0;
     padding: 0;
