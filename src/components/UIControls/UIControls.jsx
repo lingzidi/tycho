@@ -27,14 +27,14 @@ export default class UIControls extends React.Component {
         </div>
 
         <div className="uicontrols__control uicontrols__control--datetime">
-          <DatePickerContainer 
-            time={this.props.time} 
+          <DatePickerContainer
+            time={this.props.time}
             onUpdate={this.props.changeTimeOffset}
           />
           <PlayPauseContainer />
         </div>
 
-        <div className="uicontrols__control uicontrols__control--left-bar"> 
+        <div className="uicontrols__control uicontrols__control--left-bar">
           <div
             className="uicontrols__button uicontrols__button--about-modal"
             onClick={this.props.openModal.bind(this, Constants.UI.ModalTypes.ABOUT_MODAL)}>
@@ -43,7 +43,6 @@ export default class UIControls extends React.Component {
             value={this.props.zoom}
             onChange={this.props.changeZoom}
           />
-          <div className="uicontrols__button"></div>
         </div>
       </div>
     );
