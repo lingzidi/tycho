@@ -48,3 +48,10 @@ export const toggleSettings = (settingsActive) => {
         settingsActive
     };
 }
+
+export const setVolume = (volume) => {
+    return {
+        type: Actions.SET_VOLUME,
+        volume
+    }
+}

@@ -105,6 +105,7 @@ export class SceneContainer extends React.Component {
                           scale={this.props.scale}
                           scene={this.refs.scene}
                           zoom={this.props.zoom}
+                          volume={this.props.volume}
                           isAutoOrbitEnabled={this.props.isAutoOrbitEnabled}
                           orbitalData={this.props.orbitalData}
                           domElement={this.domElement}
@@ -123,6 +124,7 @@ export default connect(
         'uiControls.zoom',
         'uiControls.scale',
         'uiControls.speed',
+        'uiControls.volume',
         'label.targetId',
         'label.highlightedOrbitals',
         'tour.isAutoOrbitEnabled',

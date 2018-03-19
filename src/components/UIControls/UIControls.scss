@@ -14,7 +14,6 @@
   }
 
   &__button {
-    background-color: $brand-primary;
     width: $icon-size;
     height: $icon-size;
     display: flex;
@@ -24,6 +23,7 @@
     cursor: pointer;
 
     &--about-modal {
+      background-color: $brand-primary;
       color: $brand-secondary;
       font-weight: bold;
       border-radius: 50%;
@@ -36,13 +36,6 @@
       &:hover {
         box-shadow: $text-shadow;
       }
-    }
-
-    &--volume {
-        /* one day this will be useful... */
-        height: 0;
-        margin: 0;
-        background-color: transparent;
     }
   }
 

@@ -8,11 +8,13 @@ import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import CameraContainer from '../CameraContainer';
 import Controls from '../../utils/Controls';
+import Ambience from '../../utils/Ambience';
 import Constants from '../../constants';
 import data from './__fixtures__/orbitals.json';
 import CameraService from '../../services/CameraService';
 
 jest.mock('../../services/CameraService');
+jest.mock('../../utils/Ambience');
 
 /* mock data */
 const target = new Object3D();
@@ -43,10 +45,17 @@ describe('Camera Container', () => {
     cameraContainer = component.instance();
   });
 
-  describe('Prop update methods', () => {
-    beforeEach(() => {
-      cameraContainer.controls = new Controls(new Camera());
+  describe('componentDidMount()', () => {
+    it('should assign a new instance of Ambience', () => {
+        const camera = new Camera();
+
+        cameraContainer.refs = {camera};
+        cameraContainer.componentDidMount();
+
+        expect(cameraContainer).toHaveProperty('ambience');
+        expect(cameraContainer.ambience).toBeInstanceOf(Ambience);
     });
+  });
 
     describe('componentWillUnmount()', () => {
       beforeEach(() => {
@@ -67,6 +76,11 @@ describe('Camera Container', () => {
         cameraContainer.componentWillUnmount();
         expect(cameraContainer).not.toHaveProperty('controls');
       });
+    });
+
+  describe('Prop update methods', () => {
+    beforeEach(() => {
+      cameraContainer.controls = new Controls(new Camera());
     });
 
     describe('componentWillReceiveProps()', () => {
@@ -94,6 +108,36 @@ describe('Camera Container', () => {
         cameraContainer.componentWillReceiveProps(nextProps);
 
         expect(spy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('maybeSetVolume()', () => {
+      beforeEach(() => {
+        cameraContainer.ambience = {
+            setVolume: jest.fn()
+        };
+      });
+
+      it('should not call ambience.setVolume if the volume is unchanged', () => {
+        const spy = jest.spyOn(cameraContainer.ambience, 'setVolume');
+        const volume = 1;
+
+        cameraContainer.props = {volume};
+        cameraContainer.maybeSetVolume({volume});
+
+        expect(spy).not.toHaveBeenCalled();
+      });
+
+      it('should call ambience.setVolume if the volume has changed', () => {
+        const spy = jest.spyOn(cameraContainer.ambience, 'setVolume');
+        const volume = 1;
+
+        cameraContainer.props = {};
+        cameraContainer.maybeSetVolume({volume});
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(spy).toHaveBeenCalledWith(volume);
       });
     });
 

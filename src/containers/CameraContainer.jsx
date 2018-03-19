@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CameraService from '../services/CameraService';
 import Controls from '../utils/Controls';
+import Ambience from '../utils/Ambience';
 import Constants from '../constants';
 
 export default class CameraContainer extends React.Component {
@@ -18,12 +19,17 @@ export default class CameraContainer extends React.Component {
       orbitalData: PropTypes.array
   }
 
+  componentDidMount = () => {
+    this.ambience = new Ambience(this.refs.camera);
+  }
+
   componentWillUnmount = () => {
       this.controls.dispose();
       delete this.controls;
   }
 
   componentWillReceiveProps = (nextProps) => {
+      this.maybeSetVolume(nextProps);
       this.maybeCreateControls(nextProps);
       this.maybeMoveCameraPivot(nextProps);
       this.maybeUpdateControlsZoom(nextProps);
@@ -37,6 +43,18 @@ export default class CameraContainer extends React.Component {
   update = () => {
       if (this.controls) {
           this.controls.update();
+      }
+  }
+
+  /**
+   * Sets ambience volume.
+   *
+   * @param {Object} props
+   * @param {Boolean} props.volume
+   */
+  maybeSetVolume = ({volume}) => {
+      if (this.props.volume !== volume) {
+          this.ambience.setVolume(volume);
       }
   }
 

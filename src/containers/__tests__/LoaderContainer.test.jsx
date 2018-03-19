@@ -12,7 +12,8 @@ describe('Loader Container', () => {
       action={{
         setPercentLoaded: jest.fn(),
         setTextureLoaded: jest.fn(),
-        setPlaying: jest.fn()
+        setPlaying: jest.fn(),
+        setVolume: jest.fn()
       }}
     />);
     loaderContainer = component.instance();
@@ -28,7 +29,7 @@ describe('Loader Container', () => {
     const url = 'myImage.jpg';
     const count = 5;
     const total = 8;
-    
+
     it('should call the setPercentLoaded() action', () => {
       const spy = jest.spyOn(loaderContainer.props.action, 'setPercentLoaded');
 

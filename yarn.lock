@@ -7644,6 +7644,10 @@ wbuf@^1.1.0, wbuf@^1.7.2:
   dependencies:
     minimalistic-assert "^1.0.0"
 
+web-audio-mock@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/web-audio-mock/-/web-audio-mock-0.1.9.tgz#23d46d6376ec9a18acb73afb236e2ba5b43c83f2"
+
 webgl-detect@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/webgl-detect/-/webgl-detect-0.0.1.tgz#9b533c52b9d8e3c5cb8da6a29c02f8f50e888445"

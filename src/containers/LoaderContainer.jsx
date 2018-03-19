@@ -3,6 +3,7 @@ import {DefaultLoadingManager} from 'three';
 import {connect} from 'react-redux';
 import * as AnimationActions from '../actions/AnimationActions';
 import * as LoaderActions from '../actions/LoaderActions';
+import * as UIControlsActions from '../actions/UIControlsActions';
 import ReduxService from '../services/ReduxService';
 import SplashScreen from '../components/SplashScreen';
 
@@ -30,6 +31,7 @@ export class LoaderContainer extends React.Component {
    */
   enterScene = () => {
       this.props.action.setPlaying(true);
+      this.props.action.setVolume(1);
       this.setState({hasEntered: true});
   }
 
@@ -54,6 +56,7 @@ export default connect(
     ),
     ReduxService.mapDispatchToProps(
         AnimationActions,
-        LoaderActions
+        LoaderActions,
+        UIControlsActions
     )
 )(LoaderContainer);

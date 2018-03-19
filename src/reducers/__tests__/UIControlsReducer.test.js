@@ -88,4 +88,14 @@ describe('UIControls Reducer', () => {
 
         expect(result).toEqual({settingsActive});
     });
+
+    it('should handle SET_VOLUME', () => {
+        const volume = 1;
+        const result = reducer(undefined, {
+            type: Actions.SET_VOLUME,
+            volume
+        });
+
+        expect(result).toEqual({volume});
+    });
 });

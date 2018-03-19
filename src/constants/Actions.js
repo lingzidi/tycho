@@ -20,6 +20,7 @@ export default keyMirror({
     SET_TIME: null,
     SET_TOUCHED: null,
     SET_UI_CONTROLS: null,
+    SET_VOLUME: null,
     SHOW_LABEL: null,
     SPEED_CHANGE: null,
     TIME_OFFSET_CHANGE: null,

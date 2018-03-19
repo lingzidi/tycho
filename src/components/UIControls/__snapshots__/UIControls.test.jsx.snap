@@ -35,8 +35,10 @@ exports[`UIControls Component render() should render the UIControls successfully
     />
     <ZoomSlider />
     <div
-      className="uicontrols__button"
-    />
+      className="uicontrols__button uicontrols__button--volume"
+    >
+      <Connect(VolumeContainer) />
+    </div>
   </div>
 </div>
 `;

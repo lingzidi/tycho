@@ -21,6 +21,8 @@ export default function(state = {}, payload) {
             return assign('activeModal');
         case Actions.SETTINGS_ACTIVE:
             return assign('settingsActive');
+        case Actions.SET_VOLUME:
+            return assign('volume');
         default:
             return state;
     }

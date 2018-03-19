@@ -4,6 +4,7 @@ import Settings from '../Settings';
 import ZoomSlider from '../Slider/ZoomSlider';
 import DatePickerContainer from '../../containers/DatePickerContainer';
 import PlayPauseContainer from '../../containers/PlayPauseContainer';
+import VolumeContainer from '../../containers/VolumeContainer';
 import Constants from '../../constants';
 
 export default class UIControls extends React.Component {
@@ -42,8 +43,10 @@ export default class UIControls extends React.Component {
           <ZoomSlider
             value={this.props.zoom}
             onChange={this.props.changeZoom}
-          />               />
-          <div className="uicontrols__button uicontrols__button--volume"></div>
+          />
+          <div className="uicontrols__button uicontrols__button--volume">
+            <VolumeContainer />
+          </div>
         </div>
       </div>
     );
