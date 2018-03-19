@@ -37,7 +37,7 @@ describe('Tour Service', () => {
             const result = TourService.getTourDuration(labels);
 
             expect(typeof result).toBe('number');
-            expect(result).toEqual(18000);
+            expect(result).toEqual(23000);
         });
     });
 });

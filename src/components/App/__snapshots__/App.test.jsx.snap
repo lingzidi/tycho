@@ -17,11 +17,11 @@ exports[`App Component render() should render the app successfully 1`] = `
           "text": "Welcome to the Solar System",
         },
         Object {
-          "duration": 2500,
+          "duration": 4000,
           "text": "This is a real-time interactive simulation of major planetary bodies",
         },
         Object {
-          "duration": 2500,
+          "duration": 3500,
           "text": "Let's start exploring",
         },
       ]

@@ -36,7 +36,7 @@ export class VolumeContainer extends React.Component {
      */
     getVolume = () => {
         const volume = parseInt(Cookies.get('volume'), 10);
-        return isNaN(volume) ? 0 : volume;
+        return isNaN(volume) ? 1 : volume;
     }
 
     /**

@@ -12,6 +12,7 @@
         color: $brand-primary;
         padding: $base-spacing;
         transition: opacity $transition-speed;
+        font-size: $font-size-medium;
         opacity: 0;
 
         &--show {

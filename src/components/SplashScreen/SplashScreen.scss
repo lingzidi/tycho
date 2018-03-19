@@ -18,7 +18,7 @@ $button-transition-speed: 0.25s;
     background-color: $brand-primary;
     background: url('/static/img/bg-stars-large.png');
     background-size: cover;
-    font-size: 1.5em;
+    font-size: $font-size-medium;
     transition: opacity $button-transition-speed;
     opacity: 1;
     z-index: $z-index-top;
@@ -62,44 +62,16 @@ $button-transition-speed: 0.25s;
     }
 
     &__button-anchor {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        transform-style: preserve-3d;
-        transform: translateZ(-($button-height / 2));
-        transition: transform $button-transition-speed;
+        color: $brand-primary;
+        border: 3px solid $brand-primary;
+        padding: 0.35em 2em;
+        background-color: transparent;
+        transition: 0.25s all;
         cursor: pointer;
 
-        &::before,
-        &::after {
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            width: $button-width;
-            height: $button-height;
-            position: absolute;
-            border: 5px solid transparent;
-            box-sizing: border-box;
-            content: attr(title);
-            display: flex;
-        }
-
-        &::before {
+        &:hover {
             background-color: $brand-primary;
             color: $brand-secondary;
-            transform: rotateY(0deg) translateZ($button-height / 2);
-        }
-
-        &::after {
-            background-color: $brand-secondary;
-            color: $brand-primary;
-            transform: rotateX(90deg) translateZ($button-height / 2);
-        }
-
-        &:hover {
-            transform: translateZ($button-height / 2) rotateX(-90deg);
         }
     }
 }

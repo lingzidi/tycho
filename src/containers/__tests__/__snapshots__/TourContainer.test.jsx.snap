@@ -2,24 +2,24 @@
 
 exports[`Tour Container getLabels() should return an array of TourLabels 1`] = `
 <TourLabelContainer
-  end={7000}
-  start={2000}
+  end={9000}
+  start={4000}
   text="Welcome to the Solar System"
 />
 `;
 
 exports[`Tour Container getLabels() should return an array of TourLabels 2`] = `
 <TourLabelContainer
-  end={13000}
-  start={8000}
+  end={16000}
+  start={11000}
   text="This is a real-time interactive simulation of major planetary bodies"
 />
 `;
 
 exports[`Tour Container getLabels() should return an array of TourLabels 3`] = `
 <TourLabelContainer
-  end={17000}
-  start={14000}
+  end={21000}
+  start={18000}
   text="Let's start exploring"
 />
 `;

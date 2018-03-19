@@ -20,8 +20,8 @@ export default class SplashScreen extends React.Component {
             <div className="splash-screen__button">
                 <a
                     className="splash-screen__button-anchor"
-                    onClick={this.props.enterScene}
-                    title={this.props.pageText.start}>
+                    onClick={this.props.enterScene}>
+                    {this.props.pageText.start}
                 </a>
             </div>
         );
