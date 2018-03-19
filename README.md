@@ -9,7 +9,7 @@
 [![dependency Status](https://img.shields.io/david/jshor/tycho.svg?style=flat-square)](https://david-dm.org/jshor/tycho#info=dependencies)
 [![devDependency Status](https://img.shields.io/david/dev/jshor/tycho.svg?style=flat-square)](https://david-dm.org/jshor/tycho#info=devDependencies)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-square)](LICENSE.md)
-![Version](http://img.shields.io/:version-0.0.1-orange.svg?style=flat-square)
+![Version](http://img.shields.io/:version-1.0.0-orange.svg?style=flat-square)
 
 ## Table of Contents
 
