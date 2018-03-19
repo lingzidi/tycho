@@ -1,14 +1,13 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jshor/tycho2/develop/public/static/img/logo-gradient-dark.png" width="450" height="75" />
+  <img src="https://raw.githubusercontent.com/jshor/tycho2/develop/public/static/img/logo-gradient-dark.png" width="450" height="88" />
 </p>
 
 <br>
 
-[![Code Quality](https://img.shields.io/codacy/grade/fe8a6a1dbe1b4a7eb91f6b655f7f99c8.svg?style=flat-square)](https://www.codacy.com/app/jshor/tycho2)
-[![Coverage](https://img.shields.io/codacy/coverage/fe8a6a1dbe1b4a7eb91f6b655f7f99c8.svg?style=flat-square)](https://www.codacy.com/app/jshor/tycho2)
-[![Build Status](https://img.shields.io/travis/jshor/tycho2.svg?style=flat-square)](https://travis-ci.org/jshor/tycho2)
-[![dependency Status](https://img.shields.io/david/jshor/tycho2.svg?style=flat-square)](https://david-dm.org/jshor/tycho2#info=dependencies)
-[![devDependency Status](https://img.shields.io/david/dev/jshor/tycho2.svg?style=flat-square)](https://david-dm.org/jshor/tycho2#info=devDependencies)
+[![Coverage](https://img.shields.io/codecov/c/github/jshor/tycho.svg?style=flat-square)](https://codecov.io/gh/jshor/tycho)
+[![Build Status](https://img.shields.io/travis/jshor/tycho.svg?style=flat-square)](https://travis-ci.org/jshor/tycho)
+[![dependency Status](https://img.shields.io/david/jshor/tycho.svg?style=flat-square)](https://david-dm.org/jshor/tycho#info=dependencies)
+[![devDependency Status](https://img.shields.io/david/dev/jshor/tycho.svg?style=flat-square)](https://david-dm.org/jshor/tycho#info=devDependencies)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 ![Version](http://img.shields.io/:version-0.0.1-orange.svg?style=flat-square)
 
@@ -22,9 +21,7 @@
   - [Styling](#styling)
   - [Testing](#testing)
     - [Testing Guidelines](#testing-guidelines)
-- [Application Flow](#application-flow)
 - [Application Architecture](#application-architecture)
-  - [Routing](#routing)
   - [State management](#state-management)
 - [Static Data](#static-data)
 - [Folder Structure](#folder-structure)
@@ -35,6 +32,7 @@
   - [yarn lint](#yarn-lint)
   - [yarn lint:fix](#yarn-lintfix)
   - [yarn build](#yarn-build)
+  - [yarn deploy](#yarn-deploy)
   - [yarn orbitals](#yarn-orbitals)
   - [yarn ephemeris](#yarn-ephemeris)
 - [Supported Language Features and Polyfills](#supported-language-features-and-polyfills)
@@ -97,10 +95,6 @@ Tests use [Jest](https://facebook.github.io/jest/), [enzyme](https://github.com/
 * Components should be [snapshot tested](https://facebook.github.io/jest/docs/en/snapshot-testing.html#content).
 * [TDD](https://en.wikipedia.org/wiki/Test-driven_development) and [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development).
 
-## Application Flow
-
-TODO
-
 ## Application Architecture
 
 The overall architecture uses the [React/Redux container pattern](http://www.thegreatcodeadventure.com/the-react-plus-redux-container-pattern/). In a nutshell, containers in this app leverage tasks such as handling state and minor front-end logic, while components simply handle the presentation. Physics calculations and business logic is delegated to services, and some critical components, such as the Camera, have dedicated services.
@@ -157,6 +151,11 @@ It correctly bundles React in production mode and optimizes the build for the be
 It also runs the compilation script for the orbital data json.<br>
 The build is minified and the filenames include the hashes.<br>
 
+### `yarn deploy`
+
+Deploys the `build/` contents to the designated production AWS S3 bucket.<br>
+Requires credentials set at `~/.aws/credentials`. [More info](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html).
+
 ### `yarn orbitals`
 
 Runs the compilation script for the orbital data json.
@@ -173,7 +172,7 @@ In addition to [ES6](https://github.com/lukehoban/es6features) syntax features, 
 * [Exponentiation Operator](https://github.com/rwaldron/exponentiation-operator) (ES2016).
 * [Async/await](https://github.com/tc39/ecmascript-asyncawait) (ES2017).
 * [Object Rest/Spread Properties](https://github.com/sebmarkbage/ecmascript-rest-spread) (stage 3 proposal).
-* [Dynamic import()](https://github.com/tc39/proposal-dynamic-import) (stage 3 proposal)
+* [Dynamic import()](https://github.com/tc39/proposal-dynamic-import) (stage 3 proposal).
 * [Class Fields and Static Properties](https://github.com/tc39/proposal-class-public-fields) (stage 2 proposal).
 * [JSX](https://facebook.github.io/react/docs/introducing-jsx.html).
 
@@ -190,5 +189,5 @@ The following ES6 **[polyfills](https://en.wikipedia.org/wiki/Polyfill)** are av
 * Project developed by [Josh Shor](http://josh.so)
 * Planetary ephemerides courtesy of [NASA](https://jpl.nasa.gov/) and the [Jet Propulsion Laboratory](https://www.nasa.gov/).
 * Orbital textures by [James Hastings-Trew](http://planetpixelemporium.com/).
-* Ambient music [*Ultra Deep Field*](https://soundcloud.com/stellardrone/stellardrone-ultra-deep-field) by [Stellardrone](https://soundcloud.com/stellardrone).
+* Ambient music: [*Ultra Deep Field*](https://soundcloud.com/stellardrone/stellardrone-ultra-deep-field) by [Stellardrone](https://soundcloud.com/stellardrone).
 * Special thanks to the open source community for [React.js](https://facebook.github.io/react/)/[Redux](http://redux.js.org/), [THREE.js](https://threejs.org), and [react-three-renderer](https://github.com/toxicFork/react-three-renderer). 
