@@ -5,7 +5,6 @@ import data from './__fixtures__/orbitals.json';
 import {OrbitalContainer} from '../OrbitalContainer';
 import OrbitalService from '../../services/OrbitalService';
 import Ellipse from '../../utils/Ellipse';
-import Service from '../../services/OrbitalService';
 import Constants from '../../constants';
 
 describe('Orbital Container', () => {
@@ -125,7 +124,6 @@ describe('Orbital Container', () => {
         it('should call setPathOpacity() if the highlightedOrbitals list has not changed', () => {
             orbitalContainer.setPathOpacity = jest.fn();
 
-            const time = 1;
             const highlightedOrbitals = ['Mars'];
             const nextProps = {highlightedOrbitals};
             const spy = jest.spyOn(orbitalContainer, 'setPathOpacity');

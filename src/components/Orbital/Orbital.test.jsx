@@ -4,7 +4,7 @@ import {shallow} from 'enzyme';
 import Orbital from './Orbital';
 
 describe('Orbital Component', () => {
-    let component, orbital, updatePosition;
+    let component, updatePosition;
 
     beforeEach(() => {
         const position = {};
@@ -24,8 +24,6 @@ describe('Orbital Component', () => {
             text="Test Orbital"
             action={{}}
         />);
-
-        orbital = component.instance();
     });
 
     describe('render()', () => {

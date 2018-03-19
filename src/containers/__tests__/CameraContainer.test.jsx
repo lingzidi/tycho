@@ -1,9 +1,6 @@
 import React from 'react';
-import React3 from 'react-three-renderer';
-import renderer from 'react-test-renderer';
-import ReactDOM from 'react-dom';
 import TWEEN from 'tween.js';
-import {Vector3, Camera, Object3D, Scene} from 'three';
+import {Vector3, Camera, Object3D} from 'three';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import CameraContainer from '../CameraContainer';
@@ -147,7 +144,6 @@ describe('Camera Container', () => {
             });
 
             it('should create a new instance of Controls if the domElement has changed', () => {
-                const controls = new Controls(new Camera());
                 const domElement = <canvas />;
 
                 cameraContainer.props = {domElement};
@@ -333,8 +329,6 @@ describe('Camera Container', () => {
     });
 
     describe('startTween()', () => {
-        const targetId = 'Mars';
-
         beforeEach(() => {
             cameraContainer.props = {scene, action};
             cameraContainer.refs = {pivot};

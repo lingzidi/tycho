@@ -1,13 +1,8 @@
 import React from 'react';
-import React3 from 'react-three-renderer';
-import renderer from 'react-test-renderer';
-import ReactDOM from 'react-dom';
-import {Vector3, Camera, CubeTexture, PerspectiveCamera} from 'three';
+import {CubeTexture} from 'three';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 import {SceneContainer} from '../SceneContainer';
-import {CameraContainer} from '../CameraContainer';
-import Controls from '../../utils/Controls';
 import data from './__fixtures__/orbitals.json';
 
 describe('Scene Container', () => {

@@ -4,10 +4,6 @@ import {shallow} from 'enzyme';
 import ScaleSlider from './ScaleSlider';
 
 describe('Scale Slider Component', () => {
-    let component;
-
-    beforeEach(() => {  });
-
     describe('render()', () => {
         describe('when the value is set', () => {
             it('should successfully render the slider', () => {
@@ -20,7 +16,7 @@ describe('Scale Slider Component', () => {
                 expect(toJson(component)).toMatchSnapshot();
             });
         });
-      
+
         describe('when the value is undefined', () => {
             it('should successfully render the slider', () => {
                 const component = shallow(<ScaleSlider

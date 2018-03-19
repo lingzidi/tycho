@@ -3,7 +3,6 @@ import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
 import {StatsContainer} from '../StatsContainer';
 import OrbitalService from '../../services/OrbitalService';
-import PhysicsService from '../../services/PhysicsService';
 import orbitalData from './__fixtures__/orbitals.json';
 
 describe('Stats Container', () => {
@@ -85,7 +84,7 @@ describe('Stats Container', () => {
             OrbitalService.getTargetByName = () => target;
             OrbitalService.getOrbitalStats = () => {};
             statsContainer.updateOrbitalStats(targetId, 1);
-    
+
             expect(typeof component.state('name')).toBe('string');
             expect(component.state('name')).toEqual(target.name);
         });

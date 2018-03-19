@@ -1,7 +1,7 @@
 import React from 'react';
 import toJson from 'enzyme-to-json';
 import {shallow} from 'enzyme';
-import {Euler, Object3D} from 'three';
+import {Euler} from 'three';
 import Body from './';
 import Rings from '../Rings';
 

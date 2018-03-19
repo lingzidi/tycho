@@ -14,20 +14,20 @@ export default class Slider extends React.Component {
   }
 
   componentDidMount = () => {
-      this.state = {
+      this.setState({
           value: this.getInitialValue()
-      };
+      });
   }
-  
+
   getInitialValue = () => {
       const {value} = this.props;
       return value || 0;
   }
-  
+
   getClassName = (subName) => {
       const {orientation} = this.props;
       let baseName = 'slider';
-    
+
       if (subName) {
           baseName += `__${subName}`;
       }

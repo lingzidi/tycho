@@ -217,7 +217,6 @@ describe('Tour Container', () => {
             it('should call onOrbitComplete after the calculated duration has passed', () => {
                 tourContainer.onOrbitComplete = jest.fn();
                 const spy = jest.spyOn(tourContainer, 'onOrbitComplete');
-                const duration = 5000;
 
                 tourContainer.initializeTour();
 
