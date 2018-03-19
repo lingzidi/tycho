@@ -16,8 +16,3 @@ insert_final_newline = true
 # markdown files
 [*.md]
 trim_trailing_whitespace = false
-
-# json files
-[{*.json}]
-indent_style = space
-indent_size = 4
