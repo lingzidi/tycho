@@ -4,19 +4,19 @@ import {shallow} from 'enzyme';
 import Modal from './';
 
 describe('Modal Component', () => {
-  let component;
+    let component;
 
-  beforeEach(() => {
-    component = shallow(
-      <Modal
-        closeModal={jest.fn()}
-        title="Test Modal"
-        description="Test Description"
-      />
-    );
-  });
+    beforeEach(() => {
+        component = shallow(
+            <Modal
+                closeModal={jest.fn()}
+                title="Test Modal"
+                description="Test Description"
+            />
+        );
+    });
 
-  it('should render the Modal successfully', () => {
-    expect(toJson(component)).toMatchSnapshot();
-  });
+    it('should render the Modal successfully', () => {
+        expect(toJson(component)).toMatchSnapshot();
+    });
 });

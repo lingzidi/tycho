@@ -17,9 +17,9 @@ export default class Sun extends React.Component {
         return (
             <group ref="sun">
                 <pointLight
-                  color={Constants.WebGL.Sunlight.COLOR}
-                  intensity={Constants.WebGL.Sunlight.INTENSITY}
-                  distance={Constants.WebGL.Sunlight.DISTANCE}
+                    color={Constants.WebGL.Sunlight.COLOR}
+                    intensity={Constants.WebGL.Sunlight.INTENSITY}
+                    distance={Constants.WebGL.Sunlight.DISTANCE}
                 />
             </group>
         );

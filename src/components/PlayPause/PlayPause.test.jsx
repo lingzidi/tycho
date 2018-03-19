@@ -4,13 +4,13 @@ import {shallow} from 'enzyme';
 import PlayPause from './';
 
 describe('Play/Pause Button Component', () => {
-  let component;
+    let component;
 
-  beforeEach(() => {
-    component = shallow(<PlayPause onClick={jest.fn()} />);
-  });
+    beforeEach(() => {
+        component = shallow(<PlayPause onClick={jest.fn()} />);
+    });
 
-  it('should render the PlayPause button successfully', () => {
-    expect(toJson(component)).toMatchSnapshot();
-  });
+    it('should render the PlayPause button successfully', () => {
+        expect(toJson(component)).toMatchSnapshot();
+    });
 });

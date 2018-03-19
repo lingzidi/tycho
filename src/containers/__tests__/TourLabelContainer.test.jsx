@@ -6,81 +6,81 @@ import TourLabelContainer from '../TourLabelContainer';
 jest.useFakeTimers();
 
 describe('Tour Label Container', () => {
-  let component, tourLabelContainer;
+    let component, tourLabelContainer;
 
-  beforeEach(() => {
-    component = shallow(<TourLabelContainer
-      start={1000}
-      end={3000}
-      text="Hello, world"
-    />);
-    tourLabelContainer = component.instance();
-  });
-
-  describe('componentWillMount()', () => {
-    it('should initialize the modifier in state', () => {
-      expect(component.state()).toHaveProperty('modifier');
-      expect(typeof component.state('modifier')).toBe('string');
+    beforeEach(() => {
+        component = shallow(<TourLabelContainer
+            start={1000}
+            end={3000}
+            text="Hello, world"
+        />);
+        tourLabelContainer = component.instance();
     });
 
-    it('should set the start and stop modifier change classes', () => {
-      const spy = jest.spyOn(tourLabelContainer, 'setClassAsync');
-      const start = 1000;
-      const end = 3000;
+    describe('componentWillMount()', () => {
+        it('should initialize the modifier in state', () => {
+            expect(component.state()).toHaveProperty('modifier');
+            expect(typeof component.state('modifier')).toBe('string');
+        });
 
-      tourLabelContainer.props = {start, end};
-      tourLabelContainer.componentWillMount();
+        it('should set the start and stop modifier change classes', () => {
+            const spy = jest.spyOn(tourLabelContainer, 'setClassAsync');
+            const start = 1000;
+            const end = 3000;
 
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(2);
-      expect(spy).toHaveBeenCalledWith('show', start);
-      expect(spy).toHaveBeenCalledWith('hide', end);
-    });
-  });
+            tourLabelContainer.props = {start, end};
+            tourLabelContainer.componentWillMount();
 
-  describe('componentWillUnmount()', () => {
-    it('should set `isCancelled` to true', () => {
-      tourLabelContainer.componentWillUnmount();
-
-      expect(tourLabelContainer).toHaveProperty('isCancelled');
-      expect(tourLabelContainer.isCancelled).toBe(true);
-    });
-  });
-
-  describe('setClassAsync()', () => {
-    describe('when the component is mounted', () => {
-      it('should add the given BEM modifier to the modifier after the given duration', () => {
-        const modifier = 'hide';
-
-        component.setState({modifier: 'show'});
-        tourLabelContainer.isCancelled = false;
-        tourLabelContainer.setClassAsync(modifier, 1000);
-
-        jest.runAllTimers();
-
-        expect(component.state('modifier')).toEqual(modifier);
-      });
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(2);
+            expect(spy).toHaveBeenCalledWith('show', start);
+            expect(spy).toHaveBeenCalledWith('hide', end);
+        });
     });
 
-    describe('when the component is not mounted', () => {
-      it('should not change the className modifier', () => {
-        const modifier = 'hide';
+    describe('componentWillUnmount()', () => {
+        it('should set `isCancelled` to true', () => {
+            tourLabelContainer.componentWillUnmount();
 
-        component.setState({modifier: 'show'});
-        tourLabelContainer.isCancelled = true;
-        tourLabelContainer.setClassAsync(modifier, 1000);
-
-        jest.runAllTimers();
-
-        expect(component.state('modifier')).not.toEqual(modifier);
-      });
+            expect(tourLabelContainer).toHaveProperty('isCancelled');
+            expect(tourLabelContainer.isCancelled).toBe(true);
+        });
     });
-  });
 
-  describe('render()', () => {
-    it('should render the app successfully', () => {
-      component.setState({time: 1});
-      expect(toJson(component)).toMatchSnapshot();
+    describe('setClassAsync()', () => {
+        describe('when the component is mounted', () => {
+            it('should add the given BEM modifier to the modifier after the given duration', () => {
+                const modifier = 'hide';
+
+                component.setState({modifier: 'show'});
+                tourLabelContainer.isCancelled = false;
+                tourLabelContainer.setClassAsync(modifier, 1000);
+
+                jest.runAllTimers();
+
+                expect(component.state('modifier')).toEqual(modifier);
+            });
+        });
+
+        describe('when the component is not mounted', () => {
+            it('should not change the className modifier', () => {
+                const modifier = 'hide';
+
+                component.setState({modifier: 'show'});
+                tourLabelContainer.isCancelled = true;
+                tourLabelContainer.setClassAsync(modifier, 1000);
+
+                jest.runAllTimers();
+
+                expect(component.state('modifier')).not.toEqual(modifier);
+            });
+        });
     });
-  });
+
+    describe('render()', () => {
+        it('should render the app successfully', () => {
+            component.setState({time: 1});
+            expect(toJson(component)).toMatchSnapshot();
+        });
+    });
 });

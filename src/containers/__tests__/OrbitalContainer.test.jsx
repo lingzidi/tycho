@@ -9,221 +9,221 @@ import Service from '../../services/OrbitalService';
 import Constants from '../../constants';
 
 describe('Orbital Container', () => {
-  let component, orbitalContainer;
-
-  beforeEach(() => {
-    component = shallow(
-      <OrbitalContainer
-        {...data[0]}
-        time={1}
-        action={{
-          setActiveOrbital: jest.fn(),
-          addHighlightedOrbital: jest.fn(),
-          removeHighlightedOrbital: jest.fn()
-        }}
-      />);
-
-    orbitalContainer = component.instance();
-  });
-
-  afterEach(() => jest.resetAllMocks());
-
-  describe('componentWillMount()', () => {
-    beforeEach(() => {
-      orbitalContainer.setBodyState = jest.fn();
-      orbitalContainer.setGroupRotations = jest.fn();
-      orbitalContainer.setPathOpacity = jest.fn();
-    });
-
-    it('should initialize a new instance of Ellipse', () => {
-      orbitalContainer.componentWillMount();
-
-      expect(orbitalContainer).toHaveProperty('ellipse');
-      expect(orbitalContainer.ellipse).toBeInstanceOf(Ellipse);
-    });
-
-    it('should initialize group rotations', () => {
-      const spy = jest.spyOn(orbitalContainer, 'setGroupRotations');
-
-      orbitalContainer.componentWillMount();
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(orbitalContainer.props);
-    });
-  });
-
-  describe('componentWillReceiveProps()', () => {
-    it('should call maybeUpdateBodyState()', () => {
-      const spy = jest.spyOn(orbitalContainer, 'maybeUpdateBodyState');
-      const nextProps = {};
-
-      orbitalContainer.componentWillReceiveProps(nextProps);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(nextProps);
-    });
-
-    it('should call maybeUpdatePathOpacity()', () => {
-      const spy = jest.spyOn(orbitalContainer, 'maybeUpdatePathOpacity');
-      const nextProps = {};
-
-      orbitalContainer.componentWillReceiveProps(nextProps);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(nextProps);
-    });
-  });
-
-  describe('maybeUpdateBodyState()', () => {
-    it('should call setBodyState() if the time param has changed', () => {
-      orbitalContainer.setBodyState = jest.fn();
-
-      const time = 1;
-      const nextProps = {time: 2};
-      const spy = jest.spyOn(orbitalContainer, 'setBodyState');
-
-      orbitalContainer.props = {time};
-      orbitalContainer.maybeUpdateBodyState(nextProps);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(orbitalContainer.props, orbitalContainer.ellipse);
-    });
-
-    it('should not call setBodyState() if the time param has not changed', () => {
-      orbitalContainer.setBodyState = jest.fn();
-
-      const time = 1;
-      const nextProps = {time};
-      const spy = jest.spyOn(orbitalContainer, 'setBodyState');
-
-      orbitalContainer.props = {time};
-      orbitalContainer.maybeUpdateBodyState(nextProps);
-
-      expect(spy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('maybeUpdatePathOpacity()', () => {
-    it('should call setPathOpacity() if the highlightedOrbitals list has changed', () => {
-      orbitalContainer.setPathOpacity = jest.fn();
-
-      const highlightedOrbitals = ['Mars'];
-      const nextProps = {highlightedOrbitals: ['Earth']};
-      const spy = jest.spyOn(orbitalContainer, 'setPathOpacity');
-
-      orbitalContainer.props = {highlightedOrbitals};
-      orbitalContainer.maybeUpdatePathOpacity(nextProps);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(orbitalContainer.props, nextProps.highlightedOrbitals);
-    });
-
-    it('should call setPathOpacity() if the highlightedOrbitals list has not changed', () => {
-      orbitalContainer.setPathOpacity = jest.fn();
-
-      const time = 1;
-      const highlightedOrbitals = ['Mars'];
-      const nextProps = {highlightedOrbitals};
-      const spy = jest.spyOn(orbitalContainer, 'setPathOpacity');
-
-      orbitalContainer.props = {highlightedOrbitals};
-      orbitalContainer.maybeUpdatePathOpacity(nextProps);
-
-      expect(spy).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('maybeUpdateScale()', () => {
-    const scale = 2;
-    const time = 12345;
+    let component, orbitalContainer;
 
     beforeEach(() => {
-      orbitalContainer.setBodyState = jest.fn();
-      orbitalContainer.props = {
-        scale: scale + 1
-      };
+        component = shallow(
+            <OrbitalContainer
+                {...data[0]}
+                time={1}
+                action={{
+                    setActiveOrbital: jest.fn(),
+                    addHighlightedOrbital: jest.fn(),
+                    removeHighlightedOrbital: jest.fn()
+                }}
+            />);
+
+        orbitalContainer = component.instance();
     });
 
-    it('should update the ellipse scale if orbital is a satellite', () => {
-      const spy = jest.spyOn(orbitalContainer.ellipse, 'setScale');
+    afterEach(() => jest.resetAllMocks());
 
-      orbitalContainer.props.isSatellite = true;
-      orbitalContainer.maybeUpdateScale({scale, time});
+    describe('componentWillMount()', () => {
+        beforeEach(() => {
+            orbitalContainer.setBodyState = jest.fn();
+            orbitalContainer.setGroupRotations = jest.fn();
+            orbitalContainer.setPathOpacity = jest.fn();
+        });
 
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(scale);
+        it('should initialize a new instance of Ellipse', () => {
+            orbitalContainer.componentWillMount();
+
+            expect(orbitalContainer).toHaveProperty('ellipse');
+            expect(orbitalContainer.ellipse).toBeInstanceOf(Ellipse);
+        });
+
+        it('should initialize group rotations', () => {
+            const spy = jest.spyOn(orbitalContainer, 'setGroupRotations');
+
+            orbitalContainer.componentWillMount();
+
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledWith(orbitalContainer.props);
+        });
     });
 
-    it('should not mutate the ellipse scale if orbital is not a satellite', () => {
-      const spy = jest.spyOn(orbitalContainer.ellipse, 'setScale');
-      const scale = 2;
+    describe('componentWillReceiveProps()', () => {
+        it('should call maybeUpdateBodyState()', () => {
+            const spy = jest.spyOn(orbitalContainer, 'maybeUpdateBodyState');
+            const nextProps = {};
 
-      orbitalContainer.props.isSatellite = false;
-      orbitalContainer.maybeUpdateScale({scale, time});
+            orbitalContainer.componentWillReceiveProps(nextProps);
 
-      expect(spy).not.toHaveBeenCalled();
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(nextProps);
+        });
+
+        it('should call maybeUpdatePathOpacity()', () => {
+            const spy = jest.spyOn(orbitalContainer, 'maybeUpdatePathOpacity');
+            const nextProps = {};
+
+            orbitalContainer.componentWillReceiveProps(nextProps);
+
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(nextProps);
+        });
     });
 
-    it('should update the body state', () => {
-      const spy = jest.spyOn(orbitalContainer, 'setBodyState');
-      const {props, ellipse} = orbitalContainer;
+    describe('maybeUpdateBodyState()', () => {
+        it('should call setBodyState() if the time param has changed', () => {
+            orbitalContainer.setBodyState = jest.fn();
 
-      orbitalContainer.maybeUpdateScale({scale, time});
+            const time = 1;
+            const nextProps = {time: 2};
+            const spy = jest.spyOn(orbitalContainer, 'setBodyState');
 
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(props, ellipse);
+            orbitalContainer.props = {time};
+            orbitalContainer.maybeUpdateBodyState(nextProps);
+
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(orbitalContainer.props, orbitalContainer.ellipse);
+        });
+
+        it('should not call setBodyState() if the time param has not changed', () => {
+            orbitalContainer.setBodyState = jest.fn();
+
+            const time = 1;
+            const nextProps = {time};
+            const spy = jest.spyOn(orbitalContainer, 'setBodyState');
+
+            orbitalContainer.props = {time};
+            orbitalContainer.maybeUpdateBodyState(nextProps);
+
+            expect(spy).not.toHaveBeenCalled();
+        });
     });
 
-    it('should set the scaleLastUpdate state parameter to the current time', () => {
-      orbitalContainer.maybeUpdateScale({scale, time});
+    describe('maybeUpdatePathOpacity()', () => {
+        it('should call setPathOpacity() if the highlightedOrbitals list has changed', () => {
+            orbitalContainer.setPathOpacity = jest.fn();
 
-      expect(orbitalContainer.state).toHaveProperty('scaleLastUpdate');
-      expect(orbitalContainer.state.scaleLastUpdate).toEqual(time);
-    });
-  });
+            const highlightedOrbitals = ['Mars'];
+            const nextProps = {highlightedOrbitals: ['Earth']};
+            const spy = jest.spyOn(orbitalContainer, 'setPathOpacity');
 
-  describe('setPathOpacity()', () => {
-    it('should set the opacity state to the calculated opacity', () => {
-      const opacity = Constants.UI.HOVER_OPACITY_ON;
-      OrbitalService.getPathOpacity = () => opacity;
-      orbitalContainer.setPathOpacity({}, 'Earth');
+            orbitalContainer.props = {highlightedOrbitals};
+            orbitalContainer.maybeUpdatePathOpacity(nextProps);
 
-      expect(orbitalContainer.state).toHaveProperty('pathOpacity');
-      expect(orbitalContainer.state.pathOpacity).toEqual(opacity);
-    });
-  });
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(orbitalContainer.props, nextProps.highlightedOrbitals);
+        });
 
-  describe('setGroupRotations()', () => {
-    it('should set the ecliptic and orbital group rotations', () => {
-      orbitalContainer.setGroupRotations(orbitalContainer.props);
+        it('should call setPathOpacity() if the highlightedOrbitals list has not changed', () => {
+            orbitalContainer.setPathOpacity = jest.fn();
 
-      expect(orbitalContainer.state).toHaveProperty('eclipticGroupRotation');
-      expect(orbitalContainer.state).toHaveProperty('orbitalGroupRotation');
-    });
-  });
+            const time = 1;
+            const highlightedOrbitals = ['Mars'];
+            const nextProps = {highlightedOrbitals};
+            const spy = jest.spyOn(orbitalContainer, 'setPathOpacity');
 
-  describe('setBodyState()', () => {
-    beforeEach(() => {
-      OrbitalService.getBodyPosition = () => ({});
+            orbitalContainer.props = {highlightedOrbitals};
+            orbitalContainer.maybeUpdatePathOpacity(nextProps);
+
+            expect(spy).not.toHaveBeenCalled();
+        });
     });
 
-    it('should set the present body position, rotation, and radius', () => {
-      orbitalContainer.setBodyState(orbitalContainer.props);
+    describe('maybeUpdateScale()', () => {
+        const scale = 2;
+        const time = 12345;
 
-      expect(orbitalContainer.state).toHaveProperty('bodyPosition');
-      expect(orbitalContainer.state).toHaveProperty('bodyRotation');
-    });
-  });
+        beforeEach(() => {
+            orbitalContainer.setBodyState = jest.fn();
+            orbitalContainer.props = {
+                scale: scale + 1
+            };
+        });
 
-  describe('render()', () => {
-    it('should render the OrbitalContainer successfully', () => {
-      expect(toJson(component)).toMatchSnapshot();
+        it('should update the ellipse scale if orbital is a satellite', () => {
+            const spy = jest.spyOn(orbitalContainer.ellipse, 'setScale');
+
+            orbitalContainer.props.isSatellite = true;
+            orbitalContainer.maybeUpdateScale({scale, time});
+
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(scale);
+        });
+
+        it('should not mutate the ellipse scale if orbital is not a satellite', () => {
+            const spy = jest.spyOn(orbitalContainer.ellipse, 'setScale');
+            const scale = 2;
+
+            orbitalContainer.props.isSatellite = false;
+            orbitalContainer.maybeUpdateScale({scale, time});
+
+            expect(spy).not.toHaveBeenCalled();
+        });
+
+        it('should update the body state', () => {
+            const spy = jest.spyOn(orbitalContainer, 'setBodyState');
+            const {props, ellipse} = orbitalContainer;
+
+            orbitalContainer.maybeUpdateScale({scale, time});
+
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(props, ellipse);
+        });
+
+        it('should set the scaleLastUpdate state parameter to the current time', () => {
+            orbitalContainer.maybeUpdateScale({scale, time});
+
+            expect(orbitalContainer.state).toHaveProperty('scaleLastUpdate');
+            expect(orbitalContainer.state.scaleLastUpdate).toEqual(time);
+        });
     });
-  });
+
+    describe('setPathOpacity()', () => {
+        it('should set the opacity state to the calculated opacity', () => {
+            const opacity = Constants.UI.HOVER_OPACITY_ON;
+            OrbitalService.getPathOpacity = () => opacity;
+            orbitalContainer.setPathOpacity({}, 'Earth');
+
+            expect(orbitalContainer.state).toHaveProperty('pathOpacity');
+            expect(orbitalContainer.state.pathOpacity).toEqual(opacity);
+        });
+    });
+
+    describe('setGroupRotations()', () => {
+        it('should set the ecliptic and orbital group rotations', () => {
+            orbitalContainer.setGroupRotations(orbitalContainer.props);
+
+            expect(orbitalContainer.state).toHaveProperty('eclipticGroupRotation');
+            expect(orbitalContainer.state).toHaveProperty('orbitalGroupRotation');
+        });
+    });
+
+    describe('setBodyState()', () => {
+        beforeEach(() => {
+            OrbitalService.getBodyPosition = () => ({});
+        });
+
+        it('should set the present body position, rotation, and radius', () => {
+            orbitalContainer.setBodyState(orbitalContainer.props);
+
+            expect(orbitalContainer.state).toHaveProperty('bodyPosition');
+            expect(orbitalContainer.state).toHaveProperty('bodyRotation');
+        });
+    });
+
+    describe('render()', () => {
+        it('should render the OrbitalContainer successfully', () => {
+            expect(toJson(component)).toMatchSnapshot();
+        });
+    });
 });

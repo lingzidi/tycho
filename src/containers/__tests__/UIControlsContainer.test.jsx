@@ -4,73 +4,73 @@ import {shallow} from 'enzyme';
 import {UIControlsContainer} from '../UIControlsContainer';
 
 describe('UIControls Container', () => {
-  let component, container;
+    let component, container;
 
-  beforeEach(() => {
-    component = shallow(<UIControlsContainer
-      action={{
-        changeSpeed: jest.fn()
-      }}
-    />);
-    container = component.instance();
-  });
-
-  describe('toggleSettings()', () => {
     beforeEach(() => {
-      container.props = {
-        action: {
-          toggleSettings: jest.fn()
-        },
-        settingsActive: false
-      };
+        component = shallow(<UIControlsContainer
+            action={{
+                changeSpeed: jest.fn()
+            }}
+        />);
+        container = component.instance();
     });
 
-    it('should open the settings pane', () => {
-      const spy = jest.spyOn(container.props.action, 'toggleSettings');
+    describe('toggleSettings()', () => {
+        beforeEach(() => {
+            container.props = {
+                action: {
+                    toggleSettings: jest.fn()
+                },
+                settingsActive: false
+            };
+        });
 
-      container.toggleSettings();
+        it('should open the settings pane', () => {
+            const spy = jest.spyOn(container.props.action, 'toggleSettings');
 
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(!container.props.settingsActive);
-    });
-  });
+            container.toggleSettings();
 
-  describe('openModal()', () => {
-    beforeEach(() => {
-      container.props = {
-        action: {
-          toggleModal: jest.fn(),
-          setUIControls: jest.fn()
-        }
-      };
-    });
-
-    it('should open the modal', () => {
-      const type = 'TEST_MODAL';
-      const spy = jest.spyOn(container.props.action, 'toggleModal');
-
-      container.openModal(type);
-
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(type);
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(!container.props.settingsActive);
+        });
     });
 
-    it('should hide the UI Controls', () => {
-      const spy = jest.spyOn(container.props.action, 'setUIControls');
+    describe('openModal()', () => {
+        beforeEach(() => {
+            container.props = {
+                action: {
+                    toggleModal: jest.fn(),
+                    setUIControls: jest.fn()
+                }
+            };
+        });
 
-      container.openModal();
+        it('should open the modal', () => {
+            const type = 'TEST_MODAL';
+            const spy = jest.spyOn(container.props.action, 'toggleModal');
 
-      expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(false);
+            container.openModal(type);
+
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(type);
+        });
+
+        it('should hide the UI Controls', () => {
+            const spy = jest.spyOn(container.props.action, 'setUIControls');
+
+            container.openModal();
+
+            expect(spy).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalledTimes(1);
+            expect(spy).toHaveBeenCalledWith(false);
+        });
     });
-  });
 
-  describe('render()', () => {
-    it('should successfully render the ui controls container', () => {
-      expect(toJson(component)).toMatchSnapshot();
+    describe('render()', () => {
+        it('should successfully render the ui controls container', () => {
+            expect(toJson(component)).toMatchSnapshot();
+        });
     });
-  });
 });

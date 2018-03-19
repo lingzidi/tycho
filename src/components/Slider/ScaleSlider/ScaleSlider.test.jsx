@@ -4,32 +4,32 @@ import {shallow} from 'enzyme';
 import ScaleSlider from './ScaleSlider';
 
 describe('Scale Slider Component', () => {
-  let component;
+    let component;
 
-  beforeEach(() => {  });
+    beforeEach(() => {  });
 
-  describe('render()', () => {
-    describe('when the value is set', () => {
-      it('should successfully render the slider', () => {
-        const component = shallow(<ScaleSlider
-          value={40}
-          label="Test Slider"
-          onChange={jest.fn()}
-        />);
+    describe('render()', () => {
+        describe('when the value is set', () => {
+            it('should successfully render the slider', () => {
+                const component = shallow(<ScaleSlider
+                    value={40}
+                    label="Test Slider"
+                    onChange={jest.fn()}
+                />);
 
-        expect(toJson(component)).toMatchSnapshot();
-      });
-    });
+                expect(toJson(component)).toMatchSnapshot();
+            });
+        });
       
-    describe('when the value is undefined', () => {
-      it('should successfully render the slider', () => {
-        const component = shallow(<ScaleSlider
-          label="Test Slider"
-          onChange={jest.fn()}
-        />);
+        describe('when the value is undefined', () => {
+            it('should successfully render the slider', () => {
+                const component = shallow(<ScaleSlider
+                    label="Test Slider"
+                    onChange={jest.fn()}
+                />);
 
-        expect(toJson(component)).toMatchSnapshot();
-      });
+                expect(toJson(component)).toMatchSnapshot();
+            });
+        });
     });
-  });
 });

@@ -5,9 +5,9 @@ import cx from 'classnames';
 export default class SplashScreen extends React.Component {
 
   static propTypes = {
-    show: PropTypes.bool,
-    pageText: PropTypes.object,
-    enterScene: PropTypes.func
+      show: PropTypes.bool,
+      pageText: PropTypes.object,
+      enterScene: PropTypes.func
   }
 
   /**
@@ -16,15 +16,15 @@ export default class SplashScreen extends React.Component {
    * @return {HTMLElement} 
    */
   renderEnterButton = () => {
-    return (
-      <div className="splash-screen__button">
-        <a
-          className="splash-screen__button-anchor"
-          onClick={this.props.enterScene}
-          title={this.props.pageText.start}>
-        </a>
-      </div>
-    );
+      return (
+          <div className="splash-screen__button">
+              <a
+                  className="splash-screen__button-anchor"
+                  onClick={this.props.enterScene}
+                  title={this.props.pageText.start}>
+              </a>
+          </div>
+      );
   }
 
   /**
@@ -33,14 +33,14 @@ export default class SplashScreen extends React.Component {
    * @return {HTMLElement} 
    */
   renderLoadingBar = () => {
-    return (
-      <div className="splash-screen__loading">
-        <div
-          className="splash-screen__loading-bar"
-          style={{width: `${this.props.percent}%`}}>
-        </div>
-      </div>
-    );
+      return (
+          <div className="splash-screen__loading">
+              <div
+                  className="splash-screen__loading-bar"
+                  style={{width: `${this.props.percent}%`}}>
+              </div>
+          </div>
+      );
   }
 
   /**
@@ -50,24 +50,24 @@ export default class SplashScreen extends React.Component {
    * @return {HTMLElement}
    */
   renderUserPrompt = () => {
-    if (this.props.percent === 100) {
-      return this.renderEnterButton();
-    }
-    return this.renderLoadingBar();
+      if (this.props.percent === 100) {
+          return this.renderEnterButton();
+      }
+      return this.renderLoadingBar();
   }
 
   render() {
-    return (
-      <div className={`splash-screen ${cx({
-        'splash-screen--hide': !this.props.show,
-        'splash-screen--show': this.props.show
-      })}`}>
-        <div className="splash-screen__hero">
-        </div>
-        <div className="splash-screen__content">
-          {this.renderUserPrompt()}
-        </div>
-      </div>
-    );
+      return (
+          <div className={`splash-screen ${cx({
+              'splash-screen--hide': !this.props.show,
+              'splash-screen--show': this.props.show
+          })}`}>
+              <div className="splash-screen__hero">
+              </div>
+              <div className="splash-screen__content">
+                  {this.renderUserPrompt()}
+              </div>
+          </div>
+      );
   }
 }

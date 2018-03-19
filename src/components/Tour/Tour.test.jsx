@@ -4,9 +4,9 @@ import {shallow} from 'enzyme';
 import Tour from './Tour';
 
 describe('Tour Component', () => {
-  it('should render the Tour component successfully', () => {
-    const component = shallow(<Tour modifier="show" pageText={{}} />);
+    it('should render the Tour component successfully', () => {
+        const component = shallow(<Tour modifier="show" pageText={{}} />);
 
-    expect(toJson(component)).toMatchSnapshot();
-  });
+        expect(toJson(component)).toMatchSnapshot();
+    });
 });

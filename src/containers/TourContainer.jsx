@@ -109,10 +109,10 @@ export class TourContainer extends React.Component {
    * Sets the active orbital targetId and the header label text to UI defaults.
    */
   setDefaultActiveOrbital = () => {
-    setTimeout(() => {
-        this.props.action.setActiveOrbital(...Constants.UI.Targets.ALTERNATE);
-        this.props.action.setActiveOrbital(...Constants.UI.Targets.DEFAULT);
-    });
+      setTimeout(() => {
+          this.props.action.setActiveOrbital(...Constants.UI.Targets.ALTERNATE);
+          this.props.action.setActiveOrbital(...Constants.UI.Targets.DEFAULT);
+      });
   }
 
   /**

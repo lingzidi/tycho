@@ -20,7 +20,7 @@ export default class CameraContainer extends React.Component {
   }
 
   componentDidMount = () => {
-    this.ambience = new Ambience(this.refs.camera);
+      this.ambience = new Ambience(this.refs.camera);
   }
 
   componentWillUnmount = () => {

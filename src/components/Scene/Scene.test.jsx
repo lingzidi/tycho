@@ -10,41 +10,41 @@ import Controls from '../../utils/Controls';
 import data from './__fixtures__/orbitals.json';
 
 describe('Scene Component', () => {
-  let component, scene;
-
-  beforeEach(() => {
-    component = shallow(<Scene
-      orbitalData={data}
-      updatePosition={() => {}}
-      time={1}
-    />);
-
-    scene = component.instance();
-  });
-
-  describe('getOrbitalElements()', () => {
-    let orbitalContainers;
+    let component, scene;
 
     beforeEach(() => {
-      orbitalContainers = scene.getOrbitalElements(data);
+        component = shallow(<Scene
+            orbitalData={data}
+            updatePosition={() => {}}
+            time={1}
+        />);
+
+        scene = component.instance();
     });
 
-    it('should be an array', () => {
-      expect(Array.isArray(orbitalContainers)).toBe(true)
+    describe('getOrbitalElements()', () => {
+        let orbitalContainers;
+
+        beforeEach(() => {
+            orbitalContainers = scene.getOrbitalElements(data);
+        });
+
+        it('should be an array', () => {
+            expect(Array.isArray(orbitalContainers)).toBe(true)
+        });
+
+        it('should match the snapshot of OrbitalElements', () => {
+            const orbitalJson = toJson(shallow(
+                <group>orbitalContainers</group>
+            ));
+
+            expect(orbitalJson).toMatchSnapshot();
+        });
     });
 
-    it('should match the snapshot of OrbitalElements', () => {
-      const orbitalJson = toJson(shallow(
-        <group>orbitalContainers</group>
-      ));
-
-      expect(orbitalJson).toMatchSnapshot();
+    describe('render()', () => {
+        it('should render the scene', () => {
+            expect(toJson(component)).toMatchSnapshot();
+        });
     });
-  });
-
-  describe('render()', () => {
-    it('should render the scene', () => {
-      expect(toJson(component)).toMatchSnapshot();
-    });
-  });
 });
