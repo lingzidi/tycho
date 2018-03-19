@@ -40,8 +40,7 @@
 
 ## About This Project
 
-This is a real-time, WebGL-based, 3D visualization of our Solar System. It's a complete re-write of the [original Tycho.io](https://github.com/jshor/tycho.io) project. Check out the full experience at [tycho.io](http://tycho.io) [coming soon]!
-
+This is a real-time, WebGL-based, 3D visualization of our Solar System. It's a complete re-write of the [original Tycho.io](https://github.com/jshor/tycho.io) project. Check out the full experience at [tycho.io](https://tycho.io)!
 
 ## Running the app
 
