@@ -4,7 +4,8 @@ import {shallow} from 'enzyme';
 import {ModalContainer} from '../ModalContainer';
 
 describe('Modal Container', () => {
-    let component, modalContainer;
+    let component;
+    let modalContainer;
 
     beforeEach(() => {
         component = shallow(

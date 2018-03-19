@@ -14,7 +14,7 @@ export default class Body extends React.Component {
     };
 
     render() {
-        const {rings, radius, scale} = this.props;
+        const { rings, radius, scale } = this.props;
 
         return (
             <group>

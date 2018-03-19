@@ -1,5 +1,5 @@
 import TWEEN from 'tween.js';
-import {Vector3} from 'three';
+import { Vector3 } from 'three';
 import Constants from '../constants';
 import OrbitalService from './OrbitalService';
 import Gyroscope from '../utils/Gyroscope';
@@ -56,7 +56,7 @@ export default class CameraService {
    * @param {THREE.Object3D} group - camera pivot
    * @param {THREE.Vector3} vect - new vector position
    */
-  static setPivotPosition = (group, {x, y, z}) => {
+  static setPivotPosition = (group, { x, y, z }) => {
       group.position.set(x, y, z);
   }
 
@@ -98,7 +98,7 @@ export default class CameraService {
    * @param {Function} callback - callback 
    */
   static attachToGyroscope = (target, pivot, callback) => {
-      let gyro = new Gyroscope();
+      const gyro = new Gyroscope();
 
       gyro.add(pivot);
       target.add(gyro);

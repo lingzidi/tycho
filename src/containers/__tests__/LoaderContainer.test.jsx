@@ -5,7 +5,8 @@ import {DefaultLoadingManager} from 'three';
 import {LoaderContainer} from '../LoaderContainer';
 
 describe('Loader Container', () => {
-    let component, loaderContainer;
+    let component;
+    let loaderContainer;
 
     beforeEach(() => {
         component = shallow(<LoaderContainer

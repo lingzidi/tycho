@@ -8,7 +8,8 @@ import Ellipse from '../../utils/Ellipse';
 import Constants from '../../constants';
 
 describe('Orbital Container', () => {
-    let component, orbitalContainer;
+    let component;
+    let orbitalContainer;
 
     beforeEach(() => {
         component = shallow(

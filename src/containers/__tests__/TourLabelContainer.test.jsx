@@ -6,7 +6,8 @@ import TourLabelContainer from '../TourLabelContainer';
 jest.useFakeTimers();
 
 describe('Tour Label Container', () => {
-    let component, tourLabelContainer;
+    let component;
+    let tourLabelContainer;
 
     beforeEach(() => {
         component = shallow(<TourLabelContainer

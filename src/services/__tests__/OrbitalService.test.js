@@ -9,7 +9,7 @@ describe('Orbital Service', () => {
     afterEach(() => jest.resetAllMocks());
 
     describe('getEclipticGroupRotation()', () => {
-        let params = {
+        const params = {
             inclination: 10,
             longitudeOfAscendingNode: 15
         };

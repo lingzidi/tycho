@@ -3,13 +3,14 @@ import {Camera, Vector3} from 'three';
 import Controls from '../Controls';
 
 describe('Controls', () => {
-    let camera, controls;
+    let camera;
+    let controls;
 
     beforeEach(() => {
         camera = new Camera();
         controls = new Controls(camera);
     });
-  
+
     describe('zoom()', () => {
         describe('when the zoom level has changed', () => {
             const newLevel = 50;
@@ -18,7 +19,7 @@ describe('Controls', () => {
             beforeEach(() => {
                 spy = jest.spyOn(controls, 'pan');
                 controls.level = 60;
-        
+
                 controls.zoom(newLevel);
             });
 
@@ -93,7 +94,7 @@ describe('Controls', () => {
         it('should scale the given vector by the given scalar', () => {
             const vector = new Vector3(1, 2, 3);
             const scalar = 10;
-      
+
             controls.maxDistance = 4;
 
             const result = controls.getZoomVector(vector, scalar);
@@ -260,7 +261,8 @@ describe('Controls', () => {
     });
 
     describe('wheelZoom()', () => {
-        let action, spy; 
+        let action;
+        let spy;
 
         beforeEach(() => {
             action = {changeZoom: jest.fn()};
@@ -269,7 +271,7 @@ describe('Controls', () => {
 
         it('should call the given action callback with the calculated zoom, if changed', () => {
             const newZoom = 20;
-      
+
             controls.getZoomDelta = () => newZoom;
             controls.wheelZoom({}, action.changeZoom);
 
@@ -279,7 +281,7 @@ describe('Controls', () => {
 
         it('should not call the given callback if the zoom stays the same', () => {
             const newZoom = 20;
-      
+
             controls.getZoomDelta = () => newZoom;
             controls.level = newZoom / 100;
             controls.wheelZoom({}, action.changeZoom);

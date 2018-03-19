@@ -4,7 +4,8 @@ import {shallow} from 'enzyme';
 import {SpinLabelContainer} from '../SpinLabelContainer';
 
 describe('Spin Label Container', () => {
-    let component, spinLabelContainer;
+    let component;
+    let spinLabelContainer;
 
     beforeEach(() => {
         component = shallow(<SpinLabelContainer />);

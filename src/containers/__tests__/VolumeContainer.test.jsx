@@ -7,7 +7,8 @@ import Cookie from 'js-cookie';
 jest.mock('js-cookie');
 
 describe('Volume Container', () => {
-    let component, container;
+    let component;
+    let container;
 
     beforeEach(() => {
         component = shallow(<VolumeContainer

@@ -44,7 +44,7 @@ export class OrbitalContainer extends React.Component {
      * @param {Object} nextProps
      * @param {Number} nextProps.time - current time, in seconds
      */
-    maybeUpdateBodyState = ({time}) => {
+    maybeUpdateBodyState = ({ time }) => {
         if (this.props.time !== time) {
             this.setBodyState(this.props, this.ellipse);
         }
@@ -56,7 +56,7 @@ export class OrbitalContainer extends React.Component {
      * @param {Object} nextProps
      * @param {String[]} nextProps.highlightedOrbitals
      */
-    maybeUpdatePathOpacity = ({highlightedOrbitals}) => {
+    maybeUpdatePathOpacity = ({ highlightedOrbitals }) => {
         if (this.props.highlightedOrbitals !== highlightedOrbitals) {
             this.setPathOpacity(this.props, highlightedOrbitals);
         }
@@ -69,7 +69,7 @@ export class OrbitalContainer extends React.Component {
      * @param {Number} nextProps.time - current time, in seconds
      * @param {Number} nextProps.scale - user-defined scale
      */
-    maybeUpdateScale = ({time, scale}) => {
+    maybeUpdateScale = ({ time, scale }) => {
         if (scale !== this.props.scale) {
             if (this.props.isSatellite) {
                 // only update the orbital path scale for satellites

@@ -11,7 +11,7 @@ describe('Clock', () => {
             expect(typeof offset).toBe('number');
             expect(offset).toBe(time);
         });
-    
+
         it('should return the current unix time as offset', () => {
             // because unix time changes within seconds, record the moment
             // before the clock was initialized and ensure that the offset
@@ -25,7 +25,7 @@ describe('Clock', () => {
         });
 
     });
-  
+
     describe('getTime()', () => {
         it('should be a number', () => {
             const clock = new Clock();
@@ -50,7 +50,7 @@ describe('Clock', () => {
             clock.clock.getElapsedTime = () => 1;
 
             clock.update();
-      
+
             expect(clock).toHaveProperty('elapsedTime');
             expect(clock.elapsedTime).toEqual(1);
         });
@@ -58,7 +58,7 @@ describe('Clock', () => {
         it('should not update elapsedTime if no time has passed', () => {
             const elapsedTime = 1470323035;
             let clock = new Clock();
-      
+
             clock.elapsedTime = elapsedTime;
             clock.clock.getElapsedTime = () => elapsedTime;
 
@@ -68,7 +68,7 @@ describe('Clock', () => {
             expect(clock.elapsedTime).toEqual(elapsedTime);
         });
     });
-  
+
     describe('speed()', () => {
         it('should set `scale` to 10^<input> if changed', () => {
             const input = 5;
@@ -225,7 +225,7 @@ describe('Clock', () => {
 
             it('should dispose of the Tween instance', () => {
                 clock.stopTween();
-        
+
                 expect(clock.tween).not.toBeDefined();
                 expect(clock).not.toHaveProperty('tween');
             });
@@ -234,7 +234,7 @@ describe('Clock', () => {
 
     describe('updateTweenOffset()', () => {
         it('should update the current offset time with current tween offset', () => {
-            let clock = new Clock();
+            const clock = new Clock();
 
             clock.offset = 100;
             clock.tweenData = {offset: 200};
@@ -246,8 +246,8 @@ describe('Clock', () => {
 
     describe('setOffset()', () => {
         it('should update the offset of Clock', () => {
-            let clock = new Clock();
-      
+            const clock = new Clock();
+
             const offset = 1470323035;
             clock.offset = offset;
 

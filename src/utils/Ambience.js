@@ -1,4 +1,4 @@
-import {AudioListener, AudioLoader, Audio} from 'three';
+import { AudioListener, AudioLoader, Audio } from 'three';
 import { env } from '../utils/Environment';
 
 export default class Ambience extends AudioListener {

@@ -6,7 +6,8 @@ import OrbitalService from '../../services/OrbitalService';
 import orbitalData from './__fixtures__/orbitals.json';
 
 describe('Stats Container', () => {
-    let component, statsContainer;
+    let component;
+    let statsContainer;
 
     beforeEach(() => {
         component = shallow(

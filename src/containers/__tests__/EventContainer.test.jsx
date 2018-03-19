@@ -4,7 +4,8 @@ import {shallow} from 'enzyme';
 import {EventContainer} from '../EventContainer';
 
 describe('Event Container', () => {
-    let eventContainer, component;
+    let eventContainer;
+    let component;
 
     beforeEach(() => {
         component = shallow(<EventContainer />);

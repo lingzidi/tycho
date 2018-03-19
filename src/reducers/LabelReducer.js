@@ -1,18 +1,18 @@
 import ReduxService from '../services/ReduxService';
 import Actions from '../constants/Actions';
 
-export default function(state = {}, payload) {
+export default function (state = {}, payload) {
     const assign = (...props) => ReduxService.assign(state, payload, ...props);
 
     /**
-   * Adds highlighted orbital from payload to state.
-   *
-   * @private
-   * @return {String[]} new list of highlighted orbitals
-   */
+     * Adds highlighted orbital from payload to state.
+     *
+     * @private
+     * @return {String[]} new list of highlighted orbitals
+     */
     const addHighlightedOrbital = () => {
-        const {highlightedOrbitals} = state;
-        const {highlightedOrbital} = payload;
+        const { highlightedOrbitals } = state;
+        const { highlightedOrbital } = payload;
 
         if (Array.isArray(highlightedOrbitals)) {
             return [...highlightedOrbitals, highlightedOrbital];
@@ -21,14 +21,14 @@ export default function(state = {}, payload) {
     };
 
     /**
-   * Removes highlighted orbital specified in payload from state.
-   * 
-   * @private
-   * @return {String[]} new list of highlighted orbitals
-   */
+     * Removes highlighted orbital specified in payload from state.
+     *
+     * @private
+     * @return {String[]} new list of highlighted orbitals
+     */
     const removeHighlightedOrbital = () => {
-        const {highlightedOrbitals} = state;
-        const {highlightedOrbital} = payload;
+        const { highlightedOrbitals } = state;
+        const { highlightedOrbital } = payload;
 
         if (Array.isArray(highlightedOrbitals)) {
             return highlightedOrbitals.filter((orbital) => {
@@ -38,7 +38,7 @@ export default function(state = {}, payload) {
         return [];
     }
 
-    switch(payload.type) {
+    switch (payload.type) {
         case Actions.SET_ACTIVE_ORBITAL:
             return Object.assign({}, state, {
                 targetId: payload.targetId,
@@ -47,7 +47,7 @@ export default function(state = {}, payload) {
 
         case Actions.SET_LABEL_TEXT:
             return assign('labelText');
-      
+
         case Actions.ADD_HIGHLIGHTED_ORBITAL:
             return Object.assign({}, state, {
                 highlightedOrbitals: addHighlightedOrbital()

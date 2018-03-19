@@ -12,7 +12,7 @@ export default class Label extends React.Component {
     }
 
     componentDidMount = () => {
-        this.label = this.getLabel();   
+        this.label = this.getLabel();
         this.refs.group.add(this.label);
     }
 
@@ -24,12 +24,12 @@ export default class Label extends React.Component {
 
     /**
      * Updates class name if the active target has changed.
-     * 
+     *
      * @param {Object} props
      * @param {String} props.id - id of current orbital
      * @param {String} props.targetId - id of active orbital
      */
-    maybeUpdateClassName = ({id, targetId}) => {
+    maybeUpdateClassName = ({ id, targetId }) => {
         if (this.props.targetId !== targetId) {
             const isActive = id === targetId;
             const classSuffix = isActive ? 'active' : 'inactive';
@@ -40,12 +40,12 @@ export default class Label extends React.Component {
 
     /**
      * Renders a new label, with mouse events bound to it.
-     * 
+     *
      * @returns {Object3D} label
      */
     getLabel = () => {
-        const {id, text, action} = this.props;
-        const classPrefix = `label label`;
+        const { id, text, action } = this.props;
+        const classPrefix = 'label label';
 
         return new DomLabel({
             ...this.props,

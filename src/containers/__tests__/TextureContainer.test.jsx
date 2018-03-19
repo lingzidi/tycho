@@ -11,7 +11,8 @@ describe('Texture Container', () => {
         }
     ];
 
-    let component, textureContainer;
+    let component;
+    let textureContainer;
 
     beforeEach(() => {
         component = shallow(<TextureContainer
@@ -38,7 +39,7 @@ describe('Texture Container', () => {
 
             textureContainer.loadedTextures = [];
             textureContainer.onTextureLoaded(texture);
-      
+
             expect(textureContainer.loadedTextures).toHaveLength(1);
             expect(textureContainer.loadedTextures[0]).toEqual(texture);
         });
@@ -60,7 +61,7 @@ describe('Texture Container', () => {
 
         it('should not call loadTexture if the param is not an array', () => {
             textureContainer.enqueueTextures();
-      
+
             expect(spy).not.toHaveBeenCalled();
         });
     });
@@ -95,7 +96,7 @@ describe('Texture Container', () => {
             textureContainer.updateMaterial();
             expect(textureContainer.refs.material.needsUpdate).toEqual(true);
         });
-    
+
         describe('when a map exists', () => {
             it('should mark the map to require an update', () => {
                 textureContainer.updateMaterial();
@@ -107,7 +108,7 @@ describe('Texture Container', () => {
             it('should have an undefined map', () => {
                 textureContainer.refs.material.map = undefined;
                 textureContainer.updateMaterial();
-      
+
                 expect(textureContainer.refs.material.map).not.toBeDefined();
             });
         });

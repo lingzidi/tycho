@@ -23,7 +23,9 @@ const labels = [
 jest.useFakeTimers();
 
 describe('Tour Container', () => {
-    let component, tourContainer, action;
+    let component;
+    let tourContainer;
+    let action;
 
     beforeEach(() => {
         action = {

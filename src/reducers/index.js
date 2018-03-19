@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import uiControls from './UIControlsReducer';
 import label from './LabelReducer';
 import loader from './LoaderReducer';

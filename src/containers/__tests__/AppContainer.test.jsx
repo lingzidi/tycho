@@ -4,7 +4,8 @@ import {shallow} from 'enzyme';
 import {AppContainer} from '../AppContainer';
 
 describe('App Container', () => {
-    let component, appContainer;
+    let component;
+    let appContainer;
 
     const action = {
         requestOrbitalData: jest.fn(),
@@ -131,7 +132,7 @@ describe('App Container', () => {
                 expect(spy).toHaveBeenCalled();
                 expect(spy).toHaveBeenCalledTimes(1);
             });
-      
+
             it('should not call continue() on the clock if the clock is running', () => {
                 const spy = jest.spyOn(appContainer.clock, 'continue');
 
@@ -148,7 +149,7 @@ describe('App Container', () => {
 
                 appContainer.props.playing = false;
                 appContainer.maybeContinue();
-        
+
                 expect(spy).not.toHaveBeenCalled();
             });
         });
@@ -176,7 +177,7 @@ describe('App Container', () => {
                 expect(spy).toHaveBeenCalled();
                 expect(spy).toHaveBeenCalledTimes(1);
             });
-      
+
             it('should not call stop() on the clock if the clock is already stopped', () => {
                 const spy = jest.spyOn(appContainer.clock, 'stop');
 
@@ -193,7 +194,7 @@ describe('App Container', () => {
 
                 appContainer.props.playing = true;
                 appContainer.maybeStop();
-        
+
                 expect(spy).not.toHaveBeenCalled();
             });
         });
@@ -214,7 +215,7 @@ describe('App Container', () => {
 
             it('should return true if scene is playing', () => {
                 appContainer.props = {playing: true};
-        
+
                 const result = appContainer.shouldUpdateTime();
 
                 expect(typeof result).toBe('boolean');
@@ -223,7 +224,7 @@ describe('App Container', () => {
 
             it('should return false if scene is paused', () => {
                 appContainer.props = {playing: false};
-        
+
                 const result = appContainer.shouldUpdateTime();
 
                 expect(typeof result).toBe('boolean');
@@ -268,7 +269,7 @@ describe('App Container', () => {
             />);
             expect(toJson(component)).toMatchSnapshot();
         });
-    
+
         it('should render the splash screen if pageText is undefined', () => {
             component = shallow(<AppContainer
                 orbitalData={{}}

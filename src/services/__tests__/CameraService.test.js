@@ -16,7 +16,9 @@ describe('Camera Service', () => {
 
     describe('setPivotPosition()', () => {
         it('should reset the pivot position to the given vector', () => {
-            const x = 1, y = 2, z = 3;
+            const x = 1;
+            const y = 2;
+            const z = 3;
             const pivot = new Object3D();
             const spy = jest.spyOn(pivot.position, 'set');
 

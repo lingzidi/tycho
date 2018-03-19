@@ -4,7 +4,8 @@ import {shallow} from 'enzyme';
 import {UIControlsContainer} from '../UIControlsContainer';
 
 describe('UIControls Container', () => {
-    let component, container;
+    let component;
+    let container;
 
     beforeEach(() => {
         component = shallow(<UIControlsContainer

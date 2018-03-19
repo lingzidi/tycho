@@ -7,7 +7,8 @@ import LensFlare from '../../utils/LensFlare';
 
 describe.only('The Sun', () => {
     const camera = new PerspectiveCamera();
-    let component, sun;
+    let component;
+    let sun;
 
     beforeEach(() => {
         component = shallow((

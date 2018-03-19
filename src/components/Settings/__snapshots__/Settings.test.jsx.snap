@@ -2,7 +2,7 @@
 
 exports[`Settings Component render() should render the settings component 1`] = `
 <div
-  className="settings-panel "
+  className="settings-panel"
 >
   <div
     className="settings-panel__header"
@@ -11,7 +11,7 @@ exports[`Settings Component render() should render the settings component 1`] = 
       className="settings-panel__title"
     />
     <div
-      className="settings-panel__hamburger "
+      className="settings-panel__hamburger"
     >
       <span />
       <span />
@@ -19,7 +19,7 @@ exports[`Settings Component render() should render the settings component 1`] = 
     </div>
   </div>
   <div
-    className="settings-panel__content "
+    className="settings-panel__content"
   >
     <ScaleSlider
       max={10}

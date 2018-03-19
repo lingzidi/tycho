@@ -6,7 +6,8 @@ import {SceneContainer} from '../SceneContainer';
 import data from './__fixtures__/orbitals.json';
 
 describe('Scene Container', () => {
-    let component, sceneContainer;
+    let component;
+    let sceneContainer;
 
     beforeEach(() => {
         component = shallow(

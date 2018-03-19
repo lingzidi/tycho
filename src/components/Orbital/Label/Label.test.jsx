@@ -13,7 +13,8 @@ jest.mock('three-dom-label', () => {
 });
 
 describe('Orbital Label Component', () => {
-    let component, label;
+    let component;
+    let label;
 
     beforeEach(() => {
         component = shallow(
@@ -127,8 +128,8 @@ describe('Orbital Label Component', () => {
 
     describe('getLabel()', () => {
         let result;
-        const text = "Test Label";
-        const id = "testPlanet";
+        const text = 'Test Label';
+        const id = 'testPlanet';
 
         beforeEach(() => {
             const action = {

@@ -4,7 +4,8 @@ import {shallow} from 'enzyme';
 import Orbital from './Orbital';
 
 describe('Orbital Component', () => {
-    let component, updatePosition;
+    let component;
+    let updatePosition;
 
     beforeEach(() => {
         const position = {};

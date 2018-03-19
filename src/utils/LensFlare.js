@@ -39,7 +39,7 @@ export default class LensFlare extends THREE.LensFlare {
      * @param {Number} options.diameter - size, in pixels, of texture
      * @param {Number} options.distance - relative distance from light source to camera [0,1]
      */
-    addLensFlare = ({url, diameter, distance}) => {
+    addLensFlare = ({ url, diameter, distance }) => {
         this.textureLoader.load(`/static/textures/lensflares/${url}`, (texture) => {
             this.add(texture, diameter, distance, this.blending, this.color);
         });
@@ -69,7 +69,7 @@ export default class LensFlare extends THREE.LensFlare {
         const percentDistance = 1 - cameraDistance / Constants.WebGL.Camera.MAX_DISTANCE;
         const isZoomedTooFar = percentDistance < Constants.WebGL.LENS_FLARE_MAX_DISTANCE;
 
-        for(let f = 0; f < fl; f++) {
+        for (let f = 0; f < fl; f++) {
             flare = this.lensFlares[f];
 
             flare.x = this.positionScreen.x + vecX * flare.distance;

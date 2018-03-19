@@ -2,7 +2,8 @@ import LensFlare from '../LensFlare';
 import Constants from '../../constants';
 
 describe('Lens Flare', () => {
-    let lensFlare, cameraDistance;
+    let lensFlare;
+    let cameraDistance;
 
     const camera = {
         position: {

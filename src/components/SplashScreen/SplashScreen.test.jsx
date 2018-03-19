@@ -4,10 +4,11 @@ import {shallow} from 'enzyme';
 import SplashScreen from './SplashScreen';
 
 describe('SplashScreen Component', () => {
-    let component, splashScreen;
+    let component;
+    let splashScreen;
 
     beforeEach(() => {
-        component = shallow(<SplashScreen 
+        component = shallow(<SplashScreen
             pageText={{}}
             percent={1}
             enterScene={jest.fn()}

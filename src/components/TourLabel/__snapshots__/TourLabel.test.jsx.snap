@@ -6,8 +6,8 @@ exports[`TourLabel Component render() should render the app successfully 1`] = `
 >
   <span
     className="
-          tour-label__text
-          tour-label__text--hide"
+                    tour-label__text
+                    tour-label__text--hide"
   >
     Hello, world
   </span>

@@ -27,7 +27,8 @@ const scene = {
 };
 
 describe('Camera Container', () => {
-    let component, cameraContainer;
+    let component;
+    let cameraContainer;
 
     beforeEach(() => {
         component = shallow(

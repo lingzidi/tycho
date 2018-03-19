@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import Volume from '../components/Volume';
@@ -12,7 +12,7 @@ export class VolumeContainer extends React.Component {
         volume: PropTypes.number
     }
 
-    componentWillReceiveProps = ({volume}) => {
+    componentWillReceiveProps = ({ volume }) => {
         if (volume && !this.getVolume()) {
             // if cookie has disabled autoplay, reverse the volume change to zero
             this.props.action.setVolume(0);
@@ -25,7 +25,7 @@ export class VolumeContainer extends React.Component {
      * @param  {Number} volume - desired volume [0,1]
      */
     setVolume = (volume) => {
-        Cookies.set('volume', volume, {expires: 365});
+        Cookies.set('volume', volume, { expires: 365 });
     }
 
     /**

@@ -6,27 +6,30 @@ import Constants from '../../constants';
 export default class Settings extends React.Component {
     render() {
         return (
-            <div className={`settings-panel ${cx({
+            <div className={cx({
+                'settings-panel': true,
                 'settings-panel--open': this.props.settingsActive
-            })}`}>
+            })}>
                 <div className="settings-panel__header">
                     <div className="settings-panel__title">
                         {this.props.pageText.settings}
                     </div>
                     <div
-                        className={`settings-panel__hamburger ${cx({
+                        className={cx({
+                            'settings-panel__hamburger': true,
                             'settings-panel__hamburger--open': this.props.settingsActive
-                        })}`}
+                        })}
                         onClick={this.props.toggleSetting}>
                         <span></span>
                         <span></span>
                         <span></span>
                     </div>
                 </div>
-        
-                <div className={`settings-panel__content ${cx({
+
+                <div className={cx({
+                    'settings-panel__content': true,
                     'settings-panel__content--open': this.props.settingsActive
-                })}`}>
+                })}>
                     <ScaleSlider
                         value={this.props.speed}
                         label={this.props.pageText.speedScale}

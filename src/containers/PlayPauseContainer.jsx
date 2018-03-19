@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import ReduxService from '../services/ReduxService';
 import * as AnimationActions from '../actions/AnimationActions';
 import PlayPause from '../components/PlayPause';

@@ -4,7 +4,8 @@ import toJson from 'enzyme-to-json';
 import {PlayPauseContainer} from '../PlayPauseContainer';
 
 describe('Orbital Container', () => {
-    let component, playPauseContainer;
+    let component;
+    let playPauseContainer;
 
     beforeEach(() => {
         component = shallow(<PlayPauseContainer />);

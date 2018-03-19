@@ -4,50 +4,50 @@ import PropTypes from 'prop-types';
 
 export default class Slider extends React.Component {
 
-  static propTypes = {
-      orientation: PropTypes.string.isRequired,
-      step: PropTypes.number,
-      min: PropTypes.number,
-      max: PropTypes.number,
-      value: PropTypes.number,
-      onChange: PropTypes.func
-  }
+    static propTypes = {
+        orientation: PropTypes.string.isRequired,
+        step: PropTypes.number,
+        min: PropTypes.number,
+        max: PropTypes.number,
+        value: PropTypes.number,
+        onChange: PropTypes.func
+    }
 
-  componentDidMount = () => {
-      this.setState({
-          value: this.getInitialValue()
-      });
-  }
+    componentDidMount = () => {
+        this.setState({
+            value: this.getInitialValue()
+        });
+    }
 
-  getInitialValue = () => {
-      const {value} = this.props;
-      return value || 0;
-  }
+    getInitialValue = () => {
+        const { value } = this.props;
+        return value || 0;
+    }
 
-  getClassName = (subName) => {
-      const {orientation} = this.props;
-      let baseName = 'slider';
+    getClassName = (subName) => {
+        const { orientation } = this.props;
+        let baseName = 'slider';
 
-      if (subName) {
-          baseName += `__${subName}`;
-      }
-      return `${baseName} ${baseName}--${orientation}`;
-  }
+        if (subName) {
+            baseName += `__${subName}`;
+        }
+        return `${baseName} ${baseName}--${orientation}`;
+    }
 
-  render() {
-      return (
-          <ReactSlider
-              orientation={this.props.orientation}
-              className={this.getClassName('container')}
-              handleClassName={this.getClassName('handle')}
-              barClassName={this.getClassName('bar')}
-              pearling={true}
-              step={this.props.step}
-              min={this.props.min}
-              max={this.props.max}
-              value={this.props.value}
-              onChange={this.props.onChange}
-          />
-      );
-  }
+    render() {
+        return (
+            <ReactSlider
+                orientation={this.props.orientation}
+                className={this.getClassName('container')}
+                handleClassName={this.getClassName('handle')}
+                barClassName={this.getClassName('bar')}
+                pearling={true}
+                step={this.props.step}
+                min={this.props.min}
+                max={this.props.max}
+                value={this.props.value}
+                onChange={this.props.onChange}
+            />
+        );
+    }
 }

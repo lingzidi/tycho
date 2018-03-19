@@ -17,195 +17,195 @@ export default class Controls extends OrbitControls(THREE) {
         this.maxDistance = Constants.WebGL.Camera.MAX_DISTANCE;
     }
 
-  /**
-   * Change zoom. Overrides the existing zoom tween in progress.
-   *
-   * @param {level} level - percentage of desired zoom level [0,100]
-   */
-  zoom = (level) => {
-      if(this.level !== level) {
-          this.pan(level / 100);
-          this.level = level;
-      }
-  }
+    /**
+     * Change zoom. Overrides the existing zoom tween in progress.
+     *
+     * @param {level} level - percentage of desired zoom level [0,100]
+     */
+    zoom = (level) => {
+        if (this.level !== level) {
+            this.pan(level / 100);
+            this.level = level;
+        }
+    }
 
-  /**
-   * Gets the zoom delta from controls and invokes the given action if zoom has changed.
-   *
-   * @param {Event} ev - DOM wheel event
-   * @param {Function} action - callback action
-   */
-  wheelZoom = (ev, action) => {
-      const zoom = this.getZoomDelta(ev.deltaY);
-      const current = Math.round(this.level * 100);
+    /**
+     * Gets the zoom delta from controls and invokes the given action if zoom has changed.
+     *
+     * @param {Event} ev - DOM wheel event
+     * @param {Function} action - callback action
+     */
+    wheelZoom = (ev, action) => {
+        const zoom = this.getZoomDelta(ev.deltaY);
+        const current = Math.round(this.level * 100);
 
-      if (current !== zoom) {
-          action(zoom);
-      }
-  }
+        if (current !== zoom) {
+            action(zoom);
+        }
+    }
 
-  /**
-   * Calculates the zoom percentage from the given mousewheel delta.
-   *
-   * @param {Number} delta - mousewheel delta
-   * @returns {Number} new zoom level
-   */
-  getZoomDelta = (delta) => {
-      let zoom = this.level;
-    
-      zoom += (delta / this.getWheelDeltaDivisor(zoom));
-      zoom = Math.max(zoom, 0);
-      zoom = Math.min(zoom, 100);
-   
-      return zoom;
-  }
+    /**
+     * Calculates the zoom percentage from the given mousewheel delta.
+     *
+     * @param {Number} delta - mousewheel delta
+     * @returns {Number} new zoom level
+     */
+    getZoomDelta = (delta) => {
+        let zoom = this.level;
 
-  /**
-   * Calculates a wheel delta that inflates based on how far away
-   * the user is from the target, because outer space is really big.
-   *
-   * @param {Number} level - current zoom level 
-   * @returns {Number} scrollwheel delta
-   */
-  getWheelDeltaDivisor = (level) => {
-      let delta = Constants.UI.WHEEL_DELTA_DIVISOR;
-      let match = false;
+        zoom += (delta / this.getWheelDeltaDivisor(zoom));
+        zoom = Math.max(zoom, 0);
+        zoom = Math.min(zoom, 100);
 
-      Constants.WebGL.ScrollScale
-          .forEach(({distance, scale}) => {
-              if (level > distance && !match) {
-                  delta *= scale;
-                  match = true;
-              }
-          });
+        return zoom;
+    }
 
-      return delta;
-  }
+    /**
+     * Calculates a wheel delta that inflates based on how far away
+     * the user is from the target, because outer space is really big.
+     *
+     * @param {Number} level - current zoom level
+     * @returns {Number} scrollwheel delta
+     */
+    getWheelDeltaDivisor = (level) => {
+        let delta = Constants.UI.WHEEL_DELTA_DIVISOR;
+        let match = false;
 
-  /**
-   * Sets the current camera position to the scaled zoom vector.
-   *
-   * @param {Number} percent - percentage of zoom [0,1]
-   */
-  pan = (percent, log) => {
-      let position = this.camera.position;
-      let newVector = this.getZoomVector(position, this.maxDistance * percent);
-      let minVector = this.getZoomVector(position, this.minDistance);
-    
-      if (newVector.length() >= this.minDistance) {
-          position.copy(newVector);
-      } else {
-          position.copy(minVector);
-      }
-  }
+        Constants.WebGL.ScrollScale
+            .forEach(({ distance, scale }) => {
+                if (level > distance && !match) {
+                    delta *= scale;
+                    match = true;
+                }
+            });
 
-  /**
-   * Returns the current vector scaled to the desired magnitude.
-   *
-   * @param {Vector3} vector - current position vector
-   * @param {Number} scalar - magnitude of vector
-   * @returns {Vector3}
-   */
-  getZoomVector = (vector, scalar) => {
-      return vector
-          .clone()
-          .normalize()
-          .multiplyScalar(scalar);
-  }
+        return delta;
+    }
 
-  /**
-   * Returns the distance between <0> and current camera position.
-   * 
-   * @returns {Number} distance
-   */
-  getDistance = () => {
-      return this.maxDistance - this.minDistance;
-  }
+    /**
+     * Sets the current camera position to the scaled zoom vector.
+     *
+     * @param {Number} percent - percentage of zoom [0,1]
+     */
+    pan = (percent, log) => {
+        const position = this.camera.position;
+        const newVector = this.getZoomVector(position, this.maxDistance * percent);
+        const minVector = this.getZoomVector(position, this.minDistance);
 
-  /**
-   * Enable controls.
-   */
-  enable = () => {
-      this.enabled = true;
-  }
+        if (newVector.length() >= this.minDistance) {
+            position.copy(newVector);
+        } else {
+            position.copy(minVector);
+        }
+    }
 
-  /**
-   * Disable controls.
-   */
-  disable = () => {
-      this.enabled = false;
-  }
+    /**
+     * Returns the current vector scaled to the desired magnitude.
+     *
+     * @param {Vector3} vector - current position vector
+     * @param {Number} scalar - magnitude of vector
+     * @returns {Vector3}
+     */
+    getZoomVector = (vector, scalar) => {
+        return vector
+            .clone()
+            .normalize()
+            .multiplyScalar(scalar);
+    }
 
-  /**
-   * Starts autorotating the scene clockwise.
-   *
-   * @param {Number} speed - speed to rotate at
-   */
-  startAutoRotate = (speed) => {
-      this.autoRotate = true;
-      this.autoRotateSpeed = speed;
-  }
+    /**
+     * Returns the distance between <0> and current camera position.
+     *
+     * @returns {Number} distance
+     */
+    getDistance = () => {
+        return this.maxDistance - this.minDistance;
+    }
 
-  /**
-   * Stop autorotating the scene.
-   */
-  stopAutoRotate = () => {
-      this.autoRotate = false;
-  }
+    /**
+     * Enable controls.
+     */
+    enable = () => {
+        this.enabled = true;
+    }
 
-  /**
-   * Deletes Tween instance and data.
-   */
-  endTween = () => {
-      delete this.tweenData;
-      delete this.tweenBase;
-  }
+    /**
+     * Disable controls.
+     */
+    disable = () => {
+        this.enabled = false;
+    }
 
-  /**
-   * Cancels Tween, if one is in progress.
-   */
-  cancelTween = () => {
-      if (this.tweenBase) {
-          this.tweenBase.stop();
-          this.endTween();
-      }
-  }
+    /**
+     * Starts autorotating the scene clockwise.
+     *
+     * @param {Number} speed - speed to rotate at
+     */
+    startAutoRotate = (speed) => {
+        this.autoRotate = true;
+        this.autoRotateSpeed = speed;
+    }
 
-  /**
-   * Zooms to the level of the current Tween data.
-   */
-  updateTween = () => {
-      this.zoom(this.tweenData.level);
-  }
+    /**
+     * Stop autorotating the scene.
+     */
+    stopAutoRotate = () => {
+        this.autoRotate = false;
+    }
 
-  /**
-   * Invokes teardown methods for active tween.
-   */
-  completeTween = () => {
-      if (this.tweenDone) {
-          this.tweenDone(this.level);
-      }
-      this.endTween();
-  }
+    /**
+     * Deletes Tween instance and data.
+     */
+    endTween = () => {
+        delete this.tweenData;
+        delete this.tweenBase;
+    }
 
-  /**
-   * Creates an animation to zoom to the specified level.
-   *
-   * @param {Number} level - percentage of zoom
-   * @param {Function} onDone - animation completion callback
-   */
-  tweenZoom = (level, onDone) => {
-      this.cancelTween();
+    /**
+     * Cancels Tween, if one is in progress.
+     */
+    cancelTween = () => {
+        if (this.tweenBase) {
+            this.tweenBase.stop();
+            this.endTween();
+        }
+    }
 
-      this.tweenDone = onDone;
-      this.tweenData = {level: this.level};
+    /**
+     * Zooms to the level of the current Tween data.
+     */
+    updateTween = () => {
+        this.zoom(this.tweenData.level);
+    }
 
-      this.tweenBase = new TWEEN
-          .Tween(this.tweenData)
-          .easing(TWEEN.Easing.Quadratic.Out)
-          .to({level}, Constants.WebGL.Tween.SLOW)
-          .onUpdate(this.updateTween)
-          .onComplete(this.completeTween)
-          .start();
-  }
+    /**
+     * Invokes teardown methods for active tween.
+     */
+    completeTween = () => {
+        if (this.tweenDone) {
+            this.tweenDone(this.level);
+        }
+        this.endTween();
+    }
+
+    /**
+     * Creates an animation to zoom to the specified level.
+     *
+     * @param {Number} level - percentage of zoom
+     * @param {Function} onDone - animation completion callback
+     */
+    tweenZoom = (level, onDone) => {
+        this.cancelTween();
+
+        this.tweenDone = onDone;
+        this.tweenData = { level: this.level };
+
+        this.tweenBase = new TWEEN
+            .Tween(this.tweenData)
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .to({ level }, Constants.WebGL.Tween.SLOW)
+            .onUpdate(this.updateTween)
+            .onComplete(this.completeTween)
+            .start();
+    }
 }

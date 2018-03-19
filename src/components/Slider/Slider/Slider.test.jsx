@@ -4,7 +4,8 @@ import {shallow} from 'enzyme';
 import Slider from './Slider';
 
 describe('Slider Component', () => {
-    let component, slider;
+    let component;
+    let slider;
 
     beforeEach(() => {
         component = shallow(<Slider

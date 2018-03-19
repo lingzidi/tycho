@@ -3,7 +3,8 @@ import Ellipse from '../Ellipse';
 import data from './__fixtures__/orbitals.json';
 
 describe('Ellipse', () => {
-    let ellipse, mockData;
+    let ellipse;
+    let mockData;
 
     beforeEach(() => {
         mockData = data[0];

@@ -5,7 +5,8 @@ import {shallow} from 'enzyme';
 import DatePickerContainer from '../DatePickerContainer';
 
 describe('DatePicker Container', () => {
-    let component, datePicker;
+    let component;
+    let datePicker;
 
     beforeEach(() => {
         component = shallow(
@@ -37,7 +38,7 @@ describe('DatePicker Container', () => {
             datePicker.isOpen = true;
             component.setState({uxTime, realTime});
             component.setProps({time: 54321});
-      
+
             expect(component.state('uxTime')).toEqual(uxTime);
             expect(component.state('realTime')).toEqual(realTime);
         });
@@ -54,7 +55,7 @@ describe('DatePicker Container', () => {
     describe('shouldComponentUpdate()', () => {
         it('should return the inverse of isOpen', () => {
             const result = datePicker.shouldComponentUpdate();
-      
+
             expect(typeof result).toBe('boolean');
             expect(result).toEqual(!datePicker.isOpen);
         });
@@ -70,7 +71,8 @@ describe('DatePicker Container', () => {
     });
 
     describe('showPicker()', () => {
-        let picker, spy;
+        let picker;
+        let spy;
 
         beforeEach(() => {
             picker = {openCalendar: jest.fn()};
