@@ -2,6 +2,21 @@
     "name": "tycho",
     "version": "1.0.0",
     "private": true,
+    "homepage": "https://www.tycho.io",
+    "description": "A real-time, WebGL-based interactive simulation of our solar system.",
+    "author": {
+        "name" : "Josh Shor",
+        "email" : "jpshor@gmail.com",
+        "url" : "https://www.josh.so/"
+    },
+    "bugs": {
+        "url": "https://github.com/jshor/tycho/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jshor/tycho.git"
+    },
+    "license": "MIT",
     "scripts": {
         "build-css": "node-sass-chokidar src/ -o src/ --include-path src/",
         "watch-css": "npm run build-css && npm run build-css --watch --recursive",
