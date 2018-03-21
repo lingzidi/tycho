@@ -33,6 +33,8 @@
   - [yarn lint:fix](#yarn-lintfix)
   - [yarn build](#yarn-build)
   - [yarn deploy](#yarn-deploy)
+    - [yarn deploy:upload](#yarn-deployupload)
+    - [yarn deploy:invalidate](#yarn-deployinvalidate)
   - [yarn orbitals](#yarn-orbitals)
   - [yarn ephemeris](#yarn-ephemeris)
 - [Supported Language Features and Polyfills](#supported-language-features-and-polyfills)
@@ -152,8 +154,16 @@ The build is minified and the filenames include the hashes.<br>
 
 ### `yarn deploy`
 
-Deploys the `build/` contents to the designated production AWS S3 bucket.<br>
-Requires credentials set at `~/.aws/credentials`. [More info](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html).
+Performs a full deploy.<br>
+Requires credentials defined at `~/.aws/credentials`. [More info](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html).
+
+#### `yarn deploy:upload`
+
+Uploads the `build/` contents to the designated production AWS S3 bucket.<br>
+
+#### `yarn deploy:invalidate`
+
+[Invalidates](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) the designated AWS CloudFront instance.<br>
 
 ### `yarn orbitals`
 
