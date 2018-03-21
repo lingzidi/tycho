@@ -1,6 +1,6 @@
 {
     "name": "tycho",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "private": true,
     "homepage": "https://www.tycho.io",
     "description": "A real-time, WebGL-based interactive simulation of our solar system.",
