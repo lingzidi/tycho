@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Orbital Label Component should render the markdown container successfully 1`] = `<group />`;

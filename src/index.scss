@@ -1,0 +1,17 @@
+@import 'globals.scss';
+
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background-color: $brand-secondary;
+    font-family: $font-family-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+canvas {
+    cursor: url('/static/img/cursor.png') 38 24, auto;
+}

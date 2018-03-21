@@ -1,0 +1,22 @@
+@import 'globals.scss';
+
+.markdown {
+    overflow: auto;
+    line-height: $font-line-height;
+    flex: 1;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+
+        &-thumb {
+            border-radius: 2px;
+            background-color: transparent;
+        }
+    }
+
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            background-color: #808080;
+        }
+    }
+}
